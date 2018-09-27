@@ -229,12 +229,12 @@
           </a>
         </li>
         <li>
-          <a href="/siswa">
+          <a href="">
             <i class="fa fa-files-o"></i> Data Kategori
           </a>
         </li>
         <li>
-          <a href="/kelas">
+          <a href="">
             <i class="fa fa-th"></i> <span>Data Produk</span>
           </a>
         </li>
