@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Backend.Dashboard.index');
 });
 Route::post('paypal', 'PaymentController@payWithpaypal');
 // route for check status of the payment
