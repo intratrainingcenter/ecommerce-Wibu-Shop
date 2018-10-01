@@ -31,6 +31,7 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
 </head>
 <body class="ecommerce">
+  @include('frontend.layout.bar')
 @include('frontend.layout.header')
 @include('frontend.layout.sider')
 <div class="main">
