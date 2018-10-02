@@ -86,7 +86,7 @@
                     </div>
                     <?php Session::forget('success');?>
                     @endif
-                 
+
                     @if ($message = Session::get('error'))
                     <div class="w3-panel w3-red w3-display-container">
                         <span onclick="this.parentElement.style.display='none'"
@@ -96,26 +96,18 @@
                     <?php Session::forget('error');?>
                     @endif
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-                <form class="w3-container w3-display-middle w3-card-4 " method="POST" id="payment-form"  action="{!! URL::to('paypal') !!}">
-                    {{ csrf_field() }}
-                    <h2 class="w3-text-blue">Payment Form</h2>
-                    <p>Demo PayPal form - Integrating paypal in laravel</p>
-                    <p>      
-                    <label class="w3-text-blue"><b>Enter Amount</b></label>
-                    <input class="w3-input w3-border" name="amount" type="text"></p>      
-                    <button class="w3-btn w3-blue">Pay with PayPal</button></p>
-                  </form>
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <pre id="test"></pre>
                 </div>
             </div>
         </div>
     </body>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="js/app2.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    var ref = firebase.database().ref("test");
+    ref.on('value',function(snapshot){
+      console.log(snapshot.val())
+    })
+
+    </script>
 </html>
