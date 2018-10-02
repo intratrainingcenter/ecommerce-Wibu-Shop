@@ -26,6 +26,7 @@ $(function () {
     'searching'   : false,
     'ordering'    : true,
     'info'        : true,
+    'responsive'  : true,
     'autoWidth'   : false
   })
 })

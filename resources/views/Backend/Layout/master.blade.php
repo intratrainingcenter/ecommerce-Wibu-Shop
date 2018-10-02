@@ -19,4 +19,5 @@
 </body>
 <!-- ./wrapper -->
   @include('Backend.Layout.js')
+  @yield('js')
 </html>
