@@ -17,7 +17,7 @@ class CreateKategorisTable extends Migration
             $table->increments('id');
             $table->string('kode_kategori');
             $table->string('nama_kategori');
-            $table->string('keterangan');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
