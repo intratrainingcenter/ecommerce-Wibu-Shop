@@ -3,7 +3,7 @@
 // Route::get('/', function () {
 //     return view('frontend.produck');
 // });
-Route::get('/', function () {
+Route::get('/Dashboard', function () {
     return view('Backend.Dashboard.index');
 });
 Route::post('paypal', 'PaymentController@payWithpaypal');
