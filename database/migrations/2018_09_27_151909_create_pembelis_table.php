@@ -19,7 +19,7 @@ class CreatePembelisTable extends Migration
             $table->string('nama_pembeli');
             $table->text('alamat');
             $table->enum('jenis_kelamin',['Laki-laki','Perempuan']);
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->binary('foto');
             $table->timestamps();
