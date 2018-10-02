@@ -14,7 +14,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        $data = Produk::orderBy('created_at', 'desc')->get();
+        $no = 1;
+        return view('Backend.Produk.index', compact('data', 'no'));
     }
 
     /**

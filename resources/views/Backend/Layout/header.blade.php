@@ -234,7 +234,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{route('produk.index')}}">
             <i class="fa fa-th"></i> <span>Data Produk</span>
           </a>
         </li>
