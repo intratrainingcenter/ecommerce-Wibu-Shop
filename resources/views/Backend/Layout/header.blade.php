@@ -263,6 +263,11 @@
             <i class="fa fa-edit"></i> <span>Data Message</span>
           </a>
         </li>
+        <li>
+          <a href="{{route('user.index')}}">
+            <i class="fa fa-edit"></i> <span>User</span>
+          </a>
+        </li>
         <li class="treeview">
             <a href="">
                 <span>Laporan</span>
@@ -283,7 +288,7 @@
                 </li>
                 <li>
                   <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Barang</span>
+                    <i class="fa fa-edit"></i> <span>Laporan Keuangan</span>
                   </a>
                 </li>
             </ul>
