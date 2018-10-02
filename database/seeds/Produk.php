@@ -20,7 +20,7 @@ class Produk extends Seeder
             'stok'  => '30',
             'status'    => 'Siap',
             'keterangan'    => 'Ini keterangan',
-            'foto'  => 'foto.jpg'
+            'foto'  => 'images/foto.png'
         ]);
     }
 }
