@@ -26,7 +26,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -37,7 +37,24 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kode_produk' => 'required|max:20',
+            'nama_produk' => 'required|max:20',
+            'kode_kategori' => 'required|max:20',
+            'hpp' => 'required|numeric',
+            'harga' => 'required|numeric',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $foto = $request->foto;        
+        $path = $foto->store('public/files');
+        $create = Produk::create([
+            'kode_produk' => $request->kode_produk,
+            'nama_produk' => $request->nama_produk,
+            'kode_kategori' => $request->kode_produk,
+            'hpp' => $request->hpp,
+            'harga' => $request->harga,
+            'foto' => $path,
+        ]);
     }
 
     /**

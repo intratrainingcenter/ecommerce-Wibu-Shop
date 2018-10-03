@@ -20,8 +20,8 @@ class CreateProduksTable extends Migration
             $table->string('nama_produk');
             $table->integer('hpp');
             $table->integer('harga');
-            $table->integer('stok');
-            $table->enum('status',['Siap', 'Tidak Siap']);
+            $table->enum('status',['Siap', 'Tidak Siap'])->default('Tidak Siap');
+            $table->integer('stok')->default(0);
             $table->text('keterangan')->nullable();
             $table->binary('foto');
             $table->timestamps();
