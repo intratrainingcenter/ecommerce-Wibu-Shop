@@ -10,11 +10,12 @@
 <script src="{{asset('template/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 <script src="{{asset('template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-<script src="{{('template/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{('template/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('template/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('template/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{asset('template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{asset('template/bower_components/fastclick/lib/fastclick.js')}}"></script>
 <script src="{{asset('template/dist/js/adminlte.min.js')}}"></script>
+<script src="{{asset('template/bower_components/datatables.net-bs/js/dataTables.responsive.js')}}"></script>
 {{-- <!-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --> --}}
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
 <script type="text/javascript">
