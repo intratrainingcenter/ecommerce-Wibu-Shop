@@ -28,6 +28,15 @@
           <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
+                    @if (session('alertgagal'))
+                    <div class="col-md-12">
+                        <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-ban"></i> Gagal!</h4>
+                            <p>Tolong isi formulir dengan benar!</p> 
+                        </div>
+                    </div>
+                    @endif
                     <h3 class="box-title">Data Produk</h3>
                     <button class="btn btn-success pull-right" data-toggle="modal" data-target="#ModalAdd">Tambah</button>
                 </div>
@@ -43,7 +52,7 @@
                         <th width="50px">Stok</th>
                         <th>Harga Jual</th>
                         <th>Status</th>
-                        <th width="100px">Opsi</th>
+                        <th width="120px">Opsi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,9 +66,9 @@
                                 <td align="right">{{number_format($item->harga,0,"",".")}}</td>
                                 <td>{{$item->status}}</td>
                                 <td>
-                                    <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_produk}}"></button>
+                                    <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_produk}}" title="Rincian"></button>
                                     <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_produk}}"></button>
-                                    <button class="btn btn-danger fa fa-trash"></button>
+                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_produk}}"></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -207,7 +216,7 @@
                 </div>
                 <div class="modal-body">
                     <form role="form" action="{{route('produk.update', ['id' => $item->kode_produk])}}" method="POST" enctype="multipart/form-data">
-                        @csrf @method('POST')
+                        @csrf @method('PATCH')
                             <div class="form-group row">
                                 <label for="kode_produk" class="col-md-4">Kode Produk</label>
                                 <div class="col-md-8">
@@ -244,8 +253,8 @@
                             <div class="form-group row">
                                 <label for="foto" class="col-md-4">Foto</label>
                                 <div class="col-md-8">
-                                    <input type="file" name="fotoedit" id="foto" class="form-control" onchange="ShowImage(this);" required><br>
-                                    <img id="imageedit" src="{{Storage::url($item->foto)}}" width="150px" alt="">
+                                    <input type="file" name="foto" id="foto" class="form-control" onchange="EditImage(this);"><br>
+                                    <img id="imageedit" src="{{Storage::url($item->foto)}}" height="150px" alt="">
                                 </div>
                             </div>
                 </div>
@@ -261,6 +270,31 @@
     </div>
     <!-- /.modal -->
 
+    <!-- Modal  Delete -->
+    <div class="modal fade" id="ModalDelete{{$item->kode_produk}}" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Hapus Produk</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="{{route('produk.destroy', ['id' => $item->kode_produk])}}" method="POST">
+                    @csrf @method('DELETE')
+                    <h4>Anda Yakin Ingin Menghapus Data Produk Dari <strong> {{$item->nama_produk}}</strong> ?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
       @endforeach
 
     </section>
