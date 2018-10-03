@@ -10,4 +10,8 @@ class FrontendControler extends Controller
     {
       return view('frontend.pages.produck');
     }
+    public function product_list()
+    {
+      return view('frontend.pages.shop-product-list');
+    }
 }

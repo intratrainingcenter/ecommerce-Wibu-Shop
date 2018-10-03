@@ -1,5 +1,3 @@
-<div class="row margin-bottom-40 ">
-  <div class="sidebar col-md-3 col-sm-4">
     <ul class="list-group margin-bottom-25 sidebar-menu">
       <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
       <li class="list-group-item clearfix dropdown">
@@ -31,7 +29,7 @@
           <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> T-Shirts</a></li>
         </ul>
       </li>
-      <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
+      <li class="list-group-item clearfix"><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Kidsnnn</a></li>
       <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
       <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
       <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
@@ -39,6 +37,3 @@
       <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home & Garden</a></li>
       <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
     </ul>
-  </div>
-@include('frontend.pages.ThreProduct')
-</div>

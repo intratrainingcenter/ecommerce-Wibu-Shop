@@ -1,13 +1,15 @@
 @extends('frontend.index')
 @section('produck')
+  @include('frontend.layout.sider')
   <div class="main">
     <div class="container">
-
-      <!-- BEGIN SIDEBAR & CONTENT -->
-      
-      <!-- BEGIN TWO PRODUCTS & PROMO -->
+      <div class="row margin-bottom-40 ">
+        <div class="sidebar col-md-3 col-sm-4">
+      @include('frontend.layout.ButonProduct')
+      @include('frontend.pages.ThreProduct')
+    </div>
+    </div>
       <div class="row margin-bottom-35 ">
-        <!-- BEGIN TWO PRODUCTS -->
         <div class="col-md-6 two-items-bottom-items">
           <h2>Two items</h2>
           <div class="owl-carousel owl-carousel2">
@@ -97,12 +99,9 @@
             </div>
           </div>
         </div>
-        <!-- END TWO PRODUCTS -->
-        <!-- BEGIN PROMO -->
         <div class="col-md-6 shop-index-carousel">
           <div class="content-slider">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
               <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -122,9 +121,7 @@
             </div>
           </div>
         </div>
-        <!-- END PROMO -->
       </div>
-      <!-- END TWO PRODUCTS & PROMO -->
     </div>
   </div>
 @endsection
