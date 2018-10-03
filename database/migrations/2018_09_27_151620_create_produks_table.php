@@ -21,8 +21,8 @@ class CreateProduksTable extends Migration
             $table->integer('hpp');
             $table->integer('harga');
             $table->integer('stok');
-            $table->enum('status',['ready', 'not']);
-            $table->text('keterangan');
+            $table->enum('status',['Siap', 'Tidak Siap']);
+            $table->text('keterangan')->nullable();
             $table->binary('foto');
             $table->timestamps();
         });
