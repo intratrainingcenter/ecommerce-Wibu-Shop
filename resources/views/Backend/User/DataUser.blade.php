@@ -31,18 +31,28 @@
                   <td>{{$key->name}}</td>
                   <td>{{$key->email}}</td>
                   <td>{{$key->alamat}}</td>
+                  @if ($key->kode_user == auth::user()->kode_user)
+                    <td></td>
+                    @else
                   <td> @if ($key->status == 'Aktif' )
                       <a href="#" class="btn btn-success" data-toggle="modal" data-target="#nonAktifUser{{$key->kode_user}}">Aktif</a>
                     @else
                       <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#AktifUser{{$key->kode_user}}">Non Aktif</a>
                     @endif
                   </td>
+                @endif
                   <td>{{$key->jabatan}}</td>
+                  @if ($key->kode_user == auth::user()->kode_user)
+                    <td>
+                      <a href="#" class="btn btn-info" data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Edit">Detail</a>
+                    </td>
+                  @else
                   <td>
                     <a href="#" class="btn btn-info" data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Edit">Detail</a>
                     <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#EditUser{{$key->kode_user}}" title="Edit">Edit</a>
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#DeleteUser{{$key->kode_user}}" title="Hapus">Hapus</a>
                   </td>
+                @endif
                 </tr>
               @endforeach
               </tbody>

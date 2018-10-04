@@ -1,7 +1,6 @@
 <?php
-Route::get('/', function () {
-    return view('Backend.Dashboard.index');
-});
+Route::get('/dashboard','HomeController@index')->name('dashboard');
+Route::get('/Profile/{kode_user}','HomeController@Profile')->name('Profile');
 Route::post('paypal', 'PaymentController@payWithpaypal');
 // route for check status of the payment
 Route::get('status', 'PaymentController@getPaymentStatus');

@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 class UserController extends Controller
 {
+    public function __construct() {
+      $this->middleware('auth');
+    }
     public function index() {
       $data = User::all();
           return view('Backend.User.DataUser',compact('data'));
@@ -57,7 +60,6 @@ class UserController extends Controller
         $update->alamat = $request->alamat;
         $update->save();
         return redirect()->back();
-
       }
     }
     public function destroy($kode_user) {

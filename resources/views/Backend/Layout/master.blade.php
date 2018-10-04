@@ -13,6 +13,7 @@
 
     @yield('content')
 
+    @include('Backend.User.Pop_Up_Edit_Profil_User')
     @include('Backend.Layout.footer')
 
 </div>
