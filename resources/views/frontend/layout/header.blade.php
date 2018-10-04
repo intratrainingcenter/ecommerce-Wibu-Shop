@@ -14,7 +14,6 @@
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;"> Man </a>
 @include('frontend.layout.butonMan')
         </li>
-        <li><a href="shop-item.html">Kids</a></li>
         <li class="dropdown dropdown100 nav-catalogue">
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;"> New  </a>
 @include('frontend.layout.Newporduct-header')

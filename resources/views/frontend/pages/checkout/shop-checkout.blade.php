@@ -1,3 +1,5 @@
+@extends('frontend.index')
+@section('produck')
     <div class="main">
       <div class="container">
         <ul class="breadcrumb">
@@ -343,7 +345,7 @@
                         </tr>
                         <tr>
                           <td class="checkout-image">
-                            <a href="javascript:;"><img src="assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+                            <a href="javascript:;"><img src="{{asset('frontend/theme/assets/pages/img/products/model3.jpg')}}" alt="Berry Lace Dress"></a>
                           </td>
                           <td class="checkout-description">
                             <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
@@ -357,7 +359,7 @@
                         </tr>
                         <tr>
                           <td class="checkout-image">
-                            <a href="javascript:;"><img src="assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
+                            <a href="javascript:;"><img src="{{asset('frontend/theme/assets/pages/img/products/model4.jpg')}}" alt="Berry Lace Dress"></a>
                           </td>
                           <td class="checkout-description">
                             <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
@@ -411,3 +413,4 @@
         <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
+@endsection

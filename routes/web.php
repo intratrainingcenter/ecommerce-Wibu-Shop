@@ -13,6 +13,7 @@ Route::get('status', 'PaymentController@getPaymentStatus');
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list','FrontendControler@product_list')->name('frontend.product_list');
+Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
 
 Auth::routes();
 
