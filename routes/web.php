@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('test.welcome');
 });
+Route::get('/test', function () {
+    return view('test.OneSignal');
+});
 Route::post('paypal', 'PaymentController@payWithpaypal');
 // route for check status of the payment
 Route::get('status', 'PaymentController@getPaymentStatus');

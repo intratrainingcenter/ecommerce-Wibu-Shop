@@ -63,15 +63,20 @@
                 margin-bottom: 30px;
             }
         </style>
-        <!-- <link rel="manifest" href="/manifest.json" /> -->
+        <link rel="manifest" href="/manifest.json" />
         <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
         <script>
-          var OneSignal = window.OneSignal || [];
-          OneSignal.push(function() {
-            OneSignal.init({
-              appId: "9ffadfd8-6317-41a6-8489-ecca4c0ce524",
-            });
-          });
+         var OneSignal = window.OneSignal || [];
+         OneSignal.push(function() {
+           OneSignal.init({
+             appId: "017fcce1-5ac4-4070-bec2-f4bba36014ca",
+             autoRegister: false,
+             notifyButton: {
+               enable: true,
+             },
+             allowLocalhostAsSecureOrigin: true,
+           });
+         });
         </script>
     </head>
     <body>
