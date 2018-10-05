@@ -33,13 +33,13 @@
 <body class="ecommerce">
   @include('frontend.layout.bar')
 @include('frontend.layout.header')
-@include('frontend.layout.sider')
-<div class="main">
-  <div class="container">
-    @include('frontend.layout.ButonProduct')
+{{-- @include('frontend.layout.sider') --}}
+{{-- <div class="main">
+  <div class="container"> --}}
+    {{-- @include('frontend.layout.ButonProduct') --}}
     @yield('produck')
-  </div>
-</div>
+  {{-- </div>
+</div> --}}
 @include('frontend.layout.pre-footer')
 @include('frontend.layout.footer')
 @include('frontend.layout.pop-up')

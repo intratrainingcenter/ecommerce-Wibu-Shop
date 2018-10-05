@@ -11,10 +11,12 @@ class Produk extends Seeder
      */
     public function run()
     {
+      for ($i=1; $i < 20 ; $i++) {
+
         DB::table('produks')->insert([
-            'kode_produk' => 'PRD01',
+            'kode_produk' => 'PRD0'.$i,
             'kode_kategori' => 'KTG01',
-            'nama_produk' => 'Produk 1',
+            'nama_produk' => 'Produk '.$i,
             'hpp'   => '100000',
             'harga' => '150000',
             'stok'  => '30',
@@ -22,5 +24,6 @@ class Produk extends Seeder
             'keterangan'    => 'Ini keterangan',
             'foto'  => 'images/foto.png'
         ]);
+      }
     }
 }
