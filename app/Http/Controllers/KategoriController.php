@@ -14,7 +14,10 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+
+            $data = Kategori::orderBy('created_at', 'DESC')->paginate(10);
+            return view('Backend.Kategori.index', compact('data'));
+        
     }
 
     /**
@@ -35,9 +38,20 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $code = date("Ymdhis");
+        $count = kategori::count()+1;
 
+
+        //  dd('n'.$code.$count);
+        $insert = new Kategori;
+        $insert->kode_kategori='K'.$code.$count;
+        $insert->nama_kategori=$request->nama_kategori;
+        $insert->keterangan=$request->keterangan;
+        $insert->save();
+
+        return redirect('kategori')->with(['success'=> 'Berhasil Menambahkan Kategori Produk']);
+    }
+    
     /**
      * Display the specified resource.
      *
@@ -69,7 +83,14 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+    
+      $Update = Kategori::where('kode_kategori',$request->kode_kategori)->first();
+      $Update->kode_kategori=$request->kode_kategori;
+      $Update->nama_kategori=$request->nama_kategori;
+      $Update->keterangan=$request->keterangan;
+      $Update->save();
+
+      return redirect('kategori')->with(['success'=> 'Berhasil edit Kategori Produk']);
     }
 
     /**
@@ -78,8 +99,11 @@ class KategoriController extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($kode_kategori)
     {
-        //
+        $Delete = Kategori::where('kode_kategori',$kode_kategori)->first();
+        $Delete->delete();
+
+        return redirect('kategori')->with(['success'=>'Proses Delete Berhasil']);
     }
 }

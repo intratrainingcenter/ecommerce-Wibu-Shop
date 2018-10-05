@@ -229,7 +229,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{route('kategori')}}">
             <i class="fa fa-files-o"></i> Data Kategori
           </a>
         </li>
