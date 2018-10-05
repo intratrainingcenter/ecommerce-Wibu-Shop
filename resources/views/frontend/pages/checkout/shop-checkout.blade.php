@@ -7,15 +7,10 @@
             <li><a href="">Store</a></li>
             <li class="active">Checkout</li>
         </ul>
-        <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-          <!-- BEGIN CONTENT -->
           <div class="col-md-12 col-sm-12">
             <h1>Checkout</h1>
-            <!-- BEGIN CHECKOUT PAGE -->
             <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
-
-              <!-- BEGIN CHECKOUT -->
               <div id="checkout" class="panel panel-default">
                 <div class="panel-heading">
                   <h2 class="panel-title">
@@ -71,9 +66,6 @@
                   </div>
                 </div>
               </div>
-              <!-- END CHECKOUT -->
-
-              <!-- BEGIN PAYMENT ADDRESS -->
               <div id="payment-address" class="panel panel-default">
                 <div class="panel-heading">
                   <h2 class="panel-title">
@@ -177,9 +169,6 @@
                   </div>
                 </div>
               </div>
-              <!-- END PAYMENT ADDRESS -->
-
-              <!-- BEGIN SHIPPING ADDRESS -->
               <div id="shipping-address" class="panel panel-default">
                 <div class="panel-heading">
                   <h2 class="panel-title">
@@ -255,9 +244,6 @@
                   </div>
                 </div>
               </div>
-              <!-- END SHIPPING ADDRESS -->
-
-              <!-- BEGIN SHIPPING METHOD -->
               <div id="shipping-method" class="panel panel-default">
                 <div class="panel-heading">
                   <h2 class="panel-title">
@@ -285,9 +271,6 @@
                   </div>
                 </div>
               </div>
-              <!-- END SHIPPING METHOD -->
-
-              <!-- BEGIN PAYMENT METHOD -->
               <div id="payment-method" class="panel panel-default">
                 <div class="panel-heading">
                   <h2 class="panel-title">
@@ -319,9 +302,6 @@
                   </div>
                 </div>
               </div>
-              <!-- END PAYMENT METHOD -->
-
-              <!-- BEGIN CONFIRM -->
               <div id="confirm" class="panel panel-default">
                 <div class="panel-heading">
                   <h2 class="panel-title">
@@ -404,13 +384,9 @@
                   </div>
                 </div>
               </div>
-              <!-- END CONFIRM -->
             </div>
-            <!-- END CHECKOUT PAGE -->
           </div>
-          <!-- END CONTENT -->
         </div>
-        <!-- END SIDEBAR & CONTENT -->
       </div>
     </div>
 @endsection

@@ -1,33 +1,19 @@
     <ul class="list-group margin-bottom-25 sidebar-menu">
-      <li class="list-group-item clearfix"><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Ladies</a></li>
-      <li class="list-group-item clearfix dropdown">
-        <a href="shop-product-list.html">
-          <i class="fa fa-angle-right"></i>  Mens  </a>
+      <li class="list-group-item clearfix dropdown"><a href="#"><i class="fa fa-angle-right"></i> Ladies</a>
         <ul class="dropdown-menu">
-          <li class="list-group-item dropdown clearfix">
-            <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Shoes </a>
-              <ul class="dropdown-menu">
-                <li class="list-group-item dropdown clearfix">
-                  <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 1</a></li>
-                    <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 2</a></li>
-                  </ul>
-                </li>
-                <li class="list-group-item dropdown clearfix">
-                  <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport  </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 1</a></li>
-                    <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 2</a></li>
-                  </ul>
-                </li>
-              </ul>
-          </li>
-          <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Trainers</a></li>
+          @foreach ($kategori as $data)
+            <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i>{{ $data->nama_kategori }}</a></li>
+          @endforeach
+        </ul>
+      </li>
+      <li class="list-group-item clearfix dropdown"><a href="#"><i class="fa fa-angle-right"></i>  Mens  </a>
+        <ul class="dropdown-menu">
+          <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Shoes </a></li>
+          <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Trainers</a></li>
           <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Jeans</a></li>
           <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Chinos</a></li>
           <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> T-Shirts</a></li>
         </ul>
       </li>
-      <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
+      <li class=" list-group-item clearfix"><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Accessories</a></li>
     </ul>
