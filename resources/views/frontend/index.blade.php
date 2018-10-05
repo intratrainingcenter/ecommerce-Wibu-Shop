@@ -25,6 +25,7 @@
   <link href="{{asset('frontend/theme/assets/pages/css/components.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/pages/css/slider.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/pages/css/style-shop.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('frontend/theme/assets/pages/css/style-chat.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('frontend/theme/assets/corporate/css/style.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
@@ -40,6 +41,7 @@
     @yield('produck')
   {{-- </div>
 </div> --}}
+@include('frontend.layout.chatPop-up')
 @include('frontend.layout.pre-footer')
 @include('frontend.layout.footer')
 @include('frontend.layout.pop-up')

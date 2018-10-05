@@ -1,5 +1,13 @@
 <div class="top-cart-block">
   <div class="top-cart-info">
+    <!-- Chat -->
+    <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view">Chat</a>
+  </div>
+  <a href="#"> <i class="fa fa-comments-o"></i></a>
+</div>
+
+<div class="top-cart-block">
+  <div class="top-cart-info">
     <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
     <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
   </div>
