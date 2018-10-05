@@ -317,7 +317,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="{{route('LapKeuangan')}}">
+                  <a href="{{route('LaporanKeuangan')}}">
                     <i class="fa fa-edit"></i> <span>Laporan Keuangan</span>
                   </a>
                 </li>

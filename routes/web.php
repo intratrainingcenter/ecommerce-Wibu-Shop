@@ -19,4 +19,4 @@ Route::resource('user','UserController');
 Route::resource('produk', 'ProdukController');
 
 
-Route::get('/keuangan','KeuanganController@Index')->name('LapKeuangan');
+Route::get('/keuangan','KeuanganController@Index')->name('LaporanKeuangan');
