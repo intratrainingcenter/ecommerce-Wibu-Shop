@@ -27,16 +27,24 @@
       <div class="row">
           <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    @if (session('alertgagal'))
-                    <div class="col-md-12">
-                        <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h4><i class="icon fa fa-ban"></i> Gagal!</h4>
-                            <p>Tolong isi formulir dengan benar!</p> 
-                        </div>
+                @if (session('alertfail'))
+                <div class="col-md-12 MyAlert">
+                    <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-ban"></i> Gagal!</h4>
+                        <p>{{session('alertfail')}}</p> 
                     </div>
-                    @endif
+                </div>
+                @elseif(session('alertsuccess'))
+                <div class="col-md-12 MyAlert">
+                    <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+                        <p>{{session('alertsuccess')}}</p> 
+                    </div>
+                </div>
+                @endif
+                <div class="box-header">
                     <h3 class="box-title">Data Produk</h3>
                     <button class="btn btn-success pull-right" data-toggle="modal" data-target="#ModalAdd">Tambah</button>
                 </div>

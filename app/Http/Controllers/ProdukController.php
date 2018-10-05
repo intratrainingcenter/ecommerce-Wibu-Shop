@@ -47,9 +47,15 @@ class ProdukController extends Controller
                     'harga' => 'required|numeric',
                     'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $check = Produk::where('kode_produk', $request->kode_produk)->exists();
         if ($validator->fails()) {
-            return redirect()->back()->with('alertgagal', 'Gagal');
-        } else {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        } 
+        elseif ($check) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        }
+        else {
             $foto = $request->foto;  
             $GetExtension = $foto->getClientOriginalExtension();
             $path = $foto->storeAs('public/images', $request->kode_produk . '.' . $GetExtension);
@@ -107,7 +113,7 @@ class ProdukController extends Controller
             'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertgagal', 'Gagal');
+            return redirect()->back()->with('alertfail', 'Gagal');
         } else {
             if ($request->hasFile('foto')) {
                 $get_foto = Produk::where('kode_produk', $id)->first();

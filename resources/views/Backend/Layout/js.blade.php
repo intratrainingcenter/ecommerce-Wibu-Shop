@@ -19,16 +19,22 @@
 {{-- <!-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --> --}}
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
 <script type="text/javascript">
-$(function () {
-  $('#example1').DataTable()
-  $('#example2').DataTable({
-    'paging'      : true,
-    'lengthChange': false,
-    'searching'   : false,
-    'ordering'    : true,
-    'info'        : true,
-    'autoWidth'   : false
+$(document).ready(function(){
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
   })
+
+  // SET TIMEOUT ALERT
+  setTimeout(function(){ $('.MyAlert').hide(1000); }, 3000);
+
 })
 </script>
 @yield('footer')
