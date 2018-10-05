@@ -2,7 +2,7 @@
 @extends('Backend.Kategori.additional')
 
 @section('title')
-    Kategori Produk
+    Product Category
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Kategori Produk
+      Product Category
       <small>Control panel</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-      <li class="active">Kategori Produk</li>
+      <li class="active">Product Category</li>
     </ol>
   </section>
   <!-- Main content -->
@@ -29,7 +29,7 @@
         <div class="box-header">
           <h3 class="box-title">Data Table With Full Features</h3>
           <div class="box-tools">
-            <a class="btn btn-success fa fa-plus" title="add" data-toggle="modal" data-target="#AddKategori" style="float:right;" href="#"></a>
+            <a class="btn btn-success fa fa-plus" title="add" data-toggle="modal" data-target="#AddCategory" style="float:right;" href="#"></a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -37,9 +37,9 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Kode Kategori</th>
-                  <th>Nama Kategori</th>
-                  <th>Keterangan</th>
+                  <th>Code Category</th>
+                  <th>Name Category</th>
+                  <th>Description</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -51,8 +51,8 @@
                   <td>{{$item->nama_kategori}}</td>
                   <td>{{$item->keterangan}}</td>
                   <td>
-                    <a type="button" class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#EditKategori{{$item->kode_kategori}}" href="#"></a>
-                    <a type="button" class="btn btn-danger fa  fa-trash" data-toggle="modal" data-target="#DeleteKategori{{$item->kode_kategori}}"></a>
+                    <a type="button" class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#EditCategory{{$item->kode_kategori}}" href="#"></a>
+                    <a type="button" class="btn btn-danger fa  fa-trash" data-toggle="modal" data-target="#DeleteCategory{{$item->kode_kategori}}"></a>
                   </td>
                 </tr>
                 @endforeach
@@ -66,13 +66,13 @@
     </div>
   </section>
   {{-- ---------add------------ --}}
-  <div id="AddKategori" class="modal fade" role="dialog">
+  <div id="AddCategory" class="modal fade" role="dialog">
     <div class="modal-dialog">
       {{Form::open(['route' => 'kategori.store'])}}
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Tambah Kategori Produk</h4>
+          <h4 class="modal-title">Add Product Category</h4>
         </div>
         <div class="modal-body col-md-12">
           @csrf
@@ -80,13 +80,13 @@
           {{
           Form::hidden('kode_kategori', '',['placeholder'=>'kode','class' => 'form-control','required','autofocus'])
           }}{{
-          Form::label('nama_kategori', 'Nama Kategori', ['class' => 'awesome'])
+          Form::label('nama_kategori', 'Category Name', ['class' => 'awesome'])
           }}{{
-          Form::text('nama_kategori', '',['placeholder'=> 'Nama Kategori','class' => 'form-control','required','autofocus'])
+          Form::text('nama_kategori', '',['placeholder'=> 'Category Name','class' => 'form-control','required','autofocus'])
           }}{{
-          Form::label('keterangan', 'Keterangan Kategori', ['class' => 'awesome'])
+          Form::label('keterangan', 'Description', ['class' => 'awesome'])
           }}{{
-          Form::text('keterangan', '',['placeholder'=> 'Keterangan Kategori', 'class' => 'form-control','required','autofocus'])
+          Form::text('keterangan', '',['placeholder'=> 'Description', 'class' => 'form-control','required','autofocus'])
           }}
         </div>
         <div class="modal-footer">
@@ -100,7 +100,7 @@
   </div>
 </div>
 @foreach ($data as $item => $Edit)
-<div id="EditKategori{{$Edit->kode_kategori}}" class="modal fade" role="dialog">
+<div id="EditCategory{{$Edit->kode_kategori}}" class="modal fade" role="dialog">
   <div class="modal-dialog">
     {!! Form::model($data, ['route' => ['kategori.update',$Edit->kode_kategori]]) !!}
     <div class="modal-content">
@@ -114,13 +114,13 @@
         {{
         Form::hidden('kode_kategori', $Edit->kode_kategori,['placeholder'=>'kode','class' => 'form-control','required','autofocus'])
         }}{{
-        Form::label('nama_kategori', 'Nama Kategori', ['class' => 'awesome'])
+        Form::label('nama_kategori', 'Category Name', ['class' => 'awesome'])
         }}{{
-        Form::text('nama_kategori', $Edit->nama_kategori,['placeholder'=> 'Nama Kategori','class' => 'form-control','required'])
+        Form::text('nama_kategori', $Edit->nama_kategori,['placeholder'=> 'Category Name','class' => 'form-control','required'])
         }}{{
-        Form::label('keterangan', 'keterangan', ['class' => 'awesome'])
+        Form::label('keterangan', 'Description', ['class' => 'awesome'])
         }}{{
-        Form::text('keterangan', $Edit->keterangan,['placeholder'=> 'Keterangan','class' => 'form-control','required'])
+        Form::text('keterangan', $Edit->keterangan,['placeholder'=> 'Description','class' => 'form-control','required'])
         }}
         </select>
     </div>
@@ -135,19 +135,19 @@
 </div>
 @endforeach
 @foreach ($data as $delete)
-<div id="DeleteKategori{{$delete->kode_kategori}}" class="modal fade" role="dialog">
+<div id="DeleteCategory{{$delete->kode_kategori}}" class="modal fade" role="dialog">
   <div class="modal-dialog">
     {!! Form::model($data, ['route' => ['kategori.destroy',$delete->kode_kategori]]) !!}
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete Kategori</h4>
+        <h4 class="modal-title">Delete Category</h4>
       </div>
       <div class="modal-body col-md-12">
         @csrf
         @method('DELETE')
         <center>
-          <h3>Anda Yakin Ingin Menghapus Kategori ?</h3>
+          <h3>Are you sure you want to delete a category?</h3>
         </center>
         <center>
           <b>
