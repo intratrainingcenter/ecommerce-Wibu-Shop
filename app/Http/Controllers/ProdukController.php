@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class ProdukController extends Controller
 {
@@ -26,7 +28,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -37,7 +39,38 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+                    'kode_produk' => 'required|max:20',
+                    'nama_produk' => 'required|max:20',
+                    'kode_kategori' => 'required|max:20',
+                    'hpp' => 'required|numeric',
+                    'harga' => 'required|numeric',
+                    'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $check = Produk::where('kode_produk', $request->kode_produk)->exists();
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        } 
+        elseif ($check) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        }
+        else {
+            $foto = $request->foto;  
+            $GetExtension = $foto->getClientOriginalExtension();
+            $path = $foto->storeAs('public/images', $request->kode_produk . '.' . $GetExtension);
+            $create = Produk::create([
+                'kode_produk' => $request->kode_produk,
+                'nama_produk' => $request->nama_produk,
+                'kode_kategori' => $request->kode_produk,
+                'hpp' => $request->hpp,
+                'harga' => $request->harga,
+                'foto' => $path,
+            ]);
+            return redirect()->back();
+        }
+        
+        
     }
 
     /**
@@ -69,9 +102,45 @@ class ProdukController extends Controller
      * @param  \App\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kode_produk' => 'required|max:20',
+            'nama_produk' => 'required|max:20',
+            'kode_kategori' => 'required|max:20',
+            'hpp' => 'required|numeric',
+            'harga' => 'required|numeric',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        } else {
+            if ($request->hasFile('foto')) {
+                $get_foto = Produk::where('kode_produk', $id)->first();
+                Storage::delete($get_foto->foto);
+                $foto = $request->foto;
+                $GetExtension = $foto->getClientOriginalExtension();
+                $path = $foto->storeAs('public/images', $request->kode_produk . '.' . $GetExtension);
+                $update = Produk::where('kode_produk', $id)->update([
+                    'kode_produk' => $request->kode_produk,
+                    'nama_produk' => $request->nama_produk,
+                    'kode_kategori' => $request->kode_produk,
+                    'hpp' => $request->hpp,
+                    'harga' => $request->harga,
+                    'foto' => $path,
+                ]);
+            } else {
+                $update = Produk::where('kode_produk', $id)->update([
+                    'kode_produk' => $request->kode_produk,
+                    'nama_produk' => $request->nama_produk,
+                    'kode_kategori' => $request->kode_produk,
+                    'hpp' => $request->hpp,
+                    'harga' => $request->harga,
+                ]);
+            }
+            
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,8 +149,13 @@ class ProdukController extends Controller
      * @param  \App\Produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produk $produk)
+    public function destroy($id)
     {
-        //
+        $data = Produk::where('kode_produk', $id)->first();
+        $image_path = $data->foto;
+        Storage::delete($image_path);
+        $data->delete();
+
+        return redirect()->back();
     }
 }
