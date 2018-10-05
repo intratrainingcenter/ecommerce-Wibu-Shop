@@ -47,7 +47,6 @@ class ProdukController extends Controller
                     'harga' => 'required|numeric',
                     'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
         $check = Produk::where('kode_produk', $request->kode_produk)->exists();
         if ($validator->fails()) {
             return redirect()->back()->with('alertfail', 'Gagal');

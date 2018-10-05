@@ -14,7 +14,10 @@ class PromoController extends Controller
      */
     public function index()
     {
-        //
+        $data = Promo::orderBy('created_at', 'desc')->get();
+        $no = 1;
+
+        return view('Backend.Promo.index', compact('data', 'no'));
     }
 
     /**

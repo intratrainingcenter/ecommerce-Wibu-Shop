@@ -15,7 +15,7 @@ class User extends Seeder
             'kode_user' => 'USR01',
             'name' => 'User 1',
             'email' => 'admin@gmail.com',
-            'password' => '123',
+            'password' => bcrypt('123'),
             'alamat'  => 'Jakarta',
             'status'    => 'nonAktif',
             'jabatan'    => 'Admin',

@@ -1,8 +1,8 @@
 @extends('Backend.Layout.master')
-@extends('Backend.Produk.additional')
+@extends('Backend.Promo.additional')
 
 @section('title')
-    Produk
+    Promo
 @endsection
 
 @section('content')
@@ -12,12 +12,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Produk
+        Promo
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Produk</li>
+        <li class="active">Promo</li>
       </ol>
     </section>
 
@@ -45,21 +45,19 @@
                 </div>
                 @endif
                 <div class="box-header">
-                    <h3 class="box-title">Data Produk</h3>
+                    <h3 class="box-title">Data Promo</h3>
                     <button class="btn btn-success pull-right" data-toggle="modal" data-target="#ModalAdd">Tambah</button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="TableProduk" class="table table-bordered table-hover" width="100%" cellspacing="0">
+                    <table id="TablePromo" class="table table-bordered table-hover" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th width="20px">No</th>
-                        <th width="100px">Kode Produk</th>
-                        <th>Nama Produk</th>
-                        <th>Kategori</th>
-                        <th width="50px">Stok</th>
-                        <th>Harga Jual</th>
-                        <th>Status</th>
+                        <th width="100px">Kode Promo</th>
+                        <th>Nama Promo</th>
+                        <th>Tanggal Awal</th>
+                        <th>Tanggal Akhir</th>
                         <th width="120px">Opsi</th>
                     </tr>
                     </thead>
@@ -67,16 +65,14 @@
                         @foreach ($data as $item)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$item->kode_produk}}</td>
-                                <td>{{$item->nama_produk}}</td>
-                                <td>{{$item->kode_kategori}}</td>
-                                <td align="right">{{$item->stok}}</td>
-                                <td align="right">{{number_format($item->harga,0,"",".")}}</td>
-                                <td>{{$item->status}}</td>
+                                <td>{{$item->kode_promo}}</td>
+                                <td>{{$item->nama_promo}}</td>
+                                <td>{{$item->tanggal_awal}}</td>
+                                <td>{{$item->tanggal_akhir}}</td>
                                 <td>
-                                    <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_produk}}" title="Rincian"></button>
-                                    <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_produk}}"></button>
-                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_produk}}"></button>
+                                    <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_promo}}" title="Rincian"></button>
+                                    <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_promo}}"></button>
+                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_promo}}"></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -93,8 +89,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  @include('Backend.Produk.modal_add')
-  @include('Backend.Produk.modal_detail')
-  @include('Backend.Produk.modal_edit')
-  @include('Backend.Produk.modal_delete')
+  @include('Backend.Promo.modal_add')
+  @include('Backend.Promo.modal_detail')
+  @include('Backend.Promo.modal_edit')
+  @include('Backend.Promo.modal_delete')
 @endsection

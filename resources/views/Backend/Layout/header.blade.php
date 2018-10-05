@@ -274,7 +274,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{route('promo.index')}}">
             <i class="fa fa-book"></i><span>Data Promo</span>
           </a>
         </li>
