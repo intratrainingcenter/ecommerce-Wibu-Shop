@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produk;
+use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -16,9 +17,10 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $data = Produk::orderBy('created_at', 'desc')->get();
+        $data = Produk::orderBy('created_at', 'desc')->with('GetKategori')->get();
+        $data_kategori = Kategori::all();
         $no = 1;
-        return view('Backend.Produk.index', compact('data', 'no'));
+        return view('Backend.Produk.index', compact('data', 'no', 'data_kategori'));
     }
 
     /**

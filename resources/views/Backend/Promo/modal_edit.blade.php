@@ -48,38 +48,38 @@
                         <div class="form-group row">
                             <label for="tanggal_awal" class="col-md-3">Masa Berlaku</label>
                             <div class="col-md-3">
-                                <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control">
+                                <input type="date" name="tanggal_awal" id="tanggal_awaledit" class="form-control">
                             </div>
                             <div class="col-md-2">
                                 <center><h4>s/d</h4></center>
                             </div>
                             <div class="col-md-3">
-                                <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control">
+                                <input type="date" name="tanggal_akhir" id="tanggal_akhiredit" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jenis_promo" class="col-md-3">Jenis Promo</label>
                             <div class="col-md-8">
-                                <select name="jenis_promo" id="jenis_promo" class="form-control">
+                                <select name="jenis_promo" id="jenis_promoedit" class="form-control jenis_promo">
                                     <option value="">Pilih Jenis Promo</option>
                                     <option value="diskon">Diskon</option>
                                     <option value="bonus">Bonus</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row" hidden id="diskon">
+                        <div class="form-group row diskon" hidden>
                             <label for="jenis_promo" class="col-md-3">Jenis Promo</label>
                             <div class="col-md-8">
                                 <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon1">Rp.</span>
-                                        <input  type="text" min="0" class="form-control" placeholder="1000" id="diskon" name="diskon" aria-describedby="basic-addon1" required="">
+                                        <input  type="text" min="0" class="form-control" placeholder="1000" id="diskonedit" name="diskon" aria-describedby="basic-addon1" required="">
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row" hidden id="bonus">
-                            <label for="bonus" class="col-md-3">Bonnus</label>
+                        <div class="form-group row bonus" hidden>
+                            <label for="bonus" class="col-md-3">Bonus</label>
                             <div class="col-md-8">
-                            <select class="form-control" id="kode_produk_bonus" name="kode_produk_bonus" required="">
+                            <select class="form-control" id="kode_produk_bonusedit" name="kode_produk_bonus" required="">
                                 <optgroup label="Pilihan Barang Bonus">
                                     <option value="">None</option>
                                     {{-- @foreach($barangs as $barang)
@@ -92,7 +92,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary" id="simpanedit">Simpan</button>
                 </form>
             </div>
         </div>

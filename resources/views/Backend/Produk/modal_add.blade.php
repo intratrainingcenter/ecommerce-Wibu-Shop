@@ -27,7 +27,9 @@
                                 <div class="col-md-8">
                                 <select name="kode_kategori" id="kode_kategori" class="form-control" required>
                                     <option value="">--Pilih Kategori--</option>
-                                    <option value="0">0</option>
+                                    @foreach ($data_kategori as $item)
+                                        <option value="{{$item->kode_kategori}}">{{$item->nama_kategori}}</option>
+                                    @endforeach
                                 </select>
                                 </div>
                             </div>

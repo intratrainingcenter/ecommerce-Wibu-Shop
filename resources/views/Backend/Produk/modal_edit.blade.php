@@ -28,21 +28,24 @@
                             <label for="kode_ategori" class="col-md-4">Kategori</label>
                             <div class="col-md-8">
                             <select name="kode_kategori" id="kode_kategoriedit" class="form-control" required>
-                                <option value="">--Pilih Kategori--</option>
-                                <option value="0">0</option>
+                                <option value="{{$item->kode_kategori}}">{{$item->GetKategori->nama_kategori}}</option>
+                                @foreach ($data_kategori as $item)
+                                    <option value="">--Pilih Kategori--</option>
+                                    <option value="{{$item->kode_kategori}}">{{$item->nama_kategori}}</option>
+                                @endforeach
                             </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="hpp" class="col-md-4">HPP</label>
                             <div class="col-md-8">
-                            <input type="number" name="hpp" id="hppedit" max="99999999" min="0" class="form-control" value="{{$item->hpp}}" required>
+                            <input type="number" name="hpp" id="hppedit" max="99999999" min="1" class="form-control" value="{{$item->hpp}}" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="harga" class="col-md-4">Harga Jual</label>
                             <div class="col-md-8">
-                                <input type="number" name="harga" id="hargaedit" min="0" max="99999999" class="form-control" value="{{$item->harga}}" required>
+                                <input type="number" name="harga" id="hargaedit" min="1" max="99999999" class="form-control" value="{{$item->harga}}" required>
                             </div>
                         </div>
                         <div class="form-group row">

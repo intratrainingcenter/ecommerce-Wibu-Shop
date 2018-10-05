@@ -67,8 +67,8 @@
                                 <td>{{$no++}}</td>
                                 <td>{{$item->kode_promo}}</td>
                                 <td>{{$item->nama_promo}}</td>
-                                <td>{{$item->tanggal_awal}}</td>
-                                <td>{{$item->tanggal_akhir}}</td>
+                                <td>{{date('d F Y', strtotime($item->tanggal_awal))}}</td>
+                                <td>{{date('d F Y', strtotime($item->tanggal_akhir))}}</td>
                                 <td>
                                     <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_promo}}" title="Rincian"></button>
                                     <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_promo}}"></button>

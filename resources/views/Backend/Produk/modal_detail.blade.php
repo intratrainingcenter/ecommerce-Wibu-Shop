@@ -23,7 +23,7 @@
                             <td><label for="">Nama Produk</label></td><td>:</td><td>{{$item->nama_produk}}</td>
                         </tr>
                         <tr>
-                            <td><label for="">Kategori</label></td><td>:</td><td>{{$item->kode_kategori}}</td>
+                            <td><label for="">Kategori</label></td><td>:</td><td>{{$item->GetKategori->nama_kategori}}</td>
                         </tr>
                         <tr>
                             <td><label for="">HPP</label></td><td>:</td><td>{{$item->hpp}}</td>

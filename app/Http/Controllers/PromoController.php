@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Promo;
+use App\Produk;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -15,10 +16,11 @@ class PromoController extends Controller
      */
     public function index()
     {
-        $data = Promo::orderBy('created_at', 'desc')->get();
+        $data = Promo::orderBy('created_at', 'desc')->with('GetProduk')->get();
+        $data_produk = Produk::all();
         $no = 1;
 
-        return view('Backend.Promo.index', compact('data', 'no'));
+        return view('Backend.Promo.index', compact('data', 'no', 'data_produk'));
     }
 
     /**
@@ -56,10 +58,10 @@ class PromoController extends Controller
             return redirect()->back()->with('alertfail', 'Gagal');
         }
         else {
-            $create = Produk::create([
+            $create = Promo::create([
                 'kode_promo' => $request->kode_promo,
                 'nama_promo' => $request->nama_promo,
-                'Kode_produk' => $request->kode_produk,
+                'kode_produk' => $request->kode_produk,
                 'min' => $request->min,
                 'max' => $request->max,
                 'tanggal_awal' => $request->tanggal_awal,
