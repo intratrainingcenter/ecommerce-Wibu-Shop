@@ -53,6 +53,10 @@ $(document).ready(function() {
   //
   // })
 
-});
+
+  // SET TIMEOUT ALERT
+  setTimeout(function(){ $('.MyAlert').hide(1000); }, 3000);
+
+})
 </script>
 @yield('footer')
