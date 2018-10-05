@@ -16,5 +16,27 @@
         })
     })
 
+    // SELECT JENIS PROMO
+    $("#jenis_promo").change(function(){
+        let Value = $("#jenis_promo").val();
+        if (Value == 'Diskon') {
+            console.log(Value);
+            
+            $("#diskon").show();
+            $("#bonus").hide();
+        } 
+        else if (Value == 'Bonus') {
+            console.log(Value);
+            
+            $("#diskon").hide();
+            $("#bonus").show();
+        } 
+        else {
+            console.log(Value);
+            
+            $("#diskon").hide();
+            $("#bonus").hide();
+        }
+    })
     </script>
 @endsection

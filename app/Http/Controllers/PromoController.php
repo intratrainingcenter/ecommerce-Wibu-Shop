@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Promo;
 use Illuminate\Http\Request;
+use Validator;
 
 class PromoController extends Controller
 {
@@ -38,7 +39,37 @@ class PromoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kode_promo' => 'required|max:20',
+            'nama_promo' => 'required|max:20',
+            'kode_produk' => 'required',
+            'min' => 'required',
+            'max' => 'required',
+            'tanggal_awal' => 'required',
+            'tanggal_akhir' => 'required',
+        ]);
+        $check = Promo::where('kode_promo', $request->kode_promo)->exists();
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        } 
+        elseif ($check) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        }
+        else {
+            $create = Produk::create([
+                'kode_promo' => $request->kode_promo,
+                'nama_promo' => $request->nama_promo,
+                'Kode_produk' => $request->kode_produk,
+                'min' => $request->min,
+                'max' => $request->max,
+                'tanggal_awal' => $request->tanggal_awal,
+                'tanggal_akhir' => $request->tanggal_akhir,
+                'jenis_promo'=>$request->jenis_promo,
+                'diskon'=>$request->diskon,
+                'kode_produk_bonus'=>$request->kode_produk_bonus,
+            ]);
+            return redirect()->back();
+        }
     }
 
     /**
