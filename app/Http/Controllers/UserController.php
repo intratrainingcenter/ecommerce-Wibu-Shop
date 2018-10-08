@@ -13,10 +13,15 @@ class UserController extends Controller
       $this->middleware('auth');
     }
     public function index() {
-      $data = User::all();
+      $data = User::orderBy('id','desc')->get();
           return view('Backend.User.DataUser',compact('data'));
     }
     public function store(Request $request){
+      $data = User::select('email')->first();
+      if ($request->email == $data->email) {
+        return redirect()->back();
+      }
+      elseif ($request->password == $request->password_confirmation) {
       $code = User::count()+1;
       $date = date('Ymdhi');
       $insert = new User;
@@ -28,7 +33,11 @@ class UserController extends Controller
       $insert->status=$request->status;
       $insert->jabatan=$request->jabatan;
       $insert->save();
+      return redirect()->back();
+      }
+      else {
         return redirect()->back();
+      }
     }
     public function nonAktif(Request $request, $kode_user) {
         $nonAktif = User::where('kode_user',$kode_user)->first();

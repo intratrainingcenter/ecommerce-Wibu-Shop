@@ -1,7 +1,6 @@
 @section('title') Laporan Keuangan @endsection
 
 @section('js')
-	{{-- <!-- Untuk Javascript kamu -->
   <script type="text/javascript">
     function printlayer(layer) {
       var cetaklpkeuangan  = window.open("print");
@@ -11,5 +10,5 @@
       cetaklpkeuangan.print();
       cetaklpkeuangan.close();
     }
-  </script> --}}
+  </script>
 @endsection

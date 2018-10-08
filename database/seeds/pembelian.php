@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Carbon\Carbon;
 class pembelian extends Seeder
 {
     /**
@@ -19,6 +19,7 @@ class pembelian extends Seeder
           'harga'  => '20000',
           'sub_total'    => '2000000',
           'status'    => 'Done',
+          'created_at' => Carbon::now(),
       ],[
         'kode_transaksi_pembelian' => 'TrRb02',
           'kode_produk' => 'Produk2',
@@ -27,6 +28,7 @@ class pembelian extends Seeder
           'harga'  => '10000',
           'sub_total'    => '1000000',
           'status'    => 'Done',
+          'created_at' => Carbon::now(),
       ]]);
     }
 }
