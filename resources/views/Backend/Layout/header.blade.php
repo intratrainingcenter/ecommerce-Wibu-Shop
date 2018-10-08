@@ -253,76 +253,46 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
-        <li>
-          <a href="{{route('dashboard')}}">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-files-o"></i> Data Kategori
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-th"></i> <span>Data Produk</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-pie-chart"></i><span>Data Pembeli</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-book"></i><span>Data Promo</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-laptop"></i><span>Data Transaksi Pembelian</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-edit"></i> <span>Data Message</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{route('user.index')}}">
-            <i class="fa fa-edit"></i> <span>User</span>
-          </a>
-        </li>
-        <li class="treeview">
-            <a href="">
-                <span>Laporan</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+        @if (auth::user()->jabatan == 'Admin')
+          <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href=""><i class="fa fa-files-o"></i> Data Kategori</a></li>
+          <li><a href=""><i class="fa fa-th"></i> <span>Data Produk</span></a></li>
+          <li><a href=""><i class="fa fa-pie-chart"></i><span>Data Pembeli</span></a></li>
+          <li><a href=""><i class="fa fa-book"></i><span>Data Promo</span></a></li>
+          <li><a href=""><i class="fa fa-laptop"></i><span>Data Transaksi Pembelian</span></a></li>
+          <li><a href=""><i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span></a></li>
+          <li><a href=""><i class="fa fa-edit"></i> <span>Data Message</span></a></li>
+        @elseif (auth::user()->jabatan == 'Spv')
+          <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href=""><i class="fa fa-files-o"></i> Data Kategori</a></li>
+          <li><a href=""><i class="fa fa-th"></i> <span>Data Produk</span></a></li>
+          <li><a href=""><i class="fa fa-pie-chart"></i><span>Data Pembeli</span></a></li>
+          <li><a href=""><i class="fa fa-book"></i><span>Data Promo</span></a></li>
+          <li><a href=""><i class="fa fa-laptop"></i><span>Data Transaksi Pembelian</span></a></li>
+          <li><a href=""><i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span></a></li>
+          <li><a href=""><i class="fa fa-edit"></i> <span>Data Message</span></a></li>
+          <li><a href="{{route('user.index')}}"><i class="fa fa-edit"></i> <span>User</span></a></li>
+          <li class="treeview">
+            <a href=""><span>Laporan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
-                <li>
-                  <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Barang</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Barang</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Keuangan</span>
-                  </a>
-                </li>
+              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
+              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
+              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Keuangan</span></a></li>
             </ul>
+          </li>
+
+        @elseif (auth::user()->jabatan == 'Owner')
+          <li class="treeview">
+            <a href=""><span>Laporan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
+            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
+            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Keuangan</span></a>  </li>
+          </ul>
         </li>
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->
