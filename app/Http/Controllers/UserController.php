@@ -16,7 +16,7 @@ class UserController extends Controller
       $data = User::all();
           return view('Backend.User.DataUser',compact('data'));
     }
-    public function store(Request $request){zz
+    public function store(Request $request){
       $code = User::count()+1;
       $date = date('Ymdhi');
       $insert = new User;
@@ -43,10 +43,6 @@ class UserController extends Controller
       return redirect()->back();
     }
     public function update(Request $request, $kode_user) {
-      $checkemail = User::where('kode_user',$kode_user)->first();
-      if ( $request->email == $checkemail->email ) {
-        // code...
-      }
       if($request->password == '') {
         $update = User::where('kode_user',$kode_user)->first();
         $update->name = $request->name;
