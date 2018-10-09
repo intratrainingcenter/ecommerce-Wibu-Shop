@@ -15,9 +15,9 @@ class KategoriController extends Controller
     public function index()
     {
 
-            $data = Kategori::orderBy('created_at', 'DESC')->paginate(10);
+            $data = Kategori::orderBy('created_at', 'DESC')->get();
             return view('Backend.Kategori.index', compact('data'));
-        
+
     }
 
     /**
@@ -40,18 +40,21 @@ class KategoriController extends Controller
     {
         $code = date("Ymdhis");
         $count = kategori::count()+1;
+        $check = kategori::where('nama_kategori',$request->nama_kategori)->doesntExist();
 
+        if($check == true){
+             $insert = new Kategori;
+             $insert->kode_kategori='K'.$code.$count;
+             $insert->nama_kategori=$request->nama_kategori;
+             $insert->keterangan=$request->keterangan;
+             $insert->save();
 
-        //  dd('n'.$code.$count);
-        $insert = new Kategori;
-        $insert->kode_kategori='K'.$code.$count;
-        $insert->nama_kategori=$request->nama_kategori;
-        $insert->keterangan=$request->keterangan;
-        $insert->save();
-
-        return redirect('kategori')->with(['success'=> 'Berhasil Menambahkan Kategori Produk']);
+             return redirect('kategori')->with(['success'=> 'Berhasil Menambahkan Kategori Produk']);
+        }else{
+            return redirect('kategori')->with(['edit'=> 'Kategori Produk Sudah Ada']);
+        }
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -83,15 +86,22 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-    
-      $Update = Kategori::where('kode_kategori',$request->kode_kategori)->first();
-      $Update->kode_kategori=$request->kode_kategori;
-      $Update->nama_kategori=$request->nama_kategori;
-      $Update->keterangan=$request->keterangan;
-      $Update->save();
 
-      return redirect('kategori')->with(['success'=> 'Berhasil edit Kategori Produk']);
-    }
+        $check = kategori::where('nama_kategori',$request->nama_kategori)->doesntExist();
+
+        if($check == true){
+            $Update = Kategori::where('kode_kategori',$request->kode_kategori)->first();
+            $Update->kode_kategori=$request->kode_kategori;
+            $Update->nama_kategori=$request->nama_kategori;
+            $Update->keterangan=$request->keterangan;
+            $Update->save();
+
+            return redirect('kategori')->with(['success'=> 'Berhasil mengedit Kategori Produk']);
+        }else{
+            return redirect('kategori')->with(['edit'=> 'Kategori Produk Sudah Ada']);
+          }
+      }
+
 
     /**
      * Remove the specified resource from storage.
@@ -104,6 +114,6 @@ class KategoriController extends Controller
         $Delete = Kategori::where('kode_kategori',$kode_kategori)->first();
         $Delete->delete();
 
-        return redirect('kategori')->with(['success'=>'Proses Delete Berhasil']);
+        return redirect('kategori')->with(['success'=>'Berhasil Menghapus Kategori ']);
     }
 }
