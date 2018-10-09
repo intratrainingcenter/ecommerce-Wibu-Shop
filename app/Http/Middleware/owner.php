@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class owner
 {
@@ -15,6 +16,11 @@ class owner
      */
     public function handle($request, Closure $next)
     {
+      $user = Auth::user();
+      if ($user->jabatan == 'Owner') {
         return $next($request);
+      }else {
+        return redirect('dashboard');
+      }
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Auth;
 class admin_spv
 {
     /**
@@ -15,10 +15,11 @@ class admin_spv
      */
     public function handle($request, Closure $next)
     {
-      if (auth::user()->jabatan == 'Admin') {
+      $user = Auth::user();
+      if ($user->jabatan == 'Admin' && $user->jabatan == 'Spv') {
         return $next($request);
       }else {
-        return redirect()->back();
+        return redirect('dashboard');
       }
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Auth;
 class spv_owner
 {
     /**
@@ -15,6 +15,11 @@ class spv_owner
      */
     public function handle($request, Closure $next)
     {
+      $user = Auth::user();
+      if ($user->jabatan == 'Spv' && $user->jabatan == 'Owner') {
         return $next($request);
+      }else {
+        return redirect('dashboard');
+      }
     }
 }

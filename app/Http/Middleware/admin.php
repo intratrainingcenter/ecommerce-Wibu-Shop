@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class admin
@@ -15,6 +15,11 @@ class admin
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $user = Auth::user();
+        if ($user->jabatan == 'Admin') {
+          return $next($request);
+        }else {
+          return redirect('dashboard');
+        }
     }
 }
