@@ -11,10 +11,12 @@ class Kategori extends Seeder
      */
     public function run()
     {
+      for ($i=1; $i < 10 ; $i++) {
         DB::table('kategoris')->insert([
-            'kode_kategori' => 'KTG01',
-            'nama_kategori' => 'Kategori 1',
+            'kode_kategori' => 'KTG0'.$i,
+            'nama_kategori' => 'Kategori0'.$i,
             'keterangan'    => 'Ini keterangan',
         ]);
+      }
     }
 }
