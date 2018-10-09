@@ -7,13 +7,18 @@
       <ul><li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">  Woman  </a>
           <ul class="dropdown-menu">
-            <li><a href="shop-product-list.html">Running Shoes</a></li>
-            <li><a href="shop-product-list.html">Jackets and Coats</a></li>
+            @foreach ($kategori as $button_womens)
+              <li><a href="{{route('frontend.product_list')}}">{{$button_womens->nama_kategori}}</a></li>
+            @endforeach
           </ul></li>
         <li class="dropdown dropdown-megamenu">
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;"> Man </a>
-@include('frontend.layout.butonMan')
-        </li>
+{{-- @include('frontend.layout.butonMan') --}}
+            <ul class="dropdown-menu">
+              @foreach ($kategori as $button_womens)
+                <li><a href="{{route('frontend.product_list')}}">{{$button_womens->nama_kategori}}</a></li>
+              @endforeach
+            </ul></li>
         <li class="dropdown dropdown100 nav-catalogue">
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;"> New  </a>
 @include('frontend.layout.Newporduct-header')

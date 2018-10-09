@@ -8,6 +8,10 @@
       </li>
       <li class="list-group-item clearfix dropdown"><a href="#"><i class="fa fa-angle-right"></i>  Mens  </a>
         <ul class="dropdown-menu">
+          @foreach ($kategori as $button_mens)
+            <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i>{{ $button_mens->nama_kategori }}</a></li>
+          @endforeach
+
           <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Shoes </a></li>
           <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Trainers</a></li>
           <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Jeans</a></li>
@@ -15,5 +19,11 @@
           <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> T-Shirts</a></li>
         </ul>
       </li>
-      <li class=" list-group-item clearfix"><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i> Accessories</a></li>
+      <li class="list-group-item clearfix dropdown"><a href="#"><i class="fa fa-angle-right"></i>Accessories </a>
+        <ul class="dropdown-menu">
+          @foreach ($kategori as $data)
+            <li><a href="{{route('frontend.product_list')}}"><i class="fa fa-angle-right"></i>{{ $data->nama_kategori }}</a></li>
+          @endforeach
+        </ul>
+      </li>
     </ul>

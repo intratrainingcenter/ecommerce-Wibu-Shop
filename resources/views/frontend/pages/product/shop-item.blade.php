@@ -8,40 +8,26 @@
             <li><a href="">Store</a></li>
             <li class="active">Cool green dress with red bell</li>
         </ul>
-        <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-          <!-- BEGIN SIDEBAR -->
           <div class="sidebar col-md-3 col-sm-5">
           @include('frontend.layout.ButonProduct')
-
             <div class="sidebar-products clearfix">
               <h2>Bestsellers</h2>
+              @foreach ($three_products as $Product)
               <div class="item">
-                <a href="shop-item.html"><img src="assets/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                <a href="shop-item.html"><img src="{{$Product->foto}}" alt="Some Shoes in Animal with Cut Out"></a>
                 <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$31.00</div>
+                <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
               </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$23.00</div>
-              </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$86.00</div>
-              </div>
+            @endforeach
             </div>
           </div>
-          <!-- END SIDEBAR -->
-
-          <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-7">
             <div class="product-page">
               <div class="row">
                 <div class="col-md-6 col-sm-6">
                   <div class="product-main-image">
-                    <img src="{{$view_products->foto}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="{{$view_products->foto}}">
+                    <img src="{{asset('frontend/theme/assets/pages/img/products/model7.jpg')}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="{{$view_products->foto}}">
                   </div>
                   <div class="product-other-images">
                     <a href="{{$view_products->foto}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{$view_products->foto}}"></a>
@@ -50,10 +36,10 @@
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                  <h1>Cool green dress with red bell</h1>
+                  <h1>{{$view_products->nama_produk}}</h1>
                   <div class="price-availability-block clearfix">
                     <div class="price">
-                      <strong><span>$</span>47.00</strong>
+                      <strong>{{'Rp. '.number_format($view_products->harga)}}</strong>
                       <em>$<span>62.00</span></em>
                     </div>
                     <div class="availability">
@@ -61,8 +47,7 @@
                     </div>
                   </div>
                   <div class="description">
-                    <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat
-Nostrud duis molestie at dolore.</p>
+                    <p>{{$view_products->keterangan}}</p>
                   </div>
                   <div class="product-page-options">
                     <div class="pull-left">
@@ -162,8 +147,6 @@ Nostrud duis molestie at dolore.</p>
                             <p>Sed velit quam, auctor id semper a, hendrerit eget justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis vel arcu pulvinar dolor tempus feugiat id in orci. Phasellus sed erat leo. Donec luctus, justo eget ultricies tristique, enim mauris bibendum orci, a sodales lectus purus ut lorem.</p>
                         </div>
                       </div>
-
-                      <!-- BEGIN FORM-->
                       <form action="#" class="reviews-form" role="form">
                         <h2>Write a review</h2>
                         <div class="form-group">
@@ -188,19 +171,14 @@ Nostrud duis molestie at dolore.</p>
                           <button type="submit" class="btn btn-primary">Send</button>
                         </div>
                       </form>
-                      <!-- END FORM-->
                     </div>
                   </div>
                 </div>
-
                 <div class="sticker sticker-sale"></div>
               </div>
             </div>
           </div>
-          <!-- END CONTENT -->
         </div>
-        <!-- END SIDEBAR & CONTENT -->
-
       </div>
     </div>
 @endsection
