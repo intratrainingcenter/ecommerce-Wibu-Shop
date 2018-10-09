@@ -78,7 +78,7 @@
               </div>
             </div>
             <div class="row product-list">
-              @foreach ($Produck as $Produck)
+              @foreach ($three_products as $Produck)
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">

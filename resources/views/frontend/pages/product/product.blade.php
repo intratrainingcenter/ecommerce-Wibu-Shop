@@ -8,25 +8,25 @@
       @include('frontend.layout.ButonProduct')
     </div>
     <div class="col-md-9 col-sm-8">
-    @include( 'frontend.pages.ThreProduct')
+    @include( 'frontend.pages.product.ThreProduct')
     </div>
     </div>
       <div class="row margin-bottom-35 ">
         <div class="col-md-6 two-items-bottom-items">
           <h2>Two items</h2>
           <div class="owl-carousel owl-carousel2">
-            @foreach ($Produck as $key => $Produck)
+            @foreach ($two_products as $key => $Product)
             <div>
               <div class="product-item">
                 <div class="pi-img-wrapper">
-                  <img src="{{$Produck->foto}}" class="img-responsive" alt="Berry Lace Dress">
+                  <img src="{{$Product->foto}}" class="img-responsive" alt="Berry Lace Dress">
                   <div>
-                    <a href="{{$Produck->foto}}" class="btn btn-default fancybox-button">Zoom</a>
-                    <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                    <a href="{{$Product->foto}}" class="btn btn-default fancybox-button">Zoom</a>
+                    <a href="#product-pop-up{{$Product->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
                   </div>
                 </div>
-                <h3><a href="shop-item.html">{{$Produck->nama_produk}}</a></h3>
-                <div class="pi-price">Rp {{$Produck->harga}}</div>
+                <h3><a href="shop-item.html">{{$Product->nama_produk}}</a></h3>
+                <div class="pi-price">{{'Rp. '.number_format($Product->harga)}}</div>
                 <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
               </div>
             </div>

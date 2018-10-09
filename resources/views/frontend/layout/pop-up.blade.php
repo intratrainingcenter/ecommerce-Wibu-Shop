@@ -1,26 +1,22 @@
-<div id="product-pop-up" style="display: none; width: 700px;">
+@foreach ($all_products as $key => $pop_up)
+<div id="product-pop-up{{$pop_up->kode_produk}}" style="display: none; width: 700px;">
   <div class="product-page product-pop-up">
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-3">
         <div class="product-main-image">
-          <img src="{{asset('frontend/theme/assets/pages/img/products/model7.jpg')}}" alt="Cool green dress with red bell" class="img-responsive">
-        </div>
-        <div class="product-other-images">
-          <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="{{asset('frontend/theme/assets/pages/img/products/model3.jpg')}}"></a>
-          <a href="javascript:;"><img alt="Berry Lace Dress" src="{{asset('frontend/theme/assets/pages/img/products/model4.jpg')}}"></a>
-          <a href="javascript:;"><img alt="Berry Lace Dress" src="{{asset('frontend/theme/assets/pages/img/products/model5.jpg')}}"></a>
+          <img src="{{$pop_up->foto}}" alt="Cool green dress with red bell" class="img-responsive">
         </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-9">
         <h2>Cool green dress with red bell</h2>
         <div class="price-availability-block clearfix">
           <div class="price">
-            <strong><span>$</span>47.00</strong><em>$<span>62.00</span></em>
+            <strong>{{'Rp. '.number_format($pop_up->harga)}}</strong><em>Rp.<span>102.00</span></em>
           </div>
-          <div class="availability"> Availability: <strong>In Stock</strong></div>
+          <div class="availability"> status: <strong>{{$pop_up->status}}</strong></div>
         </div>
         <div class="description">
-          <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat Nostrud duis molestie at dolore.</p>
+          <p>{{$pop_up->keterangan}}</p>
         </div>
         <div class="product-page-options">
           <div class="pull-left">
@@ -41,9 +37,10 @@
               <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
           </div>
           <button class="btn btn-primary" type="submit">Add to cart</button>
-          <a href="shop-item.html" class="btn btn-default">More details</a>
+          <a href="{{route('frontend.shop_item',$pop_up->kode_produk)}}" class="btn btn-default">More details</a>
         </div>
       </div><div class="sticker sticker-sale"></div>
     </div>
   </div>
 </div>
+@endforeach
