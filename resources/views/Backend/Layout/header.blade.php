@@ -276,22 +276,20 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li>
-                  <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Barang</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Barang</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <i class="fa fa-edit"></i> <span>Laporan Keuangan</span>
-                  </a>
-                </li>
+              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
+              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
+              <li><a href="{{route('LaporanKeuangan')}}"><i class="fa fa-edit"></i><span>Laporan Keuangan</span></a></li>
             </ul>
+          </li>
+        @elseif (auth::user()->jabatan == 'Owner')
+          <li class="treeview">
+            <a href=""><span>Laporan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
+            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
+            <li><a href="{{route('LaporanKeuangan')}}"><i class="fa fa-edit"></i> <span>Laporan Keuangan</span></a>  </li>
+          </ul>
         </li>
       </ul>
     </section>

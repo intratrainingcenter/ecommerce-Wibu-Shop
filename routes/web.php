@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('user','UserController');
 Route::resource('produk', 'ProdukController');
+
+
+Route::get('keuangan','KeuanganController@Index')->name('LaporanKeuangan');
+Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');

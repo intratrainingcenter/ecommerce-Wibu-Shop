@@ -14,7 +14,7 @@
         <div class="box">
           <div class="box-header">
             <h3 class="box-title">Data Table With Full Features</h3>
-            <a style="float:right" class="btn btn-success" href="#">Tambah</a>
+            <a style="float:right"  title="add" data-toggle="modal" data-target="#AddUser" class="btn btn-success fa fa-plus"  href="#"></a>
           </div>
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
@@ -37,8 +37,9 @@
                   <td><a href="#">{{$key->status}}</a></td>
                   <td>{{$key->jabatan}}</td>
                   <td>
-                    <a href="#" class="btn btn-warning" title="Edit">Edit</a>
-                    <a href="#" class="btn btn-danger" title="Hapus">Hapus</a>
+                    <a href="#" class="btn btn-info " data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Detail">Detail</a>
+                    <a href="#" class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#EditUser{{$key->kode_user}}" title="Edit"></a>
+                    <a href="#" class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#DeleteUser{{$key->kode_user}}" title="Hapus"></a>
                   </td>
                 </tr>
               @endforeach
