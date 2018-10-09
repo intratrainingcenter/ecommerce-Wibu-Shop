@@ -2,83 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\PembeliAuth as Pembeli;
 
 class PembeliAuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function Register(Request $request)
     {
-        return view('frontend.pages.login');
+        $getMaxID = Pembeli::max('id') + 1;
+        $getCode = 'PMB' . date('ymdhis') . $getMaxID;
+        $register = Pembeli::create([
+            'kode_pembeli' => $getCode,
+            'nama_pembeli' => $request->nama,
+            'alamat'       => $request->alamat,
+            'email'        => $request->email,
+            'password'     => Hash::make($request->pass),
+            'foto'         => 'foto.jpg',
+        ]);
+        return redirect()->route('pembeli.login');
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function Login(Request $request)
     {
-        //
+        // $user = Pembeli::where('email', $request->email)->first();
+        // $check = Hash::check($request->password, $user->password);
+        $check = Auth::guard('pembeli')->attempt(request(['email', 'password']));
+        dd($check);
+        if ( $check ) {
+            Auth::guard('pembeli')->login($user);
+            return redirect('/');
+        } else {
+            return 'gagal';
+        }
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function Logout()
     {
-        //
-    }
+        if (Auth::guard('pembeli')->check()) {
+            Auth::guard('pembeli')->logout();
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->route('pembeli.login');
+        
     }
 }

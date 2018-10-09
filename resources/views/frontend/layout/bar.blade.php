@@ -8,10 +8,13 @@
           </div>
           <div class="col-md-6 col-sm-6 additional-nav">
               <ul class="list-unstyled list-inline pull-right">
+                  @if (Auth::guard('pembeli')->check())
                   <li><a href="shop-account.html">My Account</a></li>
-                  <li><a href="shop-wishlist.html">My Wishlist</a></li>
-                  <li><a href="shop-checkout.html">Checkout</a></li>
-                  <li><a href="{{route('authpembeli.index')}}">Log In</a></li>
+                  <li><a href="{{route('pembeli.logout')}}">Log Out</a></li>
+                  @else
+                  <li><a href="{{route('pembeli.login')}}">Log In</a></li>
+                  <li><a href="{{route('pembeli.register')}}">Register</a></li>
+                  @endif
               </ul>
           </div>
       </div>
