@@ -225,7 +225,7 @@
             <ul class="treeview-menu">
               <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
               <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
-              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Keuangan</span></a></li>
+              <li><a href="{{route('LaporanKeuangan')}}"><i class="fa fa-edit"></i><span>Laporan Keuangan</span></a></li>
             </ul>
           </li>
         @elseif (auth::user()->jabatan == 'Owner')
@@ -235,7 +235,7 @@
           <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
             <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
-            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Keuangan</span></a>  </li>
+            <li><a href="{{route('LaporanKeuangan')}}"><i class="fa fa-edit"></i> <span>Laporan Keuangan</span></a>  </li>
           </ul>
         </li>
         @endif
