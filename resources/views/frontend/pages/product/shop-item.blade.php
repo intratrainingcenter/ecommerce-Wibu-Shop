@@ -1,6 +1,6 @@
 @extends('frontend.index')
 @section('produck')
-<body class="ecommerce">
+<body class="ecomme rce">
     <div class="main">
       <div class="container">
         <ul class="breadcrumb">
@@ -15,7 +15,7 @@
               <h2>Bestsellers</h2>
               @foreach ($three_products as $Product)
               <div class="item">
-                <a href="shop-item.html"><img src="{{$Product->foto}}" alt="Some Shoes in Animal with Cut Out"></a>
+                <a href="{{$Product->foto}}"><img src="{{$Product->foto}}" alt="Some Shoes in Animal with Cut Out"></a>
                 <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
                 <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
               </div>
@@ -27,7 +27,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6">
                   <div class="product-main-image">
-                    <img src="{{asset('frontend/theme/assets/pages/img/products/model7.jpg')}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="{{$view_products->foto}}">
+                    <img src="{{asset('frontend/theme/assets/pages/img/products/model7.jpg')}}" alt="Cool green dress with red bell" class="img-responsive" >
                   </div>
                   <div class="product-other-images">
                     <a href="{{$view_products->foto}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{$view_products->foto}}"></a>

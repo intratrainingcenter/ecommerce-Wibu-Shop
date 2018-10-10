@@ -9,7 +9,7 @@ Route::get('status', 'PaymentController@getPaymentStatus');
 Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list','FrontendControler@product_list')->name('frontend.product_list');
 Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
-Route::get('/shop-item/{kode_porduck}','FrontendControler@Shop_item')->name('frontend.shop_item');
+Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
 
 Auth::routes();
 
