@@ -10,9 +10,16 @@
 <script src="{{asset('frontend/theme/assets/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/theme/assets/corporate/scripts/layout.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/theme/assets/pages/scripts/bs-carousel.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/jquery-ui.js')}}" type="text/javascript"></script>
+<script src="{{asset('frontend/login/vendor/animsition/js/animsition.min.js')}}"></script>
+<script src="{{asset('frontend/login/vendor/bootstrap/js/popper.js')}}"></script>
+<script src="{{asset('frontend/login/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('frontend/login/vendor/select2/select2.min.js')}}"></script>
+<script src="{{asset('frontend/login/vendor/daterangepicker/moment.min.js')}}"></script>
+<script src="{{asset('frontend/login/vendor/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{asset('frontend/login/vendor/countdowntime/countdowntime.js')}}"></script>
+<script src="{{asset('frontend/login/js/main.js')}}"></script>
 <script src="{{asset('frontend/theme/assets/plugins/rateit/src/jquery.rateit.js')}}" type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
-
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();

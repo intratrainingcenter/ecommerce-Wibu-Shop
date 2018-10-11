@@ -17,6 +17,10 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'pembelis' => [
+            'driver' => 'eloquent',
+            'model' => App\PembeliAuth::class,
+        ],
 
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +49,14 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'pembeli' => [
+            'driver' => 'session',
+            'provider' => 'pembelis',
+        ],
+        'pembeli-api' => [
+            'driver' => 'token',
+            'provider' => 'pembelis',
+        ],
     ],
 
     /*
@@ -70,10 +82,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'pembelis' => [
+            'driver' => 'eloquent',
+            'model' => App\PembeliAuth::class,
+        ],
     ],
 
     /*
@@ -96,6 +108,11 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+        ],
+        'pembelis' => [
+            'provider' => 'pembelis',
+            'table' => 'password_resets',
+            'expire' => 15,
         ],
     ],
 
