@@ -24,16 +24,13 @@ class FrontendControler extends Controller
     }
     public function Checkout() {
       $all_products = Produk::all();
-      return view('frontend.pages.checkout.shop-checkout',compact(['all_products']));
+      $kategori = Kategori::all();
+      return view('frontend.pages.checkout.shop-checkout',compact(['all_products','kategori']));
     }
     public function Shop_item($kode_porduk) {
       $kategori = Kategori::all();
       $all_products = Produk::all();
       $view_products = Produk::where('kode_produk',$kode_porduk)->first();
-      // dd($view_products->nama_produk);
-      // foreach ($view_products as $key => $value) {
-      //   dd($value->nama_produk);
-      // }
       // dd($view_products);
       $three_products = Produk::where('status' ,'Siap')->limit(3)->orderBy('id','ASC')->get();
       $two_products = Produk::where('status' ,'Siap')->limit(2)->orderBy('id','ASC')->get();

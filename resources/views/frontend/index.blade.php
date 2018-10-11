@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="-CUSTOMER VALUE-">
   <meta property="og:url" content="-CUSTOMER VALUE-">
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->
   <link href="{{asset('frontend/theme/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -29,17 +29,12 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
+  @yield('css')
 </head>
 <body class="ecommerce">
   @include('frontend.layout.bar')
 @include('frontend.layout.header')
-{{-- @include('frontend.layout.sider') --}}
-{{-- <div class="main">
-  <div class="container"> --}}
-    {{-- @include('frontend.layout.ButonProduct') --}}
-    @yield('produck')
-  {{-- </div>
-</div> --}}
+  @yield('produck')
 @include('frontend.layout.pre-footer')
 @include('frontend.layout.footer')
 @include('frontend.layout.pop-up')

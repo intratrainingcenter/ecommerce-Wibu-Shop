@@ -1,4 +1,8 @@
 @extends('frontend.index')
+@section('css')
+  <link href="{{asset('frontend/theme/assets/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css">
+  <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+@endsection
 @section('produck')
 <body class="ecomme rce">
     <div class="main">
@@ -15,8 +19,8 @@
               <h2>Bestsellers</h2>
               @foreach ($three_products as $Product)
               <div class="item">
-                <a href="{{$Product->foto}}"><img src="{{$Product->foto}}" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
+                <a href="{{asset($Product->foto)}}"><img src="{{asset($Product->foto)}}" alt="Some Shoes in Animal with Cut Out" ></a>
+                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">Some Shoes in Animal with Cut Out</a></h3>
                 <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
               </div>
             @endforeach
@@ -27,12 +31,12 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6">
                   <div class="product-main-image">
-                    <img src="{{asset('frontend/theme/assets/pages/img/products/model7.jpg')}}" alt="Cool green dress with red bell" class="img-responsive" >
+                    <img src="{{asset($view_products->foto)}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="{{asset($view_products->foto)}}">
                   </div>
                   <div class="product-other-images">
-                    <a href="{{$view_products->foto}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{$view_products->foto}}"></a>
-                    <a href="{{$view_products->foto}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{$view_products->foto}}"></a>
-                    <a href="{{$view_products->foto}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{$view_products->foto}}"></a>
+                    <a href="{{asset($view_products->foto)}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{asset($view_products->foto)}}"></a>
+                    <a href="{{asset($view_products->foto)}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{asset($view_products->foto)}}"></a>
+                    <a href="{{asset($view_products->foto)}}" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="{{asset($view_products->foto)}}"></a>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6">

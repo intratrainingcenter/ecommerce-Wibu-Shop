@@ -27,21 +27,13 @@
 
             <div class="sidebar-products clearfix">
               <h2>Bestsellers</h2>
+            @foreach ($two_products as $key => $Product)
               <div class="item">
-                <a href="shop-item.html"><img src="{{asset('frontend/theme/assets/pages/img/products/k1.jpg')}}" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$31.00</div>
+                <a href="shop-item.html"><img src="{{asset($Product->foto)}}" alt="Some Shoes in Animal with Cut Out"></a>
+                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">Some Shoes in Animal with Cut Out</a></h3>
+                <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
               </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="{{asset('frontend/theme/assets/pages/img/products/k4.jpg')}}" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$23.00</div>
-              </div>
-              <div class="item">
-                <a href="shop-item.html"><img src="{{asset('frontend/theme/assets/pages/img/products/k3.jpg')}}" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                <div class="price">$86.00</div>
-              </div>
+            @endforeach
             </div>
           </div>
           <div class="col-md-9 col-sm-7">
@@ -85,7 +77,7 @@
                     <img src="{{$Produck->foto}}" class="img-responsive" alt="Berry Lace Dress">
                     <div>
                       <a href="{{$Produck->foto}}" class="btn btn-default fancybox-button">Zoom</a>
-                      <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                      <a href="#product-pop-up{{$Produck->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
                   <h3><a href="shop-item.html">{{$Produck->nama_produk}}</a></h3>
