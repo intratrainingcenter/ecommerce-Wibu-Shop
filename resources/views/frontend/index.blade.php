@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="sampleApp">
 <head>
   <meta charset="utf-8">
   <title>Metronic Shop UI</title>
@@ -30,8 +30,30 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
+  <link href="{{asset('frontend/theme/assets/pages/css/popupChat.css')}}" rel="stylesheet" type="text/css">
+
+  <!-- Js Message -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+  <!-- Firebase  -->
+  <script type="text/javascript">
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCaQJIqldPHu_dAgFk8s1F3B9zU_ty7TTE",
+    authDomain: "wibu-shop-f5875.firebaseapp.com",
+    databaseURL: "https://wibu-shop-f5875.firebaseio.com",
+    projectId: "wibu-shop-f5875",
+    storageBucket: "wibu-shop-f5875.appspot.com",
+    messagingSenderId: "926586751495"
+  };
+  firebase.initializeApp(config);
+  </script>
+  <script src="{{asset('js/Chat.js')}}" type="text/javascript"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+
 </head>
-<body class="ecommerce">
+<body class="ecommerce" ng-controller="SampleCtrl">
   @include('frontend.layout.bar')
 @include('frontend.layout.header')
 {{-- @include('frontend.layout.sider') --}}
