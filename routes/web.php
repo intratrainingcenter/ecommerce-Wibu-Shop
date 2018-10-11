@@ -21,6 +21,7 @@ Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Midd
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
 
 
+Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi');
 Route::get('keuangan','KeuanganController@Index')->name('LaporanKeuangan');
 Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');
 Route::prefix('pembeli')->group(function() {

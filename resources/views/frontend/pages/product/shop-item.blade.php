@@ -20,7 +20,7 @@
               @foreach ($three_products as $Product)
               <div class="item">
                 <a href="{{asset($Product->foto)}}"><img src="{{asset($Product->foto)}}" alt="Some Shoes in Animal with Cut Out" ></a>
-                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">Some Shoes in Animal with Cut Out</a></h3>
+                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">{{$Product->nama_produk}}</a></h3>
                 <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
               </div>
             @endforeach
