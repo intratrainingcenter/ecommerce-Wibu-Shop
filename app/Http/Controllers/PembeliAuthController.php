@@ -10,6 +10,11 @@ use App\PembeliAuth as Pembeli;
 class PembeliAuthController extends Controller
 {
 
+    public function showRegisterForm()
+    {
+        return view('frontend.pages.auth.register');
+    }
+
     public function Register(Request $request)
     {
         $getMaxID = Pembeli::max('id') + 1;
@@ -23,22 +28,23 @@ class PembeliAuthController extends Controller
             'foto'         => 'foto.jpg',
         ]);
         return redirect()->route('pembeli.login');
+    }
 
+    public function showLoginForm()
+    {
+        return view('frontend.pages.auth.login');
     }
 
     public function Login(Request $request)
     {
-        // $user = Pembeli::where('email', $request->email)->first();
-        // $check = Hash::check($request->password, $user->password);
+        $user = Pembeli::where('email', $request->email)->first();
         $check = Auth::guard('pembeli')->attempt(request(['email', 'password']));
-        dd($check);
         if ( $check ) {
             Auth::guard('pembeli')->login($user);
             return redirect('/');
         } else {
             return 'gagal';
         }
-        
     }
 
     public function Logout()
@@ -48,6 +54,5 @@ class PembeliAuthController extends Controller
         }
 
         return redirect()->route('pembeli.login');
-        
     }
 }

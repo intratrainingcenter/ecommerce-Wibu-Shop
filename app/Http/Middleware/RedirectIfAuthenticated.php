@@ -17,17 +17,11 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        switch ($guard) {
-            case 'pembeli' :
-                if (Auth::guard($guard)->check()) {
-                    return redirect('/');
-                }
-                break;
-            default:
-                if (Auth::guard($guard)->check()) {
-                    return redirect('/dashboard');
-                }
-                break;
+        if (Auth::guard($guard)->check()) {
+            return redirect('/dashboard');
+        }
+        elseif (Auth::guard('pembeli')->check()) {
+            return redirect('/');
         }
 
         return $next($request);
