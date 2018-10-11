@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Metronic Shop UI</title>
+  <title>Wibu Shop</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta content="Metronic Shop UI description" name="description">
@@ -29,19 +29,9 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/bootstrap/css/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/fonts/iconic/css/material-design-iconic-font.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/animate/animate.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/css-hamburgers/hamburgers.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/animsition/css/animsition.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/select2/select2.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/daterangepicker/daterangepicker.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/css/util.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/css/main.css')}}">
 </head>
 <body class="ecommerce">
-  @include('frontend.layout.bar')
+@include('frontend.layout.bar')
 @include('frontend.layout.header')
 {{-- @include('frontend.layout.sider') --}}
 {{-- <div class="main">

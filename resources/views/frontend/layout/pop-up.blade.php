@@ -4,14 +4,14 @@
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-3">
         <div class="product-main-image">
-          <img src="{{$pop_up->foto}}" alt="Cool green dress with red bell" class="img-responsive">
+          <img src="{{Storage::url($pop_up->foto)}}" alt="" class="img-responsive">
         </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-9">
-        <h2>Cool green dress with red bell</h2>
+        <h2>{{$pop_up->nama_produk}}</h2>
         <div class="price-availability-block clearfix">
           <div class="price">
-            <strong>{{'Rp. '.number_format($pop_up->harga)}}</strong><em>Rp.<span>102.00</span></em>
+            <strong>{{'Rp. '.number_format($pop_up->harga)}}</em>
           </div>
           <div class="availability"> status: <strong>{{$pop_up->status}}</strong></div>
         </div>

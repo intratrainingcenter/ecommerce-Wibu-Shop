@@ -24,7 +24,7 @@ Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAkti
 Route::get('/keuangan','KeuanganController@Index')->name('LaporanKeuangan');
 Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');
 Route::prefix('pembeli')->group(function() {
-    Route::group(['middleware' => ['guest']], function () {
+    Route::group(['middleware' => 'guest'], function () {
         Route::get('register', 'PembeliAuthController@showRegisterForm')->name('pembeli.register');
         Route::get('login','PembeliAuthController@showLoginForm')->name('pembeli.login');
     });

@@ -14,7 +14,7 @@ class PembeliAuthController extends Controller
     {
         $id = Auth::guard('pembeli')->id();
         $user = Pembeli::where('id', $id)->first();
-        return view('frontend.pages.accountPembeli.index',compact('user'));
+        return view('frontend.pages.account.index',compact('user'));
     }
 
     public function showRegisterForm()

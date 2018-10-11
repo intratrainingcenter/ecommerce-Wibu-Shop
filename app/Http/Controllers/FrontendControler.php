@@ -18,7 +18,7 @@ class FrontendControler extends Controller
     public function product_list() {
       $kategori = Kategori::all();
       $all_products = Produk::all();
-      $three_products = Produk::where('status' ,'Siap')->limit(9)->orderBy('id','ASC')->get();
+      $three_products = Produk::where('status' ,'Siap')->orderBy('id','ASC')->paginate(9);
       $two_products = Produk::where('status' ,'Siap')->limit(3)->orderBy('id','ASC')->get();
       return view('frontend.pages.product.shop-product-list',compact(['two_products','all_products','three_products','kategori']));
     }

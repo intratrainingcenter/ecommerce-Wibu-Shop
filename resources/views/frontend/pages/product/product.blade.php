@@ -1,6 +1,6 @@
 @extends('frontend.index')
 @section('produck')
-  @include('frontend.layout.sider')
+  @include('frontend.layout.slider')
   <div class="main">
     <div class="container">
       <div class="row margin-bottom-40 ">
