@@ -1,20 +1,25 @@
-var app = angular.module('sampleApp', ["firebase"], function($interpolateProvider) {
-  $interpolateProvider.startSymbol('<%');
-  $interpolateProvider.endSymbol('%>');
-});
+var app = angular.module('sampleApp', ["firebase"]);
+
 app.controller("SampleCtrl", function($scope, $firebaseArray) {
   var ref = firebase.database().ref().child("messages");
-  // create a synchronized array
-  // click on `index.html` above to see it used in the DOM!
+  // download the data into a local object
   $scope.messages = $firebaseArray(ref);
-
-
+  // putting a console.log here won't work, see below
+  ref.on("child_added", function(snapshot, prevChildKey) {
+    var newPost = snapshot.val();
+    // console.log("Author: " + newPost.id);
+    // console.log("Title: " + newPost.level);
+    // console.log("Previous Post ID: " + prevChildKey);
+    console.log(newPost);
+  });
   $scope.send = function() {
       $scope.messages.$add({
-          id: $scope.messageId,
-          level: $scope.messageLevel,
+          id: '123',
+          level: 'admin',
           message: $scope.messageText,
           date: Date.now()
       })
+      $scope.messageText = "";
   }
+
 });
