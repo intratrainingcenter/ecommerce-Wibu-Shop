@@ -17,6 +17,16 @@
                             <input class="input100" type="nama" name="nama">
                             <span class="focus-input100" data-symbol="&#xf206;"></span>
                         </div>
+
+                        <div class="wrap-input100 validate-input m-b-23" >
+                            <span class="label-input100">Jenis Kelamin</span>
+                            <select class="input100" name="jenis_kelamin">
+                                <option value="">--Pilih Jenis Kelamin--</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                            <span class="focus-input100" data-symbol="&female;"></span>
+                        </div>
     
                         <div class="wrap-input100 validate-input" >
                             <span class="label-input100">Alamat</span>

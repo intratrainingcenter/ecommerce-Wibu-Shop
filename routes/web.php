@@ -24,4 +24,5 @@ Route::prefix('pembeli')->group(function() {
     Route::post('register','PembeliAuthController@Register')->name('pembeli.register.submit');
     Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
     Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
+    Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account')->middleware('auth:pembeli');
 });

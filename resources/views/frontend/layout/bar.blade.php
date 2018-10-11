@@ -9,7 +9,8 @@
           <div class="col-md-6 col-sm-6 additional-nav">
               <ul class="list-unstyled list-inline pull-right">
                   @if (Auth::guard('pembeli')->check())
-                  <li><a href="shop-account.html">My Account</a></li>
+                  <li><a href="{{route('pembeli.account')}}">My Account</a></li>
+                  <li><a href="{{route('pembeli.account')}}">Checkout</a></li>
                   <li><a href="{{route('pembeli.logout')}}">Log Out</a></li>
                   @else
                   <li><a href="{{route('pembeli.login')}}">Log In</a></li>

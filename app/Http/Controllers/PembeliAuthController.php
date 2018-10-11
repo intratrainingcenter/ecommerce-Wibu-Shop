@@ -10,6 +10,13 @@ use App\PembeliAuth as Pembeli;
 class PembeliAuthController extends Controller
 {
 
+    public function index()
+    {
+        $id = Auth::guard('pembeli')->id();
+        $user = Pembeli::where('id', $id)->first();
+        return view('frontend.pages.accountPembeli.index',compact('user'));
+    }
+
     public function showRegisterForm()
     {
         return view('frontend.pages.auth.register');
@@ -22,10 +29,11 @@ class PembeliAuthController extends Controller
         $register = Pembeli::create([
             'kode_pembeli' => $getCode,
             'nama_pembeli' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'alamat'       => $request->alamat,
             'email'        => $request->email,
             'password'     => Hash::make($request->pass),
-            'foto'         => 'foto.jpg',
+            'foto'         => '',
         ]);
         return redirect()->route('pembeli.login');
     }

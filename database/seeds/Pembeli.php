@@ -18,7 +18,7 @@ class Pembeli extends Seeder
             'jenis_kelamin' => 'Laki-laki',
             'email' =>  'pembeli@gmail.com',
             'password' => Hash::make(123),
-            'foto'  =>  'foto.jpg'
+            'foto'  =>  'images/foto.png'
         ]);
     }
 }
