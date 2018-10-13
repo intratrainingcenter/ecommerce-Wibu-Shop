@@ -42,7 +42,7 @@
 														<tr>
 															<th>#</th>
 															<th>kode transaksi</th>
-															<th>User</th>
+															<th>Pembeli</th>
 															<th>Tanggal transaksi</th>
 															<th>Grand Total</th>
 														</tr>
@@ -51,8 +51,8 @@
 															<tr>
 																<td>{{$key +1}}</td>
 																<td>{{$buy->kode_transaksi_penjualan }}</td>
-																<td></td>
-																<td>{{$buy->created_at}}</td>
+																<td>{{$buy->nama_pembeli}}</td>
+																<td>{{$buy->creat}}</td>
 																<td>{{$buy->grand_total}}</td>
 															</tr>
 															@endforeach
@@ -60,7 +60,7 @@
 													</table>
 												</div>
 											</div>
-											<div class="col-md-12 col-sm-12">	<h3 class="">Laporan Transaksi</h3> </div>
+											<div class="col-md-12 col-sm-12">	<h3 class="">Laporan Pembelian</h3> </div>
 											<div class="responsive-table">
 												<table class="table table-bordered table-hover" width="100%">
 													<tr>
@@ -75,8 +75,8 @@
 														<tr>
 															<td>{{$key +1}}</td>
 															<td>{{$shell->kode_transaksi_pembelian }}</td>
-															<td></td>
-															<td>{{$shell->created_at}}</td>
+															<td>{{$shell->name}}</td>
+															<td>{{$shell->creat}}</td>
 															<td>{{$shell->sub_total}}</td>
 														</tr>
 														@endforeach
