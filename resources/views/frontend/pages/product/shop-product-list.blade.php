@@ -19,14 +19,11 @@
               </div>
               <h3>Price</h3>
               <p>
-                {{-- <label for="amount">Range:</label><br> --}}
-                {{-- <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;"> --}}
                 <label for="amount">Dari:</label>
                 <input placeholder="Rp. 1,000" type="text" name="dari" value="" style="color:black; font-weight:bold;">
                 <label for="amount">Sampai:</label>
                 <input placeholder="Rp. 100,000" type="text" name="sampai" style="color:black; font-weight:bold;">
               </p>
-              {{-- <div id="slider-range"></div> --}}
               <button type="submit" class="btn btn-success" name="button">Filter</button>
             </div>
 
@@ -79,9 +76,9 @@
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="{{$Produck->foto}}" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="{{asset($Produck->foto)}}" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="{{$Produck->foto}}" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="{{asset($Produck->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up{{$Produck->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>

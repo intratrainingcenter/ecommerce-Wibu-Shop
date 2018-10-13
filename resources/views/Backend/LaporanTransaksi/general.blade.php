@@ -2,15 +2,15 @@
 @section('content')
 	<div class="content-wrapper">
 	  <section class="content-header">
-	    <h1>Laporan Keuangan<small>Data Keuangan</small> </h1>
-	    <ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">User</li></ol>
+	    <h1>Laporan Transaksi<small>Data Transaksi</small> </h1>
+	    <ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">LaporanTransaksi</li></ol>
 	  </section>
 	  <section class="content">
 	    <div class="row">
 	      <div class="col-xs-12">
 	        <div class="box">
 									<div class="panel-body">
-										<form action="{{route('FilterLaporanKeuangan')}}">
+										<form action="{{route('FilterLaporanTransaksi')}}">
 												<div class="col-lg-4">
 													<div class="form-group"  style="width: 100px;">
 														<div class="input-group">
@@ -47,13 +47,13 @@
 															<th>Grand Total</th>
 														</tr>
 														<tbody>
-															@foreach ($Shell as $key => $shell)
+															@foreach ($Buy as $key => $buy)
 															<tr>
 																<td>{{$key +1}}</td>
+																<td>{{$buy->kode_transaksi_penjualan }}</td>
 																<td></td>
-																<td></td>
-																<td></td>
-																<td></td>
+																<td>{{$buy->created_at}}</td>
+																<td>{{$buy->grand_total}}</td>
 															</tr>
 															@endforeach
 														</tbody>
@@ -71,13 +71,13 @@
 														<th>Grand Total</th>
 													</tr>
 													<tbody>
-														@foreach ($Buy as $key => $buy)
+														@foreach ($Shell as $key => $shell)
 														<tr>
 															<td>{{$key +1}}</td>
+															<td>{{$shell->kode_transaksi_pembelian }}</td>
 															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
+															<td>{{$shell->created_at}}</td>
+															<td>{{$shell->sub_total}}</td>
 														</tr>
 														@endforeach
 													</tbody>

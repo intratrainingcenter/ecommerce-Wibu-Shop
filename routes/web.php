@@ -7,7 +7,7 @@ Route::get('status', 'PaymentController@getPaymentStatus');
 
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
-Route::get('/shop-product-list','FrontendControler@product_list')->name('frontend.product_list');
+Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list')->name('frontend.product_list');
 Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
 
@@ -22,6 +22,7 @@ Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAkti
 
 
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi');
+Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi');
 Route::get('keuangan','KeuanganController@Index')->name('LaporanKeuangan');
 Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');
 Route::prefix('pembeli')->group(function() {

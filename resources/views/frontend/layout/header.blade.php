@@ -8,7 +8,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">  Woman  </a>
           <ul class="dropdown-menu">
             @foreach ($kategori as $button_womens)
-              <li><a href="{{route('frontend.product_list')}}">{{$button_womens->nama_kategori}}</a></li>
+              <li><a href="{{route('frontend.product_list',$button_womens->kode_kategori)}}">{{$button_womens->nama_kategori}}</a></li>
             @endforeach
           </ul></li>
         <li class="dropdown dropdown-megamenu">
@@ -16,7 +16,7 @@
 {{-- @include('frontend.layout.butonMan') --}}
             <ul class="dropdown-menu">
               @foreach ($kategori as $button_womens)
-                <li><a href="{{route('frontend.product_list')}}">{{$button_womens->nama_kategori}}</a></li>
+                <li><a href="{{route('frontend.product_list',$button_womens->kode_kategori)}}">{{$button_womens->nama_kategori}}</a></li>
               @endforeach
             </ul></li>
         <li class="dropdown dropdown100 nav-catalogue">
