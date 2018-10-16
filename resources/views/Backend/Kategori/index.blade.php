@@ -34,7 +34,7 @@
         </div>
 
         <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped table-hover">
+          <table id="TableKategoriProduk"  class="table table-bordered table-hover" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>No</th>
@@ -80,12 +80,12 @@
           @method('POST')
           <div class="form-group">
             <label for="name">Nama Kategori</label>
-            <input type="text" class="form-control" id="name" name="nama_kategori" placeholder="Nama Kategori" required>
+            <input type="text" class="form-control"  name="nama_kategori" placeholder="Nama Kategori" required>
           </div>
 
           <div class="form-group">
             <label for="description">Keterangan</label>
-            <input type="text" class="form-control" id="description" name="keterangan" placeholder="Keterangan" required>
+            <input type="text" class="form-control"  name="keterangan" placeholder="Keterangan" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -113,12 +113,12 @@
         <div class="form-group">
                   <input type="hidden" name="kode_kategori" value="{{ $Edit->kode_kategori }}">
                   <label for="name">Nama Kategori</label>
-	                <input type="text" class="form-control" id="name" name="nama_kategori" placeholder="Nama Kategori" value="{{ $Edit->nama_kategori }}" required>
+	                <input type="text" class="form-control"  name="nama_kategori" placeholder="Nama Kategori" value="{{ $Edit->nama_kategori }}" required>
 	              </div>
 
 	              <div class="form-group">
 	                <label for="description">Keterangan</label>
-	                <input type="text" class="form-control" id="description" name="keterangan" placeholder="Keterangan" value="{{ $Edit->keterangan }}" required>
+	                <input type="text" class="form-control"  name="keterangan" placeholder="Keterangan" value="{{ $Edit->keterangan }}" required>
 	              </div>
     </div>
     <div class="modal-footer">

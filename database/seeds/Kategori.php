@@ -11,9 +11,9 @@ class Kategori extends Seeder
      */
     public function run()
     {
-      for ($i=1; $i < 10 ; $i++) {
+      for ($i=1; $i < 20 ; $i++) {
         DB::table('kategoris')->insert([
-            'kode_kategori' => 'KTG0'.$i,
+            'kode_kategori' => 'KT-00'.$i,
             'nama_kategori' => 'Kategori0'.$i,
             'keterangan'    => 'Ini keterangan',
         ]);

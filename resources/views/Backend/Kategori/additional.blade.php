@@ -1,4 +1,4 @@
-@section('header')   
+@section('header')
 
 @endsection
 
@@ -11,6 +11,7 @@
             'searching'   : true,
             'ordering'    : true,
             'info'        : true,
+            'responsive'  : true,
             'autoWidth'   : false
         })
     })

@@ -14,7 +14,7 @@
             <a style="float:right"  title="add" data-toggle="modal" data-target="#AddUser" class="btn btn-success fa fa-plus"  href="#"></a>
           </div>
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped" width="100%" cellspacing="0">
+            <table id="example2" class="table table-bordered table-hover" width="100%" cellspacing="0">
               <thead><tr>
                         <th>#</th>
                         <th>name</th>
@@ -35,20 +35,20 @@
                     <td></td>
                     @else
                   <td> @if ($key->status == 'Aktif' )
-                      <a href="#" class="btn btn-success" data-toggle="modal" data-target="#nonAktifUser{{$key->kode_user}}">Aktif</a>
+                      <a href="#" class="btn btn-success fa fa-eye" title="Aktif" data-toggle="modal" data-target="#nonAktifUser{{$key->kode_user}}"></a>
                     @else
-                      <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#AktifUser{{$key->kode_user}}">Non Aktif</a>
+                      <a href="#" class="btn btn-danger fa fa-eye-slash" title="nonAktif" data-toggle="modal" data-target="#AktifUser{{$key->kode_user}}"></a>
                     @endif
                   </td>
                 @endif
                   <td>{{$key->jabatan}}</td>
                   @if ($key->kode_user == auth::user()->kode_user)
                     <td>
-                      <a href="#" class="btn btn-info" data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Edit">Detail</a>
+                      <a href="#" class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Detail"></a>
                     </td>
                   @else
                   <td>
-                    <a href="#" class="btn btn-info " data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Detail">Detail</a>
+                    <a href="#" class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#DetailUser{{$key->kode_user}}" title="Detail"></a>
                     <a href="#" class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#EditUser{{$key->kode_user}}" title="Edit"></a>
                     <a href="#" class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#DeleteUser{{$key->kode_user}}" title="Hapus"></a>
                   </td>

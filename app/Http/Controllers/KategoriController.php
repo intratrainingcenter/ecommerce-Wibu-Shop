@@ -38,13 +38,12 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $code = date("Ymdhis");
         $count = kategori::count()+1;
         $check = kategori::where('nama_kategori',$request->nama_kategori)->doesntExist();
 
         if($check == true){
              $insert = new Kategori;
-             $insert->kode_kategori='K'.$code.$count;
+             $insert->kode_kategori='KT-00'.$count;
              $insert->nama_kategori=$request->nama_kategori;
              $insert->keterangan=$request->keterangan;
              $insert->save();
@@ -86,7 +85,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request,$kode_kategori)
     {
-      
+
         $check = Kategori::where('nama_kategori',$request->nama_kategori)->doesntExist();
 
         if($check == true){
