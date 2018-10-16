@@ -31,3 +31,4 @@
         Layout.initUniform();
     });
 </script>
+@yield('js.new')
