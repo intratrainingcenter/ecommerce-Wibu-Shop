@@ -10,7 +10,7 @@
             <a href="#product-pop-up{{$NewProduct->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
           </div>
         </div>
-        <h3><a href="shop-item.html">{{$NewProduct->nama_produk}}</a></h3>
+        <h3><a href="{{route('frontend.shop_item',$NewProduct->kode_produk)}}">{{$NewProduct->nama_produk}}</a></h3>
         <div class="pi-price">Rp {{ $NewProduct->harga }}</div>
         <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
         <div class="sticker sticker-new"></div>

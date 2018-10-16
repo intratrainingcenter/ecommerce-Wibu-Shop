@@ -11,6 +11,7 @@ class FrontendControler extends Controller
 {
     public function Index() {
       $kategori = Kategori::all();
+      $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $three_products = Produk::where('status' ,'Siap')->limit(3)->orderBy('created_at','desc')->get();
       $two_products = Produk::where('status' ,'Siap')->limit(2)->orderBy('stok','desc')->get();

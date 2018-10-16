@@ -49,7 +49,7 @@
                       <a href="#product-pop-up{{$Produck->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
-                  <h3><a href="shop-item.html">{{$Produck->nama_produk}}</a></h3>
+                  <h3><a href="{{route('frontend.shop_item',$Produck->kode_produk)}}">{{$Produck->nama_produk}}</a></h3>
                   <div class="pi-price">Rp {{$Produck->harga}}</div>
                   <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
                 </div>
