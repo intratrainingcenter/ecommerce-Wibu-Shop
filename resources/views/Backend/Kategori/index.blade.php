@@ -100,7 +100,8 @@
 @foreach ($data as $item => $Edit)
 <div id="EditKategori{{$Edit->kode_kategori}}" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <form role="form" action="{{ route('kategori.update',$Edit->kode_kategori) }}" method="post">
+    <form class="" action="{{route('kategori.update',$Edit->kode_kategori)}}" method="post">
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -132,7 +133,7 @@
 @foreach ($data as $delete)
 <div id="HapusKategori{{$delete->kode_kategori}}" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <form class="" action="{{ route('kategori.destroy',$delete->kode_kategori) }}" method="post">
+    <form class="" action="{{route('kategori.destroy',$delete->kode_kategori)}}" method="post">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -156,6 +157,7 @@
           <button type="submit" class="btn btn-success" title="hapus">Hapus</button>
         </div>
       </div>
+    </form>
     </div>
     </div>
 @endforeach

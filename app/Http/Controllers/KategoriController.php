@@ -49,9 +49,9 @@ class KategoriController extends Controller
              $insert->keterangan=$request->keterangan;
              $insert->save();
 
-             return redirect('kategori')->with(['success'=> 'Berhasil Menambahkan Kategori Produk']);
+             return redirect()->back()->with(['success'=> 'Berhasil Menambahkan Kategori Produk']);
         }else{
-            return redirect('kategori')->with(['edit'=> 'Kategori Produk Sudah Ada']);
+            return redirect()->back()->with(['edit'=> 'Kategori Produk Sudah Ada']);
         }
     }
 
@@ -84,10 +84,10 @@ class KategoriController extends Controller
      * @param  \App\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request,$kode_kategori)
     {
-
-        $check = kategori::where('nama_kategori',$request->nama_kategori)->doesntExist();
+      
+        $check = Kategori::where('nama_kategori',$request->nama_kategori)->doesntExist();
 
         if($check == true){
             $Update = Kategori::where('kode_kategori',$request->kode_kategori)->first();
@@ -96,9 +96,9 @@ class KategoriController extends Controller
             $Update->keterangan=$request->keterangan;
             $Update->save();
 
-            return redirect('kategori')->with(['success'=> 'Berhasil mengedit Kategori Produk']);
+            return redirect()->back()->with(['success'=> 'Berhasil mengedit Kategori Produk']);
         }else{
-            return redirect('kategori')->with(['edit'=> 'Kategori Produk Sudah Ada']);
+            return redirect()->back()->with(['edit'=> 'Kategori Produk Sudah Ada']);
           }
       }
 

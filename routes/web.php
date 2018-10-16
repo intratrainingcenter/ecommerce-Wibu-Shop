@@ -19,10 +19,8 @@ Route::resource('promo', 'PromoController');
 Route::resource('user','UserController')->Middleware('spv');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
-Route::get('kategori', 'KategoriController@index')->name('kategori');
-Route::post('kategori/save', 'KategoriController@store')->name('kategori.store');
-Route::put('kategori/edit/{id}', 'KategoriController@update')->name('kategori.update');
-Route::delete('kategori/delete/{id}', 'KategoriController@destroy')->name('kategori.destroy');
+
+Route::resource('kategori','KategoriController');
 
 
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi');
