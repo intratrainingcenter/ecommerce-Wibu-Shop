@@ -13,15 +13,28 @@
               <h2>Filter</h2>
               <h3>Availability</h3>
               <div class="checkbox-list">
-                <label><input type="checkbox"> Not Available (3)</label>
-                <label><input type="checkbox"> In Stock (26)</label>
+                <label><input type="checkbox" style="float:left"> Not Available (3)</label>
+                <label><input type="checkbox" style="float:left"> In Stock (26)</label>
               </div>
               <h3>Price</h3>
               <p>
-                <label for="amount">Range:</label>
-                <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+                <label for="amount">Dari:</label>
+                <input placeholder="Rp. 1,000" type="text" name="dari" value="" style="color:black; font-weight:bold;">
+                <label for="amount">Sampai:</label>
+                <input placeholder="Rp. 100,000" type="text" name="sampai" style="color:black; font-weight:bold;">
               </p>
-              <div id="slider-range"></div>
+              <button type="submit" class="btn btn-success" name="button">Filter</button>
+            </div>
+
+            <div class="sidebar-products clearfix">
+              <h2>Bestsellers</h2>
+            @foreach ($two_products as $key => $Product)
+              <div class="item">
+                <a href="{{route('frontend.shop_item',$Product->kode_produk)}}"><img src="{{asset($Product->foto)}}" alt="Some Shoes in Animal with Cut Out"></a>
+                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">{{$Product->nama_produk}}</a></h3>
+                <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
+              </div>
+            @endforeach
             </div>
           </div>
           <div class="col-md-9 col-sm-7">
@@ -62,9 +75,9 @@
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="{{Storage::url($Produck->foto)}}" class="img-responsive" alt="">
+                    <img src="{{asset($Produck->foto)}}" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="{{Storage::url($Produck->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="{{asset($Produck->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up{{$Produck->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>

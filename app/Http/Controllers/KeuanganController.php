@@ -20,7 +20,6 @@ class KeuanganController extends Controller
                      ->where('kode_transaksi_penjualan', 'like', 'TrR%')
                      ->where('created_at', $date)
                      ->first();
-                     // dd($Buy);
       $untung = $Shell>$Buy;
       $Rugi = $Shell<$Buy;
       return view('Backend.LaporanKeuangan.general',compact(['Shell','Buy']));

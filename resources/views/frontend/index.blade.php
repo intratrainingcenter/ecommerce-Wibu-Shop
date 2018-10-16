@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="-CUSTOMER VALUE-">
   <meta property="og:url" content="-CUSTOMER VALUE-">
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->
   <link href="{{asset('frontend/theme/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -29,17 +29,22 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
+  @yield('css')
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/fonts/iconic/css/material-design-iconic-font.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/animate/animate.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/css-hamburgers/hamburgers.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/animsition/css/animsition.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/select2/select2.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/daterangepicker/daterangepicker.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/css/main.css')}}">
 </head>
 <body class="ecommerce">
 @include('frontend.layout.bar')
 @include('frontend.layout.header')
-{{-- @include('frontend.layout.sider') --}}
-{{-- <div class="main">
-  <div class="container"> --}}
-    {{-- @include('frontend.layout.ButonProduct') --}}
-    @yield('produck')
-  {{-- </div>
-</div> --}}
+  @yield('produck')
 @include('frontend.layout.pre-footer')
 @include('frontend.layout.footer')
 @include('frontend.layout.pop-up')

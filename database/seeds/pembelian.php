@@ -14,7 +14,7 @@ class pembelian extends Seeder
       DB::table('transaksi_pembelians')->insert([
         [  'kode_transaksi_pembelian' => 'TrRb01',
           'kode_produk' => 'Produk1',
-          'kode_user' => 'Usr-10',
+          'kode_user' => 'USR01',
           'jummlah' => '100',
           'harga'  => '20000',
           'sub_total'    => '2000000',
@@ -23,7 +23,7 @@ class pembelian extends Seeder
       ],[
         'kode_transaksi_pembelian' => 'TrRb02',
           'kode_produk' => 'Produk2',
-          'kode_user' => 'Usr-10',
+          'kode_user' => 'USR01',
           'jummlah' => '100',
           'harga'  => '10000',
           'sub_total'    => '1000000',
