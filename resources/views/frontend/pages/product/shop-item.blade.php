@@ -33,7 +33,6 @@
                   <div class="product-main-image">
                     <img src="{{asset($view_products->foto)}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="{{asset($view_products->foto)}}">
                   </div>
-
                 </div>
                 <div class="col-md-6 col-sm-6">
                   <h1>{{$view_products->nama_produk}}</h1>
@@ -87,10 +86,8 @@
                     <li><a class="tumblr" data-original-title="tumblr" href="javascript:;"></a></li>
                   </ul>
                 </div>
-
                 <div class="product-page-content">
                   <ul id="myTab" class="nav nav-tabs">
-                    {{-- <li><a href="#Description" data-toggle="tab">Description</a></li> --}}
                     <li><a href="#Information" data-toggle="tab">Information</a></li>
                     <li class="active"><a href="#Reviews" data-toggle="tab">Reviews ({{count($review)}})</a></li>
                   </ul>
@@ -98,9 +95,7 @@
                     <div class="tab-pane fade" id="Information">
                       <p>{{$view_products->keterangan}} </p>
                     </div>
-
                     <div class="tab-pane fade in active" id="Reviews">
-                      <!--<p>There are no reviews for this product.</p>-->
                       @foreach ($review as $key => $value )
                       <div class="review-item clearfix">
                         <div class="review-item-submitted">
