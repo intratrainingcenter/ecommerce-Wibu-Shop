@@ -49,7 +49,7 @@
                         <div class="form-group row" id="tanggal">
                             <label for="tanggal_awal" class="col-md-3">Masa Berlaku</label>
                             <div class="col-md-4">
-                                <input type="date" name="tanggal_awal" class="form-control awal">
+                                <input type="date" name="tanggal_awal" class="form-control awal" required>
                             </div>
                             <div class="tooltipakhir" style="margin-right:100px"></div>
                             <div class="col-md-1">
@@ -57,7 +57,7 @@
                             </div>
                             <div class="tooltipawal" style="margin-left:350px"></div>
                             <div class="col-md-4">
-                                <input type="date" name="tanggal_akhir" class="form-control akhir">
+                                <input type="date" name="tanggal_akhir" class="form-control akhir" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -75,20 +75,18 @@
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon1">Rp.</span>
-                                    <input  type="text" min="0" class="form-control" placeholder="1000" id="diskon" name="diskon" aria-describedby="basic-addon1" required="">
+                                    <input  type="text" min="0" class="form-control input-diskon" placeholder="1000" name="diskon" aria-describedby="basic-addon1" required="">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row bonus" hidden>
                             <label for="bonus" class="col-md-3">Bonus</label>
                             <div class="col-md-9">
-                            <select class="form-control" id="kode_produk_bonus" name="kode_produk_bonus" required="">
-                                <optgroup label="Pilihan Barang Bonus">
-                                    <option value="">None</option>
-                                    @foreach($data_produk as $item)
-                                    <option value="{{ $item->kode_produk }}">{{ $item->nama_produk }}</option>
-                                    @endforeach
-                                </optgroup>
+                            <select class="form-control input-bonus" name="kode_produk_bonus" placeholder="Pilih Barang Bonus">
+                                <option value="">none</option>
+                                @foreach($data_produk as $item)
+                                <option value="{{ $item->kode_produk }}">{{ $item->nama_produk }}</option>
+                                @endforeach
                             </select>
                             </div>
                         </div>
@@ -96,7 +94,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary" id="simpan">Simpan</button>
-                </form>
+            </form>
             </div>
         </div>
         <!-- /.modal-content -->

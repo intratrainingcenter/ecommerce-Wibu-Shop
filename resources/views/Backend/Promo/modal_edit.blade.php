@@ -28,64 +28,66 @@
                             <label for="kode_produk" class="col-md-3">Produk</label>
                             <div class="col-md-8">
                             <select name="kode_produk" id="kode_produkedit" class="form-control" required>
-                                <option value="">--Pilih Produk--</option>
-                                <option value="0">0</option>
+                                <option value="{{$item->kode_produk}}">{{$item->GetProduk->nama_produk}}</option>
+                                <optgroup label="Pilih Produk">
+                                @foreach($data_produk as $produk)
+                                <option value="{{ $produk->kode_produk }}">{{ $produk->nama_produk }}</option>
+                                @endforeach
+                                </optgroup>
                             </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="min" class="col-md-3">Pembelian Barang</label>
                             <div class="col-md-3">
-                            <input type="number" name="min" id="minedit" max="99999999" min="0" class="form-control" value="{{$item->hpp}}" placeholder="Minimum" required>
+                            <input type="number" name="min" id="minedit" max="99999999" min="0" class="form-control" value="{{$item->min}}" placeholder="Minimum" required>
                             </div>
                             <div class="col-md-2">
                                 <center><h4>s/d</h4></center>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" name="max" id="maxedit" min="0" max="99999999" class="form-control" value="{{$item->harga}}" placeholder="Maximum" required>
+                                <input type="number" name="max" id="maxedit" min="0" max="99999999" class="form-control" value="{{$item->max}}" placeholder="Maximum" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="tanggal_awal" class="col-md-3">Masa Berlaku</label>
                             <div class="col-md-3">
-                                <input type="date" name="tanggal_awal" id="tanggal_awaledit" class="form-control">
+                                <input type="date" name="tanggal_awal" id="tanggal_awaledit" class="form-control" value="{{$item->tanggal_awal}}" required>
                             </div>
                             <div class="col-md-2">
                                 <center><h4>s/d</h4></center>
                             </div>
                             <div class="col-md-3">
-                                <input type="date" name="tanggal_akhir" id="tanggal_akhiredit" class="form-control">
+                                <input type="date" name="tanggal_akhir" id="tanggal_akhiredit" class="form-control" value="{{$item->tanggal_akhir}}" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jenis_promo" class="col-md-3">Jenis Promo</label>
                             <div class="col-md-8">
-                                <select name="jenis_promo" id="jenis_promoedit" class="form-control jenis_promo">
+                                <select name="jenis_promo" id="jenis_promoedit" class="form-control jenis_promo" required>
                                     <option value="">Pilih Jenis Promo</option>
-                                    <option value="diskon">Diskon</option>
-                                    <option value="bonus">Bonus</option>
+                                    <option value="Diskon">Diskon</option>
+                                    <option value="Bonus">Bonus</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row diskon" hidden>
-                            <label for="jenis_promo" class="col-md-3">Jenis Promo</label>
+                            <label for="jdiskon" class="col-md-3">Diskon</label>
                             <div class="col-md-8">
                                 <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon1">Rp.</span>
-                                        <input  type="text" min="0" class="form-control" placeholder="1000" id="diskonedit" name="diskon" aria-describedby="basic-addon1" required="">
+                                        <input  type="text" min="0" class="form-control input-diskon" placeholder="1000" name="diskon" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row bonus" hidden>
                             <label for="bonus" class="col-md-3">Bonus</label>
                             <div class="col-md-8">
-                            <select class="form-control" id="kode_produk_bonusedit" name="kode_produk_bonus" required="">
-                                <optgroup label="Pilihan Barang Bonus">
-                                    <option value="">None</option>
-                                    {{-- @foreach($barangs as $barang)
-                                    <option value="{{ $barang->kode_barang }}"> {{ $barang->kode_barang }} - {{ $barang->nama_barang }}</option>
-                                    @endforeach --}}
-                                </optgroup>
+                            <select class="form-control input-bonus" name="kode_produk_bonus">
+                                <option value="">none</option>
+                                @foreach($data_produk as $item)
+                                <option value="{{ $item->kode_produk }}">{{ $item->nama_produk }}</option>
+                                @endforeach
                             </select>
                             </div>
                         </div>

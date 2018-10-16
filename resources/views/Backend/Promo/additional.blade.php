@@ -15,22 +15,51 @@
     })
 
     // SELECT JENIS PROMO
-    $(".jenis_promo").change(function() {
-        let Value = $(".jenis_promo").val();
+    $("#jenis_promo").change(function() {
+        let Value = $("#jenis_promo").val();
+		
         if (Value == 'Diskon') {
             $(".diskon").show();
+			$(".input-diskon").prop("required", true);
             $(".bonus").hide();
+			$(".input-bonus").prop("required", false);
         } 
         else if (Value == 'Bonus') {
             $(".diskon").hide();
+			$(".input-diskon").prop("required", false);
             $(".bonus").show();
+			$(".input-bonus").prop("required", true);
         } 
         else {
             $(".diskon").hide();
             $(".bonus").hide();
+			$(".input-diskon").prop("required", false);
+			$(".input-bonus").prop("required", false);
         }
     })
 
+	$("#jenis_promoedit").change(function() {
+        let Value = $("#jenis_promoedit").val();
+		
+        if (Value == 'Diskon') {
+            $(".diskon").show();
+			$(".input-diskon").prop("required", true);
+            $(".bonus").hide();
+			$(".input-bonus").prop("required", false);
+        } 
+        else if (Value == 'Bonus') {
+            $(".diskon").hide();
+			$(".input-diskon").prop("required", false);
+            $(".bonus").show();
+			$(".input-bonus").prop("required", true);
+        } 
+        else {
+            $(".diskon").hide();
+            $(".bonus").hide();
+			$(".input-diskon").prop("required", false);
+			$(".input-bonus").prop("required", false);
+        }
+    })
     // TOOLTIP IF MIN AND MAX
 	$(".tooltipmax").tooltip({
 		trigger: 'manual',
