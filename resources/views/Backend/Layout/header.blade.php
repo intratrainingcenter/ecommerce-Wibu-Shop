@@ -202,7 +202,7 @@
         <li class="header">MENU</li>
         @if (auth::user()->jabatan == 'Admin')
           <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href=""><i class="fa fa-files-o"></i> Data Kategori</a></li>
+          <li><a href="{{route('kategori')}}"><i class="fa fa-files-o"></i> Data Kategori</a></li>
           <li><a href=""><i class="fa fa-th"></i> <span>Data Produk</span></a></li>
           <li><a href=""><i class="fa fa-pie-chart"></i><span>Data Pembeli</span></a></li>
           <li><a href=""><i class="fa fa-book"></i><span>Data Promo</span></a></li>
@@ -211,7 +211,7 @@
           <li><a href=""><i class="fa fa-edit"></i> <span>Data Message</span></a></li>
         @elseif (auth::user()->jabatan == 'Spv')
           <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href=""><i class="fa fa-files-o"></i> Data Kategori</a></li>
+          <li><a href="{{route('kategori')}}"><i class="fa fa-files-o"></i> Data Kategori</a></li>
           <li><a href=""><i class="fa fa-th"></i> <span>Data Produk</span></a></li>
           <li><a href=""><i class="fa fa-pie-chart"></i><span>Data Pembeli</span></a></li>
           <li><a href=""><i class="fa fa-book"></i><span>Data Promo</span></a></li>
