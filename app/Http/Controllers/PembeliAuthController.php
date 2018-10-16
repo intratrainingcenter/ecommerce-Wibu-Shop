@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\PembeliAuth as Pembeli;
+use App\Kategori;
+use App\Produk;
 
 class PembeliAuthController extends Controller
 {
@@ -19,7 +21,9 @@ class PembeliAuthController extends Controller
 
     public function showRegisterForm()
     {
-        return view('frontend.pages.auth.register');
+      $kategori = Kategori::all();
+      $all_products = Produk::limit(8)->orderBy('id','ASC')->get();
+        return view('frontend.pages.auth.register',compact('kategori','all_products'));
     }
 
     public function Register(Request $request)
@@ -40,7 +44,9 @@ class PembeliAuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('frontend.pages.auth.login');
+      $kategori = Kategori::all();
+      $all_products = Produk::limit(8)->orderBy('id','ASC')->get();
+        return view('frontend.pages.auth.login',compact('kategori','all_products'));
     }
 
     public function Login(Request $request)

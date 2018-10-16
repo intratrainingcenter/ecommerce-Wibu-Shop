@@ -4,6 +4,7 @@
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-3">
         <div class="product-main-image">
+          <img src="{{asset($pop_up->foto)}}" alt="Cool green dress with red bell" class="img-responsive">
           <img src="{{Storage::url($pop_up->foto)}}" alt="" class="img-responsive">
         </div>
       </div>
