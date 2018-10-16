@@ -15,23 +15,13 @@
         <div class="row margin-bottom-40">
           <div class="sidebar col-md-3 col-sm-5">
           @include('frontend.layout.ButonProduct')
-            <div class="sidebar-products clearfix">
-              <h2>Bestsellers</h2>
-              @foreach ($three_products as $Product)
-              <div class="item">
-                <a href="{{asset($Product->foto)}}"><img src="{{asset($Product->foto)}}" alt="Some Shoes in Animal with Cut Out" ></a>
-                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">{{$Product->nama_produk}}</a></h3>
-                <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
-              </div>
-            @endforeach
-            </div>
           </div>
           <div class="col-md-9 col-sm-7">
             <div class="product-page">
               <div class="row">
                 <div class="col-md-6 col-sm-6">
                   <div class="product-main-image">
-                    <img src="{{asset($view_products->foto)}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="{{asset($view_products->foto)}}">
+                    <img src="{{Storage::url($view_products->foto)}}" alt="" class="img-responsive" data-BigImgsrc="{{Storage::url($view_products->foto)}}">
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
@@ -39,32 +29,17 @@
                   <div class="price-availability-block clearfix">
                     <div class="price">
                       <strong>{{'Rp. '.number_format($view_products->harga)}}</strong>
-                      <em>$<span>62.00</span></em>
                     </div>
                     <div class="availability">
-                      Availability: <strong>In Stock</strong>
+                      @if ($view_products->status == 'Siap')
+                      Status: <strong>Ready Stock</strong>
+                      @else
+                      Status: <strong>Sold Out</strong>
+                      @endif
                     </div>
                   </div>
                   <div class="description">
                     <p>{{$view_products->keterangan}}</p>
-                  </div>
-                  <div class="product-page-options">
-                    <div class="pull-left">
-                      <label class="control-label">Size:</label>
-                      <select class="form-control input-sm">
-                        <option>L</option>
-                        <option>M</option>
-                        <option>XL</option>
-                      </select>
-                    </div>
-                    <div class="pull-left">
-                      <label class="control-label">Color:</label>
-                      <select class="form-control input-sm">
-                        <option>Red</option>
-                        <option>Blue</option>
-                        <option>Black</option>
-                      </select>
-                    </div>
                   </div>
                   <div class="product-page-cart">
                     <div class="product-quantity">
@@ -72,19 +47,6 @@
                     </div>
                     <button class="btn btn-primary" type="submit">Add to cart</button>
                   </div>
-                  <div class="review">
-                    <input type="range" value="4" step="0.25" id="backing4">
-                    <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-                    </div>
-                    <a href="javascript:;">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:;">Write a review</a>
-                  </div>
-                  <ul class="social-icons">
-                    <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
-                    <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>
-                    <li><a class="googleplus" data-original-title="googleplus" href="javascript:;"></a></li>
-                    <li><a class="evernote" data-original-title="evernote" href="javascript:;"></a></li>
-                    <li><a class="tumblr" data-original-title="tumblr" href="javascript:;"></a></li>
-                  </ul>
                 </div>
                 <div class="product-page-content">
                   <ul id="myTab" class="nav nav-tabs">
@@ -124,12 +86,6 @@
                         <div class="form-group">
                           <label for="review">Review <span class="require">*</span></label>
                           <textarea class="form-control" rows="8" name="review_product" id="review"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label for="email">Rating</label>
-                          <input type="range" value="4" step="0.25" id="backing5">
-                          <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-                          </div>
                         </div>
                         <div class="padding-top-20">
                           <button type="submit" class="btn btn-primary">Send</button>

@@ -13,15 +13,15 @@
     </div>
       <div class="row margin-bottom-35 ">
         <div class="col-md-6 two-items-bottom-items">
-          <h2>Two items</h2>
+          <h2>Hot Products</h2>
           <div class="owl-carousel owl-carousel2">
             @foreach ($two_products as $key => $Product)
             <div>
               <div class="product-item">
                 <div class="pi-img-wrapper">
-                  <img src="{{$Product->foto}}" class="img-responsive" alt="Berry Lace Dress">
+                  <img src="{{Storage::url($Product->foto)}}" class="img-responsive" alt="Berry Lace Dress">
                   <div>
-                    <a href="{{$Product->foto}}" class="btn btn-default fancybox-button">Zoom</a>
+                    <a href="{{Storage::url($Product->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
                     <a href="#product-pop-up{{$Product->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
                   </div>
                 </div>

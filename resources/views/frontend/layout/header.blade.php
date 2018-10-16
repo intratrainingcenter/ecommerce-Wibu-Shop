@@ -5,7 +5,7 @@
 @include('frontend.layout.cart')
     <div class="header-navigation">
       <ul><li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">  Woman  </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">  Categories  </a>
           <ul class="dropdown-menu">
             @foreach ($kategori as $button_womens)
               <li><a href="{{route('frontend.product_list',$button_womens->kode_kategori)}}">{{$button_womens->nama_kategori}}</a></li>
@@ -15,8 +15,8 @@
           <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;"> New  </a>
 @include('frontend.layout.Newporduct-header')
         </li>
-        <li class="dropdown">
-          <a href="javascript:;"> All Products </a>
+        <li class="">
+          <a href="{{route('all_products')}}"> All Products </a>
         </li>
         <li class="menu-search">
           <span class="sep"></span>

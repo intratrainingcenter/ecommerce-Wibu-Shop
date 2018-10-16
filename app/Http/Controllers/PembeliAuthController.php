@@ -16,7 +16,9 @@ class PembeliAuthController extends Controller
     {
         $id = Auth::guard('pembeli')->id();
         $user = Pembeli::where('id', $id)->first();
-        return view('frontend.pages.account.index',compact('user'));
+        $kategori = Kategori::all();
+        $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+        return view('frontend.pages.account.index',compact('user', 'kategori', 'new_products'));
     }
 
     public function showRegisterForm()

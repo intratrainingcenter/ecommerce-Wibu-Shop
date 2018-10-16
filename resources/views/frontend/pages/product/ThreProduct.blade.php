@@ -1,12 +1,12 @@
-  <h2>Three items</h2>
+  <h2>Latest Products</h2>
   <div class="owl-carousel owl-carousel3">
     @foreach ($three_products as $key => $NewProduct)
     <div>
       <div class="product-item">
         <div class="pi-img-wrapper">
-          <img src="{{$NewProduct->foto}}" class="img-responsive" alt="Berry Lace Dress">
+          <img src="{{Storage::url($NewProduct->foto)}}" class="img-responsive" alt="">
           <div>
-            <a href="{{$NewProduct->foto}}" class="btn btn-default fancybox-button">Zoom</a>
+            <a href="{{Storage::url($NewProduct->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
             <a href="#product-pop-up{{$NewProduct->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
           </div>
         </div>
