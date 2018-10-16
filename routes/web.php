@@ -20,6 +20,8 @@ Route::resource('user','UserController')->Middleware('spv');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
 
+Route::resource('kategori','KategoriController');
+
 
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi');
 Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi');
