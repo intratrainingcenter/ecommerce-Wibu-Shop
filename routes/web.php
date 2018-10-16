@@ -27,6 +27,8 @@ Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi'
 Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi');
 Route::get('keuangan','KeuanganController@Index')->name('LaporanKeuangan');
 Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');
+Route::get('Product','laporanBarang@Index')->name('LaporanProduct');
+Route::get('/FilterProduct','laporanBarang@Filter')->name('FilterLaporanProduct');
 Route::prefix('pembeli')->group(function() {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('register', 'PembeliAuthController@showRegisterForm')->name('pembeli.register');
