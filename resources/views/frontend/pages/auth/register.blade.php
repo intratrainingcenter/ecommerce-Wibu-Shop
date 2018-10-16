@@ -1,5 +1,6 @@
-@extends('frontend.pages.auth.master')
-@section('content')
+@extends('frontend.index')
+@extends('frontend.pages.auth.additional')
+@section('produck')
   <div class="main">
     <div class="container">
 

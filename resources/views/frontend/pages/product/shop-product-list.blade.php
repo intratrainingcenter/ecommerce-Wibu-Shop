@@ -4,7 +4,8 @@
       <div class="container">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li class="active">List Product</li>
+            <li><a href="">Product</a></li>
+            <li class="active">{{$kode_kategori}}</li>
         </ul>
         <div class="row margin-bottom-40">
           <div class="sidebar col-md-3 col-sm-5">
@@ -17,25 +18,20 @@
                 <label><input type="checkbox" style="float:left"> In Stock (26)</label>
               </div>
               <h3>Price</h3>
-              <p>
-                <label for="amount">Dari:</label>
-                <input placeholder="Rp. 1,000" type="text" name="dari" value="" style="color:black; font-weight:bold;">
-                <label for="amount">Sampai:</label>
-                <input placeholder="Rp. 100,000" type="text" name="sampai" style="color:black; font-weight:bold;">
-              </p>
-              <button type="submit" class="btn btn-success" name="button">Filter</button>
+              <div class="row">
+                <div class="col-md-4">
+                    <input placeholder="1,000" type="number" name="dari" min="1">
+                </div>
+                <div class="col-md1">
+                  s/d
+                </div>
+                <div class="col-md-4">
+                    <input placeholder="100,000" type="number" name="sampai" min="1">
+                </div>
+              </div>
+                <button type="submit" class="btn btn-primary" name="button">Filter</button>
             </div>
 
-            <div class="sidebar-products clearfix">
-              <h2>Bestsellers</h2>
-            @foreach ($two_products as $key => $Product)
-              <div class="item">
-                <a href="{{route('frontend.shop_item',$Product->kode_produk)}}"><img src="{{asset($Product->foto)}}" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="{{route('frontend.shop_item',$Product->kode_produk)}}">{{$Product->nama_produk}}</a></h3>
-                <div class="price">{{'Rp. '.number_format($Product->harga)}}</div>
-              </div>
-            @endforeach
-            </div>
           </div>
           <div class="col-md-9 col-sm-7">
             <div class="row list-view-sorting clearfix">
