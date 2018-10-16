@@ -15,7 +15,7 @@ class Produk extends Seeder
 
         DB::table('produks')->insert([
             'kode_produk' => 'PRD0'.$i,
-            'kode_kategori' => 'KTG01',
+            'kode_kategori' => 'KT-00'.$i,
             'nama_produk' => 'Produk '.$i,
             'hpp'   => '100000',
             'harga' => '150000',
