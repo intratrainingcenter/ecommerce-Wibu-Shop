@@ -5,7 +5,7 @@
 
         <div class="box-body">
           <!-- Conversations are loaded here -->
-          <div class="direct-chat-messages">
+          <div class="direct-chat-messages" id="chat">
 
             <ul ng-repeat="m in messages">
             <!-- Message to the right -->
@@ -38,6 +38,7 @@
             </div>
             <!-- /.direct-chat-msg -->
           </ul>
+          <a id="bottom">test</a>
           </div>
           <!--/.direct-chat-messages-->
         </div>

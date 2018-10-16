@@ -1,9 +1,9 @@
 <div class="top-cart-block">
   <div class="top-cart-info">
     <!-- Chat -->
-    <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view">Chat</a>
+    <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view" ng-click="openChat()">Chat</a>
   </div>
-  <a href="#"> <i class="fa fa-comments-o"></i></a>
+  <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view"> <i class="fa fa-comments-o"></i></a>
 </div>
 
 <div class="top-cart-block">
