@@ -22,7 +22,7 @@ class CreatePromosTable extends Migration
             $table->integer('max');
             $table->date('tanggal_awal');
             $table->date('tanggal_akhir');
-            $table->enum('jenis_promo',['diskon', 'bonus']);
+            $table->enum('jenis_promo',['Diskon', 'Bonus']);
             $table->integer('diskon')->nullable();
             $table->string('kode_produk_bonus')->nullable();
             $table->timestamps();

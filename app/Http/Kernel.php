@@ -52,6 +52,12 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'admin' => \App\Http\Middleware\admin::class,
+        'admin_spv' => \App\Http\Middleware\admin_spv::class,
+        'owner' => \App\Http\Middleware\owner::class,
+        'spv_owner' => \App\Http\Middleware\spv_owner::class,
+        'spv' => \App\Http\Middleware\spv::class,
+        'suplayer' => \App\Http\Middleware\suplayer::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
