@@ -31,7 +31,12 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/pages/css/popupChat.css')}}" rel="stylesheet" type="text/css">
-
+  <style media="screen">
+    #bottom {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
   <!-- Js Message -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
@@ -53,7 +58,7 @@
 
 
 </head>
-<body class="ecommerce" ng-controller="SampleCtrl">
+<body id="test" class="ecommerce" ng-controller="SampleCtrl">
   @include('frontend.layout.bar')
 @include('frontend.layout.header')
 {{-- @include('frontend.layout.sider') --}}

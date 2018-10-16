@@ -1,3 +1,4 @@
-$(document).ready(function(){
-  $("#chat").scrollTop($("#chat")[0].scrollHeight);
-});
+// $(document).ready(function(){
+	// $('<li class="sent">aaaaa</li>').appendTo($('#chat ul'));
+  // $("#chat").animate({ scrollTop: $(document).height() }, "fast");
+// });

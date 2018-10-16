@@ -10,6 +10,7 @@
 <script src="{{asset('frontend/theme/assets/corporate/scripts/layout.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/theme/assets/pages/scripts/bs-carousel.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/jsChat.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/OneSignal.js')}}" type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
 
 <script type="text/javascript">
