@@ -12,7 +12,7 @@
             <!-- BEGIN SIDEBAR -->
             <div class="sidebar col-md-3 col-sm-3">
                 <ul class="list-group margin-bottom-25 sidebar-menu">
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Edit Account</a></li>
+                <li class="list-group-item clearfix"><a href="{{route('account.edit')}}"><i class="fa fa-angle-right"></i> My Profile</a></li>
                 <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address</a></li>
                 <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My Order</a></li>
                 <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Order History</a></li>
@@ -22,7 +22,6 @@
         
             <!-- BEGIN CONTENT -->
             <div class="col-md-9 col-sm-7">
-                <h1>My Profile</h1>
                 <div class="content-page">
                     <center>
                         @if ($user->foto == '')
@@ -41,9 +40,6 @@
                             </tr>
                             <tr>
                                 <td><h3>Gender</h3></td><td>:</td><td><h3>{{$user->jenis_kelamin}}</h3></td>
-                            </tr>
-                            <tr>
-                                <td><h3>Address</h3></td><td>:</td><td><h3>{{$user->alamat}}</h3></td>
                             </tr>
                             <tr>
                                 <td><h3>Email</h3></td><td>:</td><td><h3>{{$user->email}}</h3></td>

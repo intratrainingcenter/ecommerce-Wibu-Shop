@@ -38,7 +38,7 @@
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="{{Storage::url($item->foto)}}" class="img-responsive" alt="">
+                    <img src="{{Storage::url($item->foto)}}" width="230px" height="200px"alt="">
                     <div>
                       <a href="{{Storage::url($item->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up{{$item->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>

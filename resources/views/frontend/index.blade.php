@@ -39,5 +39,6 @@
 @include('frontend.layout.footer')
 @include('frontend.layout.pop-up')
 @include('frontend.layout.js')
+@yield('js')
 </body>
 </html>
