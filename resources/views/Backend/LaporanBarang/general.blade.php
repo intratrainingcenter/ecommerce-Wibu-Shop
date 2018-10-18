@@ -15,13 +15,13 @@
 												<div class="form-group"  style="width: 100px;">
 													<select class="btn btn-3d" name="kode_kategori" id="kategorinya">
 															<option value="ada">Semua kategori</option>
-														@foreach ($category as $key)
+														@foreach ($selectcategory as $key)
 														<option  value="{{$key->kode_kategori}}">{{$key->nama_kategori}}</option>
 														@endforeach
 													</select>
 												</div>
 											</div>
-												{{-- <div class="col-lg-4">
+												<div class="col-lg-4">
 													<div class="form-group"  style="width: 100px;">
 														<div class="input-group">
 															<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
@@ -36,7 +36,7 @@
 															<input type="datetime-local" class="form-control pull-right"  name="sampai" >
 														</div>
 													</div>
-												</div> --}}
+												</div>
 												<div class="col-lg-4 right">
 													<button class="btn btn-primary btn-3d">Filter</button>
 													<a href="#" onclick="javascript:printlayer('print_lpTransaksi')" class="btn btn-primary btn-3d pull-right"><i class="fa fa-print"></i> Print</a>
@@ -81,13 +81,13 @@
 																	@php($row++)
 																	@php($kode_tt=$valuedata->kode_produk)
 																	@php($kode_tt2=$valuedata->kode_produk)
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{$no++}}</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{$valuedata->kode_produk}}</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{$valuedata->nama_produk}}</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{"Rp. ".number_format($valuedata->hpp)}}</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{"Rp. ".number_format($valuedata->harga)}}</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{$valuedata->stock - $valuedata->masuk}}</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">
+																<td >{{$no++}}</td>
+																<td >{{$valuedata->kode_produk}}</td>
+																<td >{{$valuedata->nama_produk}}</td>
+																<td >{{"Rp. ".number_format($valuedata->hpp)}}</td>
+																<td >{{"Rp. ".number_format($valuedata->harga)}}</td>
+																<td >{{$valuedata->stock - $valuedata->masuk}}</td>
+																<td >
 																	@if ($Buy->whereIn('kode_produk',[$valuedata->kode_produk])->isNotEmpty())
 																		@foreach ($Buy as $key => $valueBuy)
 																			@if ($valueBuy->kode_produk == $valuedata->kode_produk)
@@ -97,7 +97,7 @@
 																	@else -
 																	@endif
 																</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">
+																<td >
 																	@if ($Shell->whereIn('kode_produk',[$valuedata->kode_produk])->isNotEmpty())
 																		@foreach ($Shell as $key => $valueShell)
 																			@if ($valueShell->kode_produk == $valuedata->kode_produk)
@@ -107,7 +107,7 @@
 																	@else -
 																	@endif
 																</td>
-																<td rowspan="{{ $row }}" style="vertical-align : middle;text-align:center;">{{$valuedata->stock}}</td>
+																<td >{{$valuedata->stock}}</td>
 															</tr>
 																@endif
 																@endif

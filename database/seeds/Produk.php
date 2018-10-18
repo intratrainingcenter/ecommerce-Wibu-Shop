@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class Produk extends Seeder
 {
@@ -22,7 +23,8 @@ class Produk extends Seeder
             'stok'  => '30',
             'status'    => 'Siap',
             'keterangan'    => 'Ini keterangan',
-            'foto'  => 'images/foto.png'
+            'foto'  => 'images/foto.png',
+            'created_at' => Carbon::now(),
         ]);
       }
     }
