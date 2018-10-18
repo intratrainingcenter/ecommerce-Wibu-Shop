@@ -1,35 +1,47 @@
-<div id="FormEdit" class="content-page" hidden>
-        <div class="col-md-4">
-            @if ($user->foto == '')
-            <img src="{{asset('images/foto.png')}}" alt="">
-            @else
-            <img src="{{Storage::url($user->foto)}}" class="img-responsive image" alt="">
-            @endif
-            <label for="">Upload image</label>
-            <input type="file" name="" id="foto">
+<div id="FormEdit" class="col-md-9 col-sm-7" hidden>
+    <h1>Edit Profile</h1>
+    <div class="content-page">
+        <form action="/edit" enctype="multipart/form-data">
+            @csrf @method('PATCH')
+            <div class="col-md-4">
+                @if ($user->foto == '')
+                <img src="{{asset('images/foto.png')}}" alt="">
+                @else
+                <img src="{{Storage::url($user->foto)}}" class="img-responsive image" alt="">
+                @endif
+                <label for="">Upload image</label>
+                <input class="form-control" type="file" name="foto" id="foto">
+            </div>
+            <div class="col-md-4">
+                <label for=""> Name</label>
+                <input type="text" class="form-control" name="nama_pembeli" value="{{$user->nama_pembeli}}">
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                <label for=""> Gender</label>
+                <select class="form-control" name="jenis_kelamin" id="">
+                    @if ($user->jenis_kelamin == 'Laki-laki')
+                    <option value="{{$user->jenis_kelamin}}" selected>Male</option>
+                    <option value="Perempuan">Female</option>
+                    @else
+                    <option value="Laki-laki">Male</option>
+                    <option value="{{$user->jenis_kelamin}}" selected>Female</option>
+                    @endif
+                </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for=""> Email</label>
+                <input class="form-control" type="text" name="email" id="" value="{{$user->email}}">
+            </div>
+            <div class="col-md-4">
+                <label for=""> Phone Number </label>
+                <input class="form-control" type="text" name="telepon" id="" value="0090908">
+            </div>
+        <div class="row">
+            <button id="Save" type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
+            <button type="button" class="btn btn-danger pull-right cancel" style="margin:10px">Cancel</button>
         </div>
-        <div class="col-md-4">
-            Name
-            <h3>{{$user->nama_pembeli}}</h3>
-        </div>
-        <div class="col-md-4">
-            Gender
-            @if ($user->jenis_kelamin == 'Laki-laki')
-                <h3>Male</h3>
-            @else
-                <h3>Female</h3>
-            @endif
-        </div>
-        <div class="col-md-4">
-            Email
-            <h3>{{$user->email}}</h3>
-        </div>
-        <div class="col-md-4">
-            Phone Number
-            <h3>0987654321</h3>
-        </div>
-    <div class="row">
-        <button id="Save" class="btn btn-success pull-right" style="margin:10px">Save</button>
-        <button id="Cancel" class="btn btn-danger pull-right" style="margin:10px">Cancel</button>
+    </form>
     </div>
 </div>

@@ -7,6 +7,17 @@
                 $("#FormEdit").show();
             })
 
+            $("#ChangePassword").click(function(){
+                $("#Profile").hide();
+                $("#FormPassword").show();
+            })
+
+            $(".cancel").click(function(){
+                $("#Profile").show();
+                $("#FormPassword").hide();
+                $("#FormEdit").hide();
+            })
+
             $("#foto").change(function(){
                 ShowImage(this);
             })

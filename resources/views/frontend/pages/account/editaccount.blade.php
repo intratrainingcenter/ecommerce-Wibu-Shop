@@ -23,10 +23,11 @@
             <!-- END SIDEBAR -->
         
             <!-- BEGIN CONTENT -->
-            <div class="col-md-9 col-sm-7">
+            @include('frontend.pages.account.edit_form')                
+            @include('frontend.pages.account.change_password')
+            <div id="Profile" class="col-md-9 col-sm-7">
                 <h1>My Profile</h1>
-                @include('frontend.pages.account.edit_form')
-                <div id="Profile" class="content-page">
+                <div class="content-page">
                         <div class="col-md-4">
                             @if ($user->foto == '')
                             <img src="{{asset('images/foto.png')}}" alt="">
