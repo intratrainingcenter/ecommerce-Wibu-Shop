@@ -16,7 +16,7 @@
         </li>
       </ul>
       <div class="text-right">
-        <a href="#" class="btn btn-default">View Cart</a>
+        <a href="{{route('frontend.cart')}}" class="btn btn-default">View Cart</a>
         <a href="{{route('frontend.Checkout')}}" class="btn btn-primary">Checkout</a>
       </div>
     </div>

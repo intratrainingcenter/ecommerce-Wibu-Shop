@@ -11,6 +11,9 @@ Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list'
 Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
 Route::post('reviewProduct','reviewProducts@store')->name('frontend.reviewProduct');
+Route::match(['get', 'post'], '/shopping-cart','FrontEndKeranjangController@cart')->name('frontend.cart')->middleware('auth:pembeli');
+Route::post('/add-to-cart','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart');
+Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -36,4 +39,4 @@ Route::prefix('pembeli')->group(function() {
     Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
     Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
     Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account')->middleware('auth:pembeli');
-});
+   });
