@@ -2,7 +2,7 @@
   <li>
     <div class="header-navigation-content">
       <div class="row">
-        @foreach ($all_products as $key => $porduct)
+        @foreach ($new_products as $key => $porduct)
         <div class="col-md-3 col-sm-4 col-xs-6">
           <div class="product-item">
             <div class="pi-img-wrapper">

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\PembeliAuth as Pembeli;
 use App\Kategori;
 use App\Produk;
+use App\Alamat;
 
 class PembeliAuthController extends Controller
 {
@@ -16,14 +17,18 @@ class PembeliAuthController extends Controller
     {
         $id = Auth::guard('pembeli')->id();
         $user = Pembeli::where('id', $id)->first();
-        return view('frontend.pages.account.index',compact('user'));
+        $kategori = Kategori::all();
+        $all_products = Produk::orderBy('created_at','desc')->get();
+        $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+        return view('frontend.pages.account.index',compact('user', 'kategori', 'new_products', 'all_products'));
     }
 
     public function showRegisterForm()
     {
       $kategori = Kategori::all();
-      $all_products = Produk::limit(8)->orderBy('id','ASC')->get();
-        return view('frontend.pages.auth.register',compact('kategori','all_products'));
+      $all_products = Produk::orderBy('created_at','desc')->get();
+      $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+        return view('frontend.pages.auth.register',compact('kategori','all_products', 'new_products'));
     }
 
     public function Register(Request $request)
@@ -34,7 +39,6 @@ class PembeliAuthController extends Controller
             'kode_pembeli' => $getCode,
             'nama_pembeli' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat'       => $request->alamat,
             'email'        => $request->email,
             'password'     => Hash::make($request->pass),
             'foto'         => '',
@@ -45,8 +49,9 @@ class PembeliAuthController extends Controller
     public function showLoginForm()
     {
       $kategori = Kategori::all();
-      $all_products = Produk::limit(8)->orderBy('id','ASC')->get();
-        return view('frontend.pages.auth.login',compact('kategori','all_products'));
+      $all_products = Produk::orderBy('created_at','desc')->get();
+      $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+      return view('frontend.pages.auth.login',compact('kategori','all_products', 'new_products'));
     }
 
     public function Login(Request $request)
@@ -68,5 +73,16 @@ class PembeliAuthController extends Controller
         }
 
         return redirect()->route('pembeli.login');
+    }
+
+    public function Edit()
+    {
+        $kategori = Kategori::all();
+        $all_products = Produk::orderBy('created_at','desc')->get();
+        $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $id = Auth::guard('pembeli')->id();
+        $user = Pembeli::where('id', $id)->first();
+        $alamat = Alamat::where('kode_pembeli', $user->kode_pembeli)->get();
+        return view('frontend.pages.account.editaccount', compact('user', 'alamat', 'kategori', 'all_products', 'new_products'));
     }
 }

@@ -14,7 +14,6 @@ class Pembeli extends Seeder
         DB::table('pembelis')->insert([
             'kode_pembeli' => 'pmb01',
             'nama_pembeli' => 'Pembeli 1',
-            'alamat'    => 'Ini alamat',
             'jenis_kelamin' => 'Laki-laki',
             'email' =>  'pembeli@gmail.com',
             'password' => Hash::make(123),

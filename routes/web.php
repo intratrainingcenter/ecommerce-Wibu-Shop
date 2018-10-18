@@ -10,6 +10,7 @@ Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list')->name('frontend.product_list');
 Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
+Route::get('/all-products','FrontendControler@AllProducts')->name('all_products');
 Route::post('reviewProduct','reviewProducts@store')->name('frontend.reviewProduct');
 Auth::routes();
 
@@ -36,4 +37,5 @@ Route::prefix('pembeli')->group(function() {
     Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
     Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
     Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account')->middleware('auth:pembeli');
+    Route::get('edit', 'PembeliAuthController@Edit')->name('account.edit')->middleware('auth:pembeli');
 });
