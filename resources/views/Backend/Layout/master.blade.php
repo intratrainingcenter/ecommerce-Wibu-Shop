@@ -13,10 +13,12 @@
 
     @yield('content')
 
+    @include('Backend.User.Pop_Up_Edit_Profil_User')
     @include('Backend.Layout.footer')
 
 </div>
 </body>
 <!-- ./wrapper -->
   @include('Backend.Layout.js')
+  @yield('js')
 </html>
