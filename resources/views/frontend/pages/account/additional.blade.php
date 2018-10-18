@@ -8,13 +8,14 @@
             })
 
             $("#ChangePassword").click(function(){
-                $("#Profile").hide();
-                $("#FormPassword").show();
+                window.location.href = "{{route('account.password')}}"
+            })
+            $("#cancel").click(function(){
+                window.location.href = "{{route('account.edit')}}"
             })
 
             $(".cancel").click(function(){
                 $("#Profile").show();
-                $("#FormPassword").hide();
                 $("#FormEdit").hide();
             })
 

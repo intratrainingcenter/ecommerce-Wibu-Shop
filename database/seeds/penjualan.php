@@ -13,7 +13,7 @@ class penjualan extends Seeder
     {
       DB::table('transaksi_penjualans')->insert([
         [  'kode_transaksi_penjualan' => 'TrR01',
-          'kode_keranjang' => 'User 1',
+          'kode_pembeli' => 'pmb01',
           'jumlah' => '10',
           'grand_total' => '123000',
           'bayar'  => '123000',
@@ -22,7 +22,7 @@ class penjualan extends Seeder
           'created_at' => Carbon::now(),
       ],[
           'kode_transaksi_penjualan' => 'TrR0',
-          'kode_keranjang' => 'User 1',
+          'kode_pembeli' => 'pmb01',
           'jumlah' => '10',
           'grand_total' => '1023100',
           'tanggal'    => Carbon::now(),

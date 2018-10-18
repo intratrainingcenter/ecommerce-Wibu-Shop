@@ -45,7 +45,7 @@
                                 <td><h3>Email</h3></td><td>:</td><td><h3>{{$user->email}}</h3></td>
                             </tr>
                             <tr>
-                                <td><h3>Points</h3></td><td>:</td><td><h3></h3></td>
+                                <td><h3>Points</h3></td><td>:</td><td><h3>{{$point}}</h3></td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,11 +64,18 @@
                             <th>Total</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            @forelse ($orders as $item)
+                            <tr onclick="window.location.href = ''" title="Click to view details">
+                                <td>{{$item->kode_transaksi_penjualan}}</td>
+                                <td>{{date('d F Y', strtotime($item->tanggal))}}</td>
+                                <td align="right">Rp. {{number_format($item->grand_total)}}</td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" align="center">You don't have any transactions yet!</td>
+                            </tr>
+                                
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

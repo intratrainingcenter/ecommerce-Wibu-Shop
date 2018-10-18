@@ -16,7 +16,7 @@ class CreateTransaksiPenjualansTable extends Migration
         Schema::create('transaksi_penjualans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('kode_transaksi_penjualan');
-            $table->string('kode_keranjang');
+            $table->string('kode_pembeli');
             $table->integer('jumlah');
             $table->integer('grand_total');
             $table->integer('bayar');

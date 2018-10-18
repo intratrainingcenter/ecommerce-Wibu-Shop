@@ -23,8 +23,7 @@
             <!-- END SIDEBAR -->
         
             <!-- BEGIN CONTENT -->
-            @include('frontend.pages.account.edit_form')                
-            @include('frontend.pages.account.change_password')
+            @include('frontend.pages.account.edit_form')
             <div id="Profile" class="col-md-9 col-sm-7">
                 <h1>My Profile</h1>
                 <div class="content-page">
@@ -53,7 +52,7 @@
                         </div>
                         <div class="col-md-4">
                             Phone Number
-                            <h3>0987654321</h3>
+                            <h3>{{$user->telepon}}</h3>
                         </div>
                     <div class="row">
                         <button id="EditProfile" class="btn btn-primary pull-right" style="margin:10px">Edit Profile</button>
