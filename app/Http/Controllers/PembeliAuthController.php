@@ -156,7 +156,55 @@ class PembeliAuthController extends Controller
                 return redirect()->back()->with('alertfail', 'Your current password is wrong!');
             }
         }
-        
-        
+    }
+
+    public function Address()
+    {
+        // GET API FROM RAJA ONGKIR
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "key: 8b81c63a1553aa8b18c05314ab4f13df"
+          ),
+        ));
+        $response = curl_exec($curl);
+        $decode = json_decode($response, true);
+        $province = $decode['rajaongkir']['results'];
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $address        = Alamat::where('kode_pembeli', $user->kode_pembeli)->get();
+        $no             = 1;
+        return view('frontend.pages.account.address', compact('user', 'province', 'address', 'no', 'kategori', 'all_products', 'new_products'));
+    }
+
+    public function GetCity($id)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=$id",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "key: 8b81c63a1553aa8b18c05314ab4f13df"
+          ),
+        ));
+        $response = curl_exec($curl);
+        $decode = json_decode($response, true);
+        $city = $decode['rajaongkir']['results'];
+        return $city;
     }
 }

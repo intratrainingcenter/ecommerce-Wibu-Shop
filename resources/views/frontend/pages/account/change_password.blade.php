@@ -11,17 +11,7 @@
 
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-            <!-- BEGIN SIDEBAR -->
-            <div class="sidebar col-md-3 col-sm-3">
-                <ul class="list-group margin-bottom-25 sidebar-menu">
-                <li class="list-group-item clearfix"><a href="{{route('account.edit')}}"><i class="fa fa-angle-right"></i> My Profile</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My Order</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Order History</a></li>
-                </ul>
-            </div>
-            <!-- END SIDEBAR -->
-        
+            @include('frontend.pages.account.sidebar')
             <!-- BEGIN CONTENT -->
             <div id="FormPassword" class="col-md-9 col-sm-7">
                 <h1>Change Password</h1>
@@ -54,7 +44,7 @@
                     </div>
                     <div class="row">
                         <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
-                        <button type="button" id="cancel" class="btn btn-danger pull-right" style="margin:10px">Cancel</button>
+                        <a href="{{route('account.edit')}}" class="btn btn-danger pull-right" style="margin:10px; color:white">Cancel</a>
                     </div>
                     </form>
                 </div>

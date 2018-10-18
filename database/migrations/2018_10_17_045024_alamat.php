@@ -20,8 +20,6 @@ class Alamat extends Migration
             $table->text('alamat');
             $table->string('provinsi');
             $table->string('kota');
-            $table->string('kecamatan');
-            $table->string('kelurahan')->nullable();
             $table->timestamps();
         });
     }

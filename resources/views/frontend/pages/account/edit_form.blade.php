@@ -40,7 +40,7 @@
             </div>
         <div class="row">
             <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
-            <button type="button" class="btn btn-danger pull-right cancel" style="margin:10px">Cancel</button>
+            <button id="CancelEditProfile" type="button" class="btn btn-danger pull-right" style="margin:10px">Cancel</button>
         </div>
     </form>
     </div>
