@@ -75,8 +75,8 @@
                                 <td>{{$item->status}}</td>
                                 <td>
                                     <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_produk}}" title="Rincian"></button>
-                                    <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_produk}}"></button>
-                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_produk}}"></button>
+                                    <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_produk}}" title="Ubah"></button>
+                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_produk}}" title="Hapus"></button>
                                 </td>
                             </tr>
                         @endforeach

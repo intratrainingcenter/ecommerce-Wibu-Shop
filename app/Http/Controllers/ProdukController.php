@@ -63,7 +63,7 @@ class ProdukController extends Controller
             $create = Produk::create([
                 'kode_produk' => $request->kode_produk,
                 'nama_produk' => $request->nama_produk,
-                'kode_kategori' => $request->kode_produk,
+                'kode_kategori' => $request->kode_kategori,
                 'hpp' => $request->hpp,
                 'harga' => $request->harga,
                 'foto' => $path,
@@ -125,7 +125,7 @@ class ProdukController extends Controller
                 $update = Produk::where('kode_produk', $id)->update([
                     'kode_produk' => $request->kode_produk,
                     'nama_produk' => $request->nama_produk,
-                    'kode_kategori' => $request->kode_produk,
+                    'kode_kategori' => $request->kode_kategori,
                     'hpp' => $request->hpp,
                     'harga' => $request->harga,
                     'foto' => $path,
@@ -134,7 +134,7 @@ class ProdukController extends Controller
                 $update = Produk::where('kode_produk', $id)->update([
                     'kode_produk' => $request->kode_produk,
                     'nama_produk' => $request->nama_produk,
-                    'kode_kategori' => $request->kode_produk,
+                    'kode_kategori' => $request->kode_kategori,
                     'hpp' => $request->hpp,
                     'harga' => $request->harga,
                 ]);

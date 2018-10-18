@@ -1,5 +1,6 @@
-@extends('frontend.pages.auth.master')
-@section('content')
+@extends('frontend.index')
+@extends('frontend.pages.auth.additional')
+@section('produck')
   <div class="main">
     <div class="container">
 
@@ -27,13 +28,7 @@
                             </select>
                             <span class="focus-input100" data-symbol="&female;"></span>
                         </div>
-    
-                        <div class="wrap-input100 validate-input" >
-                            <span class="label-input100">Alamat</span>
-                            <textarea class="input100" name="alamat"></textarea>
-                            <span class="focus-input100" data-symbol="&#9751;"></span>
-                        </div>
-    
+                        
                         <div class="wrap-input100 validate-input m-b-23" >
                             <span class="label-input100">Email</span>
                             <input class="input100" type="email" name="email">
