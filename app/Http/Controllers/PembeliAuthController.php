@@ -24,7 +24,7 @@ class PembeliAuthController extends Controller
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->count();
-        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->limit(3)->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->limit(3)->orderBy('tanggal', 'desc')->get();
         return view('frontend.pages.account.index',compact('user', 'point', 'orders', 'kategori', 'new_products', 'all_products'));
     }
 
