@@ -1,11 +1,12 @@
 var OneSignal = window.OneSignal || [];
 OneSignal.push(function() {
   OneSignal.init({
-    appId: "017fcce1-5ac4-4070-bec2-f4bba36014ca",
+    appId: "4f816c01-60fc-425e-9c4c-57cd67cffb1b",
     autoRegister: false,
     notifyButton: {
       enable: true,
     },
     allowLocalhostAsSecureOrigin: true,
   });
+  OneSignal.sendTag("email", "lolikawaiimoe@gmail.com");
 });

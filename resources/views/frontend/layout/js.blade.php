@@ -9,9 +9,19 @@
 <script src="{{asset('frontend/theme/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js')}}" type="text/javascript"></script><!-- Quantity -->
 <script src="{{asset('frontend/theme/assets/corporate/scripts/layout.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/theme/assets/pages/scripts/bs-carousel.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/jsChat.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/OneSignal.js')}}" type="text/javascript"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
+<!-- onesignal -->
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<!-- Js Message -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+<script src="{{asset('js/Chat.js')}}" type="text/javascript"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+<!-- Firebase  -->
+<script src="{{asset('js/FireBase.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">
     jQuery(document).ready(function() {

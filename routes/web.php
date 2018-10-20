@@ -17,3 +17,5 @@ Route::resource('user','UserController');
 Route::resource('produk', 'ProdukController');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif');
+
+Route::post('sendToUser', 'NotiveFrontendController@sendMessage');

@@ -14,9 +14,22 @@ app.controller("SampleCtrl", function($scope, $firebaseArray, $location, $anchor
           message: $scope.messageText,
           date: Date.now()
       })
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: location.origin+"/sendToUser",
+        data: {message: $scope.messageText},
+        success: function (data) {
+        }
+      });
+
       $scope.messageText = "";
       $anchorScroll();
       $location.hash('bottom');
+
   }
 
 });

@@ -14,6 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="-CUSTOMER VALUE-">
   <meta property="og:url" content="-CUSTOMER VALUE-">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->
@@ -31,31 +32,6 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/pages/css/popupChat.css')}}" rel="stylesheet" type="text/css">
-  <style media="screen">
-    #bottom {
-      display: block;
-      margin-top: 10px;
-    }
-  </style>
-  <!-- Js Message -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-  <!-- Firebase  -->
-  <script type="text/javascript">
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCaQJIqldPHu_dAgFk8s1F3B9zU_ty7TTE",
-    authDomain: "wibu-shop-f5875.firebaseapp.com",
-    databaseURL: "https://wibu-shop-f5875.firebaseio.com",
-    projectId: "wibu-shop-f5875",
-    storageBucket: "wibu-shop-f5875.appspot.com",
-    messagingSenderId: "926586751495"
-  };
-  firebase.initializeApp(config);
-  </script>
-  <script src="{{asset('js/Chat.js')}}" type="text/javascript"></script>
-  <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-
 
 </head>
 <body id="test" class="ecommerce" ng-controller="SampleCtrl">

@@ -40,7 +40,7 @@
               </ul>
             </div>
             <div class="bottom" style="padding-top: 50px;">
-              <a id="bottom" >123</a>
+              <a id="bottom" ></a>
             </div>
           </div>
           <!--/.direct-chat-messages-->
@@ -48,7 +48,7 @@
         <!-- /.box-body -->
         <div class="box-footer">
           <form ng-submit="send()">
-            <div class="input-group" id="send">
+            <div class="input-group message-input" id="send">
               <input type="text" name="message" placeholder="Type Message ..." class="form-control" ng-model="messageText" required>
                 <span class="input-group-btn">
                   <button type="submit" class="btn btn-primary">Send</button>
