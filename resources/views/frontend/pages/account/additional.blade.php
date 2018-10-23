@@ -11,7 +11,6 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        GetProvince();
 
         $("#EditProfile").click(function() {
             $("#Profile").hide();
@@ -20,6 +19,7 @@
         $("#AddAddress").click(function() {
             $("#Address").hide();
             $("#AddAddressForm").show();
+            GetProvince();
         })
         $("#CancelEditProfile").click(function() {
             $("#Profile").show();
@@ -30,7 +30,11 @@
             $("#EditAddressForm").hide();
             $("#Address").show();
         })
-
+        $("#EditAddress").click(function(){
+            $("#DetailAddress").hide();
+            $("#EditAddressForm").show();
+            GetProvince();
+        })
         // disable mousewheel on a input number field when in focus
         $('#EditForm').on('focus', 'input[type=number]', function (e) {
         $(this).on('mousewheel.disableScroll', function (e) {
@@ -88,7 +92,7 @@
             let option = '';
             $.ajax({
                 type: "GET",
-                url: "province",
+                url: "{{route('address.province')}}",
                 data: "",
                 success: function (response) {
                     $.each(response, function(key, val){
@@ -106,7 +110,7 @@
             let option = '';
             $.ajax({
                 type: "GET",
-                url: "city/"+province,
+                url: location.origin + "/pembeli/city/"+province,
                 data: "",
                 success: function (response) {
                     $.each(response, function(key, val){

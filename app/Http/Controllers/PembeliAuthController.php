@@ -241,4 +241,38 @@ class PembeliAuthController extends Controller
             return redirect()->back();
         }
     }
+
+    public function EditAddress($code)
+    {
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $address        = Alamat::where('kode_alamat', $code)->first();
+        return view('frontend.pages.account.detail_address', compact('address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
+    }
+
+    public function UpdateAddress(Request $request, $code)
+    {
+        $validator      = Validator::make($request->all(), [
+            'id_provinsi' => 'required',
+            'provinsi'  => 'required',
+            'id_kota'   => 'required',
+            'kota'      => 'required',
+            'alamat'    => 'required',
+            ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        } else {
+            $update    = Alamat::where('kode_alamat', $code)->update([
+                'alamat'        => $request->alamat,
+                'id_provinsi'   => $request->id_provinsi,
+                'provinsi'      => $request->provinsi,
+                'id_kota'       => $request->id_kota,
+                'kota'          => $request->kota,
+            ]);
+            return redirect()->back();
+        }
+    }
 }

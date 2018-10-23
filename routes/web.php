@@ -45,4 +45,6 @@ Route::prefix('pembeli')->group(function() {
     Route::get('province', 'PembeliAuthController@GetProvince')->name('address.province')->middleware('auth:pembeli');
     Route::get('city/{id}', 'PembeliAuthController@GetCity')->name('address.city')->middleware('auth:pembeli');
     Route::post('address', 'PembeliAuthController@AddAddress')->name('add.address')->middleware('auth:pembeli');
+    Route::get('edit_address/{id}', 'PembeliAuthController@EditAddress')->name('edit.address')->middleware('auth:pembeli');
+    Route::patch('update_address/{id}', 'PembeliAuthController@UpdateAddress')->name('update.address')->middleware('auth:pembeli');
 });

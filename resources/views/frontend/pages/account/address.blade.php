@@ -33,7 +33,7 @@
                                 <td>{{$item->provinsi}}</td>
                                 <td>{{$item->kota}}</td>
                                 <td align="center">
-                                    <button class="btn btn-info">Edit</button>
+                                    <a href="{{route('edit.address', ['id' => $item->kode_alamat])}}" class="btn btn-info" style="color:white">Deetail</a>
                                     <button class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
