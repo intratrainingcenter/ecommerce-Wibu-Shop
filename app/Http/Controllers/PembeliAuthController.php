@@ -160,6 +160,18 @@ class PembeliAuthController extends Controller
 
     public function Address()
     {
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $address        = Alamat::where('kode_pembeli', $user->kode_pembeli)->get();
+        $no             = 1;
+        return view('frontend.pages.account.address', compact('user', 'address', 'no', 'kategori', 'all_products', 'new_products'));
+    }
+
+    public function GetProvince()
+    {
         // GET API FROM RAJA ONGKIR
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -177,14 +189,7 @@ class PembeliAuthController extends Controller
         $response = curl_exec($curl);
         $decode = json_decode($response, true);
         $province = $decode['rajaongkir']['results'];
-        $kategori       = Kategori::all();
-        $all_products   = Produk::orderBy('created_at','desc')->get();
-        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $id             = Auth::guard('pembeli')->id();
-        $user           = Pembeli::where('id', $id)->first();
-        $address        = Alamat::where('kode_pembeli', $user->kode_pembeli)->get();
-        $no             = 1;
-        return view('frontend.pages.account.address', compact('user', 'province', 'address', 'no', 'kategori', 'all_products', 'new_products'));
+        return $province;
     }
 
     public function GetCity($id)
@@ -206,5 +211,34 @@ class PembeliAuthController extends Controller
         $decode = json_decode($response, true);
         $city = $decode['rajaongkir']['results'];
         return $city;
+    }
+
+    public function AddAddress(Request $request)
+    {
+        $get_auth_id    = Auth::guard('pembeli')->id();
+        $get_pembeli    = Pembeli::where('id', $get_auth_id)->first();
+        $get_max_id       = Alamat::max('id') + 1;
+        $validator      = Validator::make($request->all(), [
+            'id_provinsi' => 'required',
+            'provinsi'  => 'required',
+            'id_kota'   => 'required',
+            'kota'      => 'required',
+            'alamat'    => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertfail', 'Gagal');
+        } else {
+                $add    = Alamat::create([
+                    'kode_pembeli'  => $get_pembeli->kode_pembeli,
+                    'kode_alamat'   => 'ALMT'. date('ymdhis') . $get_max_id,
+                    'alamat'        => $request->alamat,
+                    'id_provinsi'   => $request->id_provinsi,
+                    'provinsi'      => $request->provinsi,
+                    'id_kota'       => $request->id_kota,
+                    'kota'          => $request->kota,
+                ]);
+            
+            return redirect()->back();
+        }
     }
 }

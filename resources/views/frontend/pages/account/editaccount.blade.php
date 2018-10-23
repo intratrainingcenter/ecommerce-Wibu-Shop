@@ -42,7 +42,11 @@
                         </div>
                         <div class="col-md-4">
                             Phone Number
-                            <h3>{{$user->telepon}}</h3>
+                            @if ($user->telepon == '')
+                                <h3>You haven't add your phone number yet</h3>
+                            @else
+                                <h3>{{$user->telepon}}</h3>
+                            @endif
                         </div>
                     <div class="row">
                         <button id="EditProfile" class="btn btn-primary pull-right" style="margin:10px">Edit Profile</button>

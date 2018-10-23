@@ -17,12 +17,13 @@
             <div id="Address" class="col-md-9 col-sm-7">
                 <h1>My Address</h1>
                 <div class="content-page">
-                    <table class="table cell-bordered table-hover">
+                    <table class="table cell-bordered table-hover" width="100%">
                         <thead>
                             <th>#</th>
                             <th width="300px">Address</th>
                             <th>Province</th>
                             <th>City</th>
+                            <th>Option</th>
                         </thead>
                         <tbody>
                             @forelse ($address as $item)
@@ -38,7 +39,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" align="center">You don't add any address yet! Please, add your address!</td>
+                                <td colspan="5" align="center">You haven't add any address yet! Please, add your address!</td>
                             </tr>
                             @endforelse
                         </tbody>

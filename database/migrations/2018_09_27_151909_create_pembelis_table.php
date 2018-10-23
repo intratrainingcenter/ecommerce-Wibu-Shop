@@ -22,7 +22,7 @@ class CreatePembelisTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->binary('foto');
-            $table->string('telepon');
+            $table->string('telepon')->nullable();
             $table->timestamps();
         });
     }

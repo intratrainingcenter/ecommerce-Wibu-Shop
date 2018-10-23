@@ -1,7 +1,7 @@
 <div id="FormEdit" class="col-md-9 col-sm-7" hidden>
     <h1>Edit Profile</h1>
     <div class="content-page">
-        <form action="{{route('update.profile', ['id' => $user->id])}}" enctype="multipart/form-data" method="POST">
+        <form action="{{route('update.profile', ['id' => $user->id])}}" enctype="multipart/form-data" method="POST" id="EditForm">
             @csrf @method('PATCH')
             <div class="col-md-4">
                 @if ($user->foto == '')
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4">
                 <label for=""> Phone Number </label>
-                <input class="form-control" type="text" name="telepon" value="{{$user->telepon}}" required>
+                <input id="Phone" class="form-control" type="number" name="telepon" value="{{$user->telepon}}" required>
             </div>
         <div class="row">
             <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
