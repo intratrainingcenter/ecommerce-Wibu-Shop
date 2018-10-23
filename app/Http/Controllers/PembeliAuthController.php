@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\PembeliAuth as Pembeli;
 use App\Kategori;
 use App\Produk;
+use App\Keranjang;
 
 class PembeliAuthController extends Controller
 {
@@ -16,14 +17,22 @@ class PembeliAuthController extends Controller
     {
         $id = Auth::guard('pembeli')->id();
         $user = Pembeli::where('id', $id)->first();
-        return view('frontend.pages.account.index',compact('user'));
+        $UserCart = Keranjang::where('kode_pembeli', $id->kode_pembeli)->with('detailProduct')->get();
+          return view('frontend.pages.account.index',compact('user','UserCart'));
     }
 
     public function showRegisterForm()
     {
+      $user = Auth::guard('pembeli')->id();
+      $Pembeli = Pembeli::where('id', $user)->first();
       $kategori = Kategori::all();
       $all_products = Produk::limit(8)->orderBy('id','ASC')->get();
-        return view('frontend.pages.auth.register',compact('kategori','all_products'));
+      if( $user != NULL){
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+      }else {
+          $UserCart = [];
+        }
+        return view('frontend.pages.auth.register',compact('kategori','all_products','UserCart'));
     }
 
     public function Register(Request $request)
@@ -44,9 +53,16 @@ class PembeliAuthController extends Controller
 
     public function showLoginForm()
     {
+      $user = Auth::guard('pembeli')->id();
+      $Pembeli = Pembeli::where('id', $user)->first();
       $kategori = Kategori::all();
       $all_products = Produk::limit(8)->orderBy('id','ASC')->get();
-        return view('frontend.pages.auth.login',compact('kategori','all_products'));
+      if( $user != NULL){
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+      }else {
+          $UserCart = [];
+        }
+        return view('frontend.pages.auth.login',compact('kategori','all_products','UserCart'));
     }
 
     public function Login(Request $request)

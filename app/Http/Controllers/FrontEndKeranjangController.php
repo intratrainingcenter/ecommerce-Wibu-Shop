@@ -28,11 +28,13 @@ class FrontEndKeranjangController extends Controller
     {
         $code = date("Ymdhis");
         $count = Keranjang::count()+1;
-
+        $user = Auth::guard('pembeli')->id();
+        $Pembeli = Pembeli::where('id', $user)->first();
+        $UserPembeli = Pembeli::where('kode_pembeli', $Pembeli->kode_pembeli)->first();
 
              $insert = new Keranjang;
              $insert->kode_keranjang='cart'.$code.$count;
-             $insert->kode_pembeli=$request->kode_pembeli;
+             $insert->kode_pembeli=$UserPembeli->kode_pembeli;
              $insert->kode_produk=$request->kode_produk;
              $insert->kode_promo=$request->kode_promo;
              $insert->jumlah=$request->jumlah;
@@ -40,6 +42,7 @@ class FrontEndKeranjangController extends Controller
              $insert->sub_total=$request->sub_total;
              $insert->status=$request->status;
              $insert->save();
+
 
         return redirect('/shopping-cart');
     }

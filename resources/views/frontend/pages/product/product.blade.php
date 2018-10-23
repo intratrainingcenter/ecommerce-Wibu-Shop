@@ -18,7 +18,15 @@
             @foreach ($two_products as $key => $Product)
             <div>
               <div class="product-item">
+                <form name="AddToCartForm" id="AddToCartForm" action="{{route('frontend.addtocart')}}" method="post" enctype="multipart/form-data">
                 <div class="pi-img-wrapper">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="kode_produk" value="{{$Product->kode_produk}}">
+                  <input type="hidden" name="kode_promo" value="qqq">
+                  <input type="hidden" name="jumlah" value="1">
+                  <input type="hidden" name="keterangan" value="Bagus">
+                  <input type="hidden" name="sub_total" value="{{$Product->harga}}">
+                  <input type="hidden" name="status" value="Pending">
                   <img src="{{$Product->foto}}" class="img-responsive" alt="Berry Lace Dress">
                   <div>
                     <a href="{{$Product->foto}}" class="btn btn-default fancybox-button">Zoom</a>
@@ -27,7 +35,7 @@
                 </div>
                 <h3><a href="shop-item.html">{{$Product->nama_produk}}</a></h3>
                 <div class="pi-price">{{'Rp. '.number_format($Product->harga)}}</div>
-                <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                <button type="submit" class="btn btn-default add2cart">Add to cart</a>
               </div>
             </div>
           @endforeach

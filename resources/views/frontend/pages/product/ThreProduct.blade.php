@@ -6,13 +6,12 @@
       <form name="AddToCartForm" id="AddToCartForm" action="{{route('frontend.addtocart')}}" method="post" enctype="multipart/form-data">
       <div class="pi-img-wrapper">
         {{ csrf_field() }}
-        <input type="text" name="kode_pembeli" value="aaaa">
-        <input type="text" name="kode_produk" value="{{$NewProduct->kode_produk}}">
-        <input type="text" name="kode_promo" value="qqq">
-        <input type="text" name="jumlah" value="1">
-        <input type="text" name="keterangan" value="bagus">
-        <input type="text" name="sub_total" value="{{$NewProduct->harga}}">
-        <input type="text" name="status" value="Pending">
+        <input type="hidden" name="kode_produk" value="{{$NewProduct->kode_produk}}">
+        <input type="hidden" name="kode_promo" value="qqq">
+        <input type="hidden" name="jumlah" value="1">
+        <input type="hidden" name="keterangan" value="Bagus">
+        <input type="hidden" name="sub_total" value="{{$NewProduct->harga}}">
+        <input type="hidden" name="status" value="Pending">
         <img name="foto" src="{{$NewProduct->foto}}" class="img-responsive" alt="Berry Lace Dress">
         <div>
           <a href="{{$NewProduct->foto}}" class="btn btn-default fancybox-button">Zoom</a>
