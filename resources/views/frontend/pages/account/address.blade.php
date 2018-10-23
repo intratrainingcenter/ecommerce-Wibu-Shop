@@ -34,7 +34,7 @@
                                 <td>{{$item->kota}}</td>
                                 <td align="center">
                                     <a href="{{route('edit.address', ['id' => $item->kode_alamat])}}" class="btn btn-info" style="color:white">Deetail</a>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <a href="#delete{{$item->kode_alamat}}" id="DeleteAddress" class="btn btn-danger fancybox-fast-view" style="color:white">Delete</a>
                                 </td>
                             </tr>
                             @empty
@@ -51,5 +51,31 @@
         </div>
         <!-- END SIDEBAR & CONTENT -->
     </div>
+
+    <!-- Modal -->
+    @foreach ($address as $alamat)
+    <div id="delete{{$alamat->kode_alamat}}" style="display: none;">
+        <div class="product-page product-pop-up">
+            <form id="FormDelete" action="{{route('delete.address', ['id' => $alamat->kode_alamat])}}" method="POST">
+                @csrf @method('DELETE')
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Confirmation!</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Are you sure want to delete this address?</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-danger pull-right">Delete</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    @endforeach
 </div>
 @endsection

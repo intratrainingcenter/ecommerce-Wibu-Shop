@@ -275,4 +275,9 @@ class PembeliAuthController extends Controller
             return redirect()->back();
         }
     }
+    public function DeleteAddress($code)
+    {
+        Alamat::where('kode_alamat', $code)->delete();
+        return redirect()->back();
+    }
 }

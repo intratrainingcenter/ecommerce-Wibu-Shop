@@ -35,6 +35,15 @@
             $("#EditAddressForm").show();
             GetProvince();
         })
+        $("#DeleteAddress").click(function(){
+            let action = $("#FormDelete").attr('action');
+            let key = $("#DeleteAddress").attr('key');
+            action = location.origin + "/pembeli/delete_address/" + key;
+            console.log(action);
+            
+            
+            
+        })
         // disable mousewheel on a input number field when in focus
         $('#EditForm').on('focus', 'input[type=number]', function (e) {
         $(this).on('mousewheel.disableScroll', function (e) {
