@@ -8,23 +8,34 @@
             <li><a href="{{route('pembeli.account')}}">My Account</a></li>
             <li class="active">Profile</li>
         </ul>
+        @if (session('alertSuccessPassword'))
+        <div style="position: absolute; z-index: 999; right: -10px; top:150px" class="col-md-6 berhasiltambah">
+			<div class="alert alert-success alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<strong>{{session('alertSuccessPassword')}}</strong>
+			</div>
+        </div>
+        @elseif(session('alertFailProfile'))
+        <div style="position: absolute; z-index: 999; right: -10px; top:150px" class="col-md-6 berhasiltambah">
+			<div class="alert alert-danger alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<strong>{{session('alertFailProfile')}}</strong>
+			</div>
+        </div>
+        @elseif(session('alertSuccessProfile'))
+        <div style="position: absolute; z-index: 999; right: -10px; top:150px" class="col-md-6 berhasiltambah">
+			<div class="alert alert-success alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<strong>{{session('alertSuccessProfile')}}</strong>
+			</div>
+        </div>
+        @endif
 
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-            <!-- BEGIN SIDEBAR -->
-            <div class="sidebar col-md-3 col-sm-3">
-                <ul class="list-group margin-bottom-25 sidebar-menu">
-                <li class="list-group-item clearfix"><a href="{{route('account.edit')}}"><i class="fa fa-angle-right"></i> My Profile</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My Order</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Order History</a></li>
-                </ul>
-            </div>
-            <!-- END SIDEBAR -->
-        
+            @include('frontend.pages.account.sidebar')
             <!-- BEGIN CONTENT -->
-            @include('frontend.pages.account.edit_form')                
-            @include('frontend.pages.account.change_password')
+            @include('frontend.pages.account.edit_form')
             <div id="Profile" class="col-md-9 col-sm-7">
                 <h1>My Profile</h1>
                 <div class="content-page">
@@ -53,11 +64,15 @@
                         </div>
                         <div class="col-md-4">
                             Phone Number
-                            <h3>0987654321</h3>
+                            @if ($user->telepon == '')
+                                <h3>You haven't add your phone number yet</h3>
+                            @else
+                                <h3>{{$user->telepon}}</h3>
+                            @endif
                         </div>
                     <div class="row">
                         <button id="EditProfile" class="btn btn-primary pull-right" style="margin:10px">Edit Profile</button>
-                        <button id="ChangePassword" class="btn btn-primary pull-right" style="margin:10px">Change Password</button>
+                        <a href="{{route('account.password')}}" class="btn btn-primary pull-right" style="margin:10px; color:white">Change Password</a>
                     </div>
                 </div>
             </div>
