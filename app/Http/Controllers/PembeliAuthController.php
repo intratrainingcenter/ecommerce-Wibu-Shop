@@ -103,12 +103,13 @@ class PembeliAuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_pembeli'  => 'required|max:20',
-            'jenis_kelamin' => 'required',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'email'         => 'required|email',
             'telepon'       => 'required',
             'foto'          => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertFailProfile', 'Something wrong in your input value. No data Changed!');
         } else {
             if ($request->hasFile('foto')) {
                 $get_pembeli    = Pembeli::where('id', $id)->first();
@@ -129,7 +130,7 @@ class PembeliAuthController extends Controller
                     'telepon'       => $request->telepon,
                 ]);
             }
-            return redirect()->back();
+            return redirect()->back()->with('alertSuccessProfile', 'Your profile successfully updated!');
         }
     }
 
@@ -137,23 +138,24 @@ class PembeliAuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'new_password'  => 'required|max:12',
+            'confirm_password' => 'required|max:12',
         ]);
         $pembeli   = Pembeli::where('id', $id)->first();
         $check     = Hash::check($request->password, $pembeli->password);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertNewPassword', 'Password must be less than 12 character');
         } else {
             if ($check) {
                 if ($request->new_password == $request->confirm_password) {
                     $pembeli->update([
                         'password' => Hash::make($request->new_password)
                     ]);
-                    return redirect()->route('account.edit');
+                    return redirect()->route('account.edit')->with('alertSuccessPassword', 'Password successfully changed!');
                 } else {
-                    return redirect()->back()->with('alertfail', 'Please confirm your new pasword');
+                    return redirect()->back()->with('alertConfirmPassword', 'Please confirm your new password!');
                 }
             } else {
-                return redirect()->back()->with('alertfail', 'Your current password is wrong!');
+                return redirect()->back()->with('alertWrongPassword', 'Your current password is wrong!');
             }
         }
     }

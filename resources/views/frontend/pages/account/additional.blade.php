@@ -11,7 +11,6 @@
 @section('js')
 <script>
     $(document).ready(function() {
-
         $("#EditProfile").click(function() {
             $("#Profile").hide();
             $("#FormEdit").show();
@@ -35,14 +34,17 @@
             $("#EditAddressForm").show();
             GetProvince();
         })
-        $("#DeleteAddress").click(function(){
-            let action = $("#FormDelete").attr('action');
-            let key = $("#DeleteAddress").attr('key');
-            action = location.origin + "/pembeli/delete_address/" + key;
-            console.log(action);
-            
-            
-            
+        $("#Current").keypress(function(){
+            $("#Current").removeClass('alert-danger')
+            $("#CurrentSpan").hide();
+        })
+        $("#New").keypress(function(){
+            $("#New").removeClass('alert-danger')
+            $("#NewSpan").hide();
+        })
+        $("#Confirm").keypress(function(){
+            $("#Confirm").removeClass('alert-danger')
+            $("#ConfirmSpan").hide();
         })
         // disable mousewheel on a input number field when in focus
         $('#EditForm').on('focus', 'input[type=number]', function (e) {
