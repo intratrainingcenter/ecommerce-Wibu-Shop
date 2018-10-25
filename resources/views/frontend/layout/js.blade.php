@@ -26,7 +26,6 @@
         Layout.initOWL();
         Layout.initImageZoom();
         Layout.initTouchspin();
-        Layout.initTwitter();
         Layout.initSliderRange();
         Layout.initUniform();
     });

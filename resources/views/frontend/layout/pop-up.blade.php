@@ -4,7 +4,6 @@
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-3">
         <div class="product-main-image">
-          <img src="{{asset($pop_up->foto)}}" alt="Cool green dress with red bell" class="img-responsive">
           <img src="{{Storage::url($pop_up->foto)}}" alt="" class="img-responsive">
         </div>
       </div>
@@ -14,24 +13,16 @@
           <div class="price">
             <strong>{{'Rp. '.number_format($pop_up->harga)}}</em>
           </div>
-          <div class="availability"> status: <strong>{{$pop_up->status}}</strong></div>
+          <div class="availability">
+              @if ($pop_up->status == 'Siap')
+              Status: <strong>Ready Stock</strong>
+              @else
+              Status: <strong>Sold Out</strong>
+              @endif
+          </div>
         </div>
         <div class="description">
           <p>{{$pop_up->keterangan}}</p>
-        </div>
-        <div class="product-page-options">
-          <div class="pull-left">
-            <label class="control-label">Size:</label><select class="form-control input-sm">
-              <option>L</option>
-              <option>M</option>
-              <option>XL</option></select>
-          </div>
-          <div class="pull-left">
-            <label class="control-label">Color:</label><select class="form-control input-sm">
-              <option>Red</option>
-              <option>Blue</option>
-              <option>Black</option></select>
-          </div>
         </div>
         <div class="product-page-cart">
           <div class="product-quantity">

@@ -2,16 +2,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 steps-block-col">
-        <i class="fa fa-truck"></i>
-        <div><h2>Free shipping</h2><em>Express delivery withing 3 days</em></div><span>&nbsp;</span>
+        <i class="fa fa-cart-plus"></i>
+        <div><h2>Points</h2><em>Get 1 point every order with total more than Rp. 300.000</em></div><span>&nbsp;</span>
       </div>
       <div class="col-md-4 steps-block-col">
         <i class="fa fa-gift"></i>
-        <div><h2>Daily Gifts</h2><em>5 Gifts daily for lucky customers</em></div><span>&nbsp;</span>
+        <div><h2>Give Away</h2><em>To every member with 10 Points</em></div><span>&nbsp;</span>
       </div>
       <div class="col-md-4 steps-block-col">
         <i class="fa fa-phone"></i>
-        <div><h2>477 505 8877</h2><em>24/7 customer care available</em></div>
+        <div><h2>08192837465</h2><em>24/7 customer care available</em></div>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Delivery Information</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Customer Service</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Order Tracking</a></li>
-          <li><i class="fa fa-angle-right"></i> <a href="contacts.html">Contact Us</a></li>
+          <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Contact Us</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Careers</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Payment Methods</a></li>
         </ul>

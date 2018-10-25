@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePembelisTable extends Migration
+class Alamat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreatePembelisTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembelis', function (Blueprint $table) {
+        Schema::create('alamats', function (Blueprint $table) {
             $table->increments('id');
             $table->string('kode_pembeli');
-            $table->string('nama_pembeli');
-            $table->enum('jenis_kelamin',['Laki-laki','Perempuan'])->nullable();
-            $table->string('email');
-            $table->string('password');
-            $table->rememberToken();
-            $table->binary('foto');
-            $table->string('telepon')->nullable();
+            $table->string('kode_alamat');
+            $table->text('alamat');
+            $table->string('id_provinsi');
+            $table->string('provinsi');
+            $table->string('id_kota');
+            $table->string('kota');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreatePembelisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembelis');
+        Schema::dropIfExists('alamats');
     }
 }
