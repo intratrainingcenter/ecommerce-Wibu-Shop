@@ -39,10 +39,10 @@ class PembeliAuthController extends Controller
     public function Register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama_pembeli'  => 'required|max:20',
+            'nama'  => 'required|max:20',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'email'         => 'required|email',
-            'password'      => 'required|max:12',
+            'pass'      => 'required|max:12',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->with('alertFailRegister', 'Something wrong in your input value. Register failed!');

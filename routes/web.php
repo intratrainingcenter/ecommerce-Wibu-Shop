@@ -32,20 +32,22 @@ Route::prefix('pembeli')->group(function() {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('register', 'PembeliAuthController@showRegisterForm')->name('pembeli.register');
         Route::get('login','PembeliAuthController@showLoginForm')->name('pembeli.login');
+        Route::post('register','PembeliAuthController@Register')->name('pembeli.register.submit');
+        Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
     });
-    Route::post('register','PembeliAuthController@Register')->name('pembeli.register.submit');
-    Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
-    Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
-    Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account')->middleware('auth:pembeli');
-    Route::get('edit', 'PembeliAuthController@Edit')->name('account.edit')->middleware('auth:pembeli');
-    Route::get('editpassword', 'PembeliAuthController@EditPassword')->name('account.password')->middleware('auth:pembeli');
-    Route::patch('updateprofile/{id}', 'PembeliAuthController@UpdateProfile')->name('update.profile')->middleware('auth:pembeli');
-    Route::patch('updatepassword/{id}', 'PembeliAuthController@UpdatePassword')->name('change.password')->middleware('auth:pembeli');
-    Route::get('address', 'PembeliAuthController@address')->name('account.address')->middleware('auth:pembeli');
-    Route::get('province', 'PembeliAuthController@GetProvince')->name('address.province')->middleware('auth:pembeli');
-    Route::get('city/{id}', 'PembeliAuthController@GetCity')->name('address.city')->middleware('auth:pembeli');
-    Route::post('address', 'PembeliAuthController@AddAddress')->name('add.address')->middleware('auth:pembeli');
-    Route::get('edit_address/{id}', 'PembeliAuthController@EditAddress')->name('edit.address')->middleware('auth:pembeli');
-    Route::patch('update_address/{id}', 'PembeliAuthController@UpdateAddress')->name('update.address')->middleware('auth:pembeli');
-    Route::delete('delete_address/{id}', 'PembeliAuthController@DeleteAddress')->name('delete.address')->middleware('auth:pembeli');
+    Route::group(['middleware' => 'auth:pembeli'], function () {
+        Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
+        Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account');
+        Route::get('edit', 'PembeliAuthController@Edit')->name('account.edit');
+        Route::get('editpassword', 'PembeliAuthController@EditPassword')->name('account.password');
+        Route::patch('updateprofile/{id}', 'PembeliAuthController@UpdateProfile')->name('update.profile');
+        Route::patch('updatepassword/{id}', 'PembeliAuthController@UpdatePassword')->name('change.password');
+        Route::get('address', 'PembeliAuthController@address')->name('account.address');
+        Route::get('province', 'PembeliAuthController@GetProvince')->name('address.province');
+        Route::get('city/{id}', 'PembeliAuthController@GetCity')->name('address.city');
+        Route::post('address', 'PembeliAuthController@AddAddress')->name('add.address');
+        Route::get('edit_address/{id}', 'PembeliAuthController@EditAddress')->name('edit.address');
+        Route::patch('update_address/{id}', 'PembeliAuthController@UpdateAddress')->name('update.address');
+        Route::delete('delete_address/{id}', 'PembeliAuthController@DeleteAddress')->name('delete.address');
+    });
 });
