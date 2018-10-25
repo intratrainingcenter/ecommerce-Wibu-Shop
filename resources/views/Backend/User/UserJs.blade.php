@@ -13,6 +13,8 @@ $(function () {
     'autoWidth'   : false
   })
 });
-
+setTimeout(function(){
+     $('.notif').hide('slow')
+       }, 3000);
 </script>
 @endsection

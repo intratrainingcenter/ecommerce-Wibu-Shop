@@ -2,7 +2,7 @@
 @section('content')
 	<div class="content-wrapper">
 	  <section class="content-header">
-	    <h1>Laporan Transaksi<small>Data Transaksi</small> </h1>
+	    <h1>Laporan Barang<small>Data barang</small> </h1>
 	    <ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">LaporanTransaksi</li></ol>
 	  </section>
 	  <section class="content">
@@ -124,5 +124,5 @@
 	    </div>
 	  </section>
 </div>
-@include('Backend.LaporanKeuangan.additional')
+@include('Backend.LaporanBarang.additional')
 @endsection
