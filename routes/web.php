@@ -5,6 +5,8 @@ Route::post('paypal', 'PaymentController@payWithpaypal');
 // route for check status of the payment
 Route::get('status', 'PaymentController@getPaymentStatus');
 
+Route::resource('Messages', 'MessageController');
+
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list','FrontendControler@product_list')->name('frontend.product_list');

@@ -53,7 +53,7 @@
   	</div>
 
     <!-- Chat Box content -->
-  	<div class="content">
+  	<div class="content_message">
   		<div class="contact-profile">
   			<img src="{{asset('images/V.jpg')}}" alt="" />
   			<p>NAME USER CHAT</p>
