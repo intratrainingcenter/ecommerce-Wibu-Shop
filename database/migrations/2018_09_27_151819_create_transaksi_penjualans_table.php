@@ -17,6 +17,8 @@ class CreateTransaksiPenjualansTable extends Migration
             $table->increments('id');
             $table->string('kode_transaksi_penjualan');
             $table->string('kode_keranjang');
+            $table->string('kode_produk');
+            $table->string('kode_pembeli');
             $table->integer('jumlah');
             $table->integer('grand_total');
             $table->integer('bayar');

@@ -224,7 +224,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{route('LaporanTransaksi')}}"><i class="fa fa-edit"></i><span>Laporan Transaksi</span></a></li>
-              <li><a href=""><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
+              <li><a href="{{route('LaporanProduct')}}"><i class="fa fa-edit"></i><span>Laporan Barang</span></a></li>
               <li><a href="{{route('LaporanKeuangan')}}"><i class="fa fa-edit"></i><span>Laporan Keuangan</span></a></li>
             </ul>
           </li>
@@ -234,7 +234,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{route('LaporanTransaksi')}}"><i class="fa fa-edit"></i> <span>Laporan Transaksi</span></a>  </li>
-            <li><a href=""><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
+            <li><a href="{{route('LaporanProduct')}}"><i class="fa fa-edit"></i> <span>Laporan Barang</span></a>  </li>
             <li><a href="{{route('LaporanKeuangan')}}"><i class="fa fa-edit"></i> <span>Laporan Keuangan</span></a>  </li>
           </ul>
         </li>

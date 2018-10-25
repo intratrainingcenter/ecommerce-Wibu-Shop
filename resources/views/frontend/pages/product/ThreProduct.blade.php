@@ -1,5 +1,3 @@
-<h2>Three items</h2>
-<div class="owl-carousel owl-carousel3">
   @foreach ($three_products as $key => $NewProduct)
   <div>
     <div class="product-item">
@@ -12,11 +10,14 @@
         <input type="hidden" name="keterangan" value="Bagus">
         <input type="hidden" name="sub_total" value="{{$NewProduct->harga}}">
         <input type="hidden" name="status" value="Pending">
-        <img name="foto" src="{{$NewProduct->foto}}" class="img-responsive" alt="Berry Lace Dress">
         <div>
           <a href="{{$NewProduct->foto}}" class="btn btn-default fancybox-button">Zoom</a>
           <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+  <h2>Latest Products</h2>
+<div class="owl-carousel owl-carousel3">
+        <img name="foto" src="{{$NewProduct->foto}}" class="img-responsive" alt="Berry Lace Dress">
         </div>
+        <h3><a href="{{route('frontend.shop_item',$NewProduct->kode_produk)}}">{{$NewProduct->nama_produk}}</a></h3>
       </div>
       <h3><a href="shop-item.html">{{$NewProduct->nama_produk}}</a></h3>
       <div class="pi-price">Rp {{ $NewProduct->harga }}</div>

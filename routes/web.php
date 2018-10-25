@@ -10,6 +10,7 @@ Route::get('/','FrontendControler@Index')->name('frontend.home')->Middleware('gu
 Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list')->name('frontend.product_list');
 Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
+Route::get('/all-products','FrontendControler@AllProducts')->name('all_products');
 Route::post('reviewProduct','reviewProducts@store')->name('frontend.reviewProduct');
 Route::match(['get', 'post'], '/shopping-cart','FrontEndKeranjangController@cart')->name('frontend.cart')->middleware('auth:pembeli');
 Route::post('/add-to-cart','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');;
@@ -30,6 +31,8 @@ Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi'
 Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi');
 Route::get('keuangan','KeuanganController@Index')->name('LaporanKeuangan');
 Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');
+Route::get('Product','laporanBarang@Index')->name('LaporanProduct');
+Route::get('/FilterProduct','laporanBarang@Filter')->name('FilterLaporanProduct');
 Route::prefix('pembeli')->group(function() {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('register', 'PembeliAuthController@showRegisterForm')->name('pembeli.register');
@@ -39,4 +42,15 @@ Route::prefix('pembeli')->group(function() {
     Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
     Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
     Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account')->middleware('auth:pembeli');
-   });
+    Route::get('edit', 'PembeliAuthController@Edit')->name('account.edit')->middleware('auth:pembeli');
+    Route::get('editpassword', 'PembeliAuthController@EditPassword')->name('account.password')->middleware('auth:pembeli');
+    Route::patch('updateprofile/{id}', 'PembeliAuthController@UpdateProfile')->name('update.profile')->middleware('auth:pembeli');
+    Route::patch('updatepassword/{id}', 'PembeliAuthController@UpdatePassword')->name('change.password')->middleware('auth:pembeli');
+    Route::get('address', 'PembeliAuthController@address')->name('account.address')->middleware('auth:pembeli');
+    Route::get('province', 'PembeliAuthController@GetProvince')->name('address.province')->middleware('auth:pembeli');
+    Route::get('city/{id}', 'PembeliAuthController@GetCity')->name('address.city')->middleware('auth:pembeli');
+    Route::post('address', 'PembeliAuthController@AddAddress')->name('add.address')->middleware('auth:pembeli');
+    Route::get('edit_address/{id}', 'PembeliAuthController@EditAddress')->name('edit.address')->middleware('auth:pembeli');
+    Route::patch('update_address/{id}', 'PembeliAuthController@UpdateAddress')->name('update.address')->middleware('auth:pembeli');
+    Route::delete('delete_address/{id}', 'PembeliAuthController@DeleteAddress')->name('delete.address')->middleware('auth:pembeli');
+});
