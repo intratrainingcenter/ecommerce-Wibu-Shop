@@ -12,8 +12,7 @@
             <input type="hidden" name="keterangan" value="Bagus">
             <input type="hidden" name="sub_total" value="{{$NewProduct->harga}}">
             <input type="hidden" name="status" value="Pending">
-        <div class="pi-img-wrapper">
-          <img src="{{Storage::url($NewProduct->foto)}}" class="img-responsive" alt="">
+            <img src="{{Storage::url($NewProduct->foto)}}" class="img-responsive" alt="">
           <div>
             <a href="{{Storage::url($NewProduct->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
             <a href="#product-pop-up{{$NewProduct->kode_produk}}" class="btn btn-default fancybox-fast-view">View</a>
@@ -24,10 +23,6 @@
         <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
         <div class="sticker sticker-new"></div>
       </div>
-      <h3><a href="shop-item.html">{{$NewProduct->nama_produk}}</a></h3>
-      <div class="pi-price">Rp {{ $NewProduct->harga }}</div>
-      <button type="submit" class="btn btn-default add2cart">Add to cart</button>
-      <div class="sticker sticker-new"></div>
       </form>
     </div>
   </div>
