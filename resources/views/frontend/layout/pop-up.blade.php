@@ -26,7 +26,7 @@
         </div>
         <div class="product-page-cart">
           <div class="product-quantity">
-              <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+              <input type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
           </div>
           <button class="btn btn-primary" type="submit">Add to cart</button>
           <a href="{{route('frontend.shop_item',$pop_up->kode_produk)}}" class="btn btn-default">More details</a>

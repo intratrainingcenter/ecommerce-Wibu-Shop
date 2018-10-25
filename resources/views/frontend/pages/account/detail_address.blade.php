@@ -8,14 +8,14 @@
             <li><a href="{{route('pembeli.account')}}">My Account</a></li>
             <li class="active">Address</li>
         </ul>
-
+        @include('frontend.pages.account.alert')
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             @include('frontend.pages.account.sidebar')
             @include('frontend.pages.account.edit_address')
             <!-- BEGIN CONTENT -->
             <div id="DetailAddress" class="col-md-9 col-sm-7">
-                <h1>Add Address</h1>
+                <h1>Detail Address</h1>
                 <div class="content-page">
                     <div class="col-md-4">
                         <div class="form-group">

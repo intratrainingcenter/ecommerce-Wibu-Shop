@@ -23,7 +23,7 @@ class PembeliAuthController extends Controller
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->count();
+        $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('grand_total', '>=', 300000)->count();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->limit(3)->orderBy('tanggal', 'desc')->get();
         return view('frontend.pages.account.index',compact('user', 'point', 'orders', 'kategori', 'new_products', 'all_products'));
     }
@@ -38,17 +38,27 @@ class PembeliAuthController extends Controller
 
     public function Register(Request $request)
     {
-        $getMaxID   = Pembeli::max('id') + 1;
-        $getCode    = 'PMB' . date('ymdhis') . $getMaxID;
-        $register   = Pembeli::create([
-            'kode_pembeli'  => $getCode,
-            'nama_pembeli'  => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'email'         => $request->email,
-            'password'      => Hash::make($request->pass),
-            'foto'          => '',
+        $validator = Validator::make($request->all(), [
+            'nama_pembeli'  => 'required|max:20',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'email'         => 'required|email',
+            'password'      => 'required|max:12',
         ]);
-        return redirect()->route('pembeli.login');
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertFailRegister', 'Something wrong in your input value. Register failed!');
+        } else {
+            $getMaxID   = Pembeli::max('id') + 1;
+            $getCode    = 'PMB' . date('ymdhis') . $getMaxID;
+            $register   = Pembeli::create([
+                'kode_pembeli'  => $getCode,
+                'nama_pembeli'  => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->pass),
+                'foto'          => '',
+                ]);
+            return redirect()->route('pembeli.login')->with('alertSuccessRegister', 'Your account successfully registered. Please login using your account!');
+        }
     }
 
     public function showLoginForm()
@@ -65,9 +75,9 @@ class PembeliAuthController extends Controller
         $check  = Auth::guard('pembeli')->attempt(request(['email', 'password']));
         if ( $check ) {
             Auth::guard('pembeli')->login($user);
-            return redirect('/');
+            return redirect()->route('frontend.home');;
         } else {
-            return 'gagal';
+            return redirect()->back()->with('alertFailLogin', 'Something wrong in your input value. Please try again!');
         }
     }
 
@@ -109,7 +119,7 @@ class PembeliAuthController extends Controller
             'foto'          => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertFailProfile', 'Something wrong in your input value. No data Changed!');
+            return redirect()->back()->with('alertFailProfile', 'Something wrong in your input value. No data changed!');
         } else {
             if ($request->hasFile('foto')) {
                 $get_pembeli    = Pembeli::where('id', $id)->first();
@@ -228,7 +238,7 @@ class PembeliAuthController extends Controller
             'alamat'    => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertFailAddAddress', 'Something wrong in your input value. No data added!');
         } else {
                 $add    = Alamat::create([
                     'kode_pembeli'  => $get_pembeli->kode_pembeli,
@@ -240,7 +250,7 @@ class PembeliAuthController extends Controller
                     'kota'          => $request->kota,
                 ]);
             
-            return redirect()->back();
+            return redirect()->back()->with('alertSuccessAddAddress', 'Your address successfully added!');
         }
     }
 
@@ -252,6 +262,7 @@ class PembeliAuthController extends Controller
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
         $address        = Alamat::where('kode_alamat', $code)->first();
+        
         return view('frontend.pages.account.detail_address', compact('address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
     }
 
@@ -265,7 +276,7 @@ class PembeliAuthController extends Controller
             'alamat'    => 'required',
             ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertFailUpdateAddress', 'Something wrong in your input value. No data changed!');
         } else {
             $update    = Alamat::where('kode_alamat', $code)->update([
                 'alamat'        => $request->alamat,
@@ -274,12 +285,12 @@ class PembeliAuthController extends Controller
                 'id_kota'       => $request->id_kota,
                 'kota'          => $request->kota,
             ]);
-            return redirect()->back();
+            return redirect()->back()->with('alertSuccessUpdateAddress', 'Your address successfully updated!');
         }
     }
     public function DeleteAddress($code)
     {
         Alamat::where('kode_alamat', $code)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('alertSuccessDeleteAddress', 'Your address successfully deleted!');
     }
 }

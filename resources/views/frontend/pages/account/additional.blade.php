@@ -34,6 +34,10 @@
             $("#EditAddressForm").show();
             GetProvince();
         })
+        $(".CancelEditAddress").click(function() {
+            $("#EditAddressForm").hide();
+            $("#DetailAddress").show();
+        })
         $("#Current").keypress(function(){
             $("#Current").removeClass('alert-danger')
             $("#CurrentSpan").hide();
