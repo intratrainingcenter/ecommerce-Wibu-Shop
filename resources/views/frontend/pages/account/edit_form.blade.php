@@ -1,7 +1,7 @@
 <div id="FormEdit" class="col-md-9 col-sm-7" hidden>
     <h1>Edit Profile</h1>
     <div class="content-page">
-        <form action="/edit" enctype="multipart/form-data">
+        <form action="{{route('update.profile', ['id' => $user->id])}}" enctype="multipart/form-data" method="POST" id="EditForm">
             @csrf @method('PATCH')
             <div class="col-md-4">
                 @if ($user->foto == '')
@@ -14,12 +14,12 @@
             </div>
             <div class="col-md-4">
                 <label for=""> Name</label>
-                <input type="text" class="form-control" name="nama_pembeli" value="{{$user->nama_pembeli}}">
+                <input type="text" class="form-control" name="nama_pembeli" value="{{$user->nama_pembeli}}" required>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                 <label for=""> Gender</label>
-                <select class="form-control" name="jenis_kelamin" id="">
+                <select class="form-control" name="jenis_kelamin" required>
                     @if ($user->jenis_kelamin == 'Laki-laki')
                     <option value="{{$user->jenis_kelamin}}" selected>Male</option>
                     <option value="Perempuan">Female</option>
@@ -32,15 +32,15 @@
             </div>
             <div class="col-md-4">
                 <label for=""> Email</label>
-                <input class="form-control" type="text" name="email" id="" value="{{$user->email}}">
+                <input class="form-control" type="text" name="email" value="{{$user->email}}" required>
             </div>
             <div class="col-md-4">
                 <label for=""> Phone Number </label>
-                <input class="form-control" type="text" name="telepon" id="" value="0090908">
+                <input id="Phone" class="form-control" type="number" name="telepon" value="{{$user->telepon}}" required>
             </div>
         <div class="row">
-            <button id="Save" type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
-            <button type="button" class="btn btn-danger pull-right cancel" style="margin:10px">Cancel</button>
+            <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
+            <button id="CancelEditProfile" type="button" class="btn btn-danger pull-right" style="margin:10px">Cancel</button>
         </div>
     </form>
     </div>
