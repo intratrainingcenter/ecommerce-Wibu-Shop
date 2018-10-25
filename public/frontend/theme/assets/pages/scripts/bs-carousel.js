@@ -1,15 +1,15 @@
 var BsCarousel = function () {
     // Carousel interval
-    // $('.carousel').carousel({
-    //     interval: 1000
-    // });
+    $('.carousel').carousel({
+        interval: 3000
+    });
 
     // smart height detection for all major screens
-    // if (Layout.getViewPort().width > 1600) {
-    //     height = $(window).height() - $('.subscribe').outerHeight();  // full height for high resolution
-    // } else if (Layout.getViewPort().height > height) {
-    //     height = Layout.getViewPort().height;
-    // }
+    if (Layout.getViewPort().width > 1600) {
+        height = $(window).height() - $('.subscribe').outerHeight();  // full height for high resolution
+    } else if (Layout.getViewPort().height > height) {
+        height = Layout.getViewPort().height;
+    }
 
     (function( $ ) {
         //Function to animate slider captions 
