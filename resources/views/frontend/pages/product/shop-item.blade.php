@@ -4,13 +4,13 @@
   <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 @endsection
 @section('produck')
-<body class="ecomme rce">
+<body class="ecommerce">
     <div class="main">
       <div class="container">
         <ul class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Store</a></li>
-            <li class="active">Cool green dress with red bell</li>
+            <li><a href="/">Home</a></li>
+            <li><a href="{{route('all_products')}}">Product</a></li>
+            <li class="active">{{$view_products->nama_produk}}</li>
         </ul>
         <div class="row margin-bottom-40">
           <div class="sidebar col-md-3 col-sm-5">
@@ -94,7 +94,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="sticker sticker-sale"></div>
               </div>
             </div>
           </div>

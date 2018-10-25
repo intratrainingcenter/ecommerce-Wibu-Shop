@@ -24,24 +24,23 @@ class FrontEndKeranjangController extends Controller
          return view('frontend.pages.cart.cart',compact(['two_products','all_products','three_products','kategori','UserCart']));
     }
 
-    public function AddToCart(Request $request)
+    public function AddToCart(Request $request, $id)
     {
         $code = date("Ymdhis");
         $count = Keranjang::count()+1;
         $user = Auth::guard('pembeli')->id();
         $Pembeli = Pembeli::where('id', $user)->first();
         $UserPembeli = Pembeli::where('kode_pembeli', $Pembeli->kode_pembeli)->first();
+        $Product    = Produk::where('kode_produk', $id)->first();
 
-             $insert = new Keranjang;
-             $insert->kode_keranjang='cart'.$code.$count;
-             $insert->kode_pembeli=$UserPembeli->kode_pembeli;
-             $insert->kode_produk=$request->kode_produk;
-             $insert->kode_promo=$request->kode_promo;
-             $insert->jumlah=$request->jumlah;
-             $insert->keterangan=$request->keterangan;
-             $insert->sub_total=$request->sub_total;
-             $insert->status=$request->status;
-             $insert->save();
+        $insert = new Keranjang;
+        $insert->kode_keranjang='cart'.$code.$count;
+        $insert->kode_pembeli=$UserPembeli->kode_pembeli;
+        $insert->kode_produk=$Product->kode_produk;
+        $insert->jumlah= 1;
+        $insert->sub_total=$Product->harga;
+        $insert->status= 'Pending';
+        $insert->save();
 
 
         return redirect('/shopping-cart');

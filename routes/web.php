@@ -13,7 +13,7 @@ Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('fron
 Route::get('/all-products','FrontendControler@AllProducts')->name('all_products');
 Route::post('reviewProduct','reviewProducts@store')->name('frontend.reviewProduct');
 Route::match(['get', 'post'], '/shopping-cart','FrontEndKeranjangController@cart')->name('frontend.cart')->middleware('auth:pembeli');
-Route::post('/add-to-cart','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');;
+Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');;
 Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
 Auth::routes();
 

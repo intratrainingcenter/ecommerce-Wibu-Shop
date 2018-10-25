@@ -8,7 +8,7 @@
       @include('frontend.layout.ButonProduct')
     </div>
     <div class="col-md-9 col-sm-8">
-    @include( 'frontend.pages.product.ThreProduct')
+    @include('frontend.pages.product.ThreProduct')
     </div>
     </div>
       <div class="row margin-bottom-35 ">
@@ -18,15 +18,9 @@
             @foreach ($two_products as $key => $Product)
             <div>
               <div class="product-item">
-                <form name="AddToCartForm" id="AddToCartForm" action="{{route('frontend.addtocart')}}" method="post" enctype="multipart/form-data">
+                <form name="AddToCartForm" id="AddToCartForm" action="{{route('frontend.addtocart', ['id' => $Product->kode_produk])}}" method="post" enctype="multipart/form-data">
                 <div class="pi-img-wrapper">
                   {{ csrf_field() }}
-                  <input type="hidden" name="kode_produk" value="{{$Product->kode_produk}}">
-                  <input type="hidden" name="kode_promo" value="qqq">
-                  <input type="hidden" name="jumlah" value="1">
-                  <input type="hidden" name="keterangan" value="Bagus">
-                  <input type="hidden" name="sub_total" value="{{$Product->harga}}">
-                  <input type="hidden" name="status" value="Pending">
                   <img src="{{Storage::url($Product->foto)}}" class="img-responsive">
                   <div>
                     <a href="{{Storage::url($Product->foto)}}" class="btn btn-default fancybox-button">Zoom</a>
