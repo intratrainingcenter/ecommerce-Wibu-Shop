@@ -15,9 +15,9 @@ use App\Pembeli;
 class FrontendControler extends Controller
 {
     public function Index() {
-      $Pembeli = Pembeli::where('id', $user)->first();
       $kategori = Kategori::all();
       $user = Auth::guard('pembeli')->id();
+      $Pembeli = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
       } else {

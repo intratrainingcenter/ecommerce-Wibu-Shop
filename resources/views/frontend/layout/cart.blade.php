@@ -3,7 +3,6 @@
     <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
     <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
   </div>
-  @forelse ($UserCart as $Items)
   <i class="fa fa-shopping-cart"></i>
   <div class="top-cart-content-wrapper">
     <div class="top-cart-content">
@@ -25,17 +24,6 @@
       <div class="text-right">
         <a href="{{route('frontend.cart')}}" class="btn btn-default">View Cart</a>
         <a href="{{route('frontend.Checkout')}}" class="btn btn-primary">Checkout</a>
-        @empty
-        <i class="fa fa-shopping-cart"></i>
-        <div class="top-cart-content-wrapper">
-          <div class="top-cart-content">
-            <ul class="scroller" style="height: 250px;">
-            <center><p>Your shopping cart is empty!</p></center>
-        </ul>
-        <div class="text-right">
-          <a href="{{route('frontend.cart')}}" class="btn btn-default">View Cart</a>
-          <a href="{{route('frontend.Checkout')}}" class="btn btn-primary">Checkout</a>
-        @endforelse
       </div>
     </div>
   </div>
