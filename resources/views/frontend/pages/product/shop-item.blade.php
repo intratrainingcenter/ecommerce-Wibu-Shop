@@ -31,24 +31,31 @@
                       <strong>{{'Rp. '.number_format($view_products->harga)}}</strong>
                     </div>
                     <div class="availability">
-                      @if ($view_products->status == 'Siap')
-                      Status: <strong>Ready Stock</strong>
-                      @else
-                      Status: <strong>Sold Out</strong>
-                      @endif
+                      Stock: <strong>{{$view_products->stok}} pcs</strong>
                     </div>
                   </div>
                   <div class="description">
                     <p>{{$view_products->keterangan}}</p>
                   </div>
                   <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
+                    <form action="{{route('frontend.addtocart', ['id' => $view_products->kode_produk])}}" method="POST">
+                      @csrf
+                        <div class="product-quantity">
+                          <input type="text" value="1" readonly name="jumlah" class="form-control input-sm">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                    </form>
                   </div>
                 </div>
-                <div class="product-page-content">
+                <div>
+                  <p>Promo :</p>
+                  @forelse ($Promo as $item)
+                    <a href="">{{$item->kode_promo}}</a>
+                  @empty
+                    <p>No Promo</p>
+                  @endforelse
+                </div>
+                  <div class="product-page-content">
                   <ul id="myTab" class="nav nav-tabs">
                     <li><a href="#Information" data-toggle="tab">Information</a></li>
                     <li class="active"><a href="#Reviews" data-toggle="tab">Reviews ({{count($review)}})</a></li>

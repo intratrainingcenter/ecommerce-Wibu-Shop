@@ -1,7 +1,6 @@
 <div class="top-cart-block">
   <div class="top-cart-info">
-    <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
-    <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
+    <a href="javascript:void(0);" class="top-cart-info-count">{{count($UserCart)}} items</a>
   </div>
   <i class="fa fa-shopping-cart"></i>
   <div class="top-cart-content-wrapper">
@@ -9,9 +8,9 @@
       <ul class="scroller" style="height: 250px;">
         @forelse ($UserCart as $Items)
         <li>
-          <a href="shop-item.html"><img src="{{asset('frontend/theme/assets/pages/img/cart-img.jpg')}}" alt="Rolex Classic Watch" width="37" height="34"></a>
+          <a href="{{route('frontend.shop_item',$Items->kode_produk)}}"><img src="{{Storage::url($Items->foto)}}" class="image-responsive"></a>
           <span class="cart-content-count">{{$Items->jumlah}}</span>
-          <strong><a href="shop-item.html">{{$Items->detailProduct->nama_produk}}</a></strong>
+          <strong><a href="{{route('frontend.shop_item',$Items->kode_produk)}}">{{$Items->detailProduct->nama_produk}}</a></strong>
           <em></em>
           <a class="del-goods" href="{{route('frontend.deletecart',$Items->id)}}">&nbsp;</a>
         </li>

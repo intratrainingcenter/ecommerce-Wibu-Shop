@@ -14,24 +14,23 @@
             <strong>{{'Rp. '.number_format($pop_up->harga)}}</em>
           </div>
           <div class="availability">
-              @if ($pop_up->status == 'Siap')
-              Status: <strong>Ready Stock</strong>
-              @else
-              Status: <strong>Sold Out</strong>
-              @endif
+              Stock: <strong>{{$pop_up->stok}} pcs</strong>
           </div>
         </div>
         <div class="description">
           <p>{{$pop_up->keterangan}}</p>
         </div>
         <div class="product-page-cart">
-          <div class="product-quantity">
-              <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
-          </div>
-          <button class="btn btn-primary" type="submit">Add to cart</button>
-          <a href="{{route('frontend.shop_item',$pop_up->kode_produk)}}" class="btn btn-default">More details</a>
+          <form action="{{route('frontend.addtocart', ['id' => $pop_up->kode_produk])}}" method="POST">
+          @csrf
+            <div class="product-quantity">
+              <input type="text" value="1" readonly name="jumlah" class="form-control input-sm">
+            </div>
+              <button class="btn btn-primary" type="submit">Add to cart</button>
+              <a href="{{route('frontend.shop_item',$pop_up->kode_produk)}}" class="btn btn-default">More details</a>
+          </form>
         </div>
-      </div><div class="sticker sticker-sale"></div>
+      </div>
     </div>
   </div>
 </div>

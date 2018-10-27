@@ -12,7 +12,11 @@
       </div>
       <h3><a href="{{route('frontend.shop_item',$NewProduct->kode_produk)}}">{{$NewProduct->nama_produk}}</a></h3>
       <div class="pi-price">Rp {{ $NewProduct->harga }}</div>
-      <button type="button" class="btn btn-default add2cart add" key="{{$NewProduct->kode_produk}}">Add to cart</button>
+      <form action="{{route('frontend.addtocart', ['id' => $NewProduct->kode_produk])}}" method="post">
+        @csrf
+        <input type="hidden" name="jumlah" value="1">
+        <button type="submit" class="btn btn-default add2cart add">Add to cart</button>
+      </form>
       <div class="sticker sticker-new"></div>
     </div>
   </div>

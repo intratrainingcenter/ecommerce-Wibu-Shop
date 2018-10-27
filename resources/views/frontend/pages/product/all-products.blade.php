@@ -46,7 +46,11 @@
                   </div>
                   <h3><a href="{{route('frontend.shop_item',$item->kode_produk)}}">{{$item->nama_produk}}</a></h3>
                   <div class="pi-price">Rp {{$item->harga}}</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                  <form action="{{route('frontend.addtocart', ['id' => $item->kode_produk])}}" method="post">
+                    @csrf
+                    <input type="hidden" name="jumlah" value="1">
+                  <button type="submit" class="btn btn-default add2cart">Add to cart</button>
+                  </form>
                 </div>
               </div>
             @endforeach
