@@ -17,6 +17,7 @@
                         <th>name</th>
                         <th>Email</th>
                         <th>alamat</th>
+                        <th>foto</th>
                         <th>status</th>
                         <th>jabatan</th>
                         <th>opsi</th>
@@ -28,6 +29,7 @@
                     <td>{{$key->name}}</td>
                     <td>{{$key->email}}</td>
                     <td>{{$key->alamat}}</td>
+                    <td><img src="{{Storage::url($key->foto)}}" width="200px" height="100px" alt=""></td>
                     @if ($key->kode_user == auth::user()->kode_user)
                       <td></td>
                     @else

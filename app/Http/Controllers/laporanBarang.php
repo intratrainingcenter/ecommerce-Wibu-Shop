@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 class laporanBarang extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth');
+  }
   public function Index() {
-
     $date = date('Y-m-d');
     $minutes = now()->addMinutes(1);
     $category = Cache::remember('categoryproduct', $minutes , function ()  {

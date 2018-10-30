@@ -1,5 +1,5 @@
 @foreach ($data as $key => $Detail)
-<div id="DetailUser{{$Detail->kode_user}}" class="modal fade" role="dialog">
+<div id="DetailUser{{$Detail->kode_user}}" class="modal fade" role="dialog" data-backdrop="false">
   <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -7,7 +7,8 @@
         <h4 class="modal-title">Detail User</h4>
         </div>
           <div class="modal-body col-md-12">
-                @csrf
+            @csrf
+            <center><img src="{{Storage::url($Detail->foto)}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
                 <div class="form-group row">
                     <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                     <div class="col-md-8">

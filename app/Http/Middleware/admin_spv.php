@@ -16,7 +16,9 @@ class admin_spv
     public function handle($request, Closure $next)
     {
       $user = Auth::user();
-      if ($user->jabatan == 'Admin' && $user->jabatan == 'Spv') {
+      if ($user->jabatan == 'Admin') {
+        return $next($request);
+      }elseif ($user->jabatan == 'Spv') {
         return $next($request);
       }else {
         return redirect('dashboard');

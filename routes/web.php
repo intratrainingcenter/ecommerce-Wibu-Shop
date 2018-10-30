@@ -19,23 +19,22 @@ Route::post('update-item/{kode_keranjang}/{kode_produk}','FrontEndKeranjangContr
 Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');
 Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
 Auth::routes();
-
+//sub menu
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('produk', 'ProdukController');
-Route::resource('promo', 'PromoController');
+Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
+Route::resource('promo', 'PromoController')->Middleware('admin_spv');
+Route::resource('kategori','KategoriController')->Middleware('admin_spv');
 Route::resource('user','UserController')->Middleware('spv');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
-
-Route::resource('kategori','KategoriController');
-
-
-Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi');
-Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi');
-Route::get('keuangan','KeuanganController@Index')->name('LaporanKeuangan');
-Route::get('/Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan');
-Route::get('Product','laporanBarang@Index')->name('LaporanProduct');
-Route::get('/FilterProduct','laporanBarang@Filter')->name('FilterLaporanProduct');
+//laporan
+Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi')->Middleware('spv_owner');
+Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi')->Middleware('spv_owner');;
+Route::get('aporankeuangan','KeuanganController@Index')->name('LaporanKeuangan')->Middleware('spv_owner');;
+Route::get('Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan')->Middleware('spv_owner');;
+Route::get('aporanProduct','laporanBarang@Index')->name('LaporanProduct')->Middleware('spv_owner');;
+Route::get('FilterProduct','laporanBarang@Filter')->name('FilterLaporanProduct')->Middleware('spv_owner');;
+//customer
 Route::prefix('pembeli')->group(function() {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('register', 'PembeliAuthController@showRegisterForm')->name('pembeli.register');
