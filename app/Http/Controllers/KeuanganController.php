@@ -8,17 +8,21 @@ use Illuminate\Support\Facades\Cache;
 
 class KeuanganController extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth');
+  }
     public function Index() {
       $date = date('Y-m-d');
       $minutes = now()->addMinutes(2);
-      $Shell = Cache::remember('Shellkeuangan',$minutes , function () use ($date) {
-        return DB::table('transaksi_pembelians')
-                  ->get()->sum('sub_total');
+      $getShell = Cache::remember('Shellkeuangan',$minutes , function () {
+        return DB::table('transaksi_pembelians')->get();
       });
-      $Buy = Cache::remember('Buykeuangan',$minutes , function () use ($date) {
-        return DB::table('transaksi_penjualans')
-                    ->get()->sum('grand_total');
+      $getBuy = Cache::remember('Buykeuangan',$minutes , function () {
+        return DB::table('transaksi_penjualans')->get();
       });
+      $Shell  = $getShell->where('created_at',$date)->sum('sub_total');
+      $Buy    = $getBuy->where('created_at',$date)->sum('grand_total');
+      // dd($Buy);
       return view('Backend.LaporanKeuangan.general',compact('Shell','Buy'));
     }
     public function Filter(Request $request) {

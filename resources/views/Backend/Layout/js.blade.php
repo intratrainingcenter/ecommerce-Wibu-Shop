@@ -42,17 +42,6 @@ $(document).ready(function() {
     $('.Reset_password').show()
     $('.edit').val('')
   })
-  // $(document).on('keyup','.password_edit',function () {
-  //   $confrim_password = $('.password_confrimation').val();
-  //   $password = $(this).val();
-  //
-  //   })
-  // $(document).on('keyup','.password_confrimation',function () {
-  //   $confrim_password = $(this).val()
-  //   $password = $('.password_edit').val();
-  //
-  // })
-
 
   // SET TIMEOUT ALERT
   setTimeout(function(){ $('.MyAlert').hide(1000); }, 3000);

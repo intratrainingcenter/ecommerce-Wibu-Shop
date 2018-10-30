@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 class LaporanTransaksi extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth');
+  }
     public function index() {
       $minutes = now()->addMinutes(2);
       $date = date('Y-m-d');

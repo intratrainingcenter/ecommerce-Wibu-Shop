@@ -16,7 +16,9 @@ class spv_owner
     public function handle($request, Closure $next)
     {
       $user = Auth::user();
-      if ($user->jabatan == 'Spv' && $user->jabatan == 'Owner') {
+      if ($user->jabatan == 'Spv' ) {
+        return $next($request);
+      }elseif ($user->jabatan == 'Owner') {
         return $next($request);
       }else {
         return redirect('dashboard');
