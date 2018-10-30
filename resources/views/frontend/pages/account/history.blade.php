@@ -17,7 +17,29 @@
                 <h1>Order History</h1>
                 <div class="content-page">
                     <div class="row">
-                        
+                        <div class="col-md-9">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>Code</th>
+                                    <th>Order at</th>
+                                    <th>Total</th>
+                                </thead>
+                                <tbody>
+                                    @forelse ($orders as $item)
+                                    <tr onclick="window.location.href = ''" title="Click to view details">
+                                        <td>{{$item->kode_transaksi_penjualan}}</td>
+                                        <td>{{date('d F Y', strtotime($item->tanggal))}}</td>
+                                        <td align="right">Rp. {{number_format($item->grand_total)}}</td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="3" align="center">You don't have any transactions yet!</td>
+                                    </tr>
+                                        
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

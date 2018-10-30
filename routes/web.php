@@ -49,5 +49,6 @@ Route::prefix('pembeli')->group(function() {
         Route::get('edit_address/{id}', 'PembeliAuthController@EditAddress')->name('edit.address');
         Route::patch('update_address/{id}', 'PembeliAuthController@UpdateAddress')->name('update.address');
         Route::delete('delete_address/{id}', 'PembeliAuthController@DeleteAddress')->name('delete.address');
+        Route::get('order-history', 'PembeliAuthController@OrderHistory')->name('order.history');
     });
 });

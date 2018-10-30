@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\TransaksiPenjualan as Penjualan;
 use App\PembeliAuth as Pembeli;
+use App\Keranjang;
 use App\Kategori;
 use App\Produk;
 use App\Alamat;
@@ -39,10 +40,10 @@ class PembeliAuthController extends Controller
     public function Register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama'  => 'required|max:20',
+            'nama'          => 'required|max:20',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'email'         => 'required|email',
-            'pass'      => 'required|max:12',
+            'pass'          => 'required|max:12',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->with('alertFailRegister', 'Something wrong in your input value. Register failed!');
@@ -187,20 +188,20 @@ class PembeliAuthController extends Controller
         // GET API FROM RAJA ONGKIR
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "GET",
-          CURLOPT_HTTPHEADER => array(
+          CURLOPT_URL               => "https://api.rajaongkir.com/starter/province",
+          CURLOPT_RETURNTRANSFER    => true,
+          CURLOPT_ENCODING          => "",
+          CURLOPT_MAXREDIRS         => 10,
+          CURLOPT_TIMEOUT           => 30,
+          CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST     => "GET",
+          CURLOPT_HTTPHEADER        => array(
             "key: 8b81c63a1553aa8b18c05314ab4f13df"
           ),
         ));
-        $response = curl_exec($curl);
-        $decode = json_decode($response, true);
-        $province = $decode['rajaongkir']['results'];
+        $response   = curl_exec($curl);
+        $decode     = json_decode($response, true);
+        $province   = $decode['rajaongkir']['results'];
         return $province;
     }
 
@@ -208,20 +209,20 @@ class PembeliAuthController extends Controller
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=$id",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "GET",
-          CURLOPT_HTTPHEADER => array(
+          CURLOPT_URL               => "https://api.rajaongkir.com/starter/city?province=$id",
+          CURLOPT_RETURNTRANSFER    => true,
+          CURLOPT_ENCODING          => "",
+          CURLOPT_MAXREDIRS         => 10,
+          CURLOPT_TIMEOUT           => 30,
+          CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST     => "GET",
+          CURLOPT_HTTPHEADER        => array(
             "key: 8b81c63a1553aa8b18c05314ab4f13df"
           ),
         ));
-        $response = curl_exec($curl);
-        $decode = json_decode($response, true);
-        $city = $decode['rajaongkir']['results'];
+        $response   = curl_exec($curl);
+        $decode     = json_decode($response, true);
+        $city       = $decode['rajaongkir']['results'];
         return $city;
     }
 
@@ -229,13 +230,13 @@ class PembeliAuthController extends Controller
     {
         $get_auth_id    = Auth::guard('pembeli')->id();
         $get_pembeli    = Pembeli::where('id', $get_auth_id)->first();
-        $get_max_id       = Alamat::max('id') + 1;
+        $get_max_id     = Alamat::max('id') + 1;
         $validator      = Validator::make($request->all(), [
             'id_provinsi' => 'required',
-            'provinsi'  => 'required',
-            'id_kota'   => 'required',
-            'kota'      => 'required',
-            'alamat'    => 'required',
+            'provinsi'    => 'required',
+            'id_kota'     => 'required',
+            'kota'        => 'required',
+            'alamat'      => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->with('alertFailAddAddress', 'Something wrong in your input value. No data added!');
@@ -292,5 +293,27 @@ class PembeliAuthController extends Controller
     {
         Alamat::where('kode_alamat', $code)->delete();
         return redirect()->back()->with('alertSuccessDeleteAddress', 'Your address successfully deleted!');
+    }
+
+    public function OrderHistory()
+    {
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('tanggal', 'desc')->with('GetDetail')->get();
+        return view('frontend.pages.account.history', compact('orders', 'new_products', 'all_products', 'kategori', 'user'));
+    }
+
+    public function ShowOrderHistory($code)
+    {
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->get();
+        $keranjang      = Keranjang::where('kode_keranjang', $code)->get();
     }
 }
