@@ -25,7 +25,7 @@
               @forelse ($UserCart as $Items)
               <tr>
                 <td class="goods-page-image">
-                  <img src="{{$Items->detailProduct->foto}}">
+                  <img src="{{Storage::url($Items->detailProduct->foto)}}">
                 </td>
                 <td class="goods-page-description">
                   <h3><a href="{{route('frontend.shop_item', ['kode_produk' => $Items->kode_produk])}}">{{$Items->detailProduct->nama_produk}}</a></h3>

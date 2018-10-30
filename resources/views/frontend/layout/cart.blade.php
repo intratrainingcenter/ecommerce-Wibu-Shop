@@ -8,7 +8,7 @@
       <ul class="scroller" style="height: 250px;">
         @forelse ($UserCart as $Items)
         <li>
-          <a href="{{route('frontend.shop_item',$Items->kode_produk)}}"><img src="{{Storage::url($Items->foto)}}" class="image-responsive"></a>
+          <a href="{{route('frontend.shop_item',$Items->kode_produk)}}"><img src="{{Storage::url($Items->detailProduct->foto)}}" width="37" height="34"></a>
           <span class="cart-content-count">{{$Items->jumlah}}</span>
           <strong><a href="{{route('frontend.shop_item',$Items->kode_produk)}}">{{$Items->detailProduct->nama_produk}}</a></strong>
           <em></em>
