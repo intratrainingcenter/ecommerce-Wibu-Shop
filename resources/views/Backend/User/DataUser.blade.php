@@ -3,7 +3,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>User<small>Data user</small> </h1> <ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">User</li></ol>
-    @include('Backend.User.Pop_Up_Detail_User')
+    @include('Backend.User.notiv')
   </section>
   <section class="content">
     <div class="row">
@@ -17,6 +17,7 @@
                         <th>name</th>
                         <th>Email</th>
                         <th>alamat</th>
+                        <th>foto</th>
                         <th>status</th>
                         <th>jabatan</th>
                         <th>opsi</th>
@@ -28,6 +29,7 @@
                     <td>{{$key->name}}</td>
                     <td>{{$key->email}}</td>
                     <td>{{$key->alamat}}</td>
+                    <td><img src="{{Storage::url($key->foto)}}" width="200px" height="100px" alt=""></td>
                     @if ($key->kode_user == auth::user()->kode_user)
                       <td></td>
                     @else

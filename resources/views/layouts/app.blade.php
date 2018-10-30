@@ -29,7 +29,15 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                @if ($message = Session::get('fatal'))
+                  <div class="col-md-12 ">
+                    <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3 notif" style="float: right;z-index:100">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                      <h4><i class="icon fa fa-check"></i> Gagal!</h4>
+                      <strong>{{ $message }}</strong>
+                    </div>
+                  </div>
+                @endif
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
@@ -70,4 +78,8 @@
         </main>
     </div>
 </body>
+<script type="text/javascript">
+setTimeout(function(){$('.notif').hide('slow')}, 3000);
+  
+</script>
 </html>

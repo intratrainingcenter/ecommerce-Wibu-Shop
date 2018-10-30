@@ -1,13 +1,14 @@
 @foreach ($data as $key => $Edit)
-<div id="EditUser{{$Edit->kode_user}}" class="modal fade" role="dialog">
+<div id="EditUser{{$Edit->kode_user}}" class="modal fade" role="dialog" data-backdrop="false">
   <div class="modal-dialog">
-    <form method="POST" action="{{ route('user.update',$Edit->kode_user) }}">
+    <form method="POST" action="{{ route('user.update',$Edit->kode_user) }}" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Edit User</h4>
         </div><div class="modal-body col-md-12">
                 @csrf @method('put')
+                <input type="hidden" name="id" value="{{ $Edit->id }}" >
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                     <div class="col-md-6">
@@ -38,6 +39,12 @@
                     <div class="col-md-6">
                         <input  type="password" class="edit_password-confirm form-control edit" name="password_confirmation" >
                     </div>
+                </div> <div class="form-group row">
+                      <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('foto') }}</label>
+                      <div class="col-md-6">
+                          <input type="file" name="foto" class="form-control" onchange="ShowImage(this);" ><br>
+                          <img class="image" src=""width="150px" height="100px" alt="">
+                      </div>
                 </div> <div class="form-group row">
                   <label  class="col-md-4 col-form-label text-md-right">alamat</label>
                   <div class="col-md-6">

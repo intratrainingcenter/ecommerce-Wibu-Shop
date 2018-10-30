@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('alamat');
+            $table->binary('foto')->nullable();
             $table->enum('status', ['Aktif', 'nonAktif'])->default('nonAktif');
             $table->enum('jabatan',['Admin', 'Spv' ,'Owner'])->default('Admin');
             $table->rememberToken();

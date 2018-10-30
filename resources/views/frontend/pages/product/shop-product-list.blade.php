@@ -4,7 +4,7 @@
       <div class="container">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li><a href="">Product</a></li>
+            <li><a href="{{route('all_products')}}">Product</a></li>
             <li class="active">{{$nama_kategori->nama_kategori}}</li>
         </ul>
         <div class="row margin-bottom-40">
