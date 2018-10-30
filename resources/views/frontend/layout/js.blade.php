@@ -20,6 +20,7 @@
 <script src="{{asset('frontend/login/vendor/countdowntime/countdowntime.js')}}"></script>
 <script src="{{asset('frontend/login/js/main.js')}}"></script>
 <script src="{{asset('frontend/theme/assets/plugins/rateit/src/jquery.rateit.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/addcart.js')}}"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         Layout.init();

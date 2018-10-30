@@ -10,6 +10,7 @@ use App\TransaksiPenjualan as Penjualan;
 use App\PembeliAuth as Pembeli;
 use App\Kategori;
 use App\Produk;
+use App\Keranjang;
 use App\Alamat;
 use Validator;
 
@@ -20,12 +21,13 @@ class PembeliAuthController extends Controller
     {
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
+        $UserCart       = Keranjang::where('kode_pembeli', $id->kode_pembeli)->with('detailProduct')->get();
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->count();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->limit(3)->orderBy('tanggal', 'desc')->get();
-        return view('frontend.pages.account.index',compact('user', 'point', 'orders', 'kategori', 'new_products', 'all_products'));
+        return view('frontend.pages.account.index',compact('user', 'point', 'orders', 'kategori', 'new_products', 'all_products', 'UserCart'));
     }
 
     public function showRegisterForm()
@@ -33,7 +35,13 @@ class PembeliAuthController extends Controller
       $kategori     = Kategori::all();
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
-        return view('frontend.pages.auth.register',compact('kategori','all_products', 'new_products'));
+      $user         = Auth::guard('pembeli')->id();
+      if( $user != NULL) {
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        } else {
+          $UserCart = [];
+        }
+        return view('frontend.pages.auth.register',compact('kategori','all_products', 'new_products', 'UserCart'));
     }
 
     public function Register(Request $request)
@@ -56,7 +64,13 @@ class PembeliAuthController extends Controller
       $kategori     = Kategori::all();
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
-      return view('frontend.pages.auth.login',compact('kategori','all_products', 'new_products'));
+      $user         = Auth::guard('pembeli')->id();
+      if( $user != NULL) {
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        } else {
+          $UserCart = [];
+        }
+      return view('frontend.pages.auth.login',compact('kategori','all_products', 'new_products', 'UserCart'));
     }
 
     public function Login(Request $request)
