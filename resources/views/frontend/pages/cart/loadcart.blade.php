@@ -1,5 +1,4 @@
 
-<div class="goods-data clearfix">
     <div class="table-wrapper-responsive">
     <table summary="Shopping cart">
         <tr>
@@ -60,4 +59,3 @@
         </li>
         </ul>
     </div>
-</div>

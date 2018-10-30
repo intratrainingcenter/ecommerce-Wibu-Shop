@@ -8,8 +8,8 @@
 
       <div class="col-md-12 col-sm-12">
         <h1>Shopping cart</h1>
-        <div class="goods-page" id="shop-cart">
-          <div class="goods-data clearfix">
+        <div class="goods-page">
+          <div class="goods-data clearfix" id="shop-cart">
             <div class="table-wrapper-responsive">
             <table summary="Shopping cart">
               <tr>
