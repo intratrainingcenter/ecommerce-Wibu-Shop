@@ -13,19 +13,13 @@ class KeuanganController extends Controller
       $minutes = now()->addMinutes(2);
       $Shell = Cache::remember('Shellkeuangan',$minutes , function () use ($date) {
         return DB::table('transaksi_pembelians')
-                  ->selectRaw('sum(sub_total) as total')
-                  ->where('kode_transaksi_pembelian', 'like', 'TrRb%')
-                  ->where('created_at', $date)
-                  ->first();
+                  ->get()->sum('sub_total');
       });
       $Buy = Cache::remember('Buykeuangan',$minutes , function () use ($date) {
         return DB::table('transaksi_penjualans')
-                  ->selectRaw('sum(grand_total) as total')
-                  ->where('kode_transaksi_penjualan', 'like', 'TrR%')
-                  ->where('created_at', $date)
-                  ->first();
+                    ->get()->sum('grand_total');
       });
-      return view('Backend.LaporanKeuangan.general',compact(['Shell','Buy']));
+      return view('Backend.LaporanKeuangan.general',compact('Shell','Buy'));
     }
     public function Filter(Request $request) {
       $start = $request->dari;
@@ -39,6 +33,6 @@ class KeuanganController extends Controller
       });
       $Shell = $getShell->where('created_at','>=',$start)->where('created_at','<',$finis)->sum('sub_total');
       $Buy = $getBuy->where('created_at','>=',$start)->where('created_at','<',$finis)->sum('grand_total');
-      return view('Backend.LaporanKeuangan.general',compact(['Shell','Buy']));
+      return view('Backend.LaporanKeuangan.general',compact('Shell','Buy'));
     }
 }
