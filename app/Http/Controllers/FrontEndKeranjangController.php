@@ -10,6 +10,7 @@ use App\Produk;
 use App\Kategori;
 use App\Keranjang;
 use App\Pembeli;
+use App\TransaksiPenjualan as Penjualan;
 
 class FrontEndKeranjangController extends Controller
 {
@@ -54,7 +55,8 @@ class FrontEndKeranjangController extends Controller
         $user           = Auth::guard('pembeli')->id();
         $Pembeli        = Pembeli::where('id', $user)->first();
         $Product        = Produk::where('kode_produk', $code)->first();
-        $kode_keranjang = 'CART-'.$Pembeli->kode_pembeli;
+        $CountTransaction = Penjualan::where('kode_pembeli', $Pembeli->kode_pembeli)->count() + 1;
+        $kode_keranjang = 'CART-' . $Pembeli->kode_pembeli . '-' . $CountTransaction;
         $checkKeranjang = Keranjang::where('kode_produk',$code)->exists();
         $keranjang      = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->first();
 
