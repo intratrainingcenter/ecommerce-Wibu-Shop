@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produk;
+use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -16,9 +17,10 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $data = Produk::orderBy('created_at', 'desc')->get();
+        $data = Produk::orderBy('created_at', 'desc')->with('GetKategori')->get();
+        $data_kategori = Kategori::all();
         $no = 1;
-        return view('Backend.Produk.index', compact('data', 'no'));
+        return view('Backend.Produk.index', compact('data', 'no', 'data_kategori'));
     }
 
     /**
@@ -47,7 +49,6 @@ class ProdukController extends Controller
                     'harga' => 'required|numeric',
                     'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
         $check = Produk::where('kode_produk', $request->kode_produk)->exists();
         if ($validator->fails()) {
             return redirect()->back()->with('alertfail', 'Gagal');
@@ -62,7 +63,7 @@ class ProdukController extends Controller
             $create = Produk::create([
                 'kode_produk' => $request->kode_produk,
                 'nama_produk' => $request->nama_produk,
-                'kode_kategori' => $request->kode_produk,
+                'kode_kategori' => $request->kode_kategori,
                 'hpp' => $request->hpp,
                 'harga' => $request->harga,
                 'foto' => $path,
@@ -124,7 +125,7 @@ class ProdukController extends Controller
                 $update = Produk::where('kode_produk', $id)->update([
                     'kode_produk' => $request->kode_produk,
                     'nama_produk' => $request->nama_produk,
-                    'kode_kategori' => $request->kode_produk,
+                    'kode_kategori' => $request->kode_kategori,
                     'hpp' => $request->hpp,
                     'harga' => $request->harga,
                     'foto' => $path,
@@ -133,7 +134,7 @@ class ProdukController extends Controller
                 $update = Produk::where('kode_produk', $id)->update([
                     'kode_produk' => $request->kode_produk,
                     'nama_produk' => $request->nama_produk,
-                    'kode_kategori' => $request->kode_produk,
+                    'kode_kategori' => $request->kode_kategori,
                     'hpp' => $request->hpp,
                     'harga' => $request->harga,
                 ]);

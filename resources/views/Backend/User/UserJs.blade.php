@@ -2,7 +2,7 @@
 @section('js')
 <script type="text/javascript">
 $(function () {
-  $('#example1').DataTable()
+  // $('#example1').DataTable()
   $('#example2').DataTable({
     'paging'      : true,
     'lengthChange': false,
@@ -13,6 +13,6 @@ $(function () {
     'autoWidth'   : false
   })
 });
-  
+
 </script>
 @endsection

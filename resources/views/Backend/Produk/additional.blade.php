@@ -21,7 +21,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#image')
+                $('.image')
                     .attr('src', e.target.result)
                     .height(150);
             };
@@ -29,17 +29,5 @@
         }
     }
 
-    // Edit Image Product
-    function EditImage(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#imageedit')
-                    .attr('src', e.target.result)
-                    .height(150);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
     </script>
 @endsection

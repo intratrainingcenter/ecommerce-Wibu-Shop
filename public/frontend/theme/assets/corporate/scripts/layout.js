@@ -21,7 +21,7 @@ var Layout = function () {
         isIE9 = !! navigator.userAgent.match(/MSIE 9.0/);
         isIE10 = !! navigator.userAgent.match(/MSIE 10.0/);
         isIE11 = !! navigator.userAgent.match(/MSIE 11.0/);
-        
+
         if (isIE10) {
             jQuery('html').addClass('ie10'); // detect IE10 version
         }
@@ -53,7 +53,7 @@ var Layout = function () {
                 }
                 resize = setTimeout(function () {
                     runResponsiveHandlers();
-                }, 50); // wait 50ms until window resize finishes.                
+                }, 50); // wait 50ms until window resize finishes.
                 currheight = document.documentElement.clientHeight; // store last body client height
             });
         } else {
@@ -118,8 +118,8 @@ var Layout = function () {
         });
     }
 
-    var handleSearch = function() {    
-        $('.search-btn').click(function () {            
+    var handleSearch = function() {
+        $('.search-btn').click(function () {
             if($('.search-btn').hasClass('show-search-icon')){
                 if ($(window).width()>767) {
                     $('.search-box').fadeOut(300);
@@ -134,8 +134,8 @@ var Layout = function () {
                     $('.search-box').fadeIn(0);
                 }
                 $('.search-btn').addClass('show-search-icon');
-            } 
-        }); 
+            }
+        });
 
         // close search box on body click
         if($('.search-btn').size() != 0) {
@@ -157,7 +157,7 @@ var Layout = function () {
             if ($(".header .navbar-collapse").hasClass("open")) {
                 $(".header .navbar-collapse").slideDown(300)
                 .removeClass("open");
-            } else {             
+            } else {
                 $(".header .navbar-collapse").slideDown(300)
                 .addClass("open");
             }
@@ -170,7 +170,7 @@ var Layout = function () {
                     $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height()+22);
                 }
             }
-        });        
+        });
     }
 
     var handleSidebarMenu = function () {
@@ -184,11 +184,11 @@ var Layout = function () {
                     $(this).removeClass("collapsed");
                     $(this).siblings(".dropdown-menu").slideUp(300);
                 }
-            } 
+            }
         });
     }
 
-    function handleDifInits() { 
+    function handleDifInits() {
         $(".header .navbar-toggle span:nth-child(2)").addClass("short-icon-bar");
         $(".header .navbar-toggle span:nth-child(4)").addClass("short-icon-bar");
     }
@@ -212,10 +212,10 @@ var Layout = function () {
         if (!jQuery.fancybox) {
             return;
         }
-        
+
         jQuery(".fancybox-fast-view").fancybox();
 
-        if (jQuery(".fancybox-button").size() > 0) {            
+        if (jQuery(".fancybox-button").size() > 0) {
             jQuery(".fancybox-button").fancybox({
                 groupAttr: 'data-rel',
                 prevEffect: 'none',
@@ -236,11 +236,11 @@ var Layout = function () {
 
     // Handles Bootstrap Accordions.
     var handleAccordions = function () {
-       
+
         jQuery('body').on('shown.bs.collapse', '.accordion.scrollable', function (e) {
             Layout.scrollTo($(e.target), -100);
         });
-        
+
     }
 
     // Handles Bootstrap Tabs.
@@ -260,16 +260,16 @@ var Layout = function () {
     var handleMobiToggler = function () {
         $(".mobi-toggler").on("click", function(event) {
             event.preventDefault();//the default action of the event will not be triggered
-            
+
             $(".header").toggleClass("menuOpened");
             $(".header").find(".header-navigation").toggle(300);
         });
     }
 
     var handleTheme = function () {
-    
+
         var panel = $('.color-panel');
-    
+
         // handle theme colors
         var setColor = function (color) {
             $('#style-color').attr("href", "../../assets/corporate/css/themes/" + color + ".css");
@@ -294,7 +294,7 @@ var Layout = function () {
             $(this).addClass("current");
         });
     }
-	
+
     return {
         init: function () {
             // init core variables
@@ -342,7 +342,7 @@ var Layout = function () {
         },
 
         initFixHeaderWithPreHeader: function () {
-            jQuery(window).scroll(function() {                
+            jQuery(window).scroll(function() {
                 if (jQuery(window).scrollTop()>37){
                     jQuery("body").addClass("page-header-fixed");
                 }
@@ -361,9 +361,9 @@ var Layout = function () {
                     jQuery(".header").removeClass("reduce-header");
                 }
             }
-            
+
             NavScrolling();
-            
+
             jQuery(window).scroll(function() {
                 NavScrolling ();
             });
@@ -473,8 +473,8 @@ var Layout = function () {
             var pos = (el && el.size() > 0) ? el.offset().top : 0;
             if (el) {
                 if ($('body').hasClass('page-header-fixed')) {
-                    pos = pos - $('.header').height(); 
-                }            
+                    pos = pos - $('.header').height();
+                }
                 pos = pos + (offeset ? offeset : -1 * el.height());
             }
 
@@ -495,7 +495,7 @@ var Layout = function () {
         gridOption1: function () {
             $(function(){
                 $('.grid-v1').mixitup();
-            });    
+            });
         }
 
     };
