@@ -2,7 +2,7 @@
 @section('content')
 	<div class="content-wrapper">
 	  <section class="content-header">
-	    <h1>Laporan Transaksi<small>Data Transaksi</small> </h1>
+	    <h1>Laporan Barang<small>Data barang</small> </h1>
 	    <ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">LaporanTransaksi</li></ol>
 	  </section>
 	  <section class="content">
@@ -25,7 +25,7 @@
 													<div class="form-group"  style="width: 100px;">
 														<div class="input-group">
 															<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-															<input type="datetime-local" class="form-control pull-right" name="dari" >
+															<input type="date" class="form-control pull-right" name="dari" >
 														</div>
 													</div>
 												</div>
@@ -33,7 +33,7 @@
 													<div class="form-group"  style="width: 100px;">
 														<div class="input-group">
 															<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-															<input type="datetime-local" class="form-control pull-right"  name="sampai" >
+															<input type="date" class="form-control pull-right"  name="sampai" >
 														</div>
 													</div>
 												</div>
@@ -124,5 +124,5 @@
 	    </div>
 	  </section>
 </div>
-@include('Backend.LaporanKeuangan.additional')
+@include('Backend.LaporanBarang.additional')
 @endsection

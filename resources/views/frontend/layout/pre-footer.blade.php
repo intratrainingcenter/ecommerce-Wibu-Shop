@@ -29,7 +29,7 @@
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Delivery Information</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Customer Service</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Order Tracking</a></li>
-          <li><i class="fa fa-angle-right"></i> <a href="contacts.html">Contact Us</a></li>
+          <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Contact Us</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Careers</a></li>
           <li><i class="fa fa-angle-right"></i> <a href="javascript:;">Payment Methods</a></li>
         </ul>

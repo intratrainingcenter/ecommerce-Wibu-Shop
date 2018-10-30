@@ -14,6 +14,12 @@ Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checko
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
 Route::get('/all-products','FrontendControler@AllProducts')->name('all_products');
 Route::post('reviewProduct','reviewProducts@store')->name('frontend.reviewProduct');
+Route::match(['get', 'post'], '/shopping-cart','FrontEndKeranjangController@cart')->name('frontend.cart')->middleware('auth:pembeli');
+Route::get('show-cart', 'FrontEndKeranjangController@ShowCart')->name('show.cart')->middleware('auth:pembeli');
+Route::get('load-cart', 'FrontEndKeranjangController@LoadCart')->name('load.cart')->middleware('auth:pembeli');
+Route::post('update-item/{kode_keranjang}/{kode_produk}','FrontEndKeranjangController@updateItem')->name('update.item')->middleware('auth:pembeli');
+Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');
+Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -42,6 +48,16 @@ Route::prefix('pembeli')->group(function() {
     Route::get('logout', 'PembeliAuthController@Logout')->name('pembeli.logout');
     Route::get('my_account', 'PembeliAuthController@index')->name('pembeli.account')->middleware('auth:pembeli');
     Route::get('edit', 'PembeliAuthController@Edit')->name('account.edit')->middleware('auth:pembeli');
+    Route::get('editpassword', 'PembeliAuthController@EditPassword')->name('account.password')->middleware('auth:pembeli');
+    Route::patch('updateprofile/{id}', 'PembeliAuthController@UpdateProfile')->name('update.profile')->middleware('auth:pembeli');
+    Route::patch('updatepassword/{id}', 'PembeliAuthController@UpdatePassword')->name('change.password')->middleware('auth:pembeli');
+    Route::get('address', 'PembeliAuthController@address')->name('account.address')->middleware('auth:pembeli');
+    Route::get('province', 'PembeliAuthController@GetProvince')->name('address.province')->middleware('auth:pembeli');
+    Route::get('city/{id}', 'PembeliAuthController@GetCity')->name('address.city')->middleware('auth:pembeli');
+    Route::post('address', 'PembeliAuthController@AddAddress')->name('add.address')->middleware('auth:pembeli');
+    Route::get('edit_address/{id}', 'PembeliAuthController@EditAddress')->name('edit.address')->middleware('auth:pembeli');
+    Route::patch('update_address/{id}', 'PembeliAuthController@UpdateAddress')->name('update.address')->middleware('auth:pembeli');
+    Route::delete('delete_address/{id}', 'PembeliAuthController@DeleteAddress')->name('delete.address')->middleware('auth:pembeli');
 });
 
 Route::post('sendToUser', 'NotiveFrontendController@sendMessage');

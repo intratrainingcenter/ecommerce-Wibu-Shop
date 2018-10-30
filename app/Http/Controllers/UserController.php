@@ -19,7 +19,7 @@ class UserController extends Controller
     public function store(Request $request){
       $data = User::select('email')->first();
       if ($request->email == $data->email) {
-        return redirect()->back();
+        return redirect()->back()->with('fatal','Email sudah di gunakan');
       }
       elseif ($request->password == $request->password_confirmation) {
       $code = User::count()+1;
@@ -33,7 +33,7 @@ class UserController extends Controller
       $insert->status=$request->status;
       $insert->jabatan=$request->jabatan;
       $insert->save();
-      return redirect()->back();
+      return redirect()->back()->with('success','User berhasil di tambahkan');
       }
       else {
         return redirect()->back();
@@ -43,13 +43,13 @@ class UserController extends Controller
         $nonAktif = User::where('kode_user',$kode_user)->first();
         $nonAktif->status=$request->status;
         $nonAktif->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','User berhasil di aktifkan');
     }
     public function Aktif(Request $request, $kode_user) {
       $Aktif = User::where('kode_user',$kode_user)->first();
       $Aktif->status=$request->status;
       $Aktif->save();
-      return redirect()->back();
+      return redirect()->back()->with('success','User berhasil di nonAktifkan');
     }
     public function update(Request $request, $kode_user) {
       if($request->password == '') {
@@ -59,7 +59,7 @@ class UserController extends Controller
         $update->jabatan = $request->jabatan;
         $update->alamat = $request->alamat;
         $update->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','User berhasil di update');
       }else {
         $update = User::where('kode_user',$kode_user)->first();
         $update->name = $request->name;
@@ -68,12 +68,12 @@ class UserController extends Controller
         $update->password = Hash::make($request->password);
         $update->alamat = $request->alamat;
         $update->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','User berhasil di update');
       }
     }
     public function destroy($kode_user) {
       $delete = User::Where('kode_user', $kode_user);
       $delete->delete();
-      return redirect()->back();
+      return redirect()->back()->with('success','User berhasil di delete');
     }
 }

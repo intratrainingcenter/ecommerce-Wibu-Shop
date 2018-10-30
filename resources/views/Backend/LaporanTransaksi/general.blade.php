@@ -15,7 +15,7 @@
 													<div class="form-group"  style="width: 100px;">
 														<div class="input-group">
 															<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-															<input type="datetime-local" class="form-control pull-right" name="dari" >
+															<input type="date" class="form-control pull-right" name="dari" >
 														</div>
 													</div>
 												</div>
@@ -23,7 +23,7 @@
 													<div class="form-group"  style="width: 100px;">
 														<div class="input-group">
 															<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-															<input type="datetime-local" class="form-control pull-right"  name="sampai" >
+															<input type="date" class="form-control pull-right"  name="sampai" >
 														</div>
 													</div>
 												</div>
@@ -90,5 +90,5 @@
 	    </div>
 	  </section>
 </div>
-@include('Backend.LaporanKeuangan.additional')
+@include('Backend.LaporanTransaksi.additional')
 @endsection

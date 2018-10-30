@@ -9,17 +9,7 @@
 
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-            <!-- BEGIN SIDEBAR -->
-            <div class="sidebar col-md-3 col-sm-3">
-                <ul class="list-group margin-bottom-25 sidebar-menu">
-                <li class="list-group-item clearfix"><a href="{{route('account.edit')}}"><i class="fa fa-angle-right"></i> My Profile</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Address</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> My Order</a></li>
-                <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Order History</a></li>
-                </ul>
-            </div>
-            <!-- END SIDEBAR -->
-        
+            @include('frontend.pages.account.sidebar')
             <!-- BEGIN CONTENT -->
             <div class="col-md-9 col-sm-7">
                 <div class="content-page">
@@ -45,7 +35,7 @@
                                 <td><h3>Email</h3></td><td>:</td><td><h3>{{$user->email}}</h3></td>
                             </tr>
                             <tr>
-                                <td><h3>Points</h3></td><td>:</td><td><h3></h3></td>
+                                <td><h3>Points</h3></td><td>:</td><td><h3>{{$point}}</h3></td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,11 +54,18 @@
                             <th>Total</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            @forelse ($orders as $item)
+                            <tr onclick="window.location.href = ''" title="Click to view details">
+                                <td>{{$item->kode_transaksi_penjualan}}</td>
+                                <td>{{date('d F Y', strtotime($item->tanggal))}}</td>
+                                <td align="right">Rp. {{number_format($item->grand_total)}}</td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" align="center">You don't have any transactions yet!</td>
+                            </tr>
+                                
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

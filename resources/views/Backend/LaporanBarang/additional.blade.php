@@ -1,14 +1,14 @@
-@section('title') Laporan Keuangan @endsection
+@section('title') Laporan Barang @endsection
 
 @section('js')
   <script type="text/javascript">
     function printlayer(layer) {
-      var cetaklpkeuangan  = window.open("print");
+      var cetaklpBarang  = window.open("print");
       var layout  = document.getElementById(layer);
-      cetaklpkeuangan.document.write(layout.innerHTML.replace('diprint'));
-      cetaklpkeuangan.document.close();
-      cetaklpkeuangan.print();
-      cetaklpkeuangan.close();
+      cetaklpBarang.document.write(layout.innerHTML.replace('diprint'));
+      cetaklpBarang.document.close();
+      cetaklpBarang.print();
+      cetaklpBarang.close();
     }
   </script>
 @endsection
