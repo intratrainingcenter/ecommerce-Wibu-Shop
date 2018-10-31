@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\TransaksiPenjualan as Penjualan;
 use App\PembeliAuth as Pembeli;
+use App\Keranjang;
 use App\Kategori;
 use App\Produk;
-use App\Keranjang;
 use App\Alamat;
 use Validator;
 
@@ -21,11 +21,11 @@ class PembeliAuthController extends Controller
     {
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
-        $UserCart       = Keranjang::where('kode_pembeli', $id->kode_pembeli)->with('detailProduct')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->count();
+        $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('grand_total', '>=', 300000)->count();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->limit(3)->orderBy('tanggal', 'desc')->get();
         return view('frontend.pages.account.index',compact('user', 'point', 'orders', 'kategori', 'new_products', 'all_products', 'UserCart'));
     }
@@ -36,8 +36,9 @@ class PembeliAuthController extends Controller
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $user         = Auth::guard('pembeli')->id();
+      $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         } else {
           $UserCart = [];
         }
@@ -46,17 +47,27 @@ class PembeliAuthController extends Controller
 
     public function Register(Request $request)
     {
-        $getMaxID   = Pembeli::max('id') + 1;
-        $getCode    = 'PMB' . date('ymdhis') . $getMaxID;
-        $register   = Pembeli::create([
-            'kode_pembeli'  => $getCode,
-            'nama_pembeli'  => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'email'         => $request->email,
-            'password'      => Hash::make($request->pass),
-            'foto'          => '',
+        $validator = Validator::make($request->all(), [
+            'nama'          => 'required|max:20',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'email'         => 'required|email',
+            'pass'          => 'required|max:12',
         ]);
-        return redirect()->route('pembeli.login');
+        if ($validator->fails()) {
+            return redirect()->back()->with('alertFailRegister', 'Something wrong in your input value. Register failed!');
+        } else {
+            $getMaxID   = Pembeli::max('id') + 1;
+            $getCode    = 'PMB' . date('ymdhis') . $getMaxID;
+            $register   = Pembeli::create([
+                'kode_pembeli'  => $getCode,
+                'nama_pembeli'  => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->pass),
+                'foto'          => '',
+                ]);
+            return redirect()->route('pembeli.login')->with('alertSuccessRegister', 'Your account successfully registered. Please login using your account!');
+        }
     }
 
     public function showLoginForm()
@@ -65,8 +76,9 @@ class PembeliAuthController extends Controller
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $user         = Auth::guard('pembeli')->id();
+      $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         } else {
           $UserCart = [];
         }
@@ -79,9 +91,9 @@ class PembeliAuthController extends Controller
         $check  = Auth::guard('pembeli')->attempt(request(['email', 'password']));
         if ( $check ) {
             Auth::guard('pembeli')->login($user);
-            return redirect('/');
+            return redirect()->route('frontend.home');;
         } else {
-            return 'gagal';
+            return redirect()->back()->with('alertFailLogin', 'Something wrong in your input value. Please try again!');
         }
     }
 
@@ -100,7 +112,8 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
-        return view('frontend.pages.account.editaccount', compact('user', 'alamat', 'kategori', 'all_products', 'new_products'));
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        return view('frontend.pages.account.editaccount', compact('UserCart', 'user', 'alamat', 'kategori', 'all_products', 'new_products'));
     }
 
     public function EditPassword()
@@ -110,7 +123,8 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
-        return view('frontend.pages.account.change_password', compact('user', 'kategori', 'all_products', 'new_products'));
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        return view('frontend.pages.account.change_password', compact('UserCart', 'user', 'kategori', 'all_products', 'new_products'));
     }
 
     public function UpdateProfile(Request $request, $id)
@@ -123,7 +137,7 @@ class PembeliAuthController extends Controller
             'foto'          => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertFailProfile', 'Something wrong in your input value. No data Changed!');
+            return redirect()->back()->with('alertFailProfile', 'Something wrong in your input value. No data changed!');
         } else {
             if ($request->hasFile('foto')) {
                 $get_pembeli    = Pembeli::where('id', $id)->first();
@@ -181,9 +195,10 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $address        = Alamat::where('kode_pembeli', $user->kode_pembeli)->get();
         $no             = 1;
-        return view('frontend.pages.account.address', compact('user', 'address', 'no', 'kategori', 'all_products', 'new_products'));
+        return view('frontend.pages.account.address', compact('UserCart', 'user', 'address', 'no', 'kategori', 'all_products', 'new_products'));
     }
 
     public function GetProvince()
@@ -191,20 +206,20 @@ class PembeliAuthController extends Controller
         // GET API FROM RAJA ONGKIR
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "GET",
-          CURLOPT_HTTPHEADER => array(
+          CURLOPT_URL               => "https://api.rajaongkir.com/starter/province",
+          CURLOPT_RETURNTRANSFER    => true,
+          CURLOPT_ENCODING          => "",
+          CURLOPT_MAXREDIRS         => 10,
+          CURLOPT_TIMEOUT           => 30,
+          CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST     => "GET",
+          CURLOPT_HTTPHEADER        => array(
             "key: 8b81c63a1553aa8b18c05314ab4f13df"
           ),
         ));
-        $response = curl_exec($curl);
-        $decode = json_decode($response, true);
-        $province = $decode['rajaongkir']['results'];
+        $response   = curl_exec($curl);
+        $decode     = json_decode($response, true);
+        $province   = $decode['rajaongkir']['results'];
         return $province;
     }
 
@@ -212,20 +227,20 @@ class PembeliAuthController extends Controller
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=$id",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "GET",
-          CURLOPT_HTTPHEADER => array(
+          CURLOPT_URL               => "https://api.rajaongkir.com/starter/city?province=$id",
+          CURLOPT_RETURNTRANSFER    => true,
+          CURLOPT_ENCODING          => "",
+          CURLOPT_MAXREDIRS         => 10,
+          CURLOPT_TIMEOUT           => 30,
+          CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST     => "GET",
+          CURLOPT_HTTPHEADER        => array(
             "key: 8b81c63a1553aa8b18c05314ab4f13df"
           ),
         ));
-        $response = curl_exec($curl);
-        $decode = json_decode($response, true);
-        $city = $decode['rajaongkir']['results'];
+        $response   = curl_exec($curl);
+        $decode     = json_decode($response, true);
+        $city       = $decode['rajaongkir']['results'];
         return $city;
     }
 
@@ -233,16 +248,16 @@ class PembeliAuthController extends Controller
     {
         $get_auth_id    = Auth::guard('pembeli')->id();
         $get_pembeli    = Pembeli::where('id', $get_auth_id)->first();
-        $get_max_id       = Alamat::max('id') + 1;
+        $get_max_id     = Alamat::max('id') + 1;
         $validator      = Validator::make($request->all(), [
             'id_provinsi' => 'required',
-            'provinsi'  => 'required',
-            'id_kota'   => 'required',
-            'kota'      => 'required',
-            'alamat'    => 'required',
+            'provinsi'    => 'required',
+            'id_kota'     => 'required',
+            'kota'        => 'required',
+            'alamat'      => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertFailAddAddress', 'Something wrong in your input value. No data added!');
         } else {
                 $add    = Alamat::create([
                     'kode_pembeli'  => $get_pembeli->kode_pembeli,
@@ -254,7 +269,7 @@ class PembeliAuthController extends Controller
                     'kota'          => $request->kota,
                 ]);
             
-            return redirect()->back();
+            return redirect()->back()->with('alertSuccessAddAddress', 'Your address successfully added!');
         }
     }
 
@@ -265,8 +280,10 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $address        = Alamat::where('kode_alamat', $code)->first();
-        return view('frontend.pages.account.detail_address', compact('address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
+        
+        return view('frontend.pages.account.detail_address', compact('UserCart','address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
     }
 
     public function UpdateAddress(Request $request, $code)
@@ -279,7 +296,7 @@ class PembeliAuthController extends Controller
             'alamat'    => 'required',
             ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertFailUpdateAddress', 'Something wrong in your input value. No data changed!');
         } else {
             $update    = Alamat::where('kode_alamat', $code)->update([
                 'alamat'        => $request->alamat,
@@ -288,12 +305,35 @@ class PembeliAuthController extends Controller
                 'id_kota'       => $request->id_kota,
                 'kota'          => $request->kota,
             ]);
-            return redirect()->back();
+            return redirect()->back()->with('alertSuccessUpdateAddress', 'Your address successfully updated!');
         }
     }
     public function DeleteAddress($code)
     {
         Alamat::where('kode_alamat', $code)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('alertSuccessDeleteAddress', 'Your address successfully deleted!');
+    }
+
+    public function OrderHistory()
+    {
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('tanggal', 'desc')->with('GetDetail')->get();
+        return view('frontend.pages.account.history', compact('UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
+    }
+
+    public function ShowOrderHistory($code)
+    {
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->get();
+        $keranjang      = Keranjang::where('kode_keranjang', $code)->get();
     }
 }

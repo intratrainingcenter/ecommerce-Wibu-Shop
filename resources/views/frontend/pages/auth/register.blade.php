@@ -3,8 +3,12 @@
 @section('produck')
   <div class="main">
     <div class="container">
-
-        <div class="limiter">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="{{route('pembeli.register')}}">Register</a></li>
+        </ul>
+        @include('frontend.pages.account.alert')
+        <div class="limiter" style="margin-top:50px;">
             <div class="container-login100">
                 <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                     <form class="login100-form validate-form" method="POST" action="{{route('pembeli.register.submit')}}">
