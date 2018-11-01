@@ -20,15 +20,26 @@ class penjualan extends Seeder
           'tanggal'    => Carbon::now(),
           'status'    => 'Received',
           'created_at' => Carbon::now(),
+          'updated_at'  => Carbon::now(),
+      ],  [  'kode_transaksi_penjualan' => 'TrR01',
+        'kode_keranjang'  => 'User 3',
+          'kode_pembeli' => 'pmb01',
+          'grand_total' => '123000',
+          'bayar'  => '123000',
+          'tanggal'    => Carbon::now(),
+          'status'    => 'pending',
+          'created_at' => Carbon::now(),
+          'updated_at'  => Carbon::now(),
       ],[
           'kode_transaksi_penjualan' => 'TrR0',
-          'kode_keranjang'  => 'User 1',
+          'kode_keranjang'  => 'User 2',
           'kode_pembeli' => 'pmb01',
           'grand_total' => '1023100',
           'tanggal'    => Carbon::now(),
           'bayar'  => '1923100',
           'status'    => 'Received',
           'created_at' => Carbon::now(),
+          'updated_at'  => Carbon::now(),
       ]]);
     }
 }

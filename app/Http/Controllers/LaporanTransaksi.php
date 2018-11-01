@@ -42,12 +42,12 @@ class LaporanTransaksi extends Controller
       });
       $getBuy = Cache::remember('BuyfilterTransaksi', $minutes, function () {
                   return DB::table('transaksi_penjualans')->join('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
-                        ->select('transaksi_penjualans.*','pembelis.*' ,'keranjangs.*', 'transaksi_penjualans.created_at as creat')
+                        ->select('transaksi_penjualans.*','pembelis.*' ,'keranjangs.*', 'transaksi_penjualans.updated_at as creat')
                         ->join('pembelis','pembelis.kode_pembeli','=','keranjangs.kode_pembeli')
                         ->get();
           });
-          $Shell = $getShell->where('creat','>=',$start)->where('creat','<',$finis);
-          $Buy = $getBuy->where('creat','>=',$start)->where('creat','<',$finis);
+          $Shell = $getShell->where('creat','>=',$start)->where('creat','<=',$finis);
+          $Buy = $getBuy->where('creat','>=',$start)->where('creat','<=',$finis);
       return view('Backend.LaporanTransaksi.general',compact(['Shell','Buy']));
     }
 }

@@ -57,7 +57,6 @@
 															<th>nama Product</th>
 															<th>Hpp</th>
 															<th>Harga Jual</th>
-															<th>stok awal</th>
 															<th>Masuk</th>
 															<th>keluar</th>
 															<th>stok Yang tersisa</th>
@@ -86,7 +85,6 @@
 																<td >{{$valuedata->nama_produk}}</td>
 																<td >{{"Rp. ".number_format($valuedata->hpp)}}</td>
 																<td >{{"Rp. ".number_format($valuedata->harga)}}</td>
-																<td >{{$valuedata->stock - $valuedata->masuk}}</td>
 																<td >
 																	@if ($Buy->whereIn('kode_produk',[$valuedata->kode_produk])->isNotEmpty())
 																		@foreach ($Buy as $key => $valueBuy)

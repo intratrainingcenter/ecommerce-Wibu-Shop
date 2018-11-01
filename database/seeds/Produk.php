@@ -25,6 +25,7 @@ class Produk extends Seeder
             'keterangan'    => 'Ini keterangan',
             'foto'  => 'images/foto.png',
             'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
       }
     }

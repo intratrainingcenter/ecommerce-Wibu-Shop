@@ -19,32 +19,35 @@ class laporanBarang extends Controller
     $selectcategory = Cache::remember('selectcategoryproduct', $minutes , function ()  {
               return DB::table('kategoris')->get();
             });
-    $data = Cache::remember('dataproduct',$minutes , function () use ($date)  {
+    $data = Cache::remember('dataproduct',$minutes , function () use ($date) {
             return DB::table('produks')
                      ->join('kategoris','kategoris.kode_kategori','=','produks.kode_kategori')
-                     ->leftJoin('transaksi_pembelians','transaksi_pembelians.kode_produk','=','produks.kode_produk')
-                     ->leftJoin('transaksi_penjualans','transaksi_penjualans.kode_produk','=','produks.kode_produk')
                      ->select('produks.kode_produk','produks.nama_produk','produks.kode_kategori',
                                 'produks.nama_produk','produks.hpp','produks.harga',
                                 'kategoris.kode_kategori','kategoris.nama_kategori',
-                                DB::raw('SUM(produks.stok) as stock'),DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'),DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
+                                DB::raw('SUM(produks.stok) as stock'))
                      ->groupBy('produks.id','produks.kode_produk','produks.nama_produk','produks.kode_kategori',
                                 'produks.nama_produk','produks.hpp','produks.harga',
                                 'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
-                     ->orderBy('produks.id')
+                     ->where('produks.status','siap')
                      ->where('produks.created_at',$date)
                      ->get();
             });
     $Shell = Cache::remember('Shellproduct', $minutes , function () {
             return DB::table('transaksi_penjualans')
-                      ->select('transaksi_penjualans.kode_produk',DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'))
-                      ->groupBy('kode_produk')->orderBy('kode_produk')
+                      ->leftjoin('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
+                      ->select('keranjangs.kode_produk',DB::raw('SUM(keranjangs.jumlah) as keluar'))
+                      ->groupBy('keranjangs.kode_produk')
+                      ->where('transaksi_penjualans.status','Received')
+                      ->orderBy('kode_produk')
                       ->get();
           });
     $Buy = Cache::remember('Buyproduct' , $minutes , function ()   {
           return DB::table('transaksi_pembelians')
                     ->select('transaksi_pembelians.kode_produk',DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
-                    ->groupBy('kode_produk')->orderBy('kode_produk')
+                    ->groupBy('transaksi_pembelians.kode_produk')
+                    ->where('transaksi_pembelians.status','Done')
+                    ->orderBy('kode_produk')
                     ->get();
         });
     $groupProduct = Cache::remember('groupProductindex', $minutes ,function ()  {
@@ -65,35 +68,38 @@ class laporanBarang extends Controller
             $data = Cache::remember('datafilterproduct1',$minutes,function () {
                         return DB::table('produks')
                                   ->join('kategoris','kategoris.kode_kategori','=','produks.kode_kategori')
-                                  ->leftJoin('transaksi_pembelians','transaksi_pembelians.kode_produk','=','produks.kode_produk')
-                                  ->leftJoin('transaksi_penjualans','transaksi_penjualans.kode_produk','=','produks.kode_produk')
                                   ->select('produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                            'produks.nama_produk','produks.hpp','produks.harga',
-                                            'kategoris.kode_kategori','kategoris.nama_kategori',
-                                            DB::raw('SUM(produks.stok) as stock'),DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'),DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
+                                             'produks.nama_produk','produks.hpp','produks.harga',
+                                             'kategoris.kode_kategori','kategoris.nama_kategori',
+                                             DB::raw('SUM(produks.stok) as stock'))
                                   ->groupBy('produks.id','produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                            'produks.nama_produk','produks.hpp','produks.harga',
-                                            'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
-                                  ->orderBy('produks.id')
+                                             'produks.nama_produk','produks.hpp','produks.harga',
+                                             'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
+                                  ->where('produks.status','siap')
                                   ->get();
                       });
             $Shell =  Cache::remember('Shellfilterproducct1',$minutes,function () {
                         return DB::table('transaksi_penjualans')
-                                    ->select('transaksi_penjualans.kode_produk',DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'))
-                                    ->groupBy('kode_produk')->orderBy('kode_produk')
+                                    ->leftjoin('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
+                                    ->select('keranjangs.kode_produk',DB::raw('SUM(keranjangs.jumlah) as keluar'))
+                                    ->groupBy('keranjangs.kode_produk')
+                                    ->where('transaksi_penjualans.status','Received')
+                                    ->orderBy('kode_produk')
                                     ->get();
                       });
             $Buy =  Cache::remember('Buyfilterproduct1',$minutes,function () {
                         return DB::table('transaksi_pembelians')
                                   ->select('transaksi_pembelians.kode_produk',DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
-                                  ->groupBy('kode_produk')->orderBy('kode_produk')
+                                  ->groupBy('transaksi_pembelians.kode_produk')
+                                  ->where('transaksi_pembelians.status','Done')
+                                  ->orderBy('kode_produk')
                                   ->get();
                       });
             $groupProduct =  Cache::remember('groupProductfilterproduct1',$minutes,function () {
                           return DB::table('produks')->select('kode_produk')->groupBy('id')->get();
                         });
             return view('Backend.LaporanBarang.general',compact('data','selectcategory','category','groupProduct','Buy','Shell'));
-      }elseif ($start == null && $finish == null) {
+          }elseif ($start == null && $finish == null) {
               $selectcategory = Cache::remember('selectcategoryfilterproduct2',$minutes, function ()  {
                             return DB::table('kategoris')->get();
                           });
@@ -101,29 +107,32 @@ class laporanBarang extends Controller
               $getData = Cache::remember('datafilterproduct2',$minutes, function (){
                             return DB::table('produks')
                                         ->join('kategoris','kategoris.kode_kategori','=','produks.kode_kategori')
-                                        ->leftJoin('transaksi_pembelians','transaksi_pembelians.kode_produk','=','produks.kode_produk')
-                                        ->leftJoin('transaksi_penjualans','transaksi_penjualans.kode_produk','=','produks.kode_produk')
                                         ->select('produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                                  'produks.nama_produk','produks.hpp','produks.harga',
-                                                  'kategoris.kode_kategori','kategoris.nama_kategori',
-                                                  DB::raw('SUM(produks.stok) as stock'),DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'),DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
+                                                   'produks.nama_produk','produks.hpp','produks.harga',
+                                                   'kategoris.kode_kategori','kategoris.nama_kategori',
+                                                   DB::raw('SUM(produks.stok) as stock'))
                                         ->groupBy('produks.id','produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                                  'produks.nama_produk','produks.hpp','produks.harga',
-                                                  'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
-                                        ->orderBy('produks.id')
+                                                   'produks.nama_produk','produks.hpp','produks.harga',
+                                                   'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
+                                        ->where('produks.status','siap')
                                         ->get();
                           });
               $data = $getData->where('kode_kategori','=',$codecategory);
               $Shell = Cache::remember('Shellfilterproduct2',$minutes, function ()  {
                             return DB::table('transaksi_penjualans')
-                                      ->select('transaksi_penjualans.kode_produk',DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'))
-                                      ->groupBy('kode_produk')->orderBy('kode_produk')
+                                      ->leftjoin('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
+                                      ->select('keranjangs.kode_produk',DB::raw('SUM(keranjangs.jumlah) as keluar'))
+                                      ->groupBy('keranjangs.kode_produk')
+                                      ->where('transaksi_penjualans.status','Received')
+                                      ->orderBy('kode_produk')
                                       ->get();
                           });
               $Buy = Cache::remember('Buyfilterproduct2',$minutes, function ()  {
                             return DB::table('transaksi_pembelians')
                                         ->select('transaksi_pembelians.kode_produk',DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
-                                        ->groupBy('kode_produk')->orderBy('kode_produk')
+                                        ->groupBy('transaksi_pembelians.kode_produk')
+                                        ->where('transaksi_pembelians.status','Done')
+                                        ->orderBy('kode_produk')
                                         ->get();
                           });
               $groupProduct = Cache::remember('groupProductfilterproduct2',$minutes, function ()  {
@@ -135,35 +144,38 @@ class laporanBarang extends Controller
           $category = Cache::remember('categoryfilterproduct3', $minutes, function () {
                               return DB::table('kategoris')->get();
                             });
-            $selectcategory = Cache::remember('selectcategoryfilterproduct3', $minutes, function () {
+          $selectcategory = Cache::remember('selectcategoryfilterproduct3', $minutes, function () {
                                 return DB::table('kategoris')->get();
                               });
-          $getData = Cache::remember('datafilterproduct3', $minutes, function () {
+          $getData = Cache::remember('datafilterproduct3', $minutes, function () use ($start,$finish)  {
                               return DB::table('produks')
                               ->join('kategoris','kategoris.kode_kategori','=','produks.kode_kategori')
-                              ->leftJoin('transaksi_pembelians','transaksi_pembelians.kode_produk','=','produks.kode_produk')
-                              ->leftJoin('transaksi_penjualans','transaksi_penjualans.kode_produk','=','produks.kode_produk')
                               ->select('produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                        'produks.nama_produk','produks.hpp','produks.harga','produks.updated_at',
-                                        'kategoris.kode_kategori','kategoris.nama_kategori',
-                                        DB::raw('SUM(produks.stok) as stock'),DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'),DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
+                                         'produks.nama_produk','produks.hpp','produks.harga',
+                                         'kategoris.kode_kategori','kategoris.nama_kategori','produks.updated_at as update',
+                                         DB::raw('SUM(produks.stok) as stock'))
                               ->groupBy('produks.id','produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                        'produks.nama_produk','produks.hpp','produks.harga',
-                                        'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
-                              ->orderBy('produks.id')
+                                         'produks.nama_produk','produks.hpp','produks.harga',
+                                         'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
+                              ->where('produks.status','siap')
                               ->get();
                             });
-            $data =  $getData->where('updated_at', '>=', $start)->where('updated_at', '<', $finish);
+            $data =  $getData->where('update', '>=', $start)->where('update', '<=', $finish);
           $Shell = Cache::remember('Shellfilterproduct3', $minutes, function () {
                               return DB::table('transaksi_penjualans')
-                              ->select('transaksi_penjualans.kode_produk',DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'))
-                              ->groupBy('kode_produk')->orderBy('kode_produk')
+                              ->leftjoin('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
+                              ->select('keranjangs.kode_produk',DB::raw('SUM(keranjangs.jumlah) as keluar'))
+                              ->groupBy('keranjangs.kode_produk')
+                              ->where('transaksi_penjualans.status','Received')
+                              ->orderBy('kode_produk')
                               ->get();
                             });
           $Buy = Cache::remember('Buyfilterproduct3', $minutes, function () {
                               return DB::table('transaksi_pembelians')
                               ->select('transaksi_pembelians.kode_produk',DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
-                              ->groupBy('kode_produk')->orderBy('kode_produk')
+                              ->groupBy('transaksi_pembelians.kode_produk')
+                              ->where('transaksi_pembelians.status','Done')
+                              ->orderBy('kode_produk')
                               ->get();
                             });
           $groupProduct = Cache::remember('groupProductfilterproduct3', $minutes, function () {
@@ -171,40 +183,42 @@ class laporanBarang extends Controller
                             });
           return view('Backend.LaporanBarang.general',compact('data','selectcategory','category','groupProduct','Buy','Shell'));
             }else {
-              // dd('berdasarkan kategori dan tanggal');
-            $selectcategory = Cache::remember('selectcategoryfilterproduct3',$minutes, function ()   {
+            $selectcategory = Cache::remember('selectcategoryfilterproduct4',$minutes, function ()   {
                               return DB::table('kategoris')->get();
                             });
             $category = $selectcategory->where('kode_kategori',$codecategory);
-            $getData = Cache::remember('datafilterproduct3',$minutes, function () {
-                            return DB::table('produks')
-                                      ->join('kategoris','kategoris.kode_kategori','=','produks.kode_kategori')
-                                      ->leftJoin('transaksi_pembelians','transaksi_pembelians.kode_produk','=','produks.kode_produk')
-                                      ->leftJoin('transaksi_penjualans','transaksi_penjualans.kode_produk','=','produks.kode_produk')
-                                      ->select('produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                                'produks.nama_produk','produks.hpp','produks.harga','produks.updated_at',
-                                                'kategoris.kode_kategori','kategoris.nama_kategori',
-                                                DB::raw('SUM(produks.stok) as stock'),DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'),DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
-                                      ->groupBy('produks.id','produks.kode_produk','produks.nama_produk','produks.kode_kategori',
-                                                'produks.nama_produk','produks.hpp','produks.harga',
-                                                'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
-                                      ->orderBy('produks.id')
-                                      ->get();
-                          });
-          $data = $getData->where('updated_at', '>=', $start)->where('updated_at', '<', $finish)->where('kode_kategori',$codecategory);
-            $Shell = Cache::remember('Shellfilterproduct3',$minutes, function () {
+                          $getData = Cache::remember('datafilterproduct4', $minutes, function () use ($start,$finish)  {
+                                              return DB::table('produks')
+                                              ->join('kategoris','kategoris.kode_kategori','=','produks.kode_kategori')
+                                              ->select('produks.kode_produk','produks.nama_produk','produks.kode_kategori',
+                                                         'produks.nama_produk','produks.hpp','produks.harga',
+                                                         'kategoris.kode_kategori','kategoris.nama_kategori','produks.updated_at as update',
+                                                         DB::raw('SUM(produks.stok) as stock'))
+                                              ->groupBy('produks.id','produks.kode_produk','produks.nama_produk','produks.kode_kategori',
+                                                         'produks.nama_produk','produks.hpp','produks.harga',
+                                                         'kategoris.kode_kategori','kategoris.id','kategoris.nama_kategori')
+                                              ->where('produks.status','siap')
+                                              ->get();
+                                            });
+                            $data =  $getData->where('update', '>=', $start)->where('update', '<=', $finish)->where('kode_kategori',$codecategory);
+            $Shell = Cache::remember('Shellfilterproduct4',$minutes, function () {
                             return DB::table('transaksi_penjualans')
-                                      ->select('transaksi_penjualans.kode_produk',DB::raw('SUM(transaksi_penjualans.jumlah) as keluar'))
-                                      ->groupBy('kode_produk')->orderBy('kode_produk')
+                                      ->leftjoin('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
+                                      ->select('keranjangs.kode_produk',DB::raw('SUM(keranjangs.jumlah) as keluar'))
+                                      ->groupBy('keranjangs.kode_produk')
+                                      ->where('transaksi_penjualans.status','Received')
+                                      ->orderBy('kode_produk')
                                       ->get();
                           });
-            $Buy = Cache::remember('Buyfilterproduct3',$minutes, function () {
+            $Buy = Cache::remember('Buyfilterproduct4',$minutes, function () {
                             return DB::table('transaksi_pembelians')
                                     ->select('transaksi_pembelians.kode_produk',DB::raw('SUM(transaksi_pembelians.jummlah) as masuk'))
-                                    ->groupBy('kode_produk')->orderBy('kode_produk')
+                                    ->groupBy('transaksi_pembelians.kode_produk')
+                                    ->where('transaksi_pembelians.status','Done')
+                                    ->orderBy('kode_produk')
                                     ->get();
                           });
-            $groupProduct = Cache::remember('groupProductfilterproduct3',$minutes, function () {
+            $groupProduct = Cache::remember('groupProductfilterproduct4',$minutes, function () {
                             return DB::table('produks')->select('kode_produk')->groupBy('id')->get();
                           });
             return view('Backend.LaporanBarang.general',compact('data','selectcategory','category','groupProduct','Buy','Shell'));
