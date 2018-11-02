@@ -1,4 +1,3 @@
-
 var app = angular.module('sampleApp', ["firebase"]);
 
 app.controller("SampleCtrl", function($scope, $firebaseArray, $location, $anchorScroll) {
@@ -7,10 +6,10 @@ app.controller("SampleCtrl", function($scope, $firebaseArray, $location, $anchor
   $location.hash('bottom');
   $anchorScroll();
   $scope.messages = $firebaseArray(ref);
-  $scope.send = function() {
+  $scope.send = function(uid, level) {
       $scope.messages.$add({
-          id: '123',
-          level: 'user',
+          id: uid,
+          level: level,
           message: $scope.messageText,
           date: Date.now()
       })

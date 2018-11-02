@@ -16,7 +16,7 @@
   <meta property="og:image" content="-CUSTOMER VALUE-">
   <meta property="og:url" content="-CUSTOMER VALUE-">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
+  <link rel="icon" href="{{asset('images/Y.png')}}">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->
   <link href="{{asset('frontend/theme/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -35,7 +35,7 @@
   <link href="{{asset('frontend/theme/assets/pages/css/popupChat.css')}}" rel="stylesheet" type="text/css">
   @yield('css')
 </head>
-<body id="test" class="ecommerce" ng-controller="SampleCtrl">
+<body class="ecommerce" ng-controller="SampleCtrl">
   @include('frontend.layout.bar')
 @include('frontend.layout.header')
   @yield('produck')

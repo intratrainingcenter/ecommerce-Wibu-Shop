@@ -1,51 +1,73 @@
 $(function() {
-$(".messages").animate({ scrollTop: $(document).height()*10 }, "fast");
-});
+// $(".messages").animate({ scrollTop: $(document).height()*10 }, "fast");
+$('.preview').html("<span>there hasn't been a message<span>");
+	$.ajax({
+		type: "GET",
+		dataType: "json",
+		url: location.origin+"/Messages/list",
+		success: function (data) {
+			var lastIndex = 0;
+			for (var i = 0; i < data.length; i++) {
+				firebase.database().ref('messages/'+ data[i].id +'/message').limitToLast(1).on('value', function(snapshot) {
+						var value = snapshot.val();
+						$.each(value, function(index, value) {
+							console.log(value.level);
+							if(value.level == 'admin') {
+								$('.preview[uid*='+ value.id +']').html('<span>You: </span>'+value.message);
+							} else if(value.level == 'user') {
+								$('.preview[uid*='+ value.id +']').html(value.message);
+							}
+						});
+				});
+				firebase.database().ref('messages/'+ data[i].id +'/status').on('value', function(snapshot) {
+						var value = snapshot.val();
+						console.log(value.status, value.id);
+						if(value.status == 'admin') {
+							$('.contact[uid*='+ value.id +'] div.wrap').prepend('<span class="contact-status busy"></span>');
+						} else {
+							$('.contact[uid*='+ value.id +'] div.wrap span.contact-status').remove();
+						}
 
-$("#profile-img").click(function() {
-	$("#status-options").toggleClass("active");
-});
-
-$(".expand-button").click(function() {
-  $("#profile").toggleClass("expanded");
-	$("#contacts").toggleClass("expanded");
-});
-
-$("#status-options ul li").click(function() {
-	$("#profile-img").removeClass();
-	$("#status-online").removeClass("active");
-	$("#status-away").removeClass("active");
-	$("#status-busy").removeClass("active");
-	$("#status-offline").removeClass("active");
-	$(this).addClass("active");
-
-	if($("#status-online").hasClass("active")) {
-		$("#profile-img").addClass("online");
-	} else if ($("#status-away").hasClass("active")) {
-		$("#profile-img").addClass("away");
-	} else if ($("#status-busy").hasClass("active")) {
-		$("#profile-img").addClass("busy");
-	} else if ($("#status-offline").hasClass("active")) {
-		$("#profile-img").addClass("offline");
-	} else {
-		$("#profile-img").removeClass();
-	};
-
-	$("#status-options").removeClass("active");
+				});
+			}
+		}
+	});
 });
 
 function newMessage() {
-	message = $(".message-input input").val();
+	var message = $(".message-input input").val();
+	var uid = $(".message-input").attr('uid');
 	if($.trim(message) == '') {
 		return false;
 	}
-	$('<li class="sent"><img src="gambar/W.jpg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
-	$('.message-input input').val(null);
-	$('.contact.active .preview').html('<span>You: </span>' + message);
+	$(".message-input input").val(null);
+	$(".contact.active .preview").html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height()*10 }, "fast");
+
+	var sendMessage = {
+	       date: Date.now(),
+				 id: uid,
+	       level: 'admin',
+	       message: message
+	     };
+	 var sendStatus = {
+		 		id: uid,
+ 	      status: 'user'
+ 	     };
+
+	     // Get a key for a new Post.
+	     var newPostKey = firebase.database().ref('messages').push().key;
+
+	     // Write the new post's data simultaneously in the posts list and the user's post list.
+	     var updates = {};
+			 updates['/messages/' + uid + '/message/' + newPostKey] = sendMessage;
+			 updates['/messages/' + uid + '/status'] = sendStatus;
+
+	     return firebase.database().ref().update(updates);
+
 };
 
-$('.submit').click(function() {
+$(".submit").click(function() {
   newMessage();
 });
 
@@ -55,3 +77,51 @@ $(window).on('keydown', function(e) {
     return false;
   }
 });
+$("li.contact").click(function() {
+	$(".contact-profile").removeAttr('style');
+	$(".message-input").removeAttr('style');
+	$(".content_image").hide();
+  $("li.active").removeClass('active');
+	$(this).addClass('active');
+  var uid = $(this).attr('uid');
+	$(".message-input").attr('uid',uid);
+
+	$.ajax({
+		type: "GET",
+		dataType: "json",
+		url: location.origin+"/Messages/fill/"+uid,
+		success: function (data) {
+			$("#nick_user").html(data.nama_pembeli)
+			var lastIndex = 0;
+
+			firebase.database().ref('messages/'+ uid +'/message').on('value', function(snapshot) {
+			    var value = snapshot.val();
+			    var htmls = [];
+			    $.each(value, function(index, value) {
+						if(value.level == 'admin') {
+							htmls.push('<li class="sent">'+
+							'<img src="images/Y.png" alt="" />'+
+							'<p>'+ value.message +'</p>'+
+							'</li>');
+						} else if(value.level == 'user') {
+							if(value.status == 'none') {
+								$('.contact-status').remove();
+							}
+							htmls.push('<li class="replies">'+
+							'<img src="images/W.jpg" alt="" />'+
+							'<p>'+ value.message +'</p>'+
+							'</li>');
+						}
+			    	lastIndex = index;
+						
+			    });
+			    $("#messages_fill").html(htmls);
+			});
+
+		}
+	});
+
+	$(".messages").animate({ scrollTop: $(document).height()*10 }, 1000);
+});
+
+$(".search")

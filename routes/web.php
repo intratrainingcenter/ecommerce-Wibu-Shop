@@ -4,9 +4,6 @@ Route::get('/Profile/{kode_user}','HomeController@Profile')->name('Profile');
 Route::post('paypal', 'PaymentController@payWithpaypal');
 // route for check status of the payment
 Route::get('status', 'PaymentController@getPaymentStatus');
-
-Route::resource('Messages', 'MessageController');
-
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list')->name('frontend.product_list');
@@ -61,3 +58,7 @@ Route::prefix('pembeli')->group(function() {
 });
 
 Route::post('sendToUser', 'NotiveFrontendController@sendMessage');
+Route::get('/Messages', 'MessageController@index');
+Route::get('/Messages/list', 'MessageController@showList');
+Route::get('/Messages/fill/{id}', 'MessageController@showFill');
+Route::get('/MessagesSearch', 'MessageController@search');

@@ -39,10 +39,10 @@
                 <table>
                   <tr ng-repeat="m in messages">
                     <td style="text-align:right;">
-                      <p ng-if="m.id == '123' && m.level == 'admin'">=> {{ m.message }}</p>
+                      <p ng-if="m.id == '2' && m.level == 'admin'">=> {{ m.message }}</p>
                     </td>
                     <td>
-                      <p ng-if="m.id == '123' && m.level == 'user'">{{ m.message }} <=</p>
+                      <p ng-if="m.id == '2' && m.level == 'user'">{{ m.message }} <=</p>
                     </td>
                   </tr>
                 </table>
