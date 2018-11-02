@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\OpsiPromoTemporary as Temporary;
+use App\OpsiPromo;
 use App\Promo;
 use App\Produk;
 use Illuminate\Http\Request;
@@ -28,9 +30,10 @@ class PromoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $data = Promo::where('kode_promo', $request->kode_promo)->count();
+        return $data;
     }
 
     /**
@@ -44,7 +47,6 @@ class PromoController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_promo' => 'required|max:20',
             'nama_promo' => 'required|max:20',
-            'kode_produk' => 'required',
             'min' => 'required',
             'max' => 'required',
             'tanggal_awal' => 'required',
@@ -52,16 +54,36 @@ class PromoController extends Controller
         ]);
         $check = Promo::where('kode_promo', $request->kode_promo)->exists();
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            $getOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->get();
+            if($getOpsiTemporary) {
+                $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
+            }
+            return redirect()->back()->with('alertfail', 'Tolong isi form dengan benar!');
         } 
         elseif ($check) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            $getOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->get();
+            if($getOpsiTemporary) {
+                $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
+            }
+            return redirect()->back()->with('alertfail', 'Kode promo yang sama sudah ada!');
         }
         else {
+            $getOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->get();
+
+            if($getOpsiTemporary){
+                foreach ($getOpsiTemporary as $item) {
+                    $store = OpsiPromo::create([
+                        'kode_promo' => $item->kode_promo,
+                        'kode_produk' => $item->kode_produk,
+                    ]);
+                }
+
+                $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
+            }
+            
             $create = Promo::create([
                 'kode_promo' => $request->kode_promo,
                 'nama_promo' => $request->nama_promo,
-                'kode_produk' => $request->kode_produk,
                 'min' => $request->min,
                 'max' => $request->max,
                 'tanggal_awal' => $request->tanggal_awal,
@@ -70,7 +92,7 @@ class PromoController extends Controller
                 'diskon'=>$request->diskon,
                 'kode_produk_bonus'=>$request->kode_produk_bonus,
             ]);
-            return redirect()->back();
+            return redirect()->back()->with('alertsuccess', 'Data promo berhasil ditambahkan!');
         }
     }
 
@@ -80,9 +102,10 @@ class PromoController extends Controller
      * @param  \App\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function show(Promo $promo)
+    public function show(Request $request)
     {
-        //
+        $data = Promo::where('kode_promo', $request->kode_promo)->first();
+        return $data;
     }
 
     /**
@@ -91,9 +114,19 @@ class PromoController extends Controller
      * @param  \App\Promo  $promo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Promo $promo)
+    public function edit(Request $request)
     {
-        //
+        $data = Promo::where('kode_promo',$request->kode_promo)->first();
+        $OpsiPromo = OpsiPromo::where('kode_promo',$data->kode_promo)->get();
+        $deleteOpsiTemporary = Temporary::where('kode_promo',$data->kode_promo)->delete();
+        foreach ($OpsiPromo as $item) {
+            $moveToTemporary = Temporary::create([
+            'kode_promo' => $item->kode_promo, 
+            'kode_produk' => $item->kode_produk, 
+            ]);
+        }
+        
+        return $data;
     }
 
     /**
@@ -108,19 +141,29 @@ class PromoController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_promo' => 'required|max:20',
             'nama_promo' => 'required|max:20',
-            'kode_produk' => 'required',
             'min' => 'required',
             'max' => 'required',
             'tanggal_awal' => 'required',
             'tanggal_akhir' => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with('alertfail', 'Gagal');
+            return redirect()->back()->with('alertfail', 'Tolong isi form dengan benar!');
         }
         else {
+            $deleteOpsi = OpsiPromo::where('kode_promo',$request->kode_promo)->delete();
+          
+            $getOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->get();
+          
+            foreach ($getOpsiTemporary as $item) {
+              $save = OpsiPromo::create([
+                'kode_promo' => $item->kode_promo,
+                'kode_produk' => $item->kode_produk,
+              ]);
+            }
+            $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
+
             $create = Promo::where('kode_promo', $code)->update([
                 'nama_promo' => $request->nama_promo,
-                'kode_produk' => $request->kode_produk,
                 'min' => $request->min,
                 'max' => $request->max,
                 'tanggal_awal' => $request->tanggal_awal,
@@ -129,10 +172,13 @@ class PromoController extends Controller
                 'diskon'=>$request->diskon,
                 'kode_produk_bonus'=>$request->kode_produk_bonus,
             ]);
-            return redirect()->back();
         }
     }
 
+    public function UpdateSuccess()
+    {
+        return redirect()->route('promo.index')->with('alertsuccess', 'Data promo berhasil diubah!');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -141,9 +187,13 @@ class PromoController extends Controller
      */
     public function destroy($code)
     {
-        $data = Promo::where('kode_promo', $code)->first();
-        $data->delete();
+        $data = Promo::where('kode_promo', $code)->delete();
+        $Opsi = OpsiPromo::where('kode_promo', $code)->delete();
+        $OpsiTemporary = Temporary::where('kode_promo', $code)->get();
+        if($OpsiTemporary) {
+            Temporary::where('kode_promo', $code)->delete();
+        }
 
-        return redirect()->back();
+        return redirect()->back()->with('alertsuccess', 'Data promo berhasil dihapus!');
     }
 }
