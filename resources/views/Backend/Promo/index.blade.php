@@ -37,7 +37,7 @@
                 </div>
                 @elseif(session('alertsuccess'))
                 <div class="col-md-12 MyAlert">
-                    <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
+                    <div class="alert alert-success alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
                         <p>{{session('alertsuccess')}}</p> 
@@ -46,7 +46,7 @@
                 @endif
                 <div class="box-header">
                     <h3 class="box-title">Data Promo</h3>
-                    <button class="btn btn-success pull-right" data-toggle="modal" data-target="#ModalAdd">Tambah</button>
+                    <button class="btn btn-success pull-right" id="ShowModalAdd">Tambah</button>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -70,9 +70,9 @@
                                 <td>{{date('d F Y', strtotime($item->tanggal_awal))}}</td>
                                 <td>{{date('d F Y', strtotime($item->tanggal_akhir))}}</td>
                                 <td>
-                                    <button class="btn btn-info fa fa-info-circle" data-toggle="modal" data-target="#ModalDetail{{$item->kode_promo}}" title="Rincian"></button>
-                                    <button class="btn btn-warning fa fa-pencil" data-toggle="modal" data-target="#ModalEdit{{$item->kode_promo}}"></button>
-                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_promo}}"></button>
+                                    <button class="btn btn-info fa fa-info-circle ModalDetail" title="Rincian" code="{{$item->kode_promo}}"></button>
+                                    <button class="btn btn-warning fa fa-pencil ModalEdit" title="Edit" code="{{$item->kode_promo}}"></button>
+                                    <button class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#ModalDelete{{$item->kode_promo}}" title="Hapus"></button>
                                 </td>
                             </tr>
                         @endforeach

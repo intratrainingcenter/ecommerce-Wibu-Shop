@@ -16,7 +16,8 @@
 <script src="{{asset('template/bower_components/fastclick/lib/fastclick.js')}}"></script>
 <script src="{{asset('template/dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('template/bower_components/datatables.net-bs/js/dataTables.responsive.js')}}"></script>
-{{-- <!-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --> --}}
+{{-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --}}
+<script src="{{asset('template/dist/js/select2.min.js')}}"></script>
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function() {

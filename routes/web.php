@@ -25,6 +25,12 @@ Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
 Route::resource('promo', 'PromoController')->Middleware('admin_spv');
 Route::resource('kategori','KategoriController')->Middleware('admin_spv');
 Route::resource('user','UserController')->Middleware('spv');
+Route::get('update-promo', 'PromoController@UpdateSuccess')->Middleware('admin_spv');
+Route::get('show-promo', 'PromoController@show')->Middleware('admin_spv');
+Route::get('edit-promo', 'PromoController@edit')->Middleware('admin_spv');
+Route::get('add-opsipromo', 'OpsiPromoController@store')->Middleware('admin_spv');
+Route::get('load-opsipromo', 'OpsiPromoController@show')->Middleware('admin_spv');
+Route::delete('delete-opsipromo', 'OpsiPromoController@destroy')->Middleware('admin_spv');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
 //laporan
