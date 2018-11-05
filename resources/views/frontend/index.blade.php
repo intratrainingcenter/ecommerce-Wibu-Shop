@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="sampleApp">
+{{Auth::guard('pembeli')->id()}}
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Wibu Shop</title>
@@ -35,7 +36,7 @@
   <link href="{{asset('frontend/theme/assets/pages/css/popupChat.css')}}" rel="stylesheet" type="text/css">
   @yield('css')
 </head>
-<body class="ecommerce" ng-controller="SampleCtrl">
+<body class="ecommerce">
   @include('frontend.layout.bar')
 @include('frontend.layout.header')
   @yield('produck')

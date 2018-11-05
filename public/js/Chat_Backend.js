@@ -104,16 +104,13 @@ $("li.contact").click(function() {
 							'<p>'+ value.message +'</p>'+
 							'</li>');
 						} else if(value.level == 'user') {
-							if(value.status == 'none') {
-								$('.contact-status').remove();
-							}
 							htmls.push('<li class="replies">'+
 							'<img src="images/W.jpg" alt="" />'+
 							'<p>'+ value.message +'</p>'+
 							'</li>');
 						}
 			    	lastIndex = index;
-						
+
 			    });
 			    $("#messages_fill").html(htmls);
 			});
