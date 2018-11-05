@@ -8,7 +8,7 @@
             <li><a href="{{route('pembeli.account')}}">My Account</a></li>
             <li class="active">Address</li>
         </ul>
-
+        @include('frontend.pages.account.alert')
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             @include('frontend.pages.account.sidebar')
@@ -33,7 +33,7 @@
                                 <td>{{$item->provinsi}}</td>
                                 <td>{{$item->kota}}</td>
                                 <td align="center">
-                                    <a href="{{route('edit.address', ['id' => $item->kode_alamat])}}" class="btn btn-info" style="color:white">Deetail</a>
+                                    <a href="{{route('edit.address', ['id' => $item->kode_alamat])}}" class="btn btn-info" style="color:white">Detail</a>
                                     <a href="#delete{{$item->kode_alamat}}" id="DeleteAddress" class="btn btn-danger fancybox-fast-view" style="color:white">Delete</a>
                                 </td>
                             </tr>

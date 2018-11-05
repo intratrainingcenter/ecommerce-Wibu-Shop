@@ -8,29 +8,7 @@
             <li><a href="{{route('pembeli.account')}}">My Account</a></li>
             <li class="active">Profile</li>
         </ul>
-        @if (session('alertSuccessPassword'))
-        <div style="position: absolute; z-index: 999; right: -10px; top:150px" class="col-md-6 berhasiltambah">
-			<div class="alert alert-success alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<strong>{{session('alertSuccessPassword')}}</strong>
-			</div>
-        </div>
-        @elseif(session('alertFailProfile'))
-        <div style="position: absolute; z-index: 999; right: -10px; top:150px" class="col-md-6 berhasiltambah">
-			<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<strong>{{session('alertFailProfile')}}</strong>
-			</div>
-        </div>
-        @elseif(session('alertSuccessProfile'))
-        <div style="position: absolute; z-index: 999; right: -10px; top:150px" class="col-md-6 berhasiltambah">
-			<div class="alert alert-success alert-dismissible fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<strong>{{session('alertSuccessProfile')}}</strong>
-			</div>
-        </div>
-        @endif
-
+        @include('frontend.pages.account.alert')
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             @include('frontend.pages.account.sidebar')

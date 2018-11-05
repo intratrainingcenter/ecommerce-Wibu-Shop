@@ -17,7 +17,6 @@ class CreatePromosTable extends Migration
             $table->increments('id');
             $table->string('kode_promo');
             $table->string('nama_promo');
-            $table->string('kode_produk');
             $table->integer('min');
             $table->integer('max');
             $table->date('tanggal_awal');

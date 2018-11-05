@@ -1,6 +1,6 @@
-<div id="AddUser" class="modal fade" role="dialog">
+<div id="AddUser" class="modal fade" role="dialog" data-backdrop="false">
   <div class="modal-dialog">
-    <form method="POST" action="{{ route('user.store') }}">
+    <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -28,6 +28,12 @@
                     <div class="col-md-6">
                         <input  type="password" class="form-control" name="password_confirmation" required>
                     </div>
+                </div> <div class="form-group row">
+                      <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('foto') }}</label>
+                      <div class="col-md-6">
+                          <input type="file" name="foto" class="form-control" onchange="ShowImage(this);" required><br>
+                          <img class="image" src="" alt="">
+                      </div>
                 </div> <div class="form-group row">
                   <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('alamat') }}</label>
                   <div class="col-md-6">

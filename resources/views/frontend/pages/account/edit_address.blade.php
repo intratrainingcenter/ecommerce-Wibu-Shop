@@ -1,6 +1,6 @@
 
 <div id="EditAddressForm" class="col-md-9 col-sm-7" hidden>
-    <h1>Add Address</h1>
+    <h1>Edit Address</h1>
     <div class="content-page">
         <form action="{{route('update.address', ['id' => $address->kode_alamat])}}" method="POST">
         @csrf @method('PATCH')
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
-                <button type="button" class="btn btn-danger pull-right cancel" style="margin:10px">Cancel</button>
+                <button type="button" class="btn btn-danger pull-right CancelEditAddress" style="margin:10px">Cancel</button>
             </div>
         </form>
     </div>

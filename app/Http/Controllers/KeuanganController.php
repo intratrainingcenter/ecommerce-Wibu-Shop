@@ -8,17 +8,20 @@ use Illuminate\Support\Facades\Cache;
 
 class KeuanganController extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth');
+  }
     public function Index() {
       $date = date('Y-m-d');
       $minutes = now()->addMinutes(2);
-      $Shell = Cache::remember('Shellkeuangan',$minutes , function () use ($date) {
-        return DB::table('transaksi_pembelians')
-                  ->get()->sum('sub_total');
+      $getShell = Cache::remember('Shellkeuangan',$minutes , function () {
+        return DB::table('transaksi_pembelians')->get();
       });
-      $Buy = Cache::remember('Buykeuangan',$minutes , function () use ($date) {
-        return DB::table('transaksi_penjualans')
-                    ->get()->sum('grand_total');
+      $getBuy = Cache::remember('Buykeuangan',$minutes , function () {
+        return DB::table('transaksi_penjualans')->get();
       });
+      $Shell  = $getShell->where('updated_at',$date)->sum('sub_total');
+      $Buy    = $getBuy->where('updated_at',$date)->sum('grand_total');
       return view('Backend.LaporanKeuangan.general',compact('Shell','Buy'));
     }
     public function Filter(Request $request) {
@@ -31,8 +34,8 @@ class KeuanganController extends Controller
       $getBuy = Cache::remember('Buyfilterkeuangan',$minutes , function () {
         return DB::table('transaksi_penjualans')->get();
       });
-      $Shell = $getShell->where('created_at','>=',$start)->where('created_at','<',$finis)->sum('sub_total');
-      $Buy = $getBuy->where('created_at','>=',$start)->where('created_at','<',$finis)->sum('grand_total');
+      $Shell = $getShell->where('updated_at','>=',$start)->where('updated_at','<=',$finis)->sum('sub_total');
+      $Buy = $getBuy->where('updated_at','>=',$start)->where('updated_at','<=',$finis)->sum('grand_total');
       return view('Backend.LaporanKeuangan.general',compact('Shell','Buy'));
     }
 }

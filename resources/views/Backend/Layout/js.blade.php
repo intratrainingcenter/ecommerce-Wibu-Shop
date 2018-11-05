@@ -16,7 +16,8 @@
 <script src="{{asset('template/bower_components/fastclick/lib/fastclick.js')}}"></script>
 <script src="{{asset('template/dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('template/bower_components/datatables.net-bs/js/dataTables.responsive.js')}}"></script>
-{{-- <!-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --> --}}
+{{-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --}}
+<script src="{{asset('template/dist/js/select2.min.js')}}"></script>
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
 <!-- onesignal -->
 <link rel="manifest" href="/manifest.json" />
@@ -47,17 +48,6 @@ $(document).ready(function() {
     $('.Reset_password').show()
     $('.edit').val('')
   })
-  // $(document).on('keyup','.password_edit',function () {
-  //   $confrim_password = $('.password_confrimation').val();
-  //   $password = $(this).val();
-  //
-  //   })
-  // $(document).on('keyup','.password_confrimation',function () {
-  //   $confrim_password = $(this).val()
-  //   $password = $('.password_edit').val();
-  //
-  // })
-
 
   // SET TIMEOUT ALERT
   setTimeout(function(){ $('.MyAlert').hide(1000); }, 3000);

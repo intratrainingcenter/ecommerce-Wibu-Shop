@@ -1,5 +1,5 @@
 @foreach ($data as $key => $Delete)
-<div id="DeleteUser{{$Delete->kode_user}}" class="modal fade" role="dialog">
+<div id="DeleteUser{{$Delete->kode_user}}" class="modal fade" role="dialog" data-backdrop="false">
   <div class="modal-dialog">
     <form method="POST" action="{{ route('user.destroy',$Delete->kode_user) }}">
       <div class="modal-content">

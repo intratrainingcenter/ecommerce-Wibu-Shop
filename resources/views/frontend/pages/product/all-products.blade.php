@@ -10,18 +10,21 @@
           <div class="sidebar col-md-3 col-sm-5">
             @include('frontend.layout.ButonProduct')
             <div class="sidebar-filter margin-bottom-25">
+              <form action="{{route('filter.product')}}" method="get">
+                @csrf
               <h2>Filter</h2>
               <h3>Availability</h3>
               <div class="checkbox-list">
-                <label><input type="checkbox" style="float:left"> Sold Out (0)</label>
-                <label><input type="checkbox" style="float:left"> Ready Stock (0)</label>
+                <label><input type="checkbox" style="float:left" name="sold"> Sold Out (0)</label>
+                <label><input type="checkbox" style="float:left" name="ready"> Ready Stock (0)</label>
               </div>
               <h3>Price</h3>
               <div class="checkbox-list">
-                <input placeholder="1,000" type="number" name="dari" min="1" style="width:40%">-
-                <input placeholder="100,000" type="number" name="sampai" min="1" style="width:40%;display:inline-block">
+                <input value="1000" type="number" name="min" min="1" style="width:40%">-
+                <input value="100000" type="number" name="max" min="1" style="width:40%;display:inline-block">
               </div>
                 <button type="submit" class="btn btn-primary" name="button">Filter</button>
+              </form>
             </div>
 
           </div>
@@ -34,7 +37,7 @@
                 </div>
             </div>
             <div class="row product-list">
-              @foreach ($all_products as $item)
+              @forelse ($all_products as $item)
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
@@ -53,7 +56,11 @@
                   </form>
                 </div>
               </div>
-            @endforeach
+              @empty
+                  <div class="col-md-12">
+                    <center><p>Sorry, the product you are looking for doesn't exist!</p></center>
+                  </div>
+              @endforelse
             </div>
             <div class="row">
               <div class="col-md-4 col-sm-4 items-info"></div>

@@ -1,7 +1,6 @@
 <header class="main-header">
     <a href="/" class="logo">
-      <span class="logo-mini"><b>A</b>LT</span>
-      <span class="logo-lg"><b>Sekolah</b>Coding</span>
+      <span class="logo-lg"><b>Wibu</b>Shop</span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -11,12 +10,20 @@
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset('template/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              @if (auth::user()->foto != '')
+              <img src="{{Storage::url(auth::user()->foto)}}" class="user-image" alt="User Image">
+              @else
+              <img src="{{asset('images/foto.png')}}" class="user-image" alt="User Image">
+              @endif
               <span class="hidden-xs">{{auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="{{asset('template/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                  @if (auth::user()->foto != '')
+                  <img src="{{Storage::url(auth::user()->foto)}}" class="img-circle" alt="User Image">
+                  @else
+                  <img src="{{asset('images/foto.png')}}" class="user-image" alt="User Image">
+                  @endif
                 <p>
                   {{auth::user()->name}}
                   <small>{{auth::user()->email}}</small>
