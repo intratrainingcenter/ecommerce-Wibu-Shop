@@ -1,3 +1,5 @@
+var email = $("input.uEmail").val();
+
 var OneSignal = window.OneSignal || [];
 OneSignal.push(function() {
   OneSignal.init({
@@ -8,5 +10,5 @@ OneSignal.push(function() {
     },
     allowLocalhostAsSecureOrigin: true,
   });
-  OneSignal.sendTag("email", "lolikawaiimoe@gmail.com");
+  OneSignal.sendTag("email", email);
 });

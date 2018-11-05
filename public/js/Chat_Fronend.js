@@ -1,51 +1,61 @@
-$(".fancybox-fast-view").click(function() {
+$(document).ready(function() {
 	var uid = $(".message-input").attr('uid');
-	$.ajax({
-		type: "GET",
-		dataType: "json",
-		url: location.origin+"/Messages/fill/"+uid,
-		success: function (data) {
-			$("#nick_user").html(data.nama_pembeli)
-			var lastIndex = 0;
+	if(uid > 0) {
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: location.origin+"/Messages/fill/"+uid,
+			success: function (data) {
+				$("#nick_user").html(data.nama_pembeli)
+				var lastIndex = 0;
 
-			firebase.database().ref('messages/'+ uid +'/message').on('value', function(snapshot) {
-				var value = snapshot.val();
-				var htmls = [];
-				$.each(value, function(index, value) {
+				firebase.database().ref('messages/'+ uid +'/message').on('value', function(snapshot) {
+					var value = snapshot.val();
+					var htmls = [];
+					$.each(value, function(index, value) {
+						if(value.level == 'user') {
+							htmls.push('<div class="direct-chat-msg right">'+
+								'<div class="direct-chat-info clearfix">'+
+									'<span class="direct-chat-name pull-right" id="nick_user"></span>'+
+									'<span class="direct-chat-timestamp pull-left"><p>'+ value.date +'</p></span>'+
+								'</div>'+
+								'<img class="direct-chat-img" src="images/W.jpg" alt="Message User Image">'+
+								'<div class="direct-chat-text">'+
+									'<p>'+ value.message +'</p>'+
+								'</div>'+
+							'</div>');
+						} else if(value.level == 'admin') {
+							htmls.push('<div class="direct-chat-msg">'+
+								'<div class="direct-chat-info clearfix">'+
+									'<span class="direct-chat-name pull-left">Admin Weaboo Shop</span>'+
+									'<span class="direct-chat-timestamp pull-right"><p>'+ value.date +'</p></span>'+
+								'</div>'+
+								'<img class="direct-chat-img" src="images/Y.png" alt="Message User Image">'+
+								'<div class="direct-chat-text">'+
+									'<p>'+ value.message +'</p>'+
+								'</div>'+
+							'</div>');
+						}
+						lastIndex = index;
+					});
 
-					if(value.level == 'user') {
-						htmls.push('<div class="direct-chat-msg right">'+
-							'<div class="direct-chat-info clearfix">'+
-								'<span class="direct-chat-name pull-right" id="nick_user"></span>'+
-								'<span class="direct-chat-timestamp pull-left"><p>'+ value.date +'</p></span>'+
-							'</div>'+
-							'<img class="direct-chat-img" src="images/W.jpg" alt="Message User Image">'+
-							'<div class="direct-chat-text">'+
-								'<p>'+ value.message +'</p>'+
-							'</div>'+
-						'</div>');
-					} else if(value.level == 'admin') {
-						htmls.push('<div class="direct-chat-msg">'+
-							'<div class="direct-chat-info clearfix">'+
-								'<span class="direct-chat-name pull-left">Admin Weaboo Shop</span>'+
-								'<span class="direct-chat-timestamp pull-right"><p>'+ value.date +'</p></span>'+
-							'</div>'+
-							'<img class="direct-chat-img" src="images/Y.png" alt="Message User Image">'+
-							'<div class="direct-chat-text">'+
-								'<p>'+ value.message +'</p>'+
-							'</div>'+
-						'</div>');
-					}
-					lastIndex = index;
-
+					$("#messages_fill").html(htmls);
+					$(".messages").animate({ scrollTop: $(document).height()*10 }, 6000);
 				});
-				$("#messages_fill").html(htmls);
-				$(".messages").animate({ scrollTop: $(document).height()*10 }, 3000);
-			});
 
-		}
-
-	});
+				firebase.database().ref('messages/'+ uid +'/status').on('value', function(snapshot) {
+						var value = snapshot.val();
+						if(value.status == 'user') {
+							$(".fa-comments-o").hide();
+					    $(".fa-comments").show();
+						} else {
+							$(".fa-comments-o").show();
+							$(".fa-comments").hide();
+						}
+				});
+			}
+		});
+	}
 
 });
 

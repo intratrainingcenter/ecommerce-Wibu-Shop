@@ -18,6 +18,11 @@
 <script src="{{asset('template/bower_components/datatables.net-bs/js/dataTables.responsive.js')}}"></script>
 {{-- <!-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --> --}}
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
+<!-- onesignal -->
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script src="{{asset('js/OneSignal.js')}}" type="text/javascript"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
   $('.edit_password').hide()

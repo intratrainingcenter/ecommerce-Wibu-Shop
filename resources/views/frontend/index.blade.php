@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{Auth::guard('pembeli')->id()}}
 <html lang="en">
 <head>
   <meta charset="utf-8">

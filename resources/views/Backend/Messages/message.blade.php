@@ -14,7 +14,7 @@
           @forelse($table as $data)
   				<li class="contact" uid="{{ $data->id }}">
   					<div class="wrap">
-              
+
   						<img src="{{asset('images/W.jpg')}}" alt="" />
   						<div class="meta">
   							<p class="name">{{ $data->nama_pembeli }}</p>

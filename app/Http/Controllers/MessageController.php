@@ -36,5 +36,4 @@ class MessageController extends Controller
       return $table->toJson();
     }
 
-
 }

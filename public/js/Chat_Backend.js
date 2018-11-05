@@ -11,7 +11,6 @@ $('.preview').html("<span>there hasn't been a message<span>");
 				firebase.database().ref('messages/'+ data[i].id +'/message').limitToLast(1).on('value', function(snapshot) {
 						var value = snapshot.val();
 						$.each(value, function(index, value) {
-							console.log(value.level);
 							if(value.level == 'admin') {
 								$('.preview[uid*='+ value.id +']').html('<span>You: </span>'+value.message);
 							} else if(value.level == 'user') {
@@ -21,7 +20,6 @@ $('.preview').html("<span>there hasn't been a message<span>");
 				});
 				firebase.database().ref('messages/'+ data[i].id +'/status').on('value', function(snapshot) {
 						var value = snapshot.val();
-						console.log(value.status, value.id);
 						if(value.status == 'admin') {
 							$('.contact[uid*='+ value.id +'] div.wrap').prepend('<span class="contact-status busy"></span>');
 						} else {
@@ -40,6 +38,7 @@ function newMessage() {
 	if($.trim(message) == '') {
 		return false;
 	}
+
 	$(".message-input input").val(null);
 	$(".contact.active .preview").html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height()*10 }, "fast");

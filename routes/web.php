@@ -57,8 +57,7 @@ Route::prefix('pembeli')->group(function() {
     Route::delete('delete_address/{id}', 'PembeliAuthController@DeleteAddress')->name('delete.address')->middleware('auth:pembeli');
 });
 
-Route::post('sendToUser', 'NotiveFrontendController@sendMessage');
-Route::get('/Messages', 'MessageController@index');
+Route::get('/Messages', 'MessageController@index')->name('Messages');
 Route::get('/Messages/list', 'MessageController@showList');
 Route::get('/Messages/fill/{id}', 'MessageController@showFill');
 Route::get('/MessagesSearch', 'MessageController@search');
