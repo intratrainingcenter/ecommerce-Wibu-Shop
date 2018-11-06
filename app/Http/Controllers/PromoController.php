@@ -98,7 +98,7 @@ class PromoController extends Controller
 
             if($request->diskon != NULL) {
               $content      = array(
-                  "en" => "Temukan Diskon Hingga $request->diskon%, Untuk Pembelian Barang dari $request->tanggal_awal Sampai $request->tanggal_akhir"
+                  "en" => "Temukan Diskon Hingga Rp.$request->diskon, Untuk Pembelian Barang dari $request->tanggal_awal Sampai $request->tanggal_akhir"
               );
             } else if($kode_produk_bonus =! NULL) {
               $content      = array(
@@ -143,7 +143,7 @@ class PromoController extends Controller
             $response = curl_exec($ch);
             curl_close($ch);
 
-            // return redirect()->back()->with('alertsuccess', 'Data promo berhasil ditambahkan!');
+            return redirect()->back()->with('alertsuccess', 'Data promo berhasil ditambahkan!');
         }
     }
 
