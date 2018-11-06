@@ -76,7 +76,34 @@
     			}
         });
       });
+//pengajuan
+      $('#showmodaltambah').click(function() {
+        var info = $('#isikode').val();
+        $('#infokode').html(info);
+        $('#simpan').modal('show');
+      });
+      $('#Diajukan').click(function() {
+        var code = $('#isikode').val();
+        let token = $('input[name=_token]').val();
+        // alert(token);
+        // alert(code);
+        $.ajax({
+          url: '/pembelianProduct/product/pengajuan/'+code,
+          type: 'POST',
+          data: { kode: code,
+                _token:token,
+                _method: 'POST',
+            },
+        })
+        .done(function() {
+          console.log("success");
+          $('#simpan').modal('hide');
+        })
+        .fail(function() {
+          console.log("error");
+        });
 
+      });
   });
   // loadOpsi
         function loadopsi(kode) {

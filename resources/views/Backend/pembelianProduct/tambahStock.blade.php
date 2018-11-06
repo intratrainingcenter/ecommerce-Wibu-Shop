@@ -144,7 +144,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-3d btn-danger" data-dismiss="modal" style="margin-right:20px">Batal</button>
-                        <button type="button" id="ya" class="btn btn-3d btn-success">Ajukan</button>
+                        <button type="button" id="Diajukan" class="btn btn-3d btn-success">Ajukan</button>
                         @csrf @method('POST')
                         </form>
                     </div>

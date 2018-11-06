@@ -58,21 +58,15 @@ class TransaksiPembelianController extends Controller
     }
     public function hapusOpsi(Request $request)  {
         $delete = TransaksiPembelian::where('id',$request->id)->first();
-        //   return ['data'=>$delete->all(),'id'=>$request->id];
-        // dd($request->id,$delete->all());
         $delete->delete();
         return Response()->json($delete);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\TransaksiPembelian  $transaksiPembelian
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TransaksiPembelian $transaksiPembelian)
-    {
-        //
+    public function pengajuan(Request $request)  {
+        // dd($request->all());
+        $pengajuan = TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode);
+        $pengajuan->status = "Pengajuan";
+        $pengajuan->save();
+        return response()->json($pengajuan);
     }
 
     /**
