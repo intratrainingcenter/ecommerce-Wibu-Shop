@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="{{asset('template/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 <link rel="stylesheet" href="{{asset('template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 <link rel="stylesheet" href="{{asset('template/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css')}}">
-<!-- <link rel="stylesheet" href="{{asset('template/bower_components/loading-page/loading.css')}}"> -->
+<link rel="stylesheet" href="{{asset('template/bower_components/loading-page/loading.css')}}">
+<link rel="stylesheet" href="{{asset('template/dist/css/select2.min.css')}}">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

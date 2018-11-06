@@ -90,4 +90,76 @@ class FrontendControler extends Controller
       }
       return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
     }
+
+    public function search(Request $request)
+    {
+      $input        = $request->search;
+      $kategori     = Kategori::all();
+      $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+      $all_products = Produk::where('nama_produk', 'like', '%'.$input.'%')->orderBy('created_at','desc')->paginate(9);
+      $user         = Auth::guard('pembeli')->id();
+      $Pembeli      = Pembeli::where('id', $user)->first();
+      if( $user != NULL) {
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+      } else {
+          $UserCart = [];
+      }
+      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+    }
+
+    public function filter(Request $request)
+    {
+      $kategori     = Kategori::all();
+      $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
+      $user         = Auth::guard('pembeli')->id();
+      $Pembeli      = Pembeli::where('id', $user)->first();
+      if( $user != NULL) {
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+      } else {
+        $UserCart = [];
+      }
+      $soldout        = $request->sold;
+      $ready          = $request->ready;
+      $minimum        = $request->min;
+      $maximum        = $request->max;
+      if ($soldout == 'on' && $ready == 'on') {
+        $all_products = Produk::orderBy('created_at','desc')->paginate(9);
+        if ($minimum != null && $maximum != null) {
+          $all_products = Produk::where('harga', '>=', $minimum)->where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($maximum != null && $minimum == null) {
+          $all_products = Produk::where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($minimum != null && $maximum == null) {
+          $all_products = Produk::where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
+        }
+      } elseif($ready == 'on' && $soldout != 'on') {
+        $all_products = Produk::where('status', 'Siap')->orderBy('created_at','desc')->paginate(9);
+        if ($minimum != null && $maximum != null) {
+          $all_products = Produk::where('status', 'Siap')->where('harga', '>=', $minimum)->where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($maximum != null && $minimum == null) {
+          $all_products = Produk::where('status', 'Siap')->where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($minimum != null && $maximum == null) {
+          $all_products = Produk::where('status', 'Siap')->where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
+        }
+      } elseif ($soldout == 'on' && $ready != 'on') {
+        $all_products = Produk::where('status', 'Tidak Siap')->orderBy('created_at','desc')->paginate(9);
+        if ($minimum != null && $maximum != null) {
+          $all_products = Produk::where('status', 'Tidak Siap')->where('harga', '>=', $minimum)->where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($maximum != null && $minimum == null) {
+          $all_products = Produk::where('status', 'Tidak Siap')->where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($minimum != null && $maximum == null) {
+          $all_products = Produk::where('status', 'Tidak Siap')->where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
+        }
+      } elseif ($soldout != 'on' && $ready != 'on') {
+        $all_products = Produk::orderBy('created_at','desc')->paginate(9);
+        if ($minimum != null && $maximum != null) {
+          $all_products = Produk::where('harga', '>=', $minimum)->where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($maximum != null && $minimum == null) {
+          $all_products = Produk::where('harga', '<=', $maximum)->orderBy('created_at','desc')->paginate(9);
+        } elseif ($minimum != null && $maximum == null) {
+          $all_products = Produk::where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
+        }
+      }
+      
+      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+    }
 }
