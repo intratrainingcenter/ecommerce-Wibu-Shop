@@ -10,7 +10,6 @@
                     <label for=""> Province</label>
                     <select id="province" class="form-control" name="id_provinsi" id="province" required>
                         <option value="">--Select Province--</option>
-                        <option value="{{$address->id_provinsi}}" selected>{{$address->provinsi}}</option>
                     </select>
                     <input type="hidden" name="provinsi" id="province_name" value="">
                 </div>
@@ -20,7 +19,6 @@
                     <label for=""> City</label>
                     <select class="form-control" name="id_kota" id="city" required>
                         <option value="">--Select City--</option>
-                        <option value="{{$address->id_kota}}" selected>{{$address->kota}}</option>
                     </select>
                     <input type="hidden" name="kota" id="city_name" value="">
                 </div>

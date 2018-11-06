@@ -214,7 +214,7 @@ class PembeliAuthController extends Controller
           CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST     => "GET",
           CURLOPT_HTTPHEADER        => array(
-            "key: 8b81c63a1553aa8b18c05314ab4f13df"
+            "key: 9e75f7010c470ab9611072c4444605be"
           ),
         ));
         $response   = curl_exec($curl);
@@ -235,7 +235,7 @@ class PembeliAuthController extends Controller
           CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST     => "GET",
           CURLOPT_HTTPHEADER        => array(
-            "key: 8b81c63a1553aa8b18c05314ab4f13df"
+            "key: 9e75f7010c470ab9611072c4444605be"
           ),
         ));
         $response   = curl_exec($curl);

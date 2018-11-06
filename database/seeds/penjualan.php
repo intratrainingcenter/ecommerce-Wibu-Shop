@@ -19,6 +19,7 @@ class penjualan extends Seeder
           'bayar'  => '123000',
           'tanggal'    => Carbon::now(),
           'status'    => 'Received',
+          'keterangan' => 'alamat, catatan pembeli',
           'created_at' => Carbon::now(),
           'updated_at'  => Carbon::now(),
       ],  [  'kode_transaksi_penjualan' => 'TrR01',
@@ -28,6 +29,7 @@ class penjualan extends Seeder
           'bayar'  => '123000',
           'tanggal'    => Carbon::now(),
           'status'    => 'pending',
+          'keterangan' => 'alamat, catatan pembeli',
           'created_at' => Carbon::now(),
           'updated_at'  => Carbon::now(),
       ],[
@@ -38,6 +40,7 @@ class penjualan extends Seeder
           'tanggal'    => Carbon::now(),
           'bayar'  => '1923100',
           'status'    => 'Received',
+          'keterangan' => 'alamat, catatan pembeli',
           'created_at' => Carbon::now(),
           'updated_at'  => Carbon::now(),
       ]]);

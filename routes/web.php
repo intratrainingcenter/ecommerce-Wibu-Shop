@@ -21,6 +21,8 @@ Route::get('load-cart', 'FrontEndKeranjangController@LoadCart')->name('load.cart
 Route::post('update-item/{kode_keranjang}/{kode_produk}','FrontEndKeranjangController@updateItem')->name('update.item')->middleware('auth:pembeli');
 Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');
 Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
+Route::get('checkout-address', 'FrontendControler@checkoutAddress')->name('checkout.address')->middleware('auth:pembeli');
+Route::get('shipping-cost', 'FrontendControler@shippingCost')->name('shipping.cost')->middleware('auth:pembeli');
 Auth::routes();
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');

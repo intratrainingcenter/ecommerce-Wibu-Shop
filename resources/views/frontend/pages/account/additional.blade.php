@@ -34,6 +34,7 @@
             $("#addressName").val('');
         })
         $("#EditAddress").click(function(){
+            GetProvince();
             $("#DetailAddress").hide();
             $("#EditAddressForm").show();
         })
@@ -90,14 +91,6 @@
                 $("#city_name").val(text);
                 
             }
-        })
-
-        $("#province").click(function() {
-            GetProvince();
-        })
-        $("#city").click(function() {
-            let province = $("#province").val();
-            GetCity(province);
         })
 
         // Show Profile Image

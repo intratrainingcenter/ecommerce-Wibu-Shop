@@ -1,4 +1,5 @@
 @extends('frontend.index')
+@extends('frontend.pages.checkout.additional')
 @section('produck')
     <div class="main">
       <div class="container">
@@ -23,12 +24,22 @@
                       <div class="col-md-6 col-sm-6">
                         <h3>Shipping Address</h3>
                         @forelse ($addresses as $address)
-                        <label>
-                        Please select your delivery address
-                        </label>
-                        <select name="alamat" id="">
-                          <option value="{{$address->kode_alamat}}">{{$address->nama_alamat}}</option>
-                        </select>
+                        <div class="form-group">
+                          <div class="col-md-12" id="label">
+                            <label>Please select your delivery address</label>
+                          </div>
+                          <div class="col-md-6">
+                              <select name="address" id="address" class="form-control" style="color:black" required>
+                                <option value="">--Select Address--</option>
+                                <option value="{{$address->kode_alamat}}">{{$address->nama_alamat}}</option>
+                              </select>
+                              <input type="hidden" name="provinceID" id="province">
+                              <input type="hidden" name="cityID" id="city">
+                          </div>
+                          <div class="col-md-6">
+                            <a href="{{route('account.address')}}" class="btn btn-primary" style="color:white">Add Another Address</a>
+                          </div>
+                        </div>
                             
                         @empty
                         <label class="col-md-8">
@@ -41,15 +52,36 @@
                       </div>
                       <div class="col-md-6 col-sm-6">
                         <h3>Delivery Courier</h3>
+                        <p>*All items delivered from Jakarta</p>
                         <div class="form-group">
-                          <label>
-                          Please select the preferred courier
-                        </label>
-                        <select name="" id="" class="form-control">
-                          <option value="">JNE</option>
-                          <option value="">TIKI</option>
-                          <option value="">POS</option>
-                        </select>
+                          <div class="col-md-12">
+                            <label>
+                              Please select the preferred courier
+                            </label>
+                          </div>
+                          <div class="col-md-6">
+                            <select name="courier" id="courier" class="form-control" style="color:black" required>
+                                <option value="">--Select Courier--</option>
+                                <option value="jne">JNE</option>
+                                <option value="pos">POS Indonesia (POS)</option>
+                                <option value="tiki">Citra Van Titipan Kilat (TIKI)</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6" id="jne" hidden>
+                              <select name="jneOption" id="jneOption" class="form-control" style="color:black" required>
+
+                              </select>
+                          </div>
+                          <div class="col-md-6" id="pos" hidden>
+                              <select name="posOption" id="posOption" class="form-control" style="color:black" required>
+
+                              </select>
+                          </div>
+                          <div class="col-md-6" id="tiki" hidden>
+                              <select name="tikiOption" id="tikiOption" class="form-control" style="color:black" required>
+
+                              </select>
+                          </div>
                       </div>
                     </div>
                   </div>
