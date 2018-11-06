@@ -81,17 +81,17 @@ class PromoController extends Controller
                 $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
             }
 
-            // $create = Promo::create([
-            //     'kode_promo' => $request->kode_promo,
-            //     'nama_promo' => $request->nama_promo,
-            //     'min' => $request->min,
-            //     'max' => $request->max,
-            //     'tanggal_awal' => $request->tanggal_awal,
-            //     'tanggal_akhir' => $request->tanggal_akhir,
-            //     'jenis_promo'=>$request->jenis_promo,
-            //     'diskon'=>$request->diskon,
-            //     'kode_produk_bonus'=>$request->kode_produk_bonus,
-            // ]);
+            $create = Promo::create([
+                'kode_promo' => $request->kode_promo,
+                'nama_promo' => $request->nama_promo,
+                'min' => $request->min,
+                'max' => $request->max,
+                'tanggal_awal' => $request->tanggal_awal,
+                'tanggal_akhir' => $request->tanggal_akhir,
+                'jenis_promo'=>$request->jenis_promo,
+                'diskon'=>$request->diskon,
+                'kode_produk_bonus'=>$request->kode_produk_bonus,
+            ]);
 
             // Notification
             $Bonus = Produk::where('kode_produk', $request->kode_produk_bonus)->first();
@@ -101,9 +101,6 @@ class PromoController extends Controller
                   "en" => "Temukan Diskon Hingga $request->diskon%, Untuk Pembelian Barang dari $request->tanggal_awal Sampai $request->tanggal_akhir"
               );
             } else if($kode_produk_bonus =! NULL) {
-              // dd($kode_produk_bonus);
-              // dd($Bonus);
-              // $Bonus = $Bonus->nama_produk;
               $content      = array(
                   "en" => "Dapatkan $Bonus->nama_produk Gratis, Untuk pembelian barang tertentu!, Buruan Sebelum Kehabisan"
               );
