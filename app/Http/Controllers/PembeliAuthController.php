@@ -123,7 +123,7 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
-        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->where('status', 'Pending')->with('detailProduct')->get();
         return view('frontend.pages.account.change_password', compact('UserCart', 'user', 'kategori', 'all_products', 'new_products'));
     }
 

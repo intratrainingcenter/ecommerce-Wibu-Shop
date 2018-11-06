@@ -21,7 +21,7 @@ class FrontendControler extends Controller
       $user = Auth::guard('pembeli')->id();
       $Pembeli = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
           $UserCart = [];
       }
@@ -40,7 +40,7 @@ class FrontendControler extends Controller
       $all_products = Produk::where('kode_kategori', $kode_kategori)->orderBy('created_at','desc')->paginate(9);
       $user = Auth::guard('pembeli')->id();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
           $UserCart = [];
       }
@@ -54,7 +54,7 @@ class FrontendControler extends Controller
       $Pembeli = Pembeli::where('id', $user)->first();
       $addresses  = Alamat::where('kode_pembeli', $Pembeli->kode_pembeli)->get();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $SUM            = $UserCart->sum('sub_total');
       } else {
           $UserCart = [];
@@ -115,7 +115,7 @@ class FrontendControler extends Controller
       $Pembeli = Pembeli::where('id', $user)->first();
       $Promo  = OpsiPromo::where('kode_produk', $kode_porduk)->get();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
           $UserCart = [];
       }
@@ -136,7 +136,7 @@ class FrontendControler extends Controller
       $user         = Auth::guard('pembeli')->id();
       $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
           $UserCart = [];
       }
@@ -152,7 +152,7 @@ class FrontendControler extends Controller
       $user         = Auth::guard('pembeli')->id();
       $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
           $UserCart = [];
       }
@@ -166,7 +166,7 @@ class FrontendControler extends Controller
       $user         = Auth::guard('pembeli')->id();
       $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
         $UserCart = [];
       }

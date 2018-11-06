@@ -23,32 +23,22 @@
                   <div class="panel-body row">
                       <div class="col-md-6 col-sm-6">
                         <h3>Shipping Address</h3>
-                        @forelse ($addresses as $address)
                         <div class="form-group">
                           <div class="col-md-12" id="label">
                             <label>Please select your delivery address</label>
                           </div>
                           <div class="col-md-6">
-                              <select name="address" id="address" class="form-control" style="color:black" required>
+                            <select name="address" id="address" class="form-control" style="color:black" required>
                                 <option value="">--Select Address--</option>
+                                @foreach ($addresses as $address)
                                 <option value="{{$address->kode_alamat}}">{{$address->nama_alamat}}</option>
+                                @endforeach
                               </select>
-                              <input type="hidden" name="provinceID" id="province">
-                              <input type="hidden" name="cityID" id="city">
                           </div>
                           <div class="col-md-6">
                             <a href="{{route('account.address')}}" class="btn btn-primary" style="color:white">Add Another Address</a>
                           </div>
                         </div>
-                            
-                        @empty
-                        <label class="col-md-8">
-                          You haven't add any address yet!
-                        </label>
-                        <div class="col-md-4">
-                          <a href="{{route('account.address')}}" class="btn btn-primary" style="color:white">Add Address</a>
-                        </div>
-                        @endforelse
                       </div>
                       <div class="col-md-6 col-sm-6">
                         <h3>Delivery Courier</h3>
@@ -62,7 +52,7 @@
                           <div class="col-md-6">
                             <select name="courier" id="courier" class="form-control" style="color:black" required>
                                 <option value="">--Select Courier--</option>
-                                <option value="jne">JNE</option>
+                                <option value="jne">Jalur Nugraha Ekakurir (JNE)</option>
                                 <option value="pos">POS Indonesia (POS)</option>
                                 <option value="tiki">Citra Van Titipan Kilat (TIKI)</option>
                             </select>
@@ -133,11 +123,11 @@
                           </li>
                           <li>
                             <em>Shipping cost</em>
-                            <strong class="price"><span>Rp.</span>3.00</strong>
+                            <strong class="price"><span>Rp.</span>0.00</strong>
                           </li>
                           <li class="checkout-total-price">
                             <em>Grand Total</em>
-                            <strong class="price"><span>Rp.</span>56.00</strong>
+                            <strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
                           </li>
                         </ul>
                       </div>

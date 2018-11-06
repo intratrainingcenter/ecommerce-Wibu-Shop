@@ -22,7 +22,10 @@ function Address(code) {
         success: function (response) {
             text = "<strong><p>" + response.alamat + ", " + response.kota + ", " + response.provinsi + "</p></strong>";
             $("#label").html(text);
-            $("#city").val(response.id_kota);
+            $("#courier").val("");
+            $("#pos").hide();
+            $("#jne").hide();
+            $("#tiki").hide();
             shippingCost(response.id_kota, 1);
         }
     });
