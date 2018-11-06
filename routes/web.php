@@ -40,7 +40,7 @@ Route::get('/pembelianProduct/product/{kode}','TransaksiPembelianController@tamb
 Route::post('/pembelianProduct/product/tambah','TransaksiPembelianController@tampilOpsi');
 Route::get('/pembelianProduct/product/loadopsi/{kode}','TransaksiPembelianController@loadOpsi');
 Route::delete('/pembelianProduct/product/hapusopsi','TransaksiPembelianController@hapusOpsi');
-Route::post('/pembelianProduct/product/pengajuan/{code}','TransaksiPembelianController@pengajuan');
+Route::post('/pembelianProduct/product/pengajuan','TransaksiPembelianController@pengajuan');
 //laporan
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi')->Middleware('spv_owner');
 Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi')->Middleware('spv_owner');;

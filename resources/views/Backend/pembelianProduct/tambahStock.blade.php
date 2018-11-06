@@ -12,7 +12,7 @@
       </div>
     </section>
     <section class="content">
-      <div class="">
+      <div id="showbaru" class="">
         <div class="form-element">
           <div class="col-md-12 padding-0">
             <div class="col-md-12" style="padding:20px">

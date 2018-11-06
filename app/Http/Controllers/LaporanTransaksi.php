@@ -17,7 +17,7 @@ class LaporanTransaksi extends Controller
       $Shell = Cache::remember('ShellTransaksi', $minutes, function () use ($date) {
             return DB::table('transaksi_pembelians')
                     ->join('users','users.kode_user','=','transaksi_pembelians.kode_user')
-                    ->select('transaksi_pembelians.*' ,'users.*', 'transaksi_pembelians.created_at as creat')
+                    ->select('transaksi_pembelians.*' ,'users.*','transaksi_pembelians.created_at as creat')
                     ->where('transaksi_pembelians.created_at',$date)
                     ->get();
           });
@@ -37,7 +37,7 @@ class LaporanTransaksi extends Controller
       $finis = $request->sampai;
       $getShell = Cache::remember('ShellfilterTransaksi', $minutes, function ()  {
           return DB::table('transaksi_pembelians')->join('users','users.kode_user','=','transaksi_pembelians.kode_user')
-                      ->select('transaksi_pembelians.*' ,'users.*', 'transaksi_pembelians.created_at as creat')
+                      ->select('transaksi_pembelians.*','transaksi_pembelians.created_at as creat','users.*','transaksi_pembelians.status as stausproduct')
                       ->get();
       });
       $getBuy = Cache::remember('BuyfilterTransaksi', $minutes, function () {

@@ -85,10 +85,8 @@
       $('#Diajukan').click(function() {
         var code = $('#isikode').val();
         let token = $('input[name=_token]').val();
-        // alert(token);
-        // alert(code);
         $.ajax({
-          url: '/pembelianProduct/product/pengajuan/'+code,
+          url: '/pembelianProduct/product/pengajuan',
           type: 'POST',
           data: { kode: code,
                 _token:token,
@@ -98,6 +96,8 @@
         .done(function() {
           console.log("success");
           $('#simpan').modal('hide');
+          $('#showmodaltambah').prop('disabled', true);
+          showbaru(code);
         })
         .fail(function() {
           console.log("error");
@@ -105,6 +105,24 @@
 
       });
   });
+  //new Pengajuan
+        function showbaru(kode) {
+          let token = $('input[name=_token]').val();
+            $.ajax({
+              url: '#',
+              type: 'GET',
+              data: { newkode: kode,
+                      _token: token,
+                      _method: 'GET',
+                }
+            })
+            .done(function() {
+              console.log("success");
+            })
+            .fail(function() {
+              console.log("error");
+            });
+        }
   // loadOpsi
         function loadopsi(kode) {
           var opsi = "";

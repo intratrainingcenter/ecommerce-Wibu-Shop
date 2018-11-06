@@ -13,7 +13,7 @@ class TransaksiPembelianController extends Controller
     public function index()  {
         $Pembelian = DB::table('transaksi_pembelians')->max('id');
         $Max= $Pembelian+1;
-        $date = date('mdhi');
+        $date = date('mdhis');
         $idUser = Auth::user()->id;
         $code = 'TRB-'.$Max.$date.$idUser;
         $Product = DB::table('produks')->get();
@@ -62,33 +62,10 @@ class TransaksiPembelianController extends Controller
         return Response()->json($delete);
     }
     public function pengajuan(Request $request)  {
-        // dd($request->all());
-        $pengajuan = TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode);
-        $pengajuan->status = "Pengajuan";
-        $pengajuan->save();
+        $pengajuan = TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)->update([
+          'status' => "Pengajuan",
+        ]);
+        // dd($pengajuan);
         return response()->json($pengajuan);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TransaksiPembelian  $transaksiPembelian
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TransaksiPembelian $transaksiPembelian)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\TransaksiPembelian  $transaksiPembelian
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TransaksiPembelian $transaksiPembelian)
-    {
-        //
     }
 }
