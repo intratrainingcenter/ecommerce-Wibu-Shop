@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+/** All Paypal Details class **/
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
-/** All Paypal Details class **/
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -29,15 +29,12 @@ class PaymentController extends Controller
     {
         /** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
-            $paypal_conf['client_id'],
-            $paypal_conf['secret'])
-        );
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
     public function index()
     {
-        return view('paywithpaypal');
+        return view('frontend.pages.checkout.pay');
     }
     public function payWithpaypal(Request $request)
     {
