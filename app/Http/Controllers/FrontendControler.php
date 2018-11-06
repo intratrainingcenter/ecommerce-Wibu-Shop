@@ -53,10 +53,11 @@ class FrontendControler extends Controller
       $Pembeli = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $SUM            = $UserCart->sum('sub_total');
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.checkout.shop-checkout',compact(['all_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.checkout.shop-checkout',compact(['SUM','all_products','kategori','new_products', 'UserCart']));
     }
     public function Shop_item($kode_porduk) {
       $user = Auth::guard('pembeli')->id();
