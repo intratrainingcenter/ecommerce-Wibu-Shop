@@ -22,7 +22,6 @@
 <!-- onesignal -->
 <link rel="manifest" href="/manifest.json" />
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script src="{{asset('js/OneSignal.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

@@ -31,7 +31,7 @@
 <!-- Js Message -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-<script src="{{asset('js/Chat_Fronend.js')}}"></script>
+<script src="{{asset('js/Chat_Frontend.js')}}"></script>
 <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
 <!-- Firebase  -->
@@ -45,9 +45,6 @@
         Layout.initTouchspin();
         Layout.initSliderRange();
         Layout.initUniform();
-        
-        //SET TIMEOUT ALERT
-    setTimeout(function(){ $('.alert-notification').hide(1000); }, 3000);
     });
 </script>
 @yield('js.new')

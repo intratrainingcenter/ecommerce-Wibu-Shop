@@ -6,20 +6,24 @@ $(document).ready(function() {
 			dataType: "json",
 			url: location.origin+"/Messages/fill/"+uid,
 			success: function (data) {
-				$("#nick_user").html(data.nama_pembeli)
 				var lastIndex = 0;
+				var src = data.foto;
+				$("#nick_user").html(data.nama_pembeli);
+
+				// $("img #img_user").attr('src' , img);
 
 				firebase.database().ref('messages/'+ uid +'/message').on('value', function(snapshot) {
 					var value = snapshot.val();
 					var htmls = [];
 					$.each(value, function(index, value) {
+						console.log(src);
 						if(value.level == 'user') {
 							htmls.push('<div class="direct-chat-msg right">'+
 								'<div class="direct-chat-info clearfix">'+
 									'<span class="direct-chat-name pull-right" id="nick_user"></span>'+
 									'<span class="direct-chat-timestamp pull-left"><p>'+ value.date +'</p></span>'+
 								'</div>'+
-								'<img class="direct-chat-img" src="images/W.jpg" alt="Message User Image">'+
+								'<img class="direct-chat-img" src="'+location.origin+'/images/avatar.png"  alt="Message User Image">'+
 								'<div class="direct-chat-text">'+
 									'<p>'+ value.message +'</p>'+
 								'</div>'+
@@ -30,7 +34,7 @@ $(document).ready(function() {
 									'<span class="direct-chat-name pull-left">Admin Weaboo Shop</span>'+
 									'<span class="direct-chat-timestamp pull-right"><p>'+ value.date +'</p></span>'+
 								'</div>'+
-								'<img class="direct-chat-img" src="images/Y.png" alt="Message User Image">'+
+								'<img class="direct-chat-img" src="'+location.origin+'/images/Y.png" alt="Message User Image">'+
 								'<div class="direct-chat-text">'+
 									'<p>'+ value.message +'</p>'+
 								'</div>'+
