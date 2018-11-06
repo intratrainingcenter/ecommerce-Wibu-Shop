@@ -22,9 +22,22 @@
                   <div class="panel-body row">
                       <div class="col-md-6 col-sm-6">
                         <h3>Shipping Address</h3>
+                        @forelse ($addresses as $address)
                         <label>
                         Please select your delivery address
-                      </label>
+                        </label>
+                        <select name="alamat" id="">
+                          <option value="{{$address->kode_alamat}}">{{$address->nama_alamat}}</option>
+                        </select>
+                            
+                        @empty
+                        <label class="col-md-8">
+                          You haven't add any address yet!
+                        </label>
+                        <div class="col-md-4">
+                          <a href="{{route('account.address')}}" class="btn btn-primary" style="color:white">Add Address</a>
+                        </div>
+                        @endforelse
                       </div>
                       <div class="col-md-6 col-sm-6">
                         <h3>Delivery Courier</h3>

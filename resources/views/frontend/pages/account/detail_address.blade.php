@@ -17,27 +17,37 @@
             <div id="DetailAddress" class="col-md-9 col-sm-7">
                 <h1>Detail Address</h1>
                 <div class="content-page">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for=""> Province</label>
-                            <h3>{{$address->provinsi}}</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""> Province</label>
+                                <h3>{{$address->provinsi}}</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for=""> City</label>
-                            <h3>{{$address->kota}}</h3>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""> City</label>
+                                <h3>{{$address->kota}}</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Address</label>
-                            <h3>{{$address->alamat}}</h3>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Address</label>
+                                <h3>{{$address->alamat}}</h3>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <button type="button" class="btn btn-success pull-right" id="EditAddress" style="margin:10px">Edit</button>
-                        <a href="{{route('account.address')}}" class="btn btn-danger pull-right" style="margin:10px;color:white">Back</a>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="">Address Name</label>
+                                <h3>{{$address->nama_alamat}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-success pull-right" id="EditAddress" style="margin:10px">Edit</button>
+                            <a href="{{route('account.address')}}" class="btn btn-danger pull-right" style="margin:10px;color:white">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>

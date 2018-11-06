@@ -69,7 +69,7 @@
                                 <td>{{$no++}}</td>
                                 <td>{{$item->kode_produk}}</td>
                                 <td>{{$item->nama_produk}}</td>
-                                <td>{{$item->kode_kategori}}</td>
+                                <td>{{$item->GetKategori->nama_kategori}}</td>
                                 <td align="right">{{$item->stok}}</td>
                                 <td align="right">{{number_format($item->harga,0,"",".")}}</td>
                                 <td>{{$item->status}}</td>
