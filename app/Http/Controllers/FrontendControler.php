@@ -10,7 +10,7 @@ use App\Kategori;
 use App\reviewProduct;
 use App\Keranjang;
 use App\Pembeli;
-use App\Promo;
+use App\OpsiPromo;
 
 
 class FrontendControler extends Controller
@@ -61,7 +61,7 @@ class FrontendControler extends Controller
     public function Shop_item($kode_porduk) {
       $user = Auth::guard('pembeli')->id();
       $Pembeli = Pembeli::where('id', $user)->first();
-      $Promo  = Promo::where('kode_produk', $kode_porduk)->get();
+      $Promo  = OpsiPromo::where('kode_produk', $kode_porduk)->get();
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
       } else {
@@ -159,7 +159,7 @@ class FrontendControler extends Controller
           $all_products = Produk::where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
         }
       }
-      
+
       return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
     }
 }
