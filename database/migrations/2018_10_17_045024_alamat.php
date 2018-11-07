@@ -17,6 +17,7 @@ class Alamat extends Migration
             $table->increments('id');
             $table->string('kode_pembeli');
             $table->string('kode_alamat');
+            $table->string('nama_alamat');
             $table->text('alamat');
             $table->string('id_provinsi');
             $table->string('provinsi');

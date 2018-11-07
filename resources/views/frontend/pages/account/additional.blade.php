@@ -28,11 +28,14 @@
             $("#AddAddressForm").hide();
             $("#EditAddressForm").hide();
             $("#Address").show();
+            $("#province").val('');
+            $("#city").val('');
+            $("#address").val('');
+            $("#addressName").val('');
         })
         $("#EditAddress").click(function(){
             $("#DetailAddress").hide();
             $("#EditAddressForm").show();
-            GetProvince();
         })
         $(".CancelEditAddress").click(function() {
             $("#EditAddressForm").hide();
@@ -52,12 +55,12 @@
         })
         // disable mousewheel on a input number field when in focus
         $('#EditForm').on('focus', 'input[type=number]', function (e) {
-        $(this).on('mousewheel.disableScroll', function (e) {
-            e.preventDefault()
-        })
+            $(this).on('mousewheel.disableScroll', function (e) {
+                e.preventDefault()
+            })
         })
         $('#EditForm').on('blur', 'input[type=number]', function (e) {
-        $(this).off('mousewheel.disableScroll')
+            $(this).off('mousewheel.disableScroll')
         })
 
         // Show Image Onchange
@@ -89,6 +92,14 @@
             }
         })
 
+        $("#province").click(function() {
+            GetProvince();
+        })
+        $("#city").click(function() {
+            let province = $("#province").val();
+            GetCity(province);
+        })
+
         // Show Profile Image
         function ShowImage(input) {
             if (input.files && input.files[0]) {
@@ -114,7 +125,7 @@
                         option += "<option value='"+val.province_id+"'>"+val.province+"</option>";
                     })
 
-                    $("#province").html("<option value=''>--Select City--</option>"+option);
+                    $("#province").html("<option value=''>--Select Province--</option>"+option);
                     
                 }
             })

@@ -250,6 +250,7 @@ class PembeliAuthController extends Controller
         $get_pembeli    = Pembeli::where('id', $get_auth_id)->first();
         $get_max_id     = Alamat::max('id') + 1;
         $validator      = Validator::make($request->all(), [
+            'nama_alamat' => 'required',
             'id_provinsi' => 'required',
             'provinsi'    => 'required',
             'id_kota'     => 'required',
@@ -262,6 +263,7 @@ class PembeliAuthController extends Controller
                 $add    = Alamat::create([
                     'kode_pembeli'  => $get_pembeli->kode_pembeli,
                     'kode_alamat'   => 'ALMT'. date('ymdhis') . $get_max_id,
+                    'nama_alamat'   => $request->nama_alamat,
                     'alamat'        => $request->alamat,
                     'id_provinsi'   => $request->id_provinsi,
                     'provinsi'      => $request->provinsi,
@@ -289,6 +291,7 @@ class PembeliAuthController extends Controller
     public function UpdateAddress(Request $request, $code)
     {
         $validator      = Validator::make($request->all(), [
+            'nama_alamat' => 'required',
             'id_provinsi' => 'required',
             'provinsi'  => 'required',
             'id_kota'   => 'required',
@@ -299,6 +302,7 @@ class PembeliAuthController extends Controller
             return redirect()->back()->with('alertFailUpdateAddress', 'Something wrong in your input value. No data changed!');
         } else {
             $update    = Alamat::where('kode_alamat', $code)->update([
+                'nama_alamat'   => $request->nama_alamat,
                 'alamat'        => $request->alamat,
                 'id_provinsi'   => $request->id_provinsi,
                 'provinsi'      => $request->provinsi,

@@ -20,6 +20,7 @@
                     <table class="table cell-bordered table-hover" width="100%">
                         <thead>
                             <th>#</th>
+                            <th>Address Name</th>
                             <th width="300px">Address</th>
                             <th>Province</th>
                             <th>City</th>
@@ -29,6 +30,7 @@
                             @forelse ($address as $item)
                             <tr>
                                 <td>{{$no++}}</td>
+                                <td>{{$item->nama_alamat}}</td>
                                 <td>{{$item->alamat}}</td>
                                 <td>{{$item->provinsi}}</td>
                                 <td>{{$item->kota}}</td>

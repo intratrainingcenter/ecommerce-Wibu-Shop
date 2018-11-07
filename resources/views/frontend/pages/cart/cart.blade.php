@@ -56,7 +56,7 @@
               </tr>
               @empty
                 <tr>
-                  <td colspan="6"><center><p>Your shopping cart is empty!</p></center></td>
+                  <td colspan="7"><center><p>Your shopping cart is empty!</p></center></td>
                 </tr>
               @endforelse
             </table>
@@ -66,7 +66,7 @@
               <ul>
                 <li class="shopping-total-price">
                   <em>Grand Total</em>
-                  <strong class="price"><span>Rp.{{number_format($SUM)}}</span></strong>
+                  <strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
                 </li>
               </ul>
             </div>

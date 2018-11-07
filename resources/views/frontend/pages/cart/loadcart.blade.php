@@ -45,7 +45,7 @@
         </tr>
         @empty
         <tr>
-            <td colspan="6"><center><p>Your shopping cart is empty!</p></center></td>
+            <td colspan="7"><center><p>Your shopping cart is empty!</p></center></td>
         </tr>
         @endforelse
     </table>

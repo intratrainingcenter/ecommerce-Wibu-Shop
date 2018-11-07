@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label for="kode_produk" class="col-md-3">Produk</label>
                             <div class="col-md-7">
-                            <select name="kode_produk" id="kode_produk" style="width: 325px;" required>
+                            <select name="kode_produk" id="kode_produk" style="width: 325px;">
                                 <option value="">--Pilih Produk--</option>
                                 @foreach($data_produk as $item)
                                 <option value="{{ $item->kode_produk }}">{{ $item->nama_produk }}</option>

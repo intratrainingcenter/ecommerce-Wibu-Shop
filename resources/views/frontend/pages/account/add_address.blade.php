@@ -3,6 +3,7 @@
     <div class="content-page">
         <form action="{{route('add.address')}}" method="POST">
         @csrf
+        <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for=""> Province</label>
@@ -24,13 +25,24 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Address</label>
-                    <textarea name="alamat" class="form-control" cols="30" rows="4" required></textarea>
+                    <textarea name="alamat" class="form-control" cols="30" rows="4" id="address" required></textarea>
                 </div>
             </div>
-            <div class="row">
-                <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
-                <button type="button" class="btn btn-danger pull-right CancelAddress" style="margin:10px">Cancel</button>
+        </div>
+        <div class="row">
+            <div class="col-md-8" style="margin-top:-15px">
+                <div class="form-group">
+                    <label for="">Address Name</label>
+                    <input type="text" name="nama_alamat" class="form-control" placeholder="Home Address" id="addressName" required>
+                </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>
+                    <button type="button" class="btn btn-danger pull-right CancelAddress" style="margin:10px">Cancel</button>
+                </div>
+            </div>
+        </div>
         </form>
     </div>
 </div>
