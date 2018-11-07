@@ -21,6 +21,10 @@ Route::get('load-cart', 'FrontEndKeranjangController@LoadCart')->name('load.cart
 Route::post('update-item/{kode_keranjang}/{kode_produk}','FrontEndKeranjangController@updateItem')->name('update.item')->middleware('auth:pembeli');
 Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');
 Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
+Route::get('/data-pembeli', 'PembeliController@index')->name('frontend.pembeli');
+Route::get('/nonAktif-pembeli', 'PembeliController@show')->name('pembeli.nonAktive');
+Route::delete('/delete-pembeli/{id}', 'PembeliController@destroy')->name('delete.pembeli');
+Route::post('/restore-pembeli/{id}', 'PembeliController@update')->name('restore.pembeli');
 Auth::routes();
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');
