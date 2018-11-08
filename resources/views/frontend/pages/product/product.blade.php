@@ -43,17 +43,13 @@
               <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
               </ol>
               <div class="carousel-inner">
                 <div class="item active">
-                  <img src="{{asset('frontend/theme/assets/pages/img/index-sliders/slide1.jpg')}}" class="img-responsive" alt="Berry Lace Dress">
+                  <img src="{{asset('images/image1.jpg')}}" class="img-responsive" alt="Berry Lace Dress">
                 </div>
                 <div class="item">
-                  <img src="{{asset('frontend/theme/assets/pages/img/index-sliders/slide2.jpg')}}" class="img-responsive" alt="Berry Lace Dress">
-                </div>
-                <div class="item">
-                  <img src="{{asset('frontend/theme/assets/pages/img/index-sliders/slide3.jpg')}}" class="img-responsive" alt="Berry Lace Dress">
+                  <img src="{{asset('images/image2.jpg')}}" class="img-responsive" alt="Berry Lace Dress">
                 </div>
               </div>
             </div>

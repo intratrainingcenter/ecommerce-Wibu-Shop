@@ -131,9 +131,31 @@
                           </li>
                         </ul>
                       </div>
-                      <div class="clearfix"></div>
+                      <div class="clearfix">
+                        <form action="" method="post">
+                            <input type="hidden" name="cmd" value="_cart">
+                            <input type="hidden" name="upload" value="1">
+                            <input type="hidden" name="business" value="edgyweeb48@gmail.com">
+                            @foreach($UserCart as $cartItem)
+                            <input type="hidden" name="item_name_{{$loop->iteration}}" value="{{$cartItem->detailProduct->nama_produk}}">
+                            <input type="hidden" name="item_number_{{$loop->iteration}}" value="{{$cartItem->kode_produk}}">
+                            <input type="hidden" name="quantity_{{$loop->iteration}}" value="{{$cartItem->jumlah}}">
+                            <input type="hidden" name="amount_{{$loop->iteration}}" value="{{$hargaUSD[$cartItem->kode_produk]}}">
+                            <input type="hidden" name="shipping_{{$loop->iteration}}" value="0.30">
+                            @endforeach
+                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          <input name="submit" id="paypalbtn" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-rect-paypalcheckout-34px.png" value="PayPal" formaction="https://www.paypal.com/cgi-bin/webscr">
+                        </form>
+                      </div>
+                      @php
+                          $count = count($UserCart);
+                      @endphp
+                      @if ($count == null)
+                        <button class="btn btn-primary pull-right" type="submit" id="button-confirm" disabled>Confirm Order</button>
+                      @else
                       <button class="btn btn-primary pull-right" type="submit" id="button-confirm">Confirm Order</button>
-                      <button type="button" class="btn btn-default pull-right margin-right-20">Cancel</button>
+                      @endif
+                      <button type="button" class="btn btn-default pull-right margin-right-20" id="tes">Cancel</button>
                     </div>
                   </div>
               </div>
@@ -143,3 +165,5 @@
       </div>
     </div>
 @endsection
+
+

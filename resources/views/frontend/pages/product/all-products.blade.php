@@ -52,7 +52,7 @@
                   <form action="{{route('frontend.addtocart', ['id' => $item->kode_produk])}}" method="post">
                     @csrf
                     <input type="hidden" name="jumlah" value="1">
-                  <button type="submit" class="btn btn-default add2cart">Add to cart</button>
+                    <button type="submit" class="btn btn-default add2cart">Add to cart</button>
                   </form>
                 </div>
               </div>
