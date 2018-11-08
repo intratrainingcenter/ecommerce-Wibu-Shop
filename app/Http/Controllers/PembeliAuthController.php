@@ -334,10 +334,17 @@ class PembeliAuthController extends Controller
     {
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->get();
-        $keranjang      = Keranjang::where('kode_keranjang', $code)->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->first();
+        $Items          = Keranjang::where('kode_keranjang', $code)->get();
+        return view('frontend.pages.account.order', compact('Items', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
+    }
+
+    public function Back()
+    {
+        return redirect()->back();
     }
 }
