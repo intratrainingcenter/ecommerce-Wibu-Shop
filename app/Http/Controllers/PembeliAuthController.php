@@ -340,7 +340,8 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->first();
         $Items          = Keranjang::where('kode_keranjang', $code)->get();
-        return view('frontend.pages.account.order', compact('Items', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
+        $SUM            = $Items->sum('sub_total');
+        return view('frontend.pages.account.order', compact('SUM', 'Items', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
     }
 
     public function Back()

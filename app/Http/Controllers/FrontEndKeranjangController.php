@@ -56,7 +56,7 @@ class FrontEndKeranjangController extends Controller
         $Pembeli        = Pembeli::where('id', $user)->first();
         $Product        = Produk::where('kode_produk', $code)->first();
         $CountTransaction = Penjualan::where('kode_pembeli', $Pembeli->kode_pembeli)->count() + 1;
-        $kode_keranjang = 'CART-' . $Pembeli->kode_pembeli . '-' . $CountTransaction;
+        $kode_keranjang = 'CART-' . $user . '-' . $CountTransaction;
         $checkKeranjang = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->where('status', 'Pending')->exists();
         $keranjang      = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->where('status', 'Pending')->first();
 

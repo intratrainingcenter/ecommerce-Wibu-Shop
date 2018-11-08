@@ -56,12 +56,19 @@
               @endforeach
             </table>
             </div>
-
-            <div class="shopping-total">
+            <div class="checkout-total-block">
               <ul>
-                <li class="shopping-total-price">
+                <li>
+                  <em>Sub total</em>
+                  <strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
+                </li>
+                <li>
+                  <em>Shipping cost</em>
+                  <strong class="price"><span>Rp.</span>{{number_format($orders->ongkir)}}</strong>
+                </li>
+                <li class="checkout-total-price">
                   <em>Grand Total</em>
-                  <strong class="price"><span>Rp.{{number_format($orders->grand_total)}}</span></strong>
+                  <strong class="price"><span>Rp.</span>{{number_format($orders->grand_total)}}</strong>
                 </li>
               </ul>
             </div>

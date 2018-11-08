@@ -18,8 +18,8 @@ class CreateTransaksiPenjualansTable extends Migration
             $table->string('kode_transaksi_penjualan');
             $table->string('kode_keranjang');
             $table->string('kode_pembeli');
+            $table->integer('ongkir');
             $table->integer('grand_total');
-            $table->integer('bayar');
             $table->date('tanggal');
             $table->enum('status',['Order','Paid','Pending','Sent','Received']);
             $table->text('keterangan');

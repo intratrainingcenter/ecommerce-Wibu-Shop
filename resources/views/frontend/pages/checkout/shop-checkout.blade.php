@@ -3,16 +3,13 @@
 @section('produck')
     <div class="main">
       <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Store</a></li>
-            <li class="active">Checkout</li>
-        </ul>
         <div class="row margin-bottom-40">
           <div class="col-md-12 col-sm-12">
             <h1>Checkout</h1>
             <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
               <div id="shipping-address" class="panel panel-default">
+                <form action="{{route('confirm.order')}}" method="post">
+                  @csrf
                 <div class="panel-heading">
                   <h2 class="panel-title">
                     <a>
@@ -28,52 +25,70 @@
                             <label>Please select your delivery address</label>
                           </div>
                           <div class="col-md-6">
+                            @php
+                                $countAddress = count($addresses);
+                            @endphp
                             <select name="address" id="address" class="form-control" style="color:black" required>
                                 <option value="">--Select Address--</option>
-                                @foreach ($addresses as $address)
-                                <option value="{{$address->kode_alamat}}">{{$address->nama_alamat}}</option>
-                                @endforeach
+                                @if ($countAddress == null)
+                                  <option value="" disabled>You haven't add any address</option>
+                                @else
+                                  @foreach ($addresses as $address)
+                                  <option value="{{$address->kode_alamat}}">{{$address->nama_alamat}}</option>
+                                  @endforeach
+                                @endif
                               </select>
-                          </div>
-                          <div class="col-md-6">
-                            <a href="{{route('account.address')}}" class="btn btn-primary" style="color:white">Add Another Address</a>
+                            </div>
+                            <div class="col-md-6">
+                              <a href="{{route('account.address')}}" class="btn btn-primary" style="color:white">Add Address</a>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6">
                         <h3>Delivery Courier</h3>
                         <p>*All items delivered from Jakarta</p>
-                        <div class="form-group">
-                          <div class="col-md-12">
-                            <label>
-                              Please select the preferred courier
-                            </label>
-                          </div>
-                          <div class="col-md-6">
-                            <select name="courier" id="courier" class="form-control" style="color:black" required>
-                                <option value="">--Select Courier--</option>
-                                <option value="jne">Jalur Nugraha Ekakurir (JNE)</option>
-                                <option value="pos">POS Indonesia (POS)</option>
-                                <option value="tiki">Citra Van Titipan Kilat (TIKI)</option>
-                            </select>
-                          </div>
-                          <div class="col-md-6" id="jne" hidden>
-                              <select name="jneOption" id="jneOption" class="form-control" style="color:black" required>
-
-                              </select>
-                          </div>
-                          <div class="col-md-6" id="pos" hidden>
-                              <select name="posOption" id="posOption" class="form-control" style="color:black" required>
-
-                              </select>
-                          </div>
-                          <div class="col-md-6" id="tiki" hidden>
-                              <select name="tikiOption" id="tikiOption" class="form-control" style="color:black" required>
-
-                              </select>
+                        <div class="row">
+                          <div class="form-group">
+                            <div class="col-md-6">
+                              <label>
+                                Please select the preferred courier
+                              </label>
+                              <div class="col-md-12">
+                                <select name="courier" id="courier" class="form-control" style="color:black" required>
+                                    <option value="">--Select Courier--</option>
+                                    <option value="jne">Jalur Nugraha Ekakurir (JNE)</option>
+                                    <option value="pos">POS Indonesia (POS)</option>
+                                    <option value="tiki">Citra Van Titipan Kilat (TIKI)</option>
+                                  </select>
+                                  <input type="hidden" name="ongkir" id="ongkir">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="col-md-12" id="jne" hidden>
+                                <label>
+                                    Please select the preferred service
+                                  </label>
+                                  <select id="jneOption" class="form-control" style="color:black" required>
+                                  </select>
+                                </div>
+                                <div class="col-md-12" id="pos" hidden>
+                                  <label>
+                                    Please select the preferred service
+                                  </label>
+                                  <select id="posOption" class="form-control" style="color:black" required>
+                                    </select>
+                              </div>
+                              <div class="col-md-12" id="tiki" hidden>
+                                <label>
+                                  Please select the preferred service
+                                </label>
+                                <select id="tikiOption" class="form-control" style="color:black" required>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                       </div>
-                    </div>
                   </div>
                   <div class="panel-body row">
                     <div class="col-md-12 clearfix">
@@ -99,7 +114,7 @@
                               {{$Items->kode_produk}}
                             </td>
                             <td class="checkout-quantity" align="center">
-                                {{$Items->jumlah}}
+                              {{$Items->jumlah}}
                             </td>
                             <td class="checkout-price" align="right">
                               <strong><span>Rp.</span>{{number_format($Items->detailProduct->harga)}}</strong>
@@ -109,11 +124,11 @@
                             </td>
                           </tr>
                           @empty
-                            <tr>
-                              <td colspan="6"><center><p>Your shopping cart is empty!</p></center></td>
+                          <tr>
+                            <td colspan="6"><center><p>Your shopping cart is empty!</p></center></td>
                             </tr>
-                          @endforelse
-                        </table>
+                            @endforelse
+                          </table>
                       </div>
                       <div class="checkout-total-block">
                         <ul>
@@ -123,7 +138,7 @@
                           </li>
                           <li>
                             <em>Shipping cost</em>
-                            <strong class="price"><span>Rp.</span>0.00</strong>
+                            <strong class="price" id="ongkirValue"><span>Rp.</span>0</strong>
                           </li>
                           <li class="checkout-total-price">
                             <em>Grand Total</em>
@@ -132,32 +147,23 @@
                         </ul>
                       </div>
                       <div class="clearfix">
-                        <form action="" method="post">
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="upload" value="1">
-                            <input type="hidden" name="business" value="edgyweeb48@gmail.com">
-                            @foreach($UserCart as $cartItem)
-                            <input type="hidden" name="item_name_{{$loop->iteration}}" value="{{$cartItem->detailProduct->nama_produk}}">
-                            <input type="hidden" name="item_number_{{$loop->iteration}}" value="{{$cartItem->kode_produk}}">
-                            <input type="hidden" name="quantity_{{$loop->iteration}}" value="{{$cartItem->jumlah}}">
-                            <input type="hidden" name="amount_{{$loop->iteration}}" value="{{$hargaUSD[$cartItem->kode_produk]}}">
-                            <input type="hidden" name="shipping_{{$loop->iteration}}" value="0.30">
-                            @endforeach
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          <input name="submit" id="paypalbtn" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/blue-rect-paypalcheckout-34px.png" value="PayPal" formaction="https://www.paypal.com/cgi-bin/webscr">
-                        </form>
+                      </div>
+                      <div class="form-group">
+                        <label for="keterangan">Note (optional)</label>
+                        <textarea name="keterangan" id="keterangan"rows="3" class="form-control"></textarea>
                       </div>
                       @php
                           $count = count($UserCart);
-                      @endphp
+                          @endphp
                       @if ($count == null)
-                        <button class="btn btn-primary pull-right" type="submit" id="button-confirm" disabled>Confirm Order</button>
+                      <button class="btn btn-primary pull-right" type="submit" id="button-confirm" disabled>Confirm Order</button>
                       @else
                       <button class="btn btn-primary pull-right" type="submit" id="button-confirm">Confirm Order</button>
                       @endif
-                      <button type="button" class="btn btn-default pull-right margin-right-20" id="tes">Cancel</button>
+                      <a href="{{route('frontend.cart')}}" class="btn btn-default pull-right margin-right-20">Cancel</a>
                     </div>
                   </div>
+                </form>
               </div>
             </div>
           </div>

@@ -23,6 +23,7 @@ Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('f
 Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
 Route::get('checkout-address', 'FrontendControler@checkoutAddress')->name('checkout.address')->middleware('auth:pembeli');
 Route::get('shipping-cost', 'FrontendControler@shippingCost')->name('shipping.cost')->middleware('auth:pembeli');
+Route::post('confirm-order', 'TransaksiPenjualanController@store')->name('confirm.order')->middleware('auth:pembeli');
 Auth::routes();
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');
