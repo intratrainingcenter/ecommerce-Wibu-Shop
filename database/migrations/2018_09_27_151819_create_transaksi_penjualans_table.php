@@ -21,8 +21,10 @@ class CreateTransaksiPenjualansTable extends Migration
             $table->integer('ongkir');
             $table->integer('grand_total');
             $table->date('tanggal');
-            $table->enum('status',['Order','Paid','Pending','Sent','Received']);
-            $table->text('keterangan');
+            $table->enum('status',['Order','Paid','Pending','Sent','Received','Cancel']);
+            $table->string('kode_alamat');
+            $table->text('service');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

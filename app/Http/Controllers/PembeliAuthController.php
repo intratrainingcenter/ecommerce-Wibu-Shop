@@ -338,10 +338,14 @@ class PembeliAuthController extends Controller
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->first();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->with('getAddress')->first();
         $Items          = Keranjang::where('kode_keranjang', $code)->get();
+        foreach ($Items as $item) {
+            $hargaUSD[$item->kode_produk] = $item->detailProduct->harga / 15000;
+        }
+        $ongkir         = $orders->ongkir / 15000;
         $SUM            = $Items->sum('sub_total');
-        return view('frontend.pages.account.order', compact('SUM', 'Items', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
+        return view('frontend.pages.account.order', compact('SUM', 'hargaUSD', 'Items', 'ongkir', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
     }
 
     public function Back()

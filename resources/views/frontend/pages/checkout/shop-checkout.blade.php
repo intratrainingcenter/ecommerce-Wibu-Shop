@@ -9,7 +9,17 @@
             <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
               <div id="shipping-address" class="panel panel-default">
                 <form action="{{route('confirm.order')}}" method="post">
-                  @csrf
+                    @csrf
+                    @if (count($UserCart) == 0)
+                    <input type="hidden" name="kode_keranjang" value="">
+                    @else
+                    <input type="hidden" name="kode_keranjang" value="{{$kode_keranjang}}">
+                    @endif
+                    <input type="hidden" id="sub_total" value="{{$SUM}}">
+                    <input type="hidden" name="ongkir" id="ongkir" value="0">
+                    <input type="hidden" name="grand_total" id="grand_total">
+                    <input type="hidden" name="alamat" id="addressValue">
+                    <input type="hidden" name="service" id="service">
                 <div class="panel-heading">
                   <h2 class="panel-title">
                     <a>
@@ -54,13 +64,12 @@
                                 Please select the preferred courier
                               </label>
                               <div class="col-md-12">
-                                <select name="courier" id="courier" class="form-control" style="color:black" required>
+                                <select name="courier" id="courier" class="form-control" style="color:black" required disabled>
                                     <option value="">--Select Courier--</option>
                                     <option value="jne">Jalur Nugraha Ekakurir (JNE)</option>
                                     <option value="pos">POS Indonesia (POS)</option>
                                     <option value="tiki">Citra Van Titipan Kilat (TIKI)</option>
                                   </select>
-                                  <input type="hidden" name="ongkir" id="ongkir">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -142,7 +151,7 @@
                           </li>
                           <li class="checkout-total-price">
                             <em>Grand Total</em>
-                            <strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
+                            <strong class="price" id="grandTotalValue"><span>Rp.</span>{{number_format($SUM)}}</strong>
                           </li>
                         </ul>
                       </div>

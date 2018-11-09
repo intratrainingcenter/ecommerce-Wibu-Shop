@@ -9,7 +9,7 @@ Route::get('status', 'PaymentController@getPaymentStatus');
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list')->name('frontend.product_list');
-Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
+Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout')->middleware('auth:pembeli');
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
 Route::get('/all-products','FrontendControler@AllProducts')->name('all_products');
 Route::get('/search-products','FrontendControler@search')->name('search.product');

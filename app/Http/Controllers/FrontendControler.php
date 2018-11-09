@@ -56,13 +56,13 @@ class FrontendControler extends Controller
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         foreach ($UserCart as $item) {
-                $hargaUSD[$item->kode_produk] = $item->detailProduct->harga / 15000;
+                $kode_keranjang = $item->kode_keranjang;
         }
         $SUM            = $UserCart->sum('sub_total');
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.checkout.shop-checkout',compact(['SUM','hargaUSD','addresses','all_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.checkout.shop-checkout',compact(['SUM','kode_keranjang','addresses','all_products','kategori','new_products', 'UserCart']));
     }
     public function checkoutAddress(Request $request)
     {
