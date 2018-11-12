@@ -42,6 +42,7 @@
                       @csrf
                         <div class="product-quantity">
                           <input type="text" value="1" readonly name="jumlah" class="form-control input-sm">
+                          <input type="hidden" name="kode_promo" value="PROMO2">
                         </div>
                         <button class="btn btn-primary" type="submit">Add to cart</button>
                     </form>

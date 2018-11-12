@@ -1,9 +1,9 @@
 @section('css')
     <style>
-    .quantity::-webkit-inner-spin-button, 
-    .quantity::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
+    .quantity::-webkit-inner-spin-button,
+    .quantity::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
     </style>
 @endsection
@@ -19,12 +19,18 @@ $(document).ready(function(){
             url: "{{route('show.cart')}}",
             data: "",
             success: function (response) {
-                $.each(response, function (index, value) { 
+
+                $.each(response, function (index, value) {
                     $("#"+value.id).on('change paste keyup mousewheel', function(){
                     let jumlah = $(this).val();
-                    UpdateItem(value.kode_keranjang, value.kode_produk, jumlah, value.harga)
+                    // var id = $(this).attr('idproduct');
+                    if (jumlah == 0) {
+                      UpdateItem(value.kode_keranjang, value.kode_produk, 1, value.harga)
+                    }else {
+                      UpdateItem(value.kode_keranjang, value.kode_produk, jumlah, value.harga)
+                    }
                     })
-                });   
+                });
             }
         });
     }
@@ -56,10 +62,38 @@ $(document).ready(function(){
 				'_method'         :'POST'
             },
             success: function (data) {
-                LoadCart();           
+                LoadCart();
             }
         });
     }
+    // $(document).on('keyup','.quantity',function () {
+    //   var qty = $(this).val();
+    //   var diskon = "";
+    //   var id = $(this).attr('idproduct');
+    //   if (qty == 0) {
+    //   }else {
+    //     $.ajax({
+    //       url: 'getPromo/' + id,
+    //       type: 'GET',
+    //       data: {param1: id,
+    //             qty: qty,
+    //           _method: 'GET'
+    //         }
+    //     })
+    //     .done(function(data) {
+    //       $.each(data,function(index, el) {
+    //         $.each(el,function (ind,el2) {
+    //           diskon += el2.diskon;
+    //         })
+    //         console.log(diskon);
+    //       });
+    //       $('.promo').html(diskon);
+    //     })
+    //     .fail(function() {
+    //       console.log("error");
+    //     });
+    //   }
+    // });
 })
 </script>
 @endsection

@@ -41,7 +41,7 @@ class OpsiPromoController extends Controller
             'kode_promo' => $request->kode_promo,
             'kode_produk' => $request->kode_produk,
           ])->first();
-        
+
         if($check == null) {
             $data = Temporary::create([
                 'kode_promo'    =>  $request->kode_promo,
@@ -74,9 +74,16 @@ class OpsiPromoController extends Controller
      * @param  \App\OpsiPromo  $opsiPromo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function getPromo(Request $request)
     {
-
+        $produck = OpsiPromo::where('kode_produk',$request->param1)->get();
+        if ($produck != null) {
+            foreach ($produck as $key => $value) {
+              $check[] = Promo::where('kode_promo',$value->kode_promo)->where('min','<=',$request->qty)->where('max','>=',$request->qty)->get();
+            }
+              return $check;
+        }
+          // return $produck;
     }
 
     /**

@@ -26,12 +26,12 @@
             @if ($Items->kode_promo != NULL)
                 <a href="">{{$Items->kode_promo}}</a>
             @else
-                <span>No Promo</span>
+                <p class="promo">No Promo</p>
             @endif
         </td>
         <td class="goods-page-quantity">
             @csrf
-                <input type="number" id="{{$Items->id}}" value="{{$Items->jumlah}}" min="1" class="form-control input-sm quantity">
+                <input type="number" id="{{$Items->id}}" value="{{$Items->jumlah}}" min="1" idproduct="{{$Items->kode_produk}}" class="form-control input-sm quantity">
         </td>
         <td class="goods-page-price" align="right">
             <strong><span>Rp.</span>{{number_format($Items->detailProduct->harga)}}</strong>
@@ -53,6 +53,13 @@
 
     <div class="shopping-total">
         <ul>
+          @if ($typediskon == "Bonus")
+            <li>
+              <em>Bonus </em>
+              <strong>{{ $diskon }}</strong>
+            </li>
+            @else
+          @endif
         <li class="shopping-total-price">
             <em>Grand Total</em>
             <strong class="price"><span>Rp.{{number_format($SUM)}}</span></strong>

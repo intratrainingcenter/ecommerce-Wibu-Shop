@@ -35,6 +35,7 @@ Route::get('edit-promo', 'PromoController@edit')->Middleware('admin_spv');
 Route::get('add-opsipromo', 'OpsiPromoController@store')->Middleware('admin_spv');
 Route::get('load-opsipromo', 'OpsiPromoController@show')->Middleware('admin_spv');
 Route::delete('delete-opsipromo', 'OpsiPromoController@destroy')->Middleware('admin_spv');
+Route::get('getPromo/{id}', 'OpsiPromoController@getPromo')->name('getPromo');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
 Route::resource('pembelianproducts','TransaksiPembelianController');
