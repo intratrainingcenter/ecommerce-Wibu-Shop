@@ -24,7 +24,7 @@
                             <th width="300px">Address</th>
                             <th>Province</th>
                             <th>City</th>
-                            <th>Option</th>
+                            <th width="200px">Option</th>
                         </thead>
                         <tbody>
                             @forelse ($address as $item)

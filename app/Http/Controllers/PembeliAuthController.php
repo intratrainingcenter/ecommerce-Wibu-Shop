@@ -123,7 +123,7 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
-        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->where('status', 'Pending')->with('detailProduct')->get();
         return view('frontend.pages.account.change_password', compact('UserCart', 'user', 'kategori', 'all_products', 'new_products'));
     }
 
@@ -214,7 +214,7 @@ class PembeliAuthController extends Controller
           CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST     => "GET",
           CURLOPT_HTTPHEADER        => array(
-            "key: 8b81c63a1553aa8b18c05314ab4f13df"
+            "key: 9e75f7010c470ab9611072c4444605be"
           ),
         ));
         $response   = curl_exec($curl);
@@ -235,7 +235,7 @@ class PembeliAuthController extends Controller
           CURLOPT_HTTP_VERSION      => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST     => "GET",
           CURLOPT_HTTPHEADER        => array(
-            "key: 8b81c63a1553aa8b18c05314ab4f13df"
+            "key: 9e75f7010c470ab9611072c4444605be"
           ),
         ));
         $response   = curl_exec($curl);
@@ -338,9 +338,14 @@ class PembeliAuthController extends Controller
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->first();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->with('getAddress')->first();
         $Items          = Keranjang::where('kode_keranjang', $code)->get();
-        return view('frontend.pages.account.order', compact('Items', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
+        foreach ($Items as $item) {
+            $hargaUSD[$item->kode_produk] = $item->detailProduct->harga / 15000;
+        }
+        $ongkir         = $orders->ongkir / 15000;
+        $SUM            = $Items->sum('sub_total');
+        return view('frontend.pages.account.order', compact('SUM', 'hargaUSD', 'Items', 'ongkir', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
     }
 
     public function Back()

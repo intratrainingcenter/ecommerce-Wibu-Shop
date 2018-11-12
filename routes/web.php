@@ -2,14 +2,11 @@
 Route::get('/dashboard','HomeController@index')->name('dashboard');
 Route::get('/Profile/{kode_user}','HomeController@Profile')->name('Profile');
 Route::get('pay', 'PaymentController@index');
-Route::post('paypal', 'PaymentController@payWithpaypal');
-// route for check status of the payment
-Route::get('status', 'PaymentController@getPaymentStatus');
 
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
 Route::get('/shop-product-list/{kode_kategori}','FrontendControler@product_list')->name('frontend.product_list');
-Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout');
+Route::get('/shop-checkout','FrontendControler@Checkout')->name('frontend.Checkout')->middleware('auth:pembeli');
 Route::get('/shop-item/{kode_porduk}','FrontendControler@Shop_item')->name('frontend.shop_item');
 Route::get('/all-products','FrontendControler@AllProducts')->name('all_products');
 Route::get('/search-products','FrontendControler@search')->name('search.product');
@@ -21,12 +18,16 @@ Route::get('load-cart', 'FrontEndKeranjangController@LoadCart')->name('load.cart
 Route::post('update-item/{kode_keranjang}/{kode_produk}','FrontEndKeranjangController@updateItem')->name('update.item')->middleware('auth:pembeli');
 Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');
 Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
+Route::get('checkout-address', 'FrontendControler@checkoutAddress')->name('checkout.address')->middleware('auth:pembeli');
+Route::get('shipping-cost', 'FrontendControler@shippingCost')->name('shipping.cost')->middleware('auth:pembeli');
+Route::post('confirm-order', 'TransaksiPenjualanController@store')->name('confirm.order')->middleware('auth:pembeli');
 Auth::routes();
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
 Route::resource('promo', 'PromoController')->Middleware('admin_spv');
 Route::resource('kategori','KategoriController')->Middleware('admin_spv');
+Route::resource('penjualan','TransaksiPenjualanController')->Middleware('admin_spv');
 Route::resource('user','UserController')->Middleware('spv');
 Route::get('update-promo', 'PromoController@UpdateSuccess')->Middleware('admin_spv');
 Route::get('show-promo', 'PromoController@show')->Middleware('admin_spv');
