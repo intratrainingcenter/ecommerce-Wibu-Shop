@@ -68,6 +68,7 @@
 														<th>kode transaksi</th>
 														<th>User</th>
 														<th>Tanggal transaksi</th>
+														<th>status</th>
 														<th>Grand Total</th>
 													</tr>
 													<tbody>
@@ -77,6 +78,7 @@
 															<td>{{$shell->kode_transaksi_pembelian }}</td>
 															<td>{{$shell->name}}</td>
 															<td>{{$shell->creat}}</td>
+															<td>{{$shell->stausproduct}}</td>
 															<td>{{$shell->sub_total}}</td>
 														</tr>
 														@endforeach

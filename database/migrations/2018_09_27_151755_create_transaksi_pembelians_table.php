@@ -21,7 +21,7 @@ class CreateTransaksiPembeliansTable extends Migration
             $table->integer('jummlah');
             $table->integer('harga');
             $table->integer('sub_total');
-            $table->enum('status',['Pending','Accepted','On Proccess','Checking','Done','Cancelled']);
+            $table->enum('status',['Pending','Pengajuan','Accepted','On Proccess','Checking','Done','Cancelled']);
             $table->timestamps();
         });
     }
