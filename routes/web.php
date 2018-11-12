@@ -2,9 +2,6 @@
 Route::get('/dashboard','HomeController@index')->name('dashboard');
 Route::get('/Profile/{kode_user}','HomeController@Profile')->name('Profile');
 Route::get('pay', 'PaymentController@index');
-Route::post('paypal', 'PaymentController@payWithpaypal');
-// route for check status of the payment
-Route::get('status', 'PaymentController@getPaymentStatus');
 
 // forntend
 Route::get('/','FrontendControler@Index')->name('frontend.home');
@@ -30,6 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
 Route::resource('promo', 'PromoController')->Middleware('admin_spv');
 Route::resource('kategori','KategoriController')->Middleware('admin_spv');
+Route::resource('penjualan','TransaksiPenjualanController')->Middleware('admin_spv');
 Route::resource('user','UserController')->Middleware('spv');
 Route::get('update-promo', 'PromoController@UpdateSuccess')->Middleware('admin_spv');
 Route::get('show-promo', 'PromoController@show')->Middleware('admin_spv');

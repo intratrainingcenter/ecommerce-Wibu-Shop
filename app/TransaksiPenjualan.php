@@ -14,6 +14,11 @@ class TransaksiPenjualan extends Model
         return $this->belongsTo('App\Keranjang', 'kode_keranjang', 'kode_keranjang');
     }
 
+    public function GetBuyer()
+    {
+        return $this->belongsTo('App\Pembeli', 'kode_pembeli', 'kode_pembeli');
+    }
+
     public function getAddress()
     {
         return $this->belongsTo('App\Alamat', 'kode_alamat', 'kode_alamat');

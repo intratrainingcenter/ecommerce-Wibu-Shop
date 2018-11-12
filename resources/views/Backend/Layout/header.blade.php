@@ -214,7 +214,7 @@
           <li><a href=""><i class="fa fa-pie-chart"></i><span>Data Pembeli</span></a></li>
           <li><a href="{{route('promo.index')}}"><i class="fa fa-book"></i><span>Data Promo</span></a></li>
           <li><a href=""><i class="fa fa-laptop"></i><span>Data Transaksi Pembelian</span></a></li>
-          <li><a href=""><i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span></a></li>
+          <li><a href="{{route('penjualan.index')}}"><i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span></a></li>
           <li><a href=""><i class="fa fa-edit"></i> <span>Data Message</span></a></li>
         @elseif (auth::user()->jabatan == 'Spv')
           <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
@@ -223,7 +223,7 @@
           <li><a href=""><i class="fa fa-pie-chart"></i><span>Data Pembeli</span></a></li>
           <li><a href="{{route('promo.index')}}"><i class="fa fa-book"></i><span>Data Promo</span></a></li>
           <li><a href=""><i class="fa fa-laptop"></i><span>Data Transaksi Pembelian</span></a></li>
-          <li><a href=""><i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span></a></li>
+          <li><a href="{{route('penjualan.index')}}"><i class="fa fa-edit"></i> <span>Data Transaksi Penjualan</span></a></li>
           <li><a href=""><i class="fa fa-edit"></i> <span>Data Message</span></a></li>
           <li><a href="{{route('user.index')}}"><i class="fa fa-edit"></i> <span>User</span></a></li>
           <li class="treeview">

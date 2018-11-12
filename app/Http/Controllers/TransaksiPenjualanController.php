@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Keranjang;
 use App\Pembeli;
+use App\Produk;
 use Validator;
 
 class TransaksiPenjualanController extends Controller
@@ -18,7 +19,9 @@ class TransaksiPenjualanController extends Controller
      */
     public function index()
     {
-        //
+        $data = Penjualan::orderBy('created_at', 'desc')->with('GetDetail')->with('GetBuyer')->get();
+
+        return view('Backend.Penjualan.index', compact('data'));
     }
 
     /**
@@ -78,9 +81,13 @@ class TransaksiPenjualanController extends Controller
      * @param  \App\TransaksiPenjualan  $transaksiPenjualan
      * @return \Illuminate\Http\Response
      */
-    public function show(TransaksiPenjualan $transaksiPenjualan)
+    public function show($code)
     {
-        //
+        $Penjualan   =   Penjualan::where('kode_keranjang', $code)->first();
+        $Products    =   Keranjang::where('kode_keranjang', $code)->with('detailProduct')->get();
+        $SUM         =   $Products->sum('sub_total');
+
+        return view('Backend.Penjualan.detail', compact('Penjualan','Products','SUM'));
     }
 
     /**
@@ -101,9 +108,28 @@ class TransaksiPenjualanController extends Controller
      * @param  \App\TransaksiPenjualan  $transaksiPenjualan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TransaksiPenjualan $transaksiPenjualan)
+    public function update(Request $request, $code)
     {
-        //
+        if ($request->type == 'Sent') {
+            $Items      =   Keranjang::where('kode_keranjang', $code)->get();
+            foreach ($Items as $Item) {
+                $Product    = Produk::where('kode_produk', $Item->kode_produk)->first();
+                $Stock      = $Product->stok - $Item->jumlah;
+                $Update     = $Product->update([
+                    'stok' => $Stock,
+                ]);
+            }
+            $Penjualan  =   Penjualan::where('kode_keranjang', $code)->update([
+                'status' => 'Sent',
+            ]);
+            return redirect()->back()->with('alertsuccess', 'Pesanan berhasil dikirim!');
+        } else {
+            $Penjualan  =   Penjualan::where('kode_keranjang', $code)->update([
+                'status' => 'Received',
+            ]);
+            return redirect()->back()->with('alertsuccess', 'Pesanan telah diterima pembeli!');
+        }
+        
     }
 
     /**
