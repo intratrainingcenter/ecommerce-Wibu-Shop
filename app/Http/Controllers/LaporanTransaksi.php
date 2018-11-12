@@ -17,16 +17,18 @@ class LaporanTransaksi extends Controller
       $Shell = Cache::remember('ShellTransaksi', $minutes, function () use ($date) {
             return DB::table('transaksi_pembelians')
                     ->join('users','users.kode_user','=','transaksi_pembelians.kode_user')
-                    ->select('transaksi_pembelians.*' ,'users.*','transaksi_pembelians.created_at as creat')
+                    ->select('transaksi_pembelians.*' ,'users.*','transaksi_pembelians.created_at as creat','transaksi_pembelians.status as stausproduct')
                     ->where('transaksi_pembelians.created_at',$date)
+                    ->where('transaksi_pembelians.status','Done')
                     ->get();
           });
       $Buy = Cache::remember('BuyTransaksi', $minutes, function () use ($date) {
             return DB::table('transaksi_penjualans')
                         ->join('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
                         ->join('pembelis','pembelis.kode_pembeli','=','keranjangs.kode_pembeli')
-                        ->select('transaksi_penjualans.*','pembelis.*' ,'keranjangs.*', 'transaksi_penjualans.created_at as creat')
+                        ->select('transaksi_penjualans.*','pembelis.*' ,'keranjangs.*', 'transaksi_penjualans.created_at as creat','transaksi_penjualans.status as statusjual')
                         ->where('transaksi_penjualans.created_at',$date)
+                        ->where('transaksi_penjualans.status','Received')
                         ->get();
           });
       return view('Backend.LaporanTransaksi.general',compact(['Shell','Buy']));
@@ -42,12 +44,12 @@ class LaporanTransaksi extends Controller
       });
       $getBuy = Cache::remember('BuyfilterTransaksi', $minutes, function () {
                   return DB::table('transaksi_penjualans')->join('keranjangs','keranjangs.kode_keranjang','=','transaksi_penjualans.kode_keranjang')
-                        ->select('transaksi_penjualans.*','pembelis.*' ,'keranjangs.*', 'transaksi_penjualans.updated_at as creat')
+                        ->select('transaksi_penjualans.*','pembelis.*' ,'keranjangs.*', 'transaksi_penjualans.updated_at as creat','transaksi_penjualans.status as statusjual')
                         ->join('pembelis','pembelis.kode_pembeli','=','keranjangs.kode_pembeli')
                         ->get();
           });
-          $Shell = $getShell->where('creat','>=',$start)->where('creat','<=',$finis);
-          $Buy = $getBuy->where('creat','>=',$start)->where('creat','<=',$finis);
+          $Shell = $getShell->where('creat','>=',$start)->where('creat','<=',$finis)->where('stausproduct','Done');
+          $Buy = $getBuy->where('creat','>=',$start)->where('creat','<=',$finis)->where('statusjual','Received');
       return view('Backend.LaporanTransaksi.general',compact(['Shell','Buy']));
     }
 }

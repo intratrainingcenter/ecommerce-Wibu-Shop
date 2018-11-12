@@ -15,10 +15,10 @@ class KeuanganController extends Controller
       $date = date('Y-m-d');
       $minutes = now()->addMinutes(2);
       $getShell = Cache::remember('Shellkeuangan',$minutes , function () {
-        return DB::table('transaksi_pembelians')->get();
+        return DB::table('transaksi_pembelians')->where('status','Done')->get();
       });
       $getBuy = Cache::remember('Buykeuangan',$minutes , function () {
-        return DB::table('transaksi_penjualans')->get();
+        return DB::table('transaksi_penjualans')->where('status','Received')->get();
       });
       $Shell  = $getShell->where('updated_at',$date)->sum('sub_total');
       $Buy    = $getBuy->where('updated_at',$date)->sum('grand_total');
@@ -29,10 +29,10 @@ class KeuanganController extends Controller
       $finis = $request->sampai;
       $minutes = now()->addMinutes(2);
       $getShell = Cache::remember('Shellfilterkeuangan',$minutes , function () {
-        return DB::table('transaksi_pembelians')->get();
+        return DB::table('transaksi_pembelians')->where('status','Done')->get();
       });
       $getBuy = Cache::remember('Buyfilterkeuangan',$minutes , function () {
-        return DB::table('transaksi_penjualans')->get();
+        return DB::table('transaksi_penjualans')->where('status','Received')->get();
       });
       $Shell = $getShell->where('updated_at','>=',$start)->where('updated_at','<=',$finis)->sum('sub_total');
       $Buy = $getBuy->where('updated_at','>=',$start)->where('updated_at','<=',$finis)->sum('grand_total');
