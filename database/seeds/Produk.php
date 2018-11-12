@@ -23,7 +23,7 @@ class Produk extends Seeder
             'stok'  => '30',
             'status'    => 'Siap',
             'keterangan'    => 'Ini keterangan',
-            'foto'  => 'images/foto.png',
+            'foto'  => 'images/product.jpg',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

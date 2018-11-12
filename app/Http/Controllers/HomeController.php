@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TransaksiPenjualan as Penjualan;
+use App\Pembeli;
+use App\Produk;
 use App\User;
 
 class HomeController extends Controller
@@ -11,12 +14,11 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-      return view('Backend.Dashboard.index');
+        $product        = Produk::all();
+        $transaction    = Penjualan::where('tanggal', date('Y-m-d'))->get();
+        $buyer          = Pembeli::all();
+        return view('Backend.Dashboard.index', compact('product','transaction','buyer'));
     }
-    // public function Profile($kode_user)
-    // {
-    //   $data = User::where('kode_user',$kode_user)->get();
-    //   dd($data);
-    //   return
-    // }
+
+
 }

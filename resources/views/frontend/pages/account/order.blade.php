@@ -3,15 +3,44 @@
 @section('produck')
 <div class="main">
   <div class="container">
-
     <div class="row margin-bottom-40">
-
       <div class="col-md-12 col-sm-12">
         <h1>{{$orders->kode_transaksi_penjualan}}</h1>
         <div class="goods-page">
             <div class="goods-data clearfix">
-                <p>Order at  :  {{date('d F Y', strtotime($orders->tanggal))}}</p>
-                <p>Status  :  {{$orders->status}}</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Order at  :  {{date('d F Y', strtotime($orders->tanggal))}}</p>
+                  <p>Address  : {{$orders->getAddress->alamat}}, {{$orders->getAddress->kota}}, {{$orders->getAddress->provinsi}}</p>
+                  <p>Courier  : {{$orders->service}}</p>
+                  <p>Note : {{$orders->keterangan}}</p>
+                  @if ($orders->status == 'Order')
+                  <p>Status : Waiting for payment</p>
+                  @elseif ($orders->status == 'Paid')
+                  <p>Status  :  On Proccess</p>
+                  @else
+                  <p>Status  :  {{$orders->status}}</p>
+                  @endif
+                </div>
+                <div class="col-md-6">
+                  @if ($orders->status == 'Order')
+                  <div class="col-md-6">
+                    <p>Transfer the payment here:</p>
+                    <p>BCA 3850594014 Abdul Mujib Ghufron</p>
+                  </div>
+                  <div class="col-md-6">
+                    <center>
+                    <p>or Pay with Paypal</p>
+                    @include('frontend.pages.checkout.pay')
+                    </center>
+                  </div>
+                  <center>
+                  <p>Please confirm after you have done the payment!</p>
+                  <button class="btn btn-info">I have done the payment</button>
+                </center>
+                  @endif
+                </div>
+              </div>
                 <hr>
             <div class="table-wrapper-responsive">
             <table summary="Shopping cart">
@@ -43,8 +72,7 @@
                     @endif
                 </td>
                 <td class="goods-page-quantity">
-                  @csrf
-                      <input type="text" value="{{$item->jumlah}}" readonly class="form-control input-sm quantity">
+                      {{$item->jumlah}}
                 </td>
                 <td class="goods-page-price" align="right">
                   <strong><span>Rp.</span>{{number_format($item->detailProduct->harga)}}</strong>
@@ -56,12 +84,19 @@
               @endforeach
             </table>
             </div>
-
-            <div class="shopping-total">
+            <div class="checkout-total-block">
               <ul>
-                <li class="shopping-total-price">
+                <li>
+                  <em>Sub total</em>
+                  <strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
+                </li>
+                <li>
+                  <em>Shipping cost</em>
+                  <strong class="price"><span>Rp.</span>{{number_format($orders->ongkir)}}</strong>
+                </li>
+                <li class="checkout-total-price">
                   <em>Grand Total</em>
-                  <strong class="price"><span>Rp.{{number_format($orders->grand_total)}}</span></strong>
+                  <strong class="price"><span>Rp.</span>{{number_format($orders->grand_total)}}</strong>
                 </li>
               </ul>
             </div>

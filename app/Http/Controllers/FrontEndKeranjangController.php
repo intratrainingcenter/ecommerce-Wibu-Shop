@@ -21,7 +21,7 @@ class FrontEndKeranjangController extends Controller
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $UserCart       = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $SUM            = $UserCart->sum('sub_total');
 
 
@@ -44,7 +44,7 @@ class FrontEndKeranjangController extends Controller
     {
         $user           = Auth::guard('pembeli')->id();
         $Pembeli        = Pembeli::where('id', $user)->first();
-        $UserCart       = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->with('detailProduct')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $SUM            = $UserCart->sum('sub_total');
 
         return view('frontend.pages.cart.loadcart',compact('UserCart', 'SUM'));
@@ -56,14 +56,14 @@ class FrontEndKeranjangController extends Controller
         $Pembeli        = Pembeli::where('id', $user)->first();
         $Product        = Produk::where('kode_produk', $code)->first();
         $CountTransaction = Penjualan::where('kode_pembeli', $Pembeli->kode_pembeli)->count() + 1;
-        $kode_keranjang = 'CART-' . $Pembeli->kode_pembeli . '-' . $CountTransaction;
-        $checkKeranjang = Keranjang::where('kode_produk',$code)->exists();
-        $keranjang      = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->first();
+        $kode_keranjang = 'CART-' . $user . '-' . $CountTransaction;
+        $checkKeranjang = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->where('status', 'Pending')->exists();
+        $keranjang      = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->where('status', 'Pending')->first();
 
         if ($checkKeranjang) {
             $jumlah     = $request->jumlah + $keranjang->jumlah;
             $sub_total  = $Product->harga * $jumlah;
-            $update     = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli);
+            $update     = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->where('status', 'Pending');
             $update->update([
                 'jumlah'    => $jumlah,
                 'sub_total' => $sub_total,
@@ -74,7 +74,7 @@ class FrontEndKeranjangController extends Controller
             $insert->kode_pembeli   =   $Pembeli->kode_pembeli;
             $insert->kode_produk    =   $Product->kode_produk;
             $insert->jumlah         =   $request->jumlah;
-            $insert->sub_total      =   $Product->harga;
+            $insert->sub_total      =   $Product->harga * $request->jumlah;
             $insert->status         =   'Pending';
             $insert->save();
         }

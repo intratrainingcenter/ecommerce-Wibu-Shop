@@ -55,7 +55,7 @@
                         </thead>
                         <tbody>
                             @forelse ($orders as $item)
-                            <tr onclick="window.location.href = ''" title="Click to view details">
+                            <tr onclick="window.location.href = '{{route('show.order', ['code' => $item->kode_keranjang])}}'" title="Click to view details">
                                 <td>{{$item->kode_transaksi_penjualan}}</td>
                                 <td>{{date('d F Y', strtotime($item->tanggal))}}</td>
                                 <td align="right">Rp. {{number_format($item->grand_total)}}</td>

@@ -41,12 +41,17 @@ class PaymentController extends Controller
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $item_1 = new Item();
-        $item_1->setName('Item 1') /** item name **/
+        $item_1->setName($request->item) /** item name **/
             ->setCurrency('USD')
             ->setQuantity(1)
             ->setPrice($request->get('amount')); /** unit price **/
+        $item_2 = new Item();
+        $item_2->setName($request->item) /** item name **/
+            ->setCurrency('USD')
+            ->setQuantity(2)
+            ->setPrice($request->get('amount')); /** unit price **/
         $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
+        $item_list->setItems(array($item_1, $item_2));
         $amount = new Amount();
         $amount->setCurrency('USD')
             ->setTotal($request->get('amount'));

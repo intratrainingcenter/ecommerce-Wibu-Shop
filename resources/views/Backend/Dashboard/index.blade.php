@@ -28,8 +28,8 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <p>--</p>
-              <h3> <span > --</span></h3>
+              <p>Jumlah Pembeli</p>
+              <h3> <span >{{count($buyer)}}</span></h3>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -42,8 +42,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <p>--</p>
-              <h3> <span > --</span></h3>
+              <p>Jumlah Produk</p>
+              <h3> <span >{{count($product)}}</span></h3>
             </div>
             <div class="icon">
               <i class="fa fa-th"></i>
@@ -56,8 +56,8 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <p>--  </p>
-              <h3> <span > --</span></h3>
+              <p>Transaksi Hari ini</p>
+              <h3> <span >{{count($transaction)}}</span></h3>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>

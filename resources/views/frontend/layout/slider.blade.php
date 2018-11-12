@@ -13,7 +13,6 @@
           </div>
           <div class="item carousel-item-five">
               <div class="container">
-                  <img class="carousel-position-five animate-delay hidden-sm hidden-xs" src="{{asset('frontend/theme/assets/pages/img/shop-slider/slide2/price.png')}}" alt="Price" data-animation="animated zoomIn">
               </div>
           </div>
           <div class="item carousel-item-six">
