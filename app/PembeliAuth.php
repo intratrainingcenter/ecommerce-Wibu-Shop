@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\PembeliResetPassword;
 
 class PembeliAuth extends Authenticatable
 {
@@ -28,4 +29,9 @@ class PembeliAuth extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function sendNotification($token)
+    {
+        $this->notify(new PembeliResetPassword($token));
+    }
 }

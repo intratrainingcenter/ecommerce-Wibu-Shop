@@ -17,11 +17,13 @@ Route::get('show-cart', 'FrontEndKeranjangController@ShowCart')->name('show.cart
 Route::get('load-cart', 'FrontEndKeranjangController@LoadCart')->name('load.cart')->middleware('auth:pembeli');
 Route::post('update-item/{kode_keranjang}/{kode_produk}','FrontEndKeranjangController@updateItem')->name('update.item')->middleware('auth:pembeli');
 Route::post('add-to-cart/{id}','FrontEndKeranjangController@AddToCart')->name('frontend.addtocart')->middleware('auth:pembeli');
-Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart');
+Route::get('/shopping-cart/delete-produk/{id}', 'FrontEndKeranjangController@DeleteCartProduk')->name('frontend.deletecart')->middleware('auth:pembeli');
 Route::get('checkout-address', 'FrontendControler@checkoutAddress')->name('checkout.address')->middleware('auth:pembeli');
 Route::get('shipping-cost', 'FrontendControler@shippingCost')->name('shipping.cost')->middleware('auth:pembeli');
 Route::post('confirm-order', 'TransaksiPenjualanController@store')->name('confirm.order')->middleware('auth:pembeli');
-Auth::routes();
+Route::prefix('admin')->group(function () {
+    Auth::routes();
+});
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
@@ -46,16 +48,20 @@ Route::get('/pembelianProduct/product/loadopsi/{kode}','TransaksiPembelianContro
 Route::delete('/pembelianProduct/product/hapusopsi','TransaksiPembelianController@hapusOpsi');
 //laporan
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi')->Middleware('spv_owner');
-Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi')->Middleware('spv_owner');;
-Route::get('aporankeuangan','KeuanganController@Index')->name('LaporanKeuangan')->Middleware('spv_owner');;
-Route::get('Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan')->Middleware('spv_owner');;
-Route::get('aporanProduct','laporanBarang@Index')->name('LaporanProduct')->Middleware('spv_owner');;
-Route::get('FilterProduct','laporanBarang@Filter')->name('FilterLaporanProduct')->Middleware('spv_owner');;
+Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi')->Middleware('spv_owner');
+Route::get('aporankeuangan','KeuanganController@Index')->name('LaporanKeuangan')->Middleware('spv_owner');
+Route::get('Filterkeuangan','KeuanganController@Filter')->name('FilterLaporanKeuangan')->Middleware('spv_owner');
+Route::get('aporanProduct','laporanBarang@Index')->name('LaporanProduct')->Middleware('spv_owner');
+Route::get('FilterProduct','laporanBarang@Filter')->name('FilterLaporanProduct')->Middleware('spv_owner');
 //customer
 Route::prefix('pembeli')->group(function() {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('register', 'PembeliAuthController@showRegisterForm')->name('pembeli.register');
         Route::get('login','PembeliAuthController@showLoginForm')->name('pembeli.login');
+        Route::get('password-reset','Auth\ForgotPasswordPembeliController@showLinkRequestForm')->name('pembeli.reset');
+        Route::post('password-email','Auth\ForgotPasswordPembeliController@sendResetLinkEmail')->name('pembeli.password.email');
+        Route::get('password-reset/{token}','Auth\ResetPasswordPembeliController@showResetForm')->name('pembeli.password.reset');
+        Route::post('password-reset','Auth\ResetPasswordPembeliController@reset')->name('pembeli.password.update');
         Route::post('register','PembeliAuthController@Register')->name('pembeli.register.submit');
         Route::post('login','PembeliAuthController@Login')->name('pembeli.login.submit');
     });

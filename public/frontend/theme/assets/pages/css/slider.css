@@ -2,6 +2,47 @@
     [Bootstrap Carousel]
 ----------------------------------------------------*/
 
+/* Carousel Item Background Images */
+.carousel-slider .carousel-item-four {
+    background: url(../../../assets/pages/img/shop-slider/slide1/bg.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-slider .carousel-item-five {
+    background: url(../../../assets/pages/img/shop-slider/slide2/bg.jpg);
+    background-size: cover;
+}
+
+.carousel-slider .carousel-item-six {
+    background: url(../../../assets/pages/img/shop-slider/slide3/bg.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-slider .carousel-item-seven {
+    background: url(../../../assets/pages/img/shop-slider/slide4/bg.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-slider .carousel-item-eight {
+    background: url(../../../assets/pages/img/frontend-slider/bg9.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-slider .carousel-item-nine {
+    background: url(../../../assets/pages/img/frontend-slider/bg1.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-slider .carousel-item-ten {
+    background: url(../../../assets/pages/img/frontend-slider/bg2.jpg);
+    background-size: cover;
+    background-position: center center;
+}
 /* Set displays an element as in inline-level flex container */
 .center-block {
     position: absolute;
