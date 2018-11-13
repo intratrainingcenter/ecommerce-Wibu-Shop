@@ -82,27 +82,28 @@ class TransaksiPembelianController extends Controller
       if ($request->status == 'Pending') {
         TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
                           ->update(['status' => 'Pengajuan']);
+        return redirect()->route('pembelianproducts.index')->with('alertsuccess', 'Transaksi '.$request->kode.' Telah Diajuan');;
       } elseif ($request->status == 'Accepted') {
         TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
                           ->update(['status' => 'On Proccess']);
+        return redirect()->route('pembelianproducts.index')->with('alertsuccess', 'Transaksi '.$request->kode.' Dalam Proses');;
       } elseif ($request->status == 'On Proccess') {
         TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
                           ->update(['status' => 'Checking']);
+        return redirect()->route('pembelianproducts.index')->with('alertsuccess', 'Transaksi '.$request->kode.' Dalam Pengecekan');;
       } elseif ($request->status == 'Checking') {
         TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
                           ->update(['status' => 'Done']);
+        return redirect()->route('pembelianproducts.index')->with('alertsuccess', 'Transaksi '.$request->kode.' Telah Selesai');;
       } elseif ($request->status == 'Cancelled') {
         TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
                           ->update(['status' => 'Cancelled']);
+        return redirect()->route('pembelianproducts.index')->with('alertsuccess', 'Transaksi '.$request->kode.' Dibatalkan');;
       } elseif ($request->status == 'Acc') {
         TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
                           ->update(['status' => 'Accepted']);
+        return redirect()->route('pembelianproducts.index')->with('alertsuccess', 'Transaksi '.$request->kode.' Telah Disetujui');;
       }
 
-      return redirect()->route('pembelianproducts.index');
-    }
-    public function FunctionName()
-    {
-      return redirect()->route('pembelianproducts.index');
     }
 }

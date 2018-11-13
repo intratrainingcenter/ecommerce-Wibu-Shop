@@ -12,7 +12,7 @@
               <div class="modal-body">
                   @csrf @method('POST')
                   <input type="hidden" name="kode" value="{{$item->kode_transaksi_pembelian}}">
-                  <input type="text" name="status" value="Acc">
+                  <input type="hidden" name="status" value="Acc">
                   <h4> <strong> Setuji Transaksi {{$item->kode_transaksi_pembelian}} ? </strong> </h4>
               </div>
               <div class="modal-footer">
