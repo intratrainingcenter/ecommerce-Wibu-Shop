@@ -16,7 +16,6 @@ $(document).ready(function() {
 					var value = snapshot.val();
 					var htmls = [];
 					$.each(value, function(index, value) {
-						console.log(src);
 						if(value.level == 'user') {
 							htmls.push('<div class="direct-chat-msg right">'+
 								'<div class="direct-chat-info clearfix">'+

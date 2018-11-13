@@ -89,9 +89,9 @@ class PembeliAuthController extends Controller
     {
         $user   = Pembeli::where('email', $request->email)->first();
         $check  = Auth::guard('pembeli')->attempt(request(['email', 'password']));
-        if ( $check ) {
-            Auth::guard('pembeli')->login($user);
-            return redirect()->route('frontend.home');;
+        if ( $check and $user->deleted_at == '' ) {
+          Auth::guard('pembeli')->login($user);
+          return redirect()->route('frontend.home');;
         } else {
             return redirect()->back()->with('alertFailLogin', 'Something wrong in your input value. Please try again!');
         }
@@ -142,7 +142,7 @@ class PembeliAuthController extends Controller
             if ($request->hasFile('foto')) {
                 $get_pembeli    = Pembeli::where('id', $id)->first();
                 Storage::delete($get_pembeli->foto);
-                $foto           = $request->foto;  
+                $foto           = $request->foto;
                 $GetExtension   = $foto->getClientOriginalExtension();
                 $path           = $foto->storeAs('public/images', $get_pembeli->kode_pembeli . '.' . $GetExtension);
                 $update         = Pembeli::where('id', $id)->update([
@@ -270,7 +270,7 @@ class PembeliAuthController extends Controller
                     'id_kota'       => $request->id_kota,
                     'kota'          => $request->kota,
                 ]);
-            
+
             return redirect()->back()->with('alertSuccessAddAddress', 'Your address successfully added!');
         }
     }
@@ -284,7 +284,7 @@ class PembeliAuthController extends Controller
         $user           = Pembeli::where('id', $id)->first();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $address        = Alamat::where('kode_alamat', $code)->first();
-        
+
         return view('frontend.pages.account.detail_address', compact('UserCart','address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
     }
 

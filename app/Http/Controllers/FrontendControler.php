@@ -21,7 +21,14 @@ class FrontendControler extends Controller
       $user = Auth::guard('pembeli')->id();
       $Pembeli = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
-        $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        if($Pembeli != NULL) {
+          $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        } else {
+          if (Auth::guard('pembeli')->check()) {
+              Auth::guard('pembeli')->logout();
+          }
+          return redirect()->route('pembeli.login')->with('alertFailLogin', 'Your Account Has Been Suspended. Please contact our admin via Whatsapp!');
+        }
       } else {
           $UserCart = [];
       }
@@ -92,17 +99,17 @@ class FrontendControler extends Controller
           "key: 9e75f7010c470ab9611072c4444605be"
         ),
       ));
-    
+
 
         $response = curl_exec($curl);
-      
+
         $err = curl_error($curl);
 
         curl_close($curl);
 
         $dec = json_decode($response, true);
         $all[] = $dec['rajaongkir']['results'];
-      
+
       }
 
       return $all;
@@ -111,7 +118,7 @@ class FrontendControler extends Controller
         } else {
           echo $all;
         }
-      
+
     }
     public function Shop_item($kode_porduk) {
       $user = Auth::guard('pembeli')->id();
