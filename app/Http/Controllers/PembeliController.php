@@ -14,7 +14,9 @@ class PembeliController extends Controller
      */
     public function index()
     {
-        //
+      $data = Pembeli::orderBy('created_at', 'desc')->get();
+      $no = 1;
+      return view('Backend.Pembeli.index', compact('data', 'no'));
     }
 
     /**
@@ -44,9 +46,11 @@ class PembeliController extends Controller
      * @param  \App\Pembeli  $pembeli
      * @return \Illuminate\Http\Response
      */
-    public function show(Pembeli $pembeli)
+    public function show()
     {
-        //
+      $data = Pembeli::onlyTrashed()->orderBy('created_at', 'desc')->get();
+      $no = 1;
+      return view('Backend.Pembeli.nonActive', compact('data', 'no'));
     }
 
     /**
@@ -67,9 +71,12 @@ class PembeliController extends Controller
      * @param  \App\Pembeli  $pembeli
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pembeli $pembeli)
+    public function update($id)
     {
-        //
+      $data = Pembeli::withTrashed()->where('kode_pembeli', $id)->first();
+      $data->restore();
+
+      return redirect()->back()->with('alertsuccess', 'Data '.$data->nama_pembeli.' Berhasil Restore');
     }
 
     /**
@@ -78,8 +85,11 @@ class PembeliController extends Controller
      * @param  \App\Pembeli  $pembeli
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pembeli $pembeli)
+    public function destroy($id)
     {
-        //
+      $data = Pembeli::where('kode_pembeli', $id)->first();
+      $data->delete();
+
+      return redirect()->back()->with('alertsuccess', 'Data '.$data->nama_pembeli.' Berhasil Dihapus');
     }
 }

@@ -23,6 +23,7 @@ class CreatePembelisTable extends Migration
             $table->rememberToken();
             $table->binary('foto');
             $table->string('telepon')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
