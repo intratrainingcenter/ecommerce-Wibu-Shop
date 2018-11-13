@@ -1,6 +1,4 @@
 @foreach ($data as $item)
-
-<!-- Modal  Detail -->
 <div class="modal fade" id="ModalDetail{{$item->kode_pembeli}}" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -15,7 +13,6 @@
                 @else
                   <center><img src="{{asset('images/avatar.png')}}" width="200px" alt=""></center><br>
                 @endif
-
                 <table width="100%">
                     <thead>
                         <th width="40%"></th><th width="10%"></th><th width="40%"></th>
@@ -43,10 +40,6 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-
 @endforeach

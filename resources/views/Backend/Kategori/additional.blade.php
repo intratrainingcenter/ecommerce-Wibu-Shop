@@ -1,7 +1,5 @@
 @section('header')
-
 @endsection
-
 @section('footer')
     <script>
     $(document).ready(function(){

@@ -15,7 +15,7 @@
   				<li class="contact" uid="{{ $data->id }}">
   					<div class="wrap">
 
-  						<img src="{{asset('images/W.jpg')}}" alt="" />
+  						<img src="{{Storage::url('images/W.jpg')}}" alt="" />
   						<div class="meta">
   							<p class="name">{{ $data->nama_pembeli }}</p>
   							<p class="preview" uid="{{ $data->id }}" >Loading...</p>
@@ -31,7 +31,7 @@
     <!-- Chat Box content -->
     <div class="content_message">
   		<div class="contact-profile" style="display: none;">
-  			<img src="{{asset('images/W.jpg')}}" alt="" />
+  			<img src="{{Storage::url('images/W.jpg')}}" alt="" />
   			<p id="nick_user"></p>
   		</div>
   		<div class="messages">

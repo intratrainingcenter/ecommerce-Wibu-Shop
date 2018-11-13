@@ -1,4 +1,3 @@
-<!-- Modal  Add -->
 <div class="modal fade" id="ModalAdd" data-backdrop="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -59,8 +58,5 @@
                     </form>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->

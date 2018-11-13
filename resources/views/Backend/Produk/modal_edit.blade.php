@@ -1,6 +1,4 @@
 @foreach ($data as $item)
-
-<!-- Modal  Edit -->
 <div class="modal fade" id="ModalEdit{{$item->kode_produk}}" data-backdrop="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -63,10 +61,6 @@
                     </form>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
-
 @endforeach

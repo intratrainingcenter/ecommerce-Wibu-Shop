@@ -1,5 +1,4 @@
 @foreach ($data as $item)
-
   @if($item->status == 'Pending')
     @include('Backend.pembelianProduct.modal.modal_st-pending')
   @elseif($item->status == 'Pengajuan')
@@ -9,5 +8,4 @@
   @elseif($item->status == 'On Proccess')
     @include('Backend.pembelianProduct.modal.modal_st-Checking')
   @endif
-
 @endforeach

@@ -1,4 +1,3 @@
-{{-- @foreach ($data as $key => $Edit) --}}
 <div id="ProfilUser{{auth::user()->kode_user}}" class="modal fade" role="dialog" data-backdrop="false">
   <div class="modal-dialog">
     <form method="POST" action="{{ route('user.update',auth::user()->kode_user) }}" enctype="multipart/form-data">
@@ -11,7 +10,7 @@
                 @if (auth::user()->foto != '')
                   <center><img src="{{Storage::url(auth::user()->foto)}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
                   @else
-                  <center><img src="{{asset('images/foto.png')}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
+                  <center><img src="{{Storage::url('images/foto.png')}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
                 @endif
                 <input type="hidden" name="id" value="{{ auth::user()->id }}" >
                 <div class="form-group row">
@@ -68,4 +67,3 @@
   </Form>
   </div>
 </div>
-{{-- @endforeach --}}

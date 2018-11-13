@@ -1,6 +1,4 @@
 @foreach ($data as $item)
-
-<!-- Modal  Delete -->
 <div class="modal fade" id="ModalDelete{{$item->kode_pembeli}}" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,10 +18,6 @@
                 </form>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-
 @endforeach

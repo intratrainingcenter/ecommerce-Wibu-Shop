@@ -1,7 +1,5 @@
 @foreach ($data->transaksi as $group)
   @foreach ($group as $item)
-
-  <!-- Modal  Cancel -->
   <div class="modal fade" id="ModalCancel{{$item->kode_transaksi_pembelian}}" data-backdrop="false">
       <div class="modal-dialog">
           <div class="modal-content">
@@ -23,11 +21,7 @@
               </div>
             </form>
           </div>
-          <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal -->
-
   @endforeach
 @endforeach

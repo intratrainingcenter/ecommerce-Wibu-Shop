@@ -2,8 +2,7 @@
 @section('content')
 	<div class="content-wrapper">
 	  <section class="content-header">
-	    <h1>Laporan Transaksi<small>Data Transaksi</small> </h1>
-	    <ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">LaporanTransaksi</li></ol>
+	    <h1>Laporan Transaksi<small>Data Transaksi</small> </h1><ol class="breadcrumb"><li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li><li class="active">LaporanTransaksi</li></ol>
 	  </section>
 	  <section class="content">
 	    <div class="row">
@@ -34,9 +33,7 @@
 										</form>
 										<div id="print_lpTransaksi" class="col-md-12" style="margin-top:20px;">
 											<div class="panel">
-												<div class="panel-heading">
-													<h3>Laporan penjualan</h3>
-												</div>
+												<div class="panel-heading"><h3>Laporan penjualan</h3></div>
 												<div class="responsive-table">
 													<table class="table table-bordered table-hover" width="100%">
 														<tr>

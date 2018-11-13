@@ -27,10 +27,6 @@
                           </div>
                           <div class="col-md-6 col-sm-6 col-xs-6 text-right"><h4>
                             <span class="fa fa-cart-plus text-right"></span>
-                            {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="fa fa-bell-o"></i>
-                              <span class="label label-warning">10</span> --}}
-                            {{-- </a> --}}
                           </h4>
                           </div>
                         </div>
@@ -92,7 +88,6 @@
                               </thead>
                               <tbody id="tempatdata">
                                 <tr>
-
                                 </tr>
                               </tbody>
                             </table>
@@ -142,7 +137,6 @@
                         <p style="color:#35bf4d;">Anda Yakin Ingin Mengajukan Pesanan?</p>
                         <p id="infokode"></p>
                         </center>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-3d btn-danger" data-dismiss="modal" style="margin-right:20px">Batal</button>
