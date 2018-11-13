@@ -23,6 +23,7 @@ class PembeliAuthController extends Controller
         $user           = Pembeli::where('id', $id)->first();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $kategori       = Kategori::all();
+        $showPromo      = Promo::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('grand_total', '>=', 300000)->count();
@@ -36,6 +37,7 @@ class PembeliAuthController extends Controller
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $user         = Auth::guard('pembeli')->id();
+      $showPromo    = Promo::all();
       $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
@@ -76,6 +78,7 @@ class PembeliAuthController extends Controller
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $user         = Auth::guard('pembeli')->id();
+      $showPromo    = Promo::all();
       $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
@@ -111,9 +114,10 @@ class PembeliAuthController extends Controller
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
+        $showPromo      = Promo::all();
         $user           = Pembeli::where('id', $id)->first();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
-        return view('frontend.pages.account.editaccount', compact('UserCart', 'user', 'alamat', 'kategori', 'all_products', 'new_products'));
+        return view('frontend.pages.account.editaccount',compact('showPromo','UserCart', 'user', 'alamat', 'kategori', 'all_products', 'new_products'));
     }
 
     public function EditPassword()
@@ -122,9 +126,10 @@ class PembeliAuthController extends Controller
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
+        $showPromo      = Promo::all();
         $user           = Pembeli::where('id', $id)->first();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->where('status', 'Pending')->with('detailProduct')->get();
-        return view('frontend.pages.account.change_password', compact('UserCart', 'user', 'kategori', 'all_products', 'new_products'));
+        return view('frontend.pages.account.change_password',compact('showPromo','UserCart', 'user', 'kategori', 'all_products', 'new_products'));
     }
 
     public function UpdateProfile(Request $request, $id)
@@ -191,6 +196,7 @@ class PembeliAuthController extends Controller
     public function Address()
     {
         $kategori       = Kategori::all();
+        $showPromo = Promo::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
@@ -198,7 +204,7 @@ class PembeliAuthController extends Controller
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $address        = Alamat::where('kode_pembeli', $user->kode_pembeli)->get();
         $no             = 1;
-        return view('frontend.pages.account.address', compact('UserCart', 'user', 'address', 'no', 'kategori', 'all_products', 'new_products'));
+        return view('frontend.pages.account.address',compact('showPromo','UserCart', 'user', 'address', 'no', 'kategori', 'all_products', 'new_products'));
     }
 
     public function GetProvince()
@@ -278,6 +284,7 @@ class PembeliAuthController extends Controller
     public function EditAddress($code)
     {
         $kategori       = Kategori::all();
+        $showPromo      = Promo::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $id             = Auth::guard('pembeli')->id();
@@ -285,7 +292,7 @@ class PembeliAuthController extends Controller
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $address        = Alamat::where('kode_alamat', $code)->first();
 
-        return view('frontend.pages.account.detail_address', compact('UserCart','address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
+        return view('frontend.pages.account.detail_address',compact('showPromo','UserCart','address', 'user', 'id', 'new_products', 'all_products', 'kategori'));
     }
 
     public function UpdateAddress(Request $request, $code)
@@ -323,11 +330,12 @@ class PembeliAuthController extends Controller
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
         $kategori       = Kategori::all();
+        $showPromo      = Promo::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
-        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('id', 'desc')->with('GetDetail')->get();
-        return view('frontend.pages.account.history', compact('UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('tanggal', 'desc')->with('GetDetail')->get();
+        return view('frontend.pages.account.history',compact('showPromo','UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
     }
 
     public function ShowOrderHistory($code)
@@ -336,6 +344,7 @@ class PembeliAuthController extends Controller
         $user           = Pembeli::where('id', $id)->first();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $kategori       = Kategori::all();
+        $showPromo      = Promo::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('kode_keranjang', $code)->with('GetDetail')->with('getAddress')->first();
@@ -345,7 +354,7 @@ class PembeliAuthController extends Controller
         }
         $ongkir         = $orders->ongkir / 15000;
         $SUM            = $Items->sum('sub_total');
-        return view('frontend.pages.account.order', compact('SUM', 'hargaUSD', 'Items', 'ongkir', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
+        return view('frontend.pages.account.order',compact('showPromo','SUM', 'hargaUSD', 'Items', 'ongkir', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
     }
 
     public function MyOrder()

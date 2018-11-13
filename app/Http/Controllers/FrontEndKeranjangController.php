@@ -23,7 +23,7 @@ class FrontEndKeranjangController extends Controller
         $kategori       = Kategori::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
-        $showPromo = Promo::all();
+        $showPromo      = Promo::all();
         $UserCart       = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $SUM            = $UserCart->sum('sub_total');
 
@@ -33,7 +33,7 @@ class FrontEndKeranjangController extends Controller
 
     public function ShowCart()
     {
-        $showPromo = Promo::all();
+        $showPromo  = Promo::all();
         $user       =   Auth::guard('pembeli')->id();
         $Pembeli    =   Pembeli::where('id', $user)->first();
         $cart       =   DB::table('keranjangs')
@@ -65,7 +65,7 @@ class FrontEndKeranjangController extends Controller
         $user           = Auth::guard('pembeli')->id();
         $Pembeli        = Pembeli::where('id', $user)->first();
         $Product        = Produk::where('kode_produk', $code)->first();
-        $showPromo = Promo::all();
+        $showPromo      = Promo::all();
         $CountTransaction = Penjualan::where('kode_pembeli', $Pembeli->kode_pembeli)->count() + 1;
         $kode_keranjang = 'CART-' . $user . '-' . $CountTransaction;
         $checkKeranjang = Keranjang::where('kode_produk',$code)->where('kode_pembeli',$Pembeli->kode_pembeli)->where('status', 'Pending')->exists();
