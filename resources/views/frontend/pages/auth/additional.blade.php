@@ -5,5 +5,4 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/vendor/animsition/css/animsition.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('frontend/login/css/main.css')}}">
-
 @endsection

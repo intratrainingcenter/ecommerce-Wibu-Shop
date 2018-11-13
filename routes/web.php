@@ -37,6 +37,7 @@ Route::get('edit-promo', 'PromoController@edit')->Middleware('admin_spv');
 Route::get('add-opsipromo', 'OpsiPromoController@store')->Middleware('admin_spv');
 Route::get('load-opsipromo', 'OpsiPromoController@show')->Middleware('admin_spv');
 Route::delete('delete-opsipromo', 'OpsiPromoController@destroy')->Middleware('admin_spv');
+Route::get('getPromo/{id}', 'OpsiPromoController@getPromo')->name('getPromo');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
 Route::get('/pembelianproducts/product','TransaksiPembelianController@addPengajuan')->name('addproduct');
@@ -46,7 +47,8 @@ Route::get('/pembelianProduct/product/{kode}','TransaksiPembelianController@tamb
 Route::post('/pembelianProduct/product/tambah','TransaksiPembelianController@tampilOpsi');
 Route::get('/pembelianProduct/product/loadopsi/{kode}','TransaksiPembelianController@loadOpsi');
 Route::delete('/pembelianProduct/product/hapusopsi','TransaksiPembelianController@hapusOpsi');
-//laporan
+Route::post('/pembelianProduct/product/pengajuan','TransaksiPembelianController@pengajuan');
+//report
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi')->Middleware('spv_owner');
 Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi')->Middleware('spv_owner');
 Route::get('aporankeuangan','KeuanganController@Index')->name('LaporanKeuangan')->Middleware('spv_owner');

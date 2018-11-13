@@ -12,12 +12,13 @@ use App\Keranjang;
 use App\Pembeli;
 use App\OpsiPromo;
 use App\Alamat;
-
+use App\Promo;
 
 class FrontendControler extends Controller
 {
     public function Index() {
       $kategori = Kategori::all();
+      $showPromo = Promo::all();
       $user = Auth::guard('pembeli')->id();
       $Pembeli = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
@@ -29,12 +30,13 @@ class FrontendControler extends Controller
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $three_products = Produk::where('status' ,'Siap')->limit(3)->orderBy('created_at','desc')->get();
       $two_products = Produk::where('status' ,'Siap')->limit(2)->orderBy('stok','desc')->get();
-      return view('frontend.pages.product.product',compact(['two_products','all_products','three_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.product.product',compact(['showPromo','two_products','all_products','three_products','kategori','new_products', 'UserCart']));
     }
     public function product_list($kode_kategori) {
       $user = Auth::guard('pembeli')->id();
       $Pembeli = Pembeli::where('id', $user)->first();
       $kategori = Kategori::all();
+      $showPromo = Promo::all();
       $nama_kategori = Kategori::where('kode_kategori', $kode_kategori)->first();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $all_products = Produk::where('kode_kategori', $kode_kategori)->orderBy('created_at','desc')->paginate(9);
@@ -44,12 +46,13 @@ class FrontendControler extends Controller
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.product.shop-product-list',compact(['all_products','kategori', 'nama_kategori','new_products', 'UserCart']));
+      return view('frontend.pages.product.shop-product-list',compact(['showPromo','all_products','kategori', 'nama_kategori','new_products', 'UserCart']));
     }
     public function Checkout() {
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $kategori = Kategori::all();
+      $showPromo = Promo::all();
       $user = Auth::guard('pembeli')->id();
       $Pembeli = Pembeli::where('id', $user)->first();
       $addresses  = Alamat::where('kode_pembeli', $Pembeli->kode_pembeli)->get();
@@ -62,7 +65,7 @@ class FrontendControler extends Controller
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.checkout.shop-checkout',compact(['SUM','kode_keranjang','addresses','all_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.checkout.shop-checkout',compact(['showPromo','SUM','kode_keranjang','addresses','all_products','kategori','new_products', 'UserCart']));
     }
     public function checkoutAddress(Request $request)
     {
@@ -92,17 +95,17 @@ class FrontendControler extends Controller
           "key: 9e75f7010c470ab9611072c4444605be"
         ),
       ));
-    
+
 
         $response = curl_exec($curl);
-      
+
         $err = curl_error($curl);
 
         curl_close($curl);
 
         $dec = json_decode($response, true);
         $all[] = $dec['rajaongkir']['results'];
-      
+
       }
 
       return $all;
@@ -111,7 +114,7 @@ class FrontendControler extends Controller
         } else {
           echo $all;
         }
-      
+
     }
     public function Shop_item($kode_porduk) {
       $user = Auth::guard('pembeli')->id();
@@ -123,13 +126,14 @@ class FrontendControler extends Controller
           $UserCart = [];
       }
       $kategori = Kategori::all();
+      $showPromo = Promo::all();
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $view_products = Produk::where('kode_produk',$kode_porduk)->first();
       $review = reviewProduct::where('kode_produk',$kode_porduk)->limit(4)->orderBy('created_at','desc')->get();
       $three_products = Produk::where('status' ,'Siap')->limit(3)->orderBy('created_at','desc')->get();
       $two_products = Produk::where('status' ,'Siap')->limit(2)->orderBy('created_at','desc')->get();
-      return view('frontend.pages.product.shop-item',compact(['Promo','two_products','review','view_products','all_products','three_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.product.shop-item',compact(['showPromo','Promo','two_products','review','view_products','all_products','three_products','kategori','new_products', 'UserCart']));
     }
     public function AllProducts()
     {
@@ -137,19 +141,21 @@ class FrontendControler extends Controller
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $all_products = Produk::orderBy('created_at','desc')->paginate(9);
       $user         = Auth::guard('pembeli')->id();
+      $showPromo = Promo::all();
       $Pembeli      = Pembeli::where('id', $user)->first();
       if( $user != NULL) {
         $UserCart = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+      return view('frontend.pages.product.all-products', compact('showPromo','kategori', 'all_products','new_products', 'UserCart'));
     }
 
     public function search(Request $request)
     {
       $input        = $request->search;
       $kategori     = Kategori::all();
+      $showPromo = Promo::all();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $all_products = Produk::where('nama_produk', 'like', '%'.$input.'%')->orderBy('created_at','desc')->paginate(9);
       $user         = Auth::guard('pembeli')->id();
@@ -159,11 +165,12 @@ class FrontendControler extends Controller
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+      return view('frontend.pages.product.all-products', compact('showPromo','kategori', 'all_products','new_products', 'UserCart'));
     }
 
     public function filter(Request $request)
     {
+      $showPromo = Promo::all();
       $kategori     = Kategori::all();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $user         = Auth::guard('pembeli')->id();
@@ -215,6 +222,6 @@ class FrontendControler extends Controller
         }
       }
 
-      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+      return view('frontend.pages.product.all-products', compact('showPromo','kategori', 'all_products','new_products', 'UserCart'));
     }
 }

@@ -24,7 +24,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary" name="button">Filter</button>
             </div>
-
           </div>
           <div class="col-md-9 col-sm-7">
             <div class="row list-view-sorting clearfix">
@@ -60,7 +59,6 @@
                   <center><h3>Sorry, Product With Category {{$nama_kategori->nama_kategori}} Is Currently Empty!</h3></center>
                 </div>
               </div>
-
             @endforelse
             </div>
             <div class="row">

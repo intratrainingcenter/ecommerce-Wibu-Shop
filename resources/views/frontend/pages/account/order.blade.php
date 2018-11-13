@@ -90,16 +90,13 @@
             <div class="checkout-total-block">
               <ul>
                 <li>
-                  <em>Sub total</em>
-                  <strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
+                  <em>Sub total</em><strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
                 </li>
                 <li>
-                  <em>Shipping cost</em>
-                  <strong class="price"><span>Rp.</span>{{number_format($orders->ongkir)}}</strong>
+                  <em>Shipping cost</em><strong class="price"><span>Rp.</span>{{number_format($orders->ongkir)}}</strong>
                 </li>
                 <li class="checkout-total-price">
-                  <em>Grand Total</em>
-                  <strong class="price"><span>Rp.</span>{{number_format($orders->grand_total)}}</strong>
+                  <em>Grand Total</em><strong class="price"><span>Rp.</span>{{number_format($orders->grand_total)}}</strong>
                 </li>
               </ul>
             </div>
@@ -107,7 +104,5 @@
           <a href="{{url()->previous()}}" class="btn btn-info">Back <i class="fa fa-arrow-left"></i></a>
         </div>
       </div>
-      <!-- END CONTENT -->
     </div>
-    <!-- END SIDEBAR & CONTENT -->
 @endsection

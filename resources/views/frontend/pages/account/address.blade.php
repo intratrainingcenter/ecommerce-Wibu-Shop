@@ -4,16 +4,12 @@
 <div class="main">
     <div class="container">
         <ul class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li><a href="{{route('pembeli.account')}}">My Account</a></li>
-            <li class="active">Address</li>
+            <li><a href="/">Home</a></li><li><a href="{{route('pembeli.account')}}">My Account</a></li><li class="active">Address</li>
         </ul>
         @include('frontend.pages.account.alert')
-        <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             @include('frontend.pages.account.sidebar')
             @include('frontend.pages.account.add_address')
-            <!-- BEGIN CONTENT -->
             <div id="Address" class="col-md-9 col-sm-7">
                 <h1>My Address</h1>
                 <div class="content-page">
@@ -49,12 +45,8 @@
                     <button id="AddAddress" class="btn btn-primary pull-right">Add Address</button><br><br>
                 </div>
             </div>
-            <!-- END CONTENT -->
         </div>
-        <!-- END SIDEBAR & CONTENT -->
     </div>
-
-    <!-- Modal -->
     @foreach ($address as $alamat)
     <div id="delete{{$alamat->kode_alamat}}" style="display: none;">
         <div class="product-page product-pop-up">
