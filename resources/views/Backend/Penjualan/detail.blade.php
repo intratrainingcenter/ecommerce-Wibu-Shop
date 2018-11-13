@@ -1,30 +1,17 @@
 @extends('Backend.Layout.master')
 @extends('Backend.Penjualan.additional')
-
-@section('title')
-    Pesanan {{$Penjualan->kode_transaksi_penjualan}}
-@endsection
-
+@section('title')  Pesanan {{$Penjualan->kode_transaksi_penjualan}} @endsection
 @section('content')
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Pesanan {{$Penjualan->kode_transaksi_penjualan}}
-        <small>Control panel</small>
-      </h1>
+      <h1>Pesanan {{$Penjualan->kode_transaksi_penjualan}}<small>Control panel</small></h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Penjualan</li>
         <li class="active">{{$Penjualan->kode_transaksi_penjualan}}</li>
       </ol>
     </section>
-
-    <!-- Main content -->
     <section class="content">
-      <!-- Main row -->
       <div class="row">
           <div class="col-xs-12">
             <div class="box">
@@ -33,7 +20,7 @@
                     <div class="alert alert-danger alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4><i class="icon fa fa-ban"></i> Gagal!</h4>
-                        <p>{{session('alertfail')}}</p> 
+                        <p>{{session('alertfail')}}</p>
                     </div>
                 </div>
                 @elseif(session('alertsuccess'))
@@ -41,7 +28,7 @@
                     <div class="alert alert-success alert-dismissible col-md-6 col-md-offset-3" style="position:absolute">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
-                        <p>{{session('alertsuccess')}}</p> 
+                        <p>{{session('alertsuccess')}}</p>
                     </div>
                 </div>
                 @endif
@@ -59,7 +46,6 @@
                         <h3 class="box-title"> Status : {{$Penjualan->status}}</h3>
                     @endif
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body">
                     <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                     <thead>
@@ -102,14 +88,9 @@
                     @endif
                     </form>
                 </div>
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
         </div>
       </div>
-      <!-- /.row (main row) -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 @endsection

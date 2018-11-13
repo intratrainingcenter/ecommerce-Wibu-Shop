@@ -11,7 +11,7 @@
             @if ($Detail->foto != '')
                 <center><img src="{{Storage::url($Detail->foto)}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
               @else
-                <center><img src="{{asset('images/foto.png')}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
+                <center><img src="{{Storage::url('images/foto.png')}}" style="margin-bottom: 10px; border-radius: 100%; width: 200px; height:150px" alt=""></center>
             @endif
                 <div class="form-group row">
                     <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>

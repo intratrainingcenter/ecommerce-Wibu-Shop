@@ -1,6 +1,4 @@
 @foreach ($data->users as $item)
-
-<!-- Modal  Detail User-->
 <div class="modal fade" id="ModalDetailUser{{$item->kode_user}}" data-backdrop="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -39,10 +37,6 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
-
 @endforeach

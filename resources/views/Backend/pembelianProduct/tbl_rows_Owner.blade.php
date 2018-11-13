@@ -4,8 +4,6 @@
     <tr>
       <td>{{$no++}}</td>
       <td>{{$item->kode_transaksi_pembelian}}</td>
-      {{--
-        --}}
       @foreach($data->users as $user)
         @if($item->kode_user == $user->kode_user)
         <td><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#ModalDetailUser{{$user->kode_user}}"> <i class="fa fa-user"></i> {{$user->name}}</button></td>

@@ -17,8 +17,6 @@
     </td>
     <input id='sub{{ $opsi->id }}' class='sub' type='hidden' value='{{$opsi->sub_total}}'>
     @csrf
-
-
 </tr>
 @endforeach
 <input type="hidden" name="opsi" id="opsi" jumlah="{{$hitung_opsi}}" value="{{$hitung_opsi}}">

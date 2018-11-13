@@ -1,7 +1,5 @@
 @foreach ($data->transaksi as $group)
   @foreach ($group as $item)
-
-  <!-- Modal  Detail Transaksi -->
   <div class="modal fade" id="ModalDetail{{$item->kode_transaksi_pembelian}}" data-backdrop="false">
       <div class="modal-dialog">
           <div class="modal-content">
@@ -23,14 +21,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($data->produks as $produk)
-                  @if($item->kode_transaksi_pembelian == $produk->kode_trans)
+                @foreach ($data->produks as $product)
+                  @if($item->kode_transaksi_pembelian == $product->kode_trans)
                   <tr>
-                    <td>{{ $produk->kode_produk }}</td>
-                    <td>{{ $produk->nama_produk }}</td>
-                    <td>{{ $produk->harga }}</td>
-                    <td>{{ $produk->jummlah }}</td>
-                    <td>{{ $produk->sub_total }}</td>
+                    <td>{{ $product->kode_produk }}</td>
+                    <td>{{ $product->nama_produk }}</td>
+                    <td>{{ $product->harga }}</td>
+                    <td>{{ $product->jummlah }}</td>
+                    <td>{{ $product->sub_total }}</td>
                   </tr>
                   @endif
                 @endforeach
@@ -41,10 +39,7 @@
                   <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
               </div>
           </div>
-          <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal -->
   @endforeach
 @endforeach

@@ -32,7 +32,7 @@
                       @if ($key->foto != '')
                     <td><img src="{{Storage::url($key->foto)}}" width="200px" height="100px" alt=""></td>
                       @else
-                    <td><img src="{{asset('images/foto.png')}}" class="user-image" alt="User Image"></td>  
+                    <td><img src="{{Storage::url('images/foto.png')}}" class="user-image" alt="User Image"></td>  
                       @endif
                     @if ($key->kode_user == auth::user()->kode_user)
                       <td></td>

@@ -1,5 +1,4 @@
 @section('title') Laporan Barang @endsection
-
 @section('js')
   <script type="text/javascript">
     function printlayer(layer) {

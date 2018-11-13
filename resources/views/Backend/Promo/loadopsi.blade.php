@@ -2,7 +2,6 @@
 $no = 1;
 $jumlah_opsi = count($data);
 @endphp
-
 @foreach($data as $opsi)
 <tr>
 	<td>{{ $no++ }}</td>
@@ -15,7 +14,6 @@ $jumlah_opsi = count($data);
 		</button>
 	</td>
 	@endif
-
 </tr>
 @endforeach
 <input type="hidden" name="jumlah_opsi" id="jumlah_opsi" value="{{$jumlah_opsi}}">
