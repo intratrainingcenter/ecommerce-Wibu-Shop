@@ -132,9 +132,11 @@
                         <h4 class="modal-title">Tambah Stok Barang</h4>
                       </div>
                       <div class="modal-body">
-                        <form id="form_masuk">
+                        <form id="form_masuk" action="{{route('editStatus')}}" method="POST">
+                        @csrf @method('POST')
                         <input type="hidden" id="isigrandtot" name="isigrandtot" type="text" value="">
-                        <input type="hidden" id="isikode" name="isikode" type="text" value="">
+                        <input type="hidden" id="isikode" name="kode" type="text" value="">
+                        <input type="hidden" name="status" value="Pending">
                         <center>
                         <h3>Konfirmasi</h3>
                         <p style="color:#35bf4d;">Anda Yakin Ingin Mengajukan Pesanan?</p>
@@ -144,7 +146,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-3d btn-danger" data-dismiss="modal" style="margin-right:20px">Batal</button>
-                        <button type="button" id="Diajukan" class="btn btn-3d btn-success">Ajukan</button>
+                        <button type="submit" class="btn btn-3d btn-success">Ajukan</button>
                         @csrf @method('POST')
                         </form>
                     </div>
