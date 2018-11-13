@@ -51,7 +51,7 @@
                 <div>
                   <p>Promo :</p>
                   @forelse ($Promo as $item)
-                    <a href="">{{$item->kode_promo}}</a>
+                    <a href="#product-pop-up1{{ $item->kode_promo }}" class="btn btn-default fancybox-fast-view" >{{$item->kode_promo}}</a>
                   @empty
                     <p>No Promo</p>
                   @endforelse
@@ -96,7 +96,11 @@
                           <textarea class="form-control" rows="8" name="review_product" id="review"></textarea>
                         </div>
                         <div class="padding-top-20">
+                          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                            Launch Default Modal
+                          </button>
                           <button type="submit" class="btn btn-primary">Send</button>
+                          <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#yourModal">adasdsa</li>
                         </div>
                       </form>
                     </div>
@@ -108,6 +112,7 @@
         </div>
       </div>
     </div>
+
 @endsection
 @section('js.new')
 <script type="text/javascript">

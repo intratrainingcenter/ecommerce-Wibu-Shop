@@ -12,7 +12,7 @@ use App\Keranjang;
 use App\Pembeli;
 use App\OpsiPromo;
 use App\Alamat;
-
+use App\Promo;
 
 class FrontendControler extends Controller
 {
@@ -92,17 +92,17 @@ class FrontendControler extends Controller
           "key: 9e75f7010c470ab9611072c4444605be"
         ),
       ));
-    
+
 
         $response = curl_exec($curl);
-      
+
         $err = curl_error($curl);
 
         curl_close($curl);
 
         $dec = json_decode($response, true);
         $all[] = $dec['rajaongkir']['results'];
-      
+
       }
 
       return $all;
@@ -111,7 +111,7 @@ class FrontendControler extends Controller
         } else {
           echo $all;
         }
-      
+
     }
     public function Shop_item($kode_porduk) {
       $user = Auth::guard('pembeli')->id();
@@ -123,13 +123,14 @@ class FrontendControler extends Controller
           $UserCart = [];
       }
       $kategori = Kategori::all();
+      $showPromo = Promo::all();
       $all_products = Produk::orderBy('created_at','desc')->get();
       $new_products = Produk::limit(4)->orderBy('created_at','desc')->get();
       $view_products = Produk::where('kode_produk',$kode_porduk)->first();
       $review = reviewProduct::where('kode_produk',$kode_porduk)->limit(4)->orderBy('created_at','desc')->get();
       $three_products = Produk::where('status' ,'Siap')->limit(3)->orderBy('created_at','desc')->get();
       $two_products = Produk::where('status' ,'Siap')->limit(2)->orderBy('created_at','desc')->get();
-      return view('frontend.pages.product.shop-item',compact(['Promo','two_products','review','view_products','all_products','three_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.product.shop-item',compact(['showPromo','Promo','two_products','review','view_products','all_products','three_products','kategori','new_products', 'UserCart']));
     }
     public function AllProducts()
     {
@@ -214,7 +215,7 @@ class FrontendControler extends Controller
           $all_products = Produk::where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
         }
       }
-      
+
       return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
     }
 }

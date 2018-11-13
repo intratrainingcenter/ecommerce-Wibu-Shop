@@ -35,3 +35,30 @@
   </div>
 </div>
 @endforeach
+@foreach ($showPromo as $element)
+<div id="product-pop-up1{{ $element->kode_promo }}" style="display: none; width: 700px;">
+  <div class="product-page product-pop-up">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-9">
+        <h2>{{ $element->kode_promo }}</h2><hr>
+        <div class="price-availability-block clearfix">
+          <div class="price">
+            <H3>Promo ini bisa di dapatkan jika pemesanan min <strong>{{$element->min}}</strong> dan max
+            <strong>{{$element->max}}</strong> tidak berlaku kelipatan</H3>
+          </div>
+        </div>
+        <div class="description">
+          <p>{{$element->jenis_promo}}</p>
+          @if ($element->jenis_promo == "Bonus")
+            <strong>Promo : {{ $element->kode_produk_bonus }}</strong>
+          @else
+            <strong>Promo : {{"Rp ".number_format($element->diskon).".00" }}</strong>
+          @endif
+        </div>
+        <div class="product-page-cart">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
