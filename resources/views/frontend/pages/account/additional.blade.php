@@ -1,13 +1,12 @@
 @section('css')
     <style>
-    #Phone::-webkit-inner-spin-button, 
-    #Phone::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
+    #Phone::-webkit-inner-spin-button,
+    #Phone::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
     </style>
 @endsection
-
 @section('js')
 <script>
     $(document).ready(function() {
@@ -63,12 +62,10 @@
         $('#EditForm').on('blur', 'input[type=number]', function (e) {
             $(this).off('mousewheel.disableScroll')
         })
-
         // Show Image Onchange
         $("#foto").change(function() {
             ShowImage(this);
         })
-
         // Show City Onchange
         $("#province").change(function(){
             let province = $("#province").val();
@@ -81,7 +78,6 @@
                 GetCity(province);
             }
         })
-
         $("#city").change(function(){
             let text = $("#city option:selected").text();
             let city = $("#city").val();
@@ -89,10 +85,8 @@
                 $("#city_name").val('');
             } else {
                 $("#city_name").val(text);
-                
             }
         })
-
         // Show Profile Image
         function ShowImage(input) {
             if (input.files && input.files[0]) {
@@ -105,7 +99,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         // Show Province
         function GetProvince() {
             let option = '';
@@ -117,13 +110,10 @@
                     $.each(response, function(key, val){
                         option += "<option value='"+val.province_id+"'>"+val.province+"</option>";
                     })
-
                     $("#province").html("<option value=''>--Select Province--</option>"+option);
-                    
                 }
             })
         }
-
         // Show City By Province
         function GetCity(province) {
             let option = '';
@@ -135,13 +125,10 @@
                     $.each(response, function(key, val){
                         option += "<option value='"+val.city_id+"'>"+val.city_name+"</option>";
                     })
-
                     $("#city").html("<option value=''>--Select City--</option>"+option);
-                    
                 }
             })
         }
-
     })
 </script>
 @endsection

@@ -8,11 +8,8 @@
             <li><a href="{{route('pembeli.account')}}">My Account</a></li>
             <li class="active">Profile</li>
         </ul>
-
-        <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             @include('frontend.pages.account.sidebar')
-            <!-- BEGIN CONTENT -->
             <div id="FormPassword" class="col-md-9 col-sm-7">
                 <h1>Change Password</h1>
                 <div class="content-page">
@@ -95,9 +92,7 @@
                     </form>
                 </div>
             </div>
-            <!-- END CONTENT -->
         </div>
-        <!-- END SIDEBAR & CONTENT -->
     </div>
 </div>
 @endsection
