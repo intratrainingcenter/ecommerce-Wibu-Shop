@@ -103,23 +103,33 @@ class FrontEndKeranjangController extends Controller
         }
         if ($checkKode == null) {
           $checkPromo = OpsiPromo::where('kode_produk',$kode_produk)->get();
-              foreach ($checkPromo as $check) {
-                $promo[] = Promo::where('kode_promo',$check->kode_promo)->where('min','<=',$jumlah)->where('max','>=',$jumlah)->get();
-              }
-              foreach ($promo as $key) {
-                foreach ($key as $keyue) {
-                  $prom = $keyue->kode_promo;
-                  $diskon = $keyue->diskon;
-                  $product = $keyue->kode_produk_bonus;
-                }
-              }
-          $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
-          $data->update([
-            'kode_promo'=>  $prom,
-            'jumlah'    =>  $jumlah,
-            'sub_total' =>  $sub_total - $diskon,
-          ]);
-          return response()->json($data);
+          if (count($checkPromo) != 0) {
+                foreach ($checkPromo as $check) {
+                    $promo[] = Promo::where('kode_promo',$check->kode_promo)->where('min','<=',$jumlah)->where('max','>=',$jumlah)->get();
+                  }
+                  foreach ($promo as $key) {
+                    foreach ($key as $keyue) {
+                      $prom = $keyue->kode_promo;
+                      $diskon = $keyue->diskon;
+                      $product = $keyue->kode_produk_bonus;
+                    }
+                  }
+                  $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
+                  $data->update([
+                    'kode_promo'=>  $prom,
+                    'jumlah'    =>  $jumlah,
+                    'sub_total' =>  $sub_total - $diskon,
+                  ]);
+                  return response()->json($data);
+            }else {
+              $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
+              $data->update([
+                'kode_promo'=>  "",
+                'jumlah'    =>  $jumlah,
+                'sub_total' =>  $sub_total,
+              ]);
+              return response()->json($data);
+            }
         }else {
         $check = Promo::where('kode_promo',$checkKode)->where('min','<=',$jumlah)->where('max','>=',$jumlah)->get();
             if (count($check) != 0) {
