@@ -214,7 +214,7 @@ class FrontendControler extends Controller
           $all_products = Produk::where('harga', '>=', $minimum)->orderBy('created_at','desc')->paginate(9);
         }
       }
-      
+
       return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
     }
 }

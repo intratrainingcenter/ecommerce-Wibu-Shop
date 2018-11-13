@@ -59,7 +59,7 @@ class PromoController extends Controller
                 $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
             }
             return redirect()->back()->with('alertfail', 'Tolong isi form dengan benar!');
-        } 
+        }
         elseif ($check) {
             $getOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->get();
             if($getOpsiTemporary) {
@@ -80,7 +80,7 @@ class PromoController extends Controller
 
                 $deleteOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->delete();
             }
-            
+
             $create = Promo::create([
                 'kode_promo' => $request->kode_promo,
                 'nama_promo' => $request->nama_promo,
@@ -92,6 +92,57 @@ class PromoController extends Controller
                 'diskon'=>$request->diskon,
                 'kode_produk_bonus'=>$request->kode_produk_bonus,
             ]);
+
+            // Notification
+            $Bonus = Produk::where('kode_produk', $request->kode_produk_bonus)->first();
+
+            if($request->diskon != NULL) {
+              $content      = array(
+                  "en" => "Temukan Diskon Hingga Rp.$request->diskon, Untuk Pembelian Barang dari $request->tanggal_awal Sampai $request->tanggal_akhir"
+              );
+            } else if($kode_produk_bonus =! NULL) {
+              $content      = array(
+                  "en" => "Dapatkan $Bonus->nama_produk Gratis, Untuk pembelian barang tertentu!, Buruan Sebelum Kehabisan"
+              );
+
+            } else {
+              $content      = array(
+                  "en" => "Buruan Cek sekarang!!"
+              );
+            }
+            $headings     = array(
+                "en" => "Wibu Shop || $request->nama_promo"
+            );
+
+            $url     = "localhost:8000/all-products";
+
+            $fields = array(
+                'app_id' => "4f816c01-60fc-425e-9c4c-57cd67cffb1b",
+                'included_segments' => array('All'),
+                'contents' => $content,
+                'headings' => $headings,
+                'url' => $url,
+            );
+
+            $fields = json_encode($fields);
+            print("\nJSON sent:\n");
+            print($fields);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json; charset=utf-8',
+                'Authorization: Basic MzdiMGNkNjgtNjQzYS00MmYxLThjYTMtOTExOWE5MGM2MTY2'
+            ));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
             return redirect()->back()->with('alertsuccess', 'Data promo berhasil ditambahkan!');
         }
     }
@@ -121,11 +172,11 @@ class PromoController extends Controller
         $deleteOpsiTemporary = Temporary::where('kode_promo',$data->kode_promo)->delete();
         foreach ($OpsiPromo as $item) {
             $moveToTemporary = Temporary::create([
-            'kode_promo' => $item->kode_promo, 
-            'kode_produk' => $item->kode_produk, 
+            'kode_promo' => $item->kode_promo,
+            'kode_produk' => $item->kode_produk,
             ]);
         }
-        
+
         return $data;
     }
 
@@ -151,9 +202,9 @@ class PromoController extends Controller
         }
         else {
             $deleteOpsi = OpsiPromo::where('kode_promo',$request->kode_promo)->delete();
-          
+
             $getOpsiTemporary = Temporary::where('kode_promo',$request->kode_promo)->get();
-          
+
             foreach ($getOpsiTemporary as $item) {
               $save = OpsiPromo::create([
                 'kode_promo' => $item->kode_promo,
