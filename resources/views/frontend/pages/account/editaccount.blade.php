@@ -15,7 +15,7 @@
                 <div class="content-page">
                         <div class="col-md-4">
                             @if ($user->foto == '')
-                                <img src="{{asset('images/foto.png')}}" alt="">
+                                <img src="{{asset('images/avatar.png')}}" alt="">
                             @else
                                 <img src="{{Storage::url($user->foto)}}" class="img-responsive" alt="">
                             @endif
