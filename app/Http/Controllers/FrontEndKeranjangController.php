@@ -47,7 +47,7 @@ class FrontEndKeranjangController extends Controller
     public function LoadCart()
     {
         $user           = Auth::guard('pembeli')->id();
-        $showPromo = Promo::all();
+        $showPromo      = Promo::all();
         $Pembeli        = Pembeli::where('id', $user)->first();
         $UserCart       = Keranjang::where('kode_pembeli', $Pembeli->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $SUM            = $UserCart->sum('sub_total');
@@ -56,7 +56,8 @@ class FrontEndKeranjangController extends Controller
           $typediskon = $key->jenis_promo;
           $diskon     = $key->kode_produk_bonus;
         }
-        return view('frontend.pages.cart.loadcart',compact('showPromo','UserCart', 'SUM','typediskon','diskon'));
+        $count = count($checkPromo);
+        return view('frontend.pages.cart.loadcart',compact('count','showPromo','UserCart', 'SUM','typediskon','diskon'));
     }
 
     public function AddToCart(Request $request, $code)
@@ -108,19 +109,29 @@ class FrontEndKeranjangController extends Controller
                     $promo[] = Promo::where('kode_promo',$check->kode_promo)->where('min','<=',$jumlah)->where('max','>=',$jumlah)->get();
                   }
                   foreach ($promo as $key) {
-                    foreach ($key as $keyue) {
+                  }
+                  foreach ($key as $keyue) {
                       $prom = $keyue->kode_promo;
                       $diskon = $keyue->diskon;
                       $product = $keyue->kode_produk_bonus;
-                    }
                   }
-                  $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
-                  $data->update([
-                    'kode_promo'=>  $prom,
-                    'jumlah'    =>  $jumlah,
-                    'sub_total' =>  $sub_total - $diskon,
-                  ]);
-                  return response()->json($data);
+                  if (count($key) != 0) {
+                    $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
+                    $data->update([
+                      'kode_promo'=>  $prom,
+                      'jumlah'    =>  $jumlah,
+                      'sub_total' =>  $sub_total - $diskon,
+                    ]);
+                    return response()->json($data);
+                  }else {
+                    $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
+                    $data->update([
+                      'kode_promo'=>  "",
+                      'jumlah'    =>  $jumlah,
+                      'sub_total' =>  $sub_total,
+                    ]);
+                    return response()->json($data);
+                  }
             }else {
               $data           =   Keranjang::where('kode_keranjang', $kode_keranjang)->where('kode_produk', $kode_produk);
               $data->update([

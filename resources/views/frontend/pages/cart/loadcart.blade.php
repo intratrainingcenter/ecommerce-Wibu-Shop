@@ -41,9 +41,12 @@
     </div>
     <div class="shopping-total">
         <ul>
-          @if ($typediskon == "Bonus")
-            <li><em>Bonus </em><strong>{{ $diskon }}</strong></li>
-            @else
+          @if ($count != 0)
+            @if ($typediskon == "Bonus")
+              <li><em>Bonus </em><strong>{{ $diskon }}</strong></li>
+            @elseif ($typediskon == "Diskon")
+            @endif
+          @else
           @endif
         <li class="shopping-total-price"><em>Grand Total</em><strong class="price"><span>Rp.{{number_format($SUM)}}</span></strong></li>
         </ul>

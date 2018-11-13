@@ -45,7 +45,6 @@
         Layout.initTouchspin();
         Layout.initSliderRange();
         Layout.initUniform();
-    setTimeout(function(){ $('.alert-notification').hide(1000); }, 3000);
     });
 </script>
 @yield('js.new')
