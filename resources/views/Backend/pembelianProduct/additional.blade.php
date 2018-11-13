@@ -5,6 +5,15 @@
 @section('js')
   <script type="text/javascript">
   $(document).ready(function() {
+    $('#TableTransBeli').DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false,
+        'responsive'  : true
+    });
 // change
     $('#KodeBarang').on('change', function() {
         var kode = $(this).val();
@@ -92,16 +101,8 @@
                 _token:token,
                 _method: 'POST',
             },
-        })
-        .done(function() {
-          console.log("success");
-          $('#simpan').modal('hide');
-          $('#showmodaltambah').prop('disabled', true);
-          showbaru(code);
-        })
-        .fail(function() {
-          console.log("error");
         });
+
 
       });
   });

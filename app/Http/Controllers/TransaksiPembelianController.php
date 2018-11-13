@@ -11,6 +11,22 @@ use Illuminate\Support\Facades\Input;
 class TransaksiPembelianController extends Controller
 {
     public function index()  {
+        $no = 1;
+        $data = (object)array(
+          'transaksi' => TransaksiPembelian::all()
+                        ->sortByDesc('updated_at')
+                        ->groupBy('kode_transaksi_pembelian'),
+          'users'     => DB::table('users')
+                          ->get(),
+          'produks'   => DB::table('transaksi_pembelians')
+                          ->join('produks', 'produks.kode_produk', '=', 'transaksi_pembelians.kode_produk')
+                          ->select('produks.*', 'transaksi_pembelians.jummlah', 'transaksi_pembelians.harga', 'transaksi_pembelians.sub_total', 'transaksi_pembelians.kode_transaksi_pembelian as kode_trans')
+                          ->get(),
+        );
+        return view('Backend.pembelianProduct.index',compact('data','no'));
+    }
+
+    public function addPengajuan()  {
         $Pembelian = DB::table('transaksi_pembelians')->max('id');
         $Max= $Pembelian+1;
         $date = date('mdhis');
@@ -61,11 +77,32 @@ class TransaksiPembelianController extends Controller
         $delete->delete();
         return Response()->json($delete);
     }
-    public function pengajuan(Request $request)  {
-        $pengajuan = TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)->update([
-          'status' => "Pengajuan",
-        ]);
-        // dd($pengajuan);
-        return response()->json($pengajuan);
+    public function change(Request $request) {
+
+      if ($request->status == 'Pending') {
+        TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
+                          ->update(['status' => 'Pengajuan']);
+      } elseif ($request->status == 'Accepted') {
+        TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
+                          ->update(['status' => 'On Proccess']);
+      } elseif ($request->status == 'On Proccess') {
+        TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
+                          ->update(['status' => 'Checking']);
+      } elseif ($request->status == 'Checking') {
+        TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
+                          ->update(['status' => 'Done']);
+      } elseif ($request->status == 'Cancelled') {
+        TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
+                          ->update(['status' => 'Cancelled']);
+      } elseif ($request->status == 'Acc') {
+        TransaksiPembelian::where('kode_transaksi_pembelian',$request->kode)
+                          ->update(['status' => 'Accepted']);
+      }
+
+      return redirect()->route('pembelianproducts.index');
+    }
+    public function FunctionName()
+    {
+      return redirect()->route('pembelianproducts.index');
     }
 }

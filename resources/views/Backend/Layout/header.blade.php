@@ -236,6 +236,7 @@
             </ul>
           </li>
         @elseif (auth::user()->jabatan == 'Owner')
+          <li><a href="{{route('pembelianproducts.index')}}"><i class="fa fa-laptop"></i><span>Data Transaksi Pembelian</span></a></li>
           <li class="treeview">
             <a href=""><span>Laporan</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
