@@ -9,12 +9,10 @@
                 @else
                 <img src="{{Storage::url($user->foto)}}" class="img-responsive image" alt="">
                 @endif
-                <label for="">Upload image</label>
-                <input class="form-control" type="file" name="foto" id="foto">
+                <label for="">Upload image</label><input class="form-control" type="file" name="foto" id="foto">
             </div>
             <div class="col-md-4">
-                <label for=""> Name</label>
-                <input type="text" class="form-control" name="nama_pembeli" value="{{$user->nama_pembeli}}" required>
+                <label for=""> Name</label><input type="text" class="form-control" name="nama_pembeli" value="{{$user->nama_pembeli}}" required>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
@@ -31,12 +29,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <label for=""> Email</label>
-                <input class="form-control" type="text" name="email" value="{{$user->email}}" required>
+                <label for=""> Email</label><input class="form-control" type="text" name="email" value="{{$user->email}}" required>
             </div>
             <div class="col-md-4">
-                <label for=""> Phone Number </label>
-                <input id="Phone" class="form-control" type="number" name="telepon" value="{{$user->telepon}}" required>
+                <label for=""> Phone Number </label><input id="Phone" class="form-control" type="number" name="telepon" value="{{$user->telepon}}" required>
             </div>
         <div class="row">
             <button type="submit" class="btn btn-success pull-right" style="margin:10px">Save</button>

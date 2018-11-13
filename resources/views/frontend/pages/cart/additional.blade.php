@@ -7,8 +7,6 @@
     }
     </style>
 @endsection
-
-
 @section('js')
 <script>
 $(document).ready(function(){
@@ -19,11 +17,9 @@ $(document).ready(function(){
             url: "{{route('show.cart')}}",
             data: "",
             success: function (response) {
-
                 $.each(response, function (index, value) {
                     $("#"+value.id).on('change paste keyup mousewheel', function(){
                     let jumlah = $(this).val();
-                    // var id = $(this).attr('idproduct');
                     if (jumlah == 0) {
                       UpdateItem(value.kode_keranjang, value.kode_produk, 1, value.harga)
                     }else {
@@ -34,7 +30,6 @@ $(document).ready(function(){
             }
         });
     }
-
     function LoadCart() {
         $.ajax({
             type: "GET",
@@ -46,7 +41,6 @@ $(document).ready(function(){
             }
         });
     }
-
     function UpdateItem(kode_keranjang, kode_produk, jumlah, harga) {
         $.ajaxSetup({
             headers: {
@@ -66,34 +60,6 @@ $(document).ready(function(){
             }
         });
     }
-    // $(document).on('keyup','.quantity',function () {
-    //   var qty = $(this).val();
-    //   var diskon = "";
-    //   var id = $(this).attr('idproduct');
-    //   if (qty == 0) {
-    //   }else {
-    //     $.ajax({
-    //       url: 'getPromo/' + id,
-    //       type: 'GET',
-    //       data: {param1: id,
-    //             qty: qty,
-    //           _method: 'GET'
-    //         }
-    //     })
-    //     .done(function(data) {
-    //       $.each(data,function(index, el) {
-    //         $.each(el,function (ind,el2) {
-    //           diskon += el2.diskon;
-    //         })
-    //         console.log(diskon);
-    //       });
-    //       $('.promo').html(diskon);
-    //     })
-    //     .fail(function() {
-    //       console.log("error");
-    //     });
-    //   }
-    // });
 })
 </script>
 @endsection

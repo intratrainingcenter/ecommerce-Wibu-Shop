@@ -2,18 +2,14 @@
 @section('produck')
     <div class="main">
       <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li class="active"><a href="">Product</a></li>
-        </ul>
+        <ul class="breadcrumb"><li><a href="/">Home</a></li><li class="active"><a href="">Product</a></li></ul>
         <div class="row margin-bottom-40">
           <div class="sidebar col-md-3 col-sm-5">
             @include('frontend.layout.ButonProduct')
             <div class="sidebar-filter margin-bottom-25">
               <form action="{{route('filter.product')}}" method="get">
                 @csrf
-              <h2>Filter</h2>
-              <h3>Availability</h3>
+              <h2>Filter</h2><h3>Availability</h3>
               <div class="checkbox-list">
                 <label><input type="checkbox" style="float:left" name="sold"> Sold Out (0)</label>
                 <label><input type="checkbox" style="float:left" name="ready"> Ready Stock (0)</label>
@@ -26,14 +22,11 @@
                 <button type="submit" class="btn btn-primary" name="button">Filter</button>
               </form>
             </div>
-
           </div>
           <div class="col-md-9 col-sm-7">
             <div class="row list-view-sorting clearfix">
                 <div class="col-md-8 col-sm-8 col-md-offset-4 col-sm-offset-4">
-                    <ul class="pagination pull-right">
-                        {{$all_products->links()}}
-                    </ul>
+                    <ul class="pagination pull-right">{{$all_products->links()}}</ul>
                 </div>
             </div>
             <div class="row product-list">
@@ -57,17 +50,13 @@
                 </div>
               </div>
               @empty
-                  <div class="col-md-12">
-                    <center><p>Sorry, the product you are looking for doesn't exist!</p></center>
-                  </div>
+                  <div class="col-md-12"><center><p>Sorry, the product you are looking for doesn't exist!</p></center></div>
               @endforelse
             </div>
             <div class="row">
               <div class="col-md-4 col-sm-4 items-info"></div>
               <div class="col-md-8 col-sm-8">
-                <ul class="pagination pull-right">
-                  {{$all_products->links()}}
-                </ul>
+                <ul class="pagination pull-right">{{$all_products->links()}}</ul>
               </div>
             </div>
           </div>

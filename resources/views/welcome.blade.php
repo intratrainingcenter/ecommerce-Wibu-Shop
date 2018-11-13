@@ -4,13 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>Laravel</title>
-
-        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
@@ -20,35 +15,28 @@
                 height: 100vh;
                 margin: 0;
             }
-
             .full-height {
                 height: 100vh;
             }
-
             .flex-center {
                 align-items: center;
                 display: flex;
                 justify-content: center;
             }
-
             .position-ref {
                 position: relative;
             }
-
             .top-right {
                 position: absolute;
                 right: 10px;
                 top: 18px;
             }
-
             .content {
                 text-align: center;
             }
-
             .title {
                 font-size: 84px;
             }
-
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -58,7 +46,6 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -76,7 +63,6 @@
                     @endauth
                 </div>
             @endif
-
             <div class="content">
                     @if ($message = Session::get('success'))
                     <div class="w3-panel w3-green w3-display-container">
@@ -86,7 +72,6 @@
                     </div>
                     <?php Session::forget('success');?>
                     @endif
-                 
                     @if ($message = Session::get('error'))
                     <div class="w3-panel w3-red w3-display-container">
                         <span onclick="this.parentElement.style.display='none'"
@@ -102,9 +87,9 @@
                     {{ csrf_field() }}
                     <h2 class="w3-text-blue">Payment Form</h2>
                     <p>Demo PayPal form - Integrating paypal in laravel</p>
-                    <p>      
+                    <p>
                     <label class="w3-text-blue"><b>Enter Amount</b></label>
-                    <input class="w3-input w3-border" name="amount" type="text"></p>      
+                    <input class="w3-input w3-border" name="amount" type="text"></p>
                     <button class="w3-btn w3-blue">Pay with PayPal</button></p>
                   </form>
                 <div class="links">

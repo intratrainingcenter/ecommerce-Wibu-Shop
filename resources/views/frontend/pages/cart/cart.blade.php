@@ -3,9 +3,7 @@
 @section('produck')
 <div class="main">
   <div class="container">
-
     <div class="row margin-bottom-40">
-
       <div class="col-md-12 col-sm-12">
         <h1>Shopping cart</h1>
         <div class="goods-page">
@@ -61,7 +59,6 @@
               @endforelse
             </table>
             </div>
-
             <div class="shopping-total">
               <ul>
                 <li class="shopping-total-price">
@@ -75,7 +72,5 @@
           <a href="{{ route('frontend.Checkout') }}" class="btn btn-primary">Checkout <i class="fa fa-check"></i></a>
         </div>
       </div>
-      <!-- END CONTENT -->
     </div>
-    <!-- END SIDEBAR & CONTENT -->
 @endsection

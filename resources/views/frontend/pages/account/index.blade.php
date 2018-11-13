@@ -6,18 +6,15 @@
             <li><a href="index.html">Home</a></li>
             <li class="active">My Account</li>
         </ul>
-
-        <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
             @include('frontend.pages.account.sidebar')
-            <!-- BEGIN CONTENT -->
             <div class="col-md-9 col-sm-7">
                 <div class="content-page">
                     <center>
                         @if ($user->foto == '')
-                        <img src="{{asset('images/foto.png')}}" alt="">
+                            <img src="{{asset('images/foto.png')}}" alt="">
                         @else
-                        <img src="{{Storage::url($user->foto)}}" width="250px" alt="">
+                            <img src="{{Storage::url($user->foto)}}" width="250px" alt="">
                         @endif
                     </center>
                     <table width="100%">
@@ -41,7 +38,6 @@
                     </table>
                 </div>
             </div>
-            <!-- END CONTENT -->
         </div>
         <div class="row">
             <div class="col-md-9 col-md-offset-3">
@@ -64,16 +60,12 @@
                             <tr>
                                 <td colspan="3" align="center">You don't have any transactions yet!</td>
                             </tr>
-                                
                             @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <!-- END SIDEBAR & CONTENT -->
     </div>
 </div>
-
-
 @endsection

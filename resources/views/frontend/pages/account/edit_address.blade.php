@@ -25,16 +25,14 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="">Address</label>
-                    <textarea name="alamat" class="form-control" cols="30" rows="4" required>{{$address->alamat}}</textarea>
+                    <label for="">Address</label><textarea name="alamat" class="form-control" cols="30" rows="4" required>{{$address->alamat}}</textarea>
                 </div>
             </div>
         </div>
             <div class="row">
                 <div class="col-md-8" style="margin-top:-15px">
                     <div class="form-group">
-                        <label for="">Address Name</label>
-                        <input type="text" name="nama_alamat" class="form-control" value="{{$address->nama_alamat}}" required>
+                        <label for="">Address Name</label><input type="text" name="nama_alamat" class="form-control" value="{{$address->nama_alamat}}" required>
                     </div>
                 </div>
                 <div class="col-md-4">

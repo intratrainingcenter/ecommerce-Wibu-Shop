@@ -7,11 +7,7 @@
 <body class="ecommerce">
     <div class="main">
       <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li><a href="{{route('all_products')}}">Product</a></li>
-            <li class="active">{{$view_products->nama_produk}}</li>
-        </ul>
+        <ul class="breadcrumb"><li><a href="/">Home</a></li><li><a href="{{route('all_products')}}">Product</a></li><li class="active">{{$view_products->nama_produk}}</li></ul>
         <div class="row margin-bottom-40">
           <div class="sidebar col-md-3 col-sm-5">
           @include('frontend.layout.ButonProduct')
@@ -27,16 +23,10 @@
                 <div class="col-md-6 col-sm-6">
                   <h1>{{$view_products->nama_produk}}</h1>
                   <div class="price-availability-block clearfix">
-                    <div class="price">
-                      <strong>{{'Rp. '.number_format($view_products->harga)}}</strong>
-                    </div>
-                    <div class="availability">
-                      Stock: <strong>{{$view_products->stok}} pcs</strong>
-                    </div>
+                    <div class="price"><strong>{{'Rp. '.number_format($view_products->harga)}}</strong></div>
+                    <div class="availability">Stock: <strong>{{$view_products->stok}} pcs</strong></div>
                   </div>
-                  <div class="description">
-                    <p>{{$view_products->keterangan}}</p>
-                  </div>
+                  <div class="description"><p>{{$view_products->keterangan}}</p></div>
                   <div class="product-page-cart">
                     <form action="{{route('frontend.addtocart', ['id' => $view_products->kode_produk])}}" method="POST">
                       @csrf
@@ -84,21 +74,16 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                           <input type="hidden" name="kode_produk" value="{{$view_products->kode_produk}}">
-                          <label for="name">Name <span class="require">*</span></label>
-                          <input type="text" class="form-control" name="nama_pembeli" id="name">
+                          <label for="name">Name <span class="require">*</span></label><input type="text" class="form-control" name="nama_pembeli" id="name">
                         </div>
                         <div class="form-group">
-                          <label for="email">Email</label>
-                          <input type="text" class="form-control" name="email_pembeli" id="email">
+                          <label for="email">Email</label><input type="text" class="form-control" name="email_pembeli" id="email">
                         </div>
                         <div class="form-group">
-                          <label for="review">Review <span class="require">*</span></label>
-                          <textarea class="form-control" rows="8" name="review_product" id="review"></textarea>
+                          <label for="review">Review <span class="require">*</span></label><textarea class="form-control" rows="8" name="review_product" id="review"></textarea>
                         </div>
                         <div class="padding-top-20">
-                          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                            Launch Default Modal
-                          </button>
+                          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">  Launch Default Modal  </button>
                           <button type="submit" class="btn btn-primary">Send</button>
                           <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#yourModal">adasdsa</li>
                         </div>
@@ -112,7 +97,6 @@
         </div>
       </div>
     </div>
-
 @endsection
 @section('js.new')
 <script type="text/javascript">
