@@ -15,7 +15,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="-CUSTOMER VALUE-">
   <meta property="og:url" content="-CUSTOMER VALUE-">
-  <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" href="{{asset('images/Y.png')}}">
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->
   <link href="{{asset('frontend/theme/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -26,16 +27,19 @@
   <link href="{{asset('frontend/theme/assets/pages/css/components.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/pages/css/slider.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/pages/css/style-shop.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('frontend/theme/assets/pages/css/style-chat.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('frontend/theme/assets/corporate/css/style.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
+  <link href="{{asset('frontend/theme/assets/pages/css/popupChat.css')}}" rel="stylesheet" type="text/css">
   @yield('css')
 </head>
 <body class="ecommerce">
-@include('frontend.layout.bar')
+  @include('frontend.layout.bar')
 @include('frontend.layout.header')
   @yield('produck')
+@include('frontend.layout.chatPop-up')
 @include('frontend.layout.pre-footer')
 @include('frontend.layout.footer')
 @include('frontend.layout.pop-up')

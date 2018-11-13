@@ -1,3 +1,13 @@
+@if (Auth::guard('pembeli')->check())
+<div class="top-cart-block">
+ <div class="top-cart-info">
+   <!-- Chat -->
+   <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view" ng-click="openChat()">Chat</a>
+ </div>
+ <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view"> <i class="fa fa-comments-o"></i></a>
+ <a href="#chat-pop-up" class="top-cart-info-count fancybox-fast-view"> <i class="fa fa-comments"></i></a>
+</div>
+@endif
 <div class="top-cart-block">
   <div class="top-cart-info">
     <a href="javascript:void(0);" class="top-cart-info-count">{{count($UserCart)}} items</a>

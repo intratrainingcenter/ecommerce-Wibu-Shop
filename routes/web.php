@@ -83,3 +83,8 @@ Route::prefix('pembeli')->group(function() {
         Route::get('order/{code}', 'PembeliAuthController@ShowOrderHistory')->name('show.order');
     });
 });
+
+Route::get('/Messages', 'MessageController@index')->name('Messages');
+Route::get('/Messages/list', 'MessageController@showList');
+Route::get('/Messages/fill/{id}', 'MessageController@showFill');
+Route::get('/MessagesSearch', 'MessageController@search');

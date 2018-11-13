@@ -19,6 +19,10 @@
 {{-- <script src="{{asset('template/dist/js/pages/dashboard.js')}}"></script> --}}
 <script src="{{asset('template/dist/js/select2.min.js')}}"></script>
 <script src="{{asset('template/dist/js/demo.js')}}"></script>
+<!-- onesignal -->
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
   $('.edit_password').hide()
