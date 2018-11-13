@@ -326,7 +326,7 @@ class PembeliAuthController extends Controller
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
-        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('tanggal', 'desc')->with('GetDetail')->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('id', 'desc')->with('GetDetail')->get();
         return view('frontend.pages.account.history', compact('UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
     }
 
@@ -348,8 +348,23 @@ class PembeliAuthController extends Controller
         return view('frontend.pages.account.order', compact('SUM', 'hargaUSD', 'Items', 'ongkir', 'orders', 'UserCart', 'new_products', 'all_products', 'kategori'));
     }
 
-    public function Back()
+    public function MyOrder()
     {
+        $id             = Auth::guard('pembeli')->id();
+        $user           = Pembeli::where('id', $id)->first();
+        $kategori       = Kategori::all();
+        $all_products   = Produk::orderBy('created_at','desc')->get();
+        $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
+        $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
+        $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('id', 'desc')->where('status', '!=', 'Received')->with('GetDetail')->get();
+        return view('frontend.pages.account.my_order', compact('UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
+    }
+
+    public function paidOrder($code)
+    {
+        $Penjualan  =   Penjualan::where('kode_keranjang', $code)->update([
+            'status' => 'Paid',
+        ]);
         return redirect()->back();
     }
 }

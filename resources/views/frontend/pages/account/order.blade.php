@@ -35,8 +35,11 @@
                     </center>
                   </div>
                   <center>
-                  <p>Please confirm after you have done the payment!</p>
-                  <button class="btn btn-info">I have done the payment</button>
+                    <form action="{{route('paid.order', ['code' => $orders->kode_keranjang])}}" method="POST">
+                      @csrf @method('PATCH')
+                      <p>Please confirm after you have done the payment!</p>
+                      <button type="submit" class="btn btn-info">I have done the payment</button>
+                    </form>
                 </center>
                   @endif
                 </div>
