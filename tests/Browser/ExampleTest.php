@@ -15,9 +15,11 @@ class ExampleTest extends DuskTestCase
      */
     public function testBasicExample()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                    ->assertSee('Laravel');
+        $this->browse(function ($browser) {
+            $browser->visit('/admin/login')
+                ->type('email', 'spv@gmail.com')
+                ->type('password', '123123')
+                ->press('Login');
         });
     }
 }
