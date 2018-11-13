@@ -15,7 +15,7 @@
                 <div class="content-page">
                     <center>
                         @if ($user->foto == '')
-                        <img src="{{asset('images/foto.png')}}" alt="">
+                        <img src="{{asset('images/avatar.png')}}" alt="">
                         @else
                         <img src="{{Storage::url($user->foto)}}" width="250px" alt="">
                         @endif
@@ -64,7 +64,7 @@
                             <tr>
                                 <td colspan="3" align="center">You don't have any transactions yet!</td>
                             </tr>
-                                
+
                             @endforelse
                         </tbody>
                     </table>
