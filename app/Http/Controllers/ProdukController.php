@@ -30,7 +30,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -52,12 +52,12 @@ class ProdukController extends Controller
         $check = Produk::where('kode_produk', $request->kode_produk)->exists();
         if ($validator->fails()) {
             return redirect()->back()->with('alertfail', 'Gagal');
-        } 
+        }
         elseif ($check) {
             return redirect()->back()->with('alertfail', 'Gagal');
         }
         else {
-            $foto = $request->foto;  
+            $foto = $request->foto;
             $GetExtension = $foto->getClientOriginalExtension();
             $path = $foto->storeAs('public/images', $request->kode_produk . '.' . $GetExtension);
             $create = Produk::create([
@@ -70,8 +70,8 @@ class ProdukController extends Controller
             ]);
             return redirect()->back();
         }
-        
-        
+
+
     }
 
     /**
@@ -139,7 +139,7 @@ class ProdukController extends Controller
                     'harga' => $request->harga,
                 ]);
             }
-            
+
             return redirect()->back();
         }
     }

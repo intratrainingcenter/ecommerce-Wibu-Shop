@@ -24,6 +24,10 @@ Route::post('confirm-order', 'TransaksiPenjualanController@store')->name('confir
 Route::prefix('admin')->group(function () {
     Auth::routes();
 });
+Route::get('/data-pembeli', 'PembeliController@index')->name('frontend.pembeli');
+Route::get('/nonAktif-pembeli', 'PembeliController@show')->name('pembeli.nonAktive');
+Route::delete('/delete-pembeli/{id}', 'PembeliController@destroy')->name('delete.pembeli');
+Route::post('/restore-pembeli/{id}', 'PembeliController@update')->name('restore.pembeli');
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
