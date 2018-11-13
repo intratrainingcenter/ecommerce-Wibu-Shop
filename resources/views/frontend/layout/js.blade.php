@@ -9,7 +9,7 @@
 <script src="{{asset('frontend/theme/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js')}}" type="text/javascript"></script><!-- Quantity -->
 <script src="{{asset('frontend/theme/assets/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/theme/assets/corporate/scripts/layout.js')}}" type="text/javascript"></script>
-{{-- <script src="{{asset('frontend/theme/assets/pages/scripts/bs-carousel.js')}}" type="text/javascript"></script> --}}
+<script src="{{asset('frontend/theme/assets/pages/scripts/bs-carousel.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/jquery-ui.js')}}" type="text/javascript"></script>
 <script src="{{asset('frontend/login/vendor/animsition/js/animsition.min.js')}}"></script>
 <script src="{{asset('frontend/login/vendor/bootstrap/js/popper.js')}}"></script>
