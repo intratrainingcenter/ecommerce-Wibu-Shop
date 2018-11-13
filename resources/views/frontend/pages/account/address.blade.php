@@ -52,21 +52,9 @@
         <div class="product-page product-pop-up">
             <form id="FormDelete" action="{{route('delete.address', ['id' => $alamat->kode_alamat])}}" method="POST">
                 @csrf @method('DELETE')
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Confirmation!</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>Are you sure want to delete this address?</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-danger pull-right">Delete</button>
-                </div>
-            </div>
+            <div class="row"><div class="col-md-12"><h2>Confirmation!</h2></div></div>
+            <div class="row"><div class="col-md-12"><h4>Are you sure want to delete this address?</h4></div></div>
+            <div class="row"><div class="col-md-12"><button type="submit" class="btn btn-danger pull-right">Delete</button></div></div>
             </form>
         </div>
     </div>

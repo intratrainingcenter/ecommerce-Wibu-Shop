@@ -63,11 +63,7 @@
             </div>
             <div class="row">
               <div class="col-md-4 col-sm-4 items-info"></div>
-              <div class="col-md-8 col-sm-8">
-                <ul class="pagination pull-right">
-                  {{$all_products->links()}}
-                </ul>
-              </div>
+              <div class="col-md-8 col-sm-8"><ul class="pagination pull-right"> {{$all_products->links()}} </ul></div>
             </div>
           </div>
         </div>

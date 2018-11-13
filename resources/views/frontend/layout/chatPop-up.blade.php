@@ -2,17 +2,12 @@
   <div class="product-page product-pop-up">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-
         <div class="box-body" id="chat_conten">
-          <!-- Conversations are loaded here -->
           <div class="direct-chat-messages" id="chat">
             <ul id="messages_fill">
-
             </ul>
           </div>
-          <!--/.direct-chat-messages-->
         </div>
-        <!-- /.box-body -->
         <div class="box-footer">
           <div class="input-group message-input" uid="{{Auth::guard('pembeli')->id()}}">
             <input type="text" name="message" placeholder="Type Message ..." class="form-control">
@@ -21,7 +16,6 @@
               </span>
           </div>
         </div>
-        <!-- /.box-footer -->
       </div>
     </div>
   </div>

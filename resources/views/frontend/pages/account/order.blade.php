@@ -58,46 +58,40 @@
               </tr>
               @foreach ($Items as $item)
               <tr>
-                <td class="goods-page-image">
-                  <img src="{{Storage::url($item->detailProduct->foto)}}">
-                </td>
-                <td class="goods-page-description">
-                  <h3><a href="{{route('frontend.shop_item', ['kode_produk' => $item->kode_produk])}}">{{$item->detailProduct->nama_produk}}</a></h3>
-                </td>
-                <td class="goods-page-ref-no">
-                  {{$item->kode_produk}}
-                </td>
-                <td>
-                    @if ($item->kode_promo != NULL)
-                        <a href="">{{$item->kode_promo}}</a>
-                    @else
-                        <span>No Promo</span>
-                    @endif
-                </td>
-                <td class="goods-page-quantity">
-                      {{$item->jumlah}}
-                </td>
-                <td class="goods-page-price" align="right">
-                  <strong><span>Rp.</span>{{number_format($item->detailProduct->harga)}}</strong>
-                </td>
-                <td class="goods-page-total" align="right">
-                  <strong><span>Rp.</span>{{number_format($item->sub_total)}}</strong>
-                </td>
+                  <td class="goods-page-image">
+                    <img src="{{Storage::url($item->detailProduct->foto)}}">
+                  </td>
+                  <td class="goods-page-description">
+                    <h3><a href="{{route('frontend.shop_item', ['kode_produk' => $item->kode_produk])}}">{{$item->detailProduct->nama_produk}}</a></h3>
+                  </td>
+                  <td class="goods-page-ref-no">
+                    {{$item->kode_produk}}
+                  </td>
+                  <td>
+                      @if ($item->kode_promo != NULL)
+                          <a href="">{{$item->kode_promo}}</a>
+                      @else
+                          <span>No Promo</span>
+                      @endif
+                  </td>
+                  <td class="goods-page-quantity">
+                        {{$item->jumlah}}
+                  </td>
+                  <td class="goods-page-price" align="right">
+                    <strong><span>Rp.</span>{{number_format($item->detailProduct->harga)}}</strong>
+                  </td>
+                  <td class="goods-page-total" align="right">
+                    <strong><span>Rp.</span>{{number_format($item->sub_total)}}</strong>
+                  </td>
               </tr>
               @endforeach
             </table>
             </div>
             <div class="checkout-total-block">
               <ul>
-                <li>
-                  <em>Sub total</em><strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong>
-                </li>
-                <li>
-                  <em>Shipping cost</em><strong class="price"><span>Rp.</span>{{number_format($orders->ongkir)}}</strong>
-                </li>
-                <li class="checkout-total-price">
-                  <em>Grand Total</em><strong class="price"><span>Rp.</span>{{number_format($orders->grand_total)}}</strong>
-                </li>
+                <li><em>Sub total</em><strong class="price"><span>Rp.</span>{{number_format($SUM)}}</strong></li>
+                <li><em>Shipping cost</em><strong class="price"><span>Rp.</span>{{number_format($orders->ongkir)}}</strong></li>
+                <li class="checkout-total-price"><em>Grand Total</em><strong class="price"><span>Rp.</span>{{number_format($orders->grand_total)}}</strong></li>
               </ul>
             </div>
           </div>
