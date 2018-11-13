@@ -30,67 +30,6 @@
   <link href="{{asset('frontend/theme/assets/corporate/css/style-responsive.css')}}" rel="stylesheet">
   <link href="{{asset('frontend/theme/assets/corporate/css/themes/red.css')}}" rel="stylesheet" id="style-color">
   <link href="{{asset('frontend/theme/assets/corporate/css/custom.css')}}" rel="stylesheet">
-  <style>
-    /* Carousel Item Background Images */
-.carousel-slider .carousel-item-one {
-    background: url(../../../assets/onepage/img/slider/slide1.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-two {
-    background: url(../../../assets/onepage/img/slider/slide2.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-three {
-    background: url(../../../assets/onepage/img/slider/slide3.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-four {
-    background: url(../../../assets/pages/img/shop-slider/slide1/bg.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-five {
-    background: url(../../../assets/pages/img/shop-slider/slide2/bg.jpg);
-    background-size: cover;
-}
-
-.carousel-slider .carousel-item-six {
-    background: url(../../../assets/pages/img/shop-slider/slide3/bg.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-seven {
-    background: url(../../../assets/pages/img/shop-slider/slide4/bg.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-eight {
-    background: url(../../../assets/pages/img/frontend-slider/bg9.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-nine {
-    background: url(../../../assets/pages/img/frontend-slider/bg1.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-
-.carousel-slider .carousel-item-ten {
-    background: url(../../../assets/pages/img/frontend-slider/bg2.jpg);
-    background-size: cover;
-    background-position: center center;
-}
-  </style>
   @yield('css')
 </head>
 <body class="ecommerce">

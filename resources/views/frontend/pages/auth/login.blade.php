@@ -28,7 +28,7 @@
                             <input class="input100" type="password" name="password" placeholder="Type your password">
                             <span class="focus-input100" data-symbol="&#xf190;"></span>
                         </div>
-                        <a href="#">Forgot Password?</a><br><br>
+                        {{-- <a href="{{ route('pembeli.reset') }}">Forgot Password?</a><br><br> --}}
                         
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
@@ -45,7 +45,7 @@
                             </span>
     
                             <a href="{{route('pembeli.register')}}" class="txt2">
-                                Sign Up
+                                Register
                             </a>
                         </div>
                     </form>
