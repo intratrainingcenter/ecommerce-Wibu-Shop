@@ -1,11 +1,4 @@
 @section('css')
-    <style>
-    .quantity::-webkit-inner-spin-button, 
-    .quantity::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
-    </style>
 @endsection
 
 
