@@ -34,7 +34,7 @@
             <div class="icon">
               <i class="ion ion-person"></i>
             </div>
-            <a href="" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('frontend.pembeli')}}" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -48,7 +48,7 @@
             <div class="icon">
               <i class="fa fa-th"></i>
             </div>
-            <a href="" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('produk.index')}}" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -62,7 +62,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('penjualan.index')}}" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -71,7 +71,7 @@
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-        
+
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->

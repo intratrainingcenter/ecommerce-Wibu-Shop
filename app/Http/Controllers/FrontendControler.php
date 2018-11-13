@@ -10,6 +10,7 @@ use App\reviewProduct;
 use App\Keranjang;
 use App\Pembeli;
 use App\OpsiPromo;
+use App\Promo;
 use App\Alamat;
 
 
@@ -71,7 +72,7 @@ class FrontendControler extends Controller
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.checkout.shop-checkout',compact(['SUM','kode_keranjang','addresses','all_products','kategori','new_products', 'UserCart']));
+      return view('frontend.pages.checkout.shop-checkout',compact(['showPromo', 'SUM','kode_keranjang','addresses','all_products','kategori','new_products', 'UserCart']));
     }
     public function checkoutAddress(Request $request)
     {
@@ -171,7 +172,7 @@ class FrontendControler extends Controller
       } else {
           $UserCart = [];
       }
-      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+      return view('frontend.pages.product.all-products', compact('showPromo','kategori', 'all_products','new_products', 'UserCart'));
     }
 
     public function filter(Request $request)
@@ -228,6 +229,6 @@ class FrontendControler extends Controller
         }
       }
 
-      return view('frontend.pages.product.all-products', compact('kategori', 'all_products','new_products', 'UserCart'));
+      return view('frontend.pages.product.all-products', compact('showPromo','kategori', 'all_products','new_products', 'UserCart'));
     }
 }

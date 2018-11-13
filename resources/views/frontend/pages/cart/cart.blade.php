@@ -68,7 +68,7 @@
               </ul>
             </div>
           </div>
-          <a href="" class="btn btn-info">Continue shopping <i class="fa fa-cart-plus"></i></a>
+          <a href="/" class="btn btn-info">Continue shopping <i class="fa fa-cart-plus"></i></a>
           <a href="{{ route('frontend.Checkout') }}" class="btn btn-primary">Checkout <i class="fa fa-check"></i></a>
         </div>
       </div>

@@ -10,6 +10,7 @@ use App\TransaksiPenjualan as Penjualan;
 use App\PembeliAuth as Pembeli;
 use App\Keranjang;
 use App\Kategori;
+use App\Promo;
 use App\Produk;
 use App\Alamat;
 use Validator;
@@ -28,7 +29,7 @@ class PembeliAuthController extends Controller
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $point          = Penjualan::where('kode_pembeli', $user->kode_pembeli)->where('grand_total', '>=', 300000)->count();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->limit(3)->orderBy('tanggal', 'desc')->get();
-        return view('frontend.pages.account.index',compact('user', 'point', 'orders', 'kategori', 'new_products', 'all_products', 'UserCart'));
+        return view('frontend.pages.account.index',compact('showPromo','user', 'point', 'orders', 'kategori', 'new_products', 'all_products', 'UserCart'));
     }
 
     public function showRegisterForm()
@@ -44,7 +45,7 @@ class PembeliAuthController extends Controller
         } else {
           $UserCart = [];
         }
-        return view('frontend.pages.auth.register',compact('kategori','all_products', 'new_products', 'UserCart'));
+        return view('frontend.pages.auth.register',compact('showPromo','kategori','all_products', 'new_products', 'UserCart'));
     }
 
     public function Register(Request $request)
@@ -85,7 +86,7 @@ class PembeliAuthController extends Controller
         } else {
           $UserCart = [];
         }
-      return view('frontend.pages.auth.login',compact('kategori','all_products', 'new_products', 'UserCart'));
+      return view('frontend.pages.auth.login',compact('showPromo','kategori','all_products', 'new_products', 'UserCart'));
     }
 
     public function Login(Request $request)
@@ -362,11 +363,12 @@ class PembeliAuthController extends Controller
         $id             = Auth::guard('pembeli')->id();
         $user           = Pembeli::where('id', $id)->first();
         $kategori       = Kategori::all();
+        $showPromo      = Promo::all();
         $all_products   = Produk::orderBy('created_at','desc')->get();
         $new_products   = Produk::limit(4)->orderBy('created_at','desc')->get();
         $UserCart       = Keranjang::where('kode_pembeli', $user->kode_pembeli)->where('status', 'Pending')->with('detailProduct')->get();
         $orders         = Penjualan::where('kode_pembeli', $user->kode_pembeli)->orderBy('id', 'desc')->where('status', '!=', 'Received')->with('GetDetail')->get();
-        return view('frontend.pages.account.my_order', compact('UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
+        return view('frontend.pages.account.my_order', compact('showPromo','UserCart', 'orders', 'new_products', 'all_products', 'kategori', 'user'));
     }
 
     public function paidOrder($code)

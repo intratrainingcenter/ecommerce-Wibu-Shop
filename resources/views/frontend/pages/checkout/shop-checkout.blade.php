@@ -18,7 +18,6 @@
                       <input type="hidden" id="sub_total" value="{{$SUM}}">
                       <input type="hidden" name="ongkir" id="ongkir" value="0">
                       <input type="hidden" name="grand_total" id="grand_total">
-                      <input type="hidden" name="alamat" id="addressValue">
                       <input type="hidden" name="service" id="service">
                 <div class="panel-heading">
                   <h2 class="panel-title"><a>  Confirm Order </a></h2>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TransaksiPenjualan extends Model
 {
 
-    protected $fillable = ['kode_transaksi_penjualan', 'kode_keranjang', 'kode_pembeli', 'ongkir', 'grand_total', 'tanggal', 'status','alamat','service', 'keterangan'];
+    protected $fillable = ['kode_transaksi_penjualan', 'kode_keranjang', 'kode_pembeli', 'ongkir', 'grand_total', 'tanggal', 'status','kode_alamat','service', 'keterangan'];
 
     public function GetDetail()
     {

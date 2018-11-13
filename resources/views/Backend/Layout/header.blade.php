@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="/" class="logo">
+    <a href="dashboard" class="logo">
       <span class="logo-lg"><b>Wibu</b>Shop</span>
     </a>
     <nav class="navbar navbar-static-top">

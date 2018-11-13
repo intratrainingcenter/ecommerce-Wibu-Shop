@@ -42,6 +42,7 @@ class TransaksiPenjualanController extends Controller
      */
     public function store(Request $request)
     {
+      // dd($request);
         $validator = Validator::make($request->all(), [
             'kode_transaksi'=> 'required',
             'kode_keranjang'=> 'required',
@@ -65,7 +66,7 @@ class TransaksiPenjualanController extends Controller
             'tanggal'                  => date('Y-m-d'),
             'status'                   => 'Order',
             'service'                  => $request->service,
-            'alamat'                   => $request->address,
+            'kode_alamat'              => $request->address,
             'keterangan'               => $request->keterangan,
         ]);
         $keranjang = Keranjang::where('kode_keranjang', $request->kode_keranjang)->update([
@@ -129,7 +130,7 @@ class TransaksiPenjualanController extends Controller
             ]);
             return redirect()->back()->with('alertsuccess', 'Pesanan telah diterima pembeli!');
         }
-        
+
     }
 
     /**
