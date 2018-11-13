@@ -19,10 +19,10 @@ class CreateKeranjangsTable extends Migration
             $table->string('kode_pembeli');
             $table->string('kode_produk');
             $table->string('kode_promo')->nullable();
-            $table->integer('jumlah');
-            $table->text('keterangan');
+            $table->integer('jumlah')->default(1);
+            $table->text('keterangan')->nullable();
             $table->integer('sub_total');
-            $table->enum('status',['Pending','Buy']);
+            $table->enum('status',['Pending','Buy'])->default('Pending');
             $table->timestamps();
         });
     }

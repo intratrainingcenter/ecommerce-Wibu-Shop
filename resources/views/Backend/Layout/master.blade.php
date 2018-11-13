@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="_token" content="{{ csrf_token() }}"/>
   <title>@yield('title')</title>
   @include('Backend.Layout.css')
 </head>
@@ -13,10 +14,12 @@
 
     @yield('content')
 
+    @include('Backend.User.Pop_Up_Edit_Profil_User')
     @include('Backend.Layout.footer')
 
 </div>
 </body>
 <!-- ./wrapper -->
   @include('Backend.Layout.js')
+  @yield('js')
 </html>

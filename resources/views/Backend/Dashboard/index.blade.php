@@ -28,13 +28,13 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <p>--</p>
-              <h3> <span > --</span></h3>
+              <p>Jumlah Pembeli</p>
+              <h3> <span >{{count($buyer)}}</span></h3>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
             </div>
-            <a href="" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('frontend.pembeli')}}" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -42,13 +42,13 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <p>--</p>
-              <h3> <span > --</span></h3>
+              <p>Jumlah Produk</p>
+              <h3> <span >{{count($product)}}</span></h3>
             </div>
             <div class="icon">
               <i class="fa fa-th"></i>
             </div>
-            <a href="" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('produk.index')}}" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -56,13 +56,13 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <p>--  </p>
-              <h3> <span > --</span></h3>
+              <p>Transaksi Hari ini</p>
+              <h3> <span >{{count($transaction)}}</span></h3>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('penjualan.index')}}" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -71,7 +71,7 @@
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-        
+
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->

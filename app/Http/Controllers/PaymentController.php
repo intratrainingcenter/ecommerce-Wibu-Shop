@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+/** All Paypal Details class **/
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
-/** All Paypal Details class **/
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -29,27 +29,29 @@ class PaymentController extends Controller
     {
         /** PayPal api context **/
         $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
-            $paypal_conf['client_id'],
-            $paypal_conf['secret'])
-        );
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
     public function index()
     {
-        return view('paywithpaypal');
+        return view('frontend.pages.checkout.pay');
     }
     public function payWithpaypal(Request $request)
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $item_1 = new Item();
-        $item_1->setName('Item 1') /** item name **/
+        $item_1->setName($request->item) /** item name **/
             ->setCurrency('USD')
             ->setQuantity(1)
             ->setPrice($request->get('amount')); /** unit price **/
+        $item_2 = new Item();
+        $item_2->setName($request->item) /** item name **/
+            ->setCurrency('USD')
+            ->setQuantity(2)
+            ->setPrice($request->get('amount')); /** unit price **/
         $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
+        $item_list->setItems(array($item_1, $item_2));
         $amount = new Amount();
         $amount->setCurrency('USD')
             ->setTotal($request->get('amount'));

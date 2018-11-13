@@ -146,8 +146,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-
+        // Collective\Html\HtmlServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -160,7 +159,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Laravel\Dusk\DuskServiceProvider::class,
     ],
 
     /*
