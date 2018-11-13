@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kategori;
+use App\Produk;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -95,9 +96,9 @@ class KategoriController extends Controller
             $Update->keterangan=$request->keterangan;
             $Update->save();
 
-            return redirect()->back()->with(['success'=> 'Berhasil mengedit Kategori Produk']);
+            return redirect()->back()->with(['alertsuccess'=> 'Berhasil mengedit Kategori Produk']);
         }else{
-            return redirect()->back()->with(['edit'=> 'Kategori Produk Sudah Ada']);
+            return redirect()->back()->with(['alertfail'=> 'Kategori Produk Sudah Ada']);
           }
       }
 
@@ -110,9 +111,15 @@ class KategoriController extends Controller
      */
     public function destroy($kode_kategori)
     {
-        $Delete = Kategori::where('kode_kategori',$kode_kategori)->first();
-        $Delete->delete();
+        $Produk = Produk::where('kode_kategori', $kode_kategori)->exists();
+        if ($Produk) {
+            return redirect('kategori')->with(['alertfail'=>'Kategori tidak bisa dihapus karena ada produk dengan kategori ini']);
+        } else {
+            $Delete = Kategori::where('kode_kategori',$kode_kategori)->first();
+            $Delete->delete();
+            return redirect('kategori')->with(['alertsuccess'=>'Berhasil Menghapus Kategori ']);
+        }
+        
 
-        return redirect('kategori')->with(['success'=>'Berhasil Menghapus Kategori ']);
     }
 }

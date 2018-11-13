@@ -83,7 +83,6 @@ class OpsiPromoController extends Controller
             }
               return $check;
         }
-          // return $produck;
     }
 
     /**

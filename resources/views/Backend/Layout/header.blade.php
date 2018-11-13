@@ -13,7 +13,7 @@
               @if (auth::user()->foto != '')
               <img src="{{Storage::url(auth::user()->foto)}}" class="user-image" alt="User Image">
               @else
-              <img src="{{asset('images/foto.png')}}" class="user-image" alt="User Image">
+              <img src="{{asset('images/avatar.png')}}" class="user-image" alt="User Image">
               @endif
               <span class="hidden-xs">{{auth::user()->name}}</span>
             </a>
@@ -22,7 +22,7 @@
                   @if (auth::user()->foto != '')
                   <img src="{{Storage::url(auth::user()->foto)}}" class="img-circle" alt="User Image">
                   @else
-                  <img src="{{asset('images/foto.png')}}" class="user-image" alt="User Image">
+                  <img src="{{asset('images/avatar.png')}}" class="user-image" alt="User Image">
                   @endif
                 <p>
                   {{auth::user()->name}}

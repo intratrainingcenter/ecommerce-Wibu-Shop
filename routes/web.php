@@ -24,10 +24,10 @@ Route::post('confirm-order', 'TransaksiPenjualanController@store')->name('confir
 Route::prefix('admin')->group(function () {
     Auth::routes();
 });
-Route::get('/data-pembeli', 'PembeliController@index')->name('frontend.pembeli');
-Route::get('/nonAktif-pembeli', 'PembeliController@show')->name('pembeli.nonAktive');
-Route::delete('/delete-pembeli/{id}', 'PembeliController@destroy')->name('delete.pembeli');
-Route::post('/restore-pembeli/{id}', 'PembeliController@update')->name('restore.pembeli');
+Route::get('/data-pembeli', 'PembeliController@index')->name('frontend.pembeli')->Middleware('spv');
+Route::get('/nonAktif-pembeli', 'PembeliController@show')->name('pembeli.nonAktive')->Middleware('spv');
+Route::delete('/delete-pembeli/{id}', 'PembeliController@destroy')->name('delete.pembeli')->Middleware('spv');
+Route::post('/restore-pembeli/{id}', 'PembeliController@update')->name('restore.pembeli')->Middleware('spv');
 //sub menu
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('produk', 'ProdukController')->Middleware('admin_spv');
@@ -44,14 +44,14 @@ Route::delete('delete-opsipromo', 'OpsiPromoController@destroy')->Middleware('ad
 Route::get('getPromo/{id}', 'OpsiPromoController@getPromo')->name('getPromo');
 Route::put('user/aktif/{kode_user}','UserController@Aktif')->name('Aktif')->Middleware('spv');
 Route::put('user/nonaktif/{kode_user}','UserController@nonAktif')->name('nonAktif')->Middleware('spv');
-Route::get('/pembelianproducts/product','TransaksiPembelianController@addPengajuan')->name('addproduct');
-Route::post('/pembelianproducts/editStatus','TransaksiPembelianController@change')->name('editStatus');
-Route::resource('pembelianproducts','TransaksiPembelianController');
-Route::get('/pembelianProduct/product/{kode}','TransaksiPembelianController@tambah');
-Route::post('/pembelianProduct/product/tambah','TransaksiPembelianController@tampilOpsi');
-Route::get('/pembelianProduct/product/loadopsi/{kode}','TransaksiPembelianController@loadOpsi');
-Route::delete('/pembelianProduct/product/hapusopsi','TransaksiPembelianController@hapusOpsi');
-Route::post('/pembelianProduct/product/pengajuan','TransaksiPembelianController@pengajuan');
+Route::get('/pembelianproducts/product','TransaksiPembelianController@addPengajuan')->name('addproduct')->Middleware('spv_owner');;
+Route::post('/pembelianproducts/editStatus','TransaksiPembelianController@change')->name('editStatus')->Middleware('spv_owner');;
+Route::resource('pembelianproducts','TransaksiPembelianController')->Middleware('spv_owner');;
+Route::get('/pembelianProduct/product/{kode}','TransaksiPembelianController@tambah')->Middleware('spv_owner');;
+Route::post('/pembelianProduct/product/tambah','TransaksiPembelianController@tampilOpsi')->Middleware('spv_owner');;
+Route::get('/pembelianProduct/product/loadopsi/{kode}','TransaksiPembelianController@loadOpsi')->Middleware('spv_owner');;
+Route::delete('/pembelianProduct/product/hapusopsi','TransaksiPembelianController@hapusOpsi')->Middleware('spv_owner');;
+Route::post('/pembelianProduct/product/pengajuan','TransaksiPembelianController@pengajuan')->Middleware('spv_owner');;
 //report
 Route::get('LaporanTransaksi','LaporanTransaksi@Index')->name('LaporanTransaksi')->Middleware('spv_owner');
 Route::get('FilterTransaksi','LaporanTransaksi@Filter')->name('FilterLaporanTransaksi')->Middleware('spv_owner');
